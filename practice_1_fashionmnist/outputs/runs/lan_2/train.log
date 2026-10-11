@@ -1,0 +1,35 @@
+2026-10-11 16:07:17,837 | Run: lan_2 | epochs=20 | seed=42
+2026-10-11 16:07:17,838 | Device: cuda | GPU: NVIDIA GeForce RTX 3050 Laptop GPU | PyTorch: 2.11.0+cu126
+2026-10-11 16:07:17,838 | Data: train=54000 | batch_size=64 | batches=844 | shuffle=RandomSampler | transform=ToTensor()
+2026-10-11 16:07:17,838 | Model: Sequential(
+  (0): Flatten(start_dim=1, end_dim=-1)
+  (1): Linear(in_features=784, out_features=128, bias=True)
+  (2): ReLU()
+  (3): Linear(in_features=128, out_features=10, bias=True)
+)
+Parameters: 101770
+2026-10-11 16:07:17,839 | Loss: CrossEntropyLoss | options={'reduction': 'mean', 'ignore_index': -100, 'label_smoothing': 0.0}
+2026-10-11 16:07:17,839 | Optimizer: Adam
+2026-10-11 16:07:17,839 | Optimizer group 1: {'lr': 0.01, 'betas': (0.9, 0.999), 'eps': 1e-08, 'weight_decay': 0, 'amsgrad': False, 'maximize': False, 'foreach': None, 'capturable': False, 'differentiable': False, 'fused': None, 'decoupled_weight_decay': False}
+2026-10-11 16:07:17,848 | Start training | validation/test not evaluated
+2026-10-11 16:07:24,285 | Epoch 1/20 | train_loss=0.5064 | lr=[0.01]
+2026-10-11 16:07:30,770 | Epoch 2/20 | train_loss=0.4110 | lr=[0.01]
+2026-10-11 16:07:38,621 | Epoch 3/20 | train_loss=0.3914 | lr=[0.01]
+2026-10-11 16:07:46,679 | Epoch 4/20 | train_loss=0.3699 | lr=[0.01]
+2026-10-11 16:07:54,946 | Epoch 5/20 | train_loss=0.3583 | lr=[0.01]
+2026-10-11 16:08:03,667 | Epoch 6/20 | train_loss=0.3506 | lr=[0.01]
+2026-10-11 16:08:11,887 | Epoch 7/20 | train_loss=0.3433 | lr=[0.01]
+2026-10-11 16:08:19,794 | Epoch 8/20 | train_loss=0.3312 | lr=[0.01]
+2026-10-11 16:08:27,751 | Epoch 9/20 | train_loss=0.3343 | lr=[0.01]
+2026-10-11 16:08:36,085 | Epoch 10/20 | train_loss=0.3286 | lr=[0.01]
+2026-10-11 16:08:44,146 | Epoch 11/20 | train_loss=0.3225 | lr=[0.01]
+2026-10-11 16:08:52,267 | Epoch 12/20 | train_loss=0.3231 | lr=[0.01]
+2026-10-11 16:08:59,938 | Epoch 13/20 | train_loss=0.3184 | lr=[0.01]
+2026-10-11 16:09:08,337 | Epoch 14/20 | train_loss=0.3092 | lr=[0.01]
+2026-10-11 16:09:17,005 | Epoch 15/20 | train_loss=0.3086 | lr=[0.01]
+2026-10-11 16:09:25,227 | Epoch 16/20 | train_loss=0.3072 | lr=[0.01]
+2026-10-11 16:09:32,995 | Epoch 17/20 | train_loss=0.3122 | lr=[0.01]
+2026-10-11 16:09:40,693 | Epoch 18/20 | train_loss=0.2996 | lr=[0.01]
+2026-10-11 16:09:51,428 | Epoch 19/20 | train_loss=0.3027 | lr=[0.01]
+2026-10-11 16:10:07,426 | Epoch 20/20 | train_loss=0.3030 | lr=[0.01]
+2026-10-11 16:10:07,427 | Finished training

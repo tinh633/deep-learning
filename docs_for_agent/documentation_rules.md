@@ -38,6 +38,14 @@ Workspace/
 
 ## File Placement
 
+- For model visualization, extend the existing single HTML page and read script-generated reports from outputs/. Use real original image indices for prediction examples; distinguish fixed-checkpoint evaluation from online training metrics and label confusion-matrix axes explicitly.
+
+- At training start, record the actual loss type/options and optimizer type/parameter groups, plus model, seed, data/batch/transform and device settings once in the run log. Read optimizer settings from the actual instance, not a fixed optimizer name. Epoch logs include loss and current learning rate.
+
+- Use readable sequential training-run names such as outputs/runs/lan_1/, lan_2/, … instead of long timestamp names. Never overwrite existing runs; preserve older directory names unless renaming is requested.
+
+- For repeated training runs, create a unique directory under outputs/runs/; preserve older results and flush logs during execution. Keep source code only in src/, without .py snapshots in runs/. Record configuration/model architecture in train.log. CSV, plots and checkpoints are optional outputs for separately agreed steps; do not require them for a minimal training example.
+
 - `src/`: only project Python scripts and modules (`.py`). Do not place HTML, JavaScript, browser checks or other visualization tooling here. Interpreter-generated caches are not project source files.
 - `visualization/`: directly viewable HTML pages, UI assets, and scripts for visualization verification or browser checks, including `.cjs` files.
 - For each visualization, maintain one directly viewable HTML file, without a second template HTML. For Live Server, keep HTML lightweight and fetch prepared data through relative HTTP paths rather than embedding a large dataset.

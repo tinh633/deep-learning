@@ -5,9 +5,9 @@
 ## Current State
 
 - Last updated: 2026-10-11
-- Current phase: User approved commit; push remains unauthorized
-- Current task: Commit prepared workspace rules and FashionMNIST explorer on branch Thái
-- Git state / last commit: Local branch Thái based on origin/main at 47959f4; no new commit or push. Remote branch Thái not created yet.
+- Current phase: Result report written; lan_10/best.pt selected for the assignment at user request
+- Current task: Created docs/04_result.md with checkpoint selection, verified scores, error analysis and plots; synchronized README and AI usage. No new training.
+- Git state / last commit: f193a6a committed and pushed to origin/Thái with user authorization; current documentation changes are not committed.
 
 ## Task Checklist
 
@@ -30,20 +30,19 @@
 ## Last Session Handoff
 
 - Session date: 2026-10-11
-- Completed and validated: Downloaded and checksum-verified dataset; generated HTML/EDA; verified gallery logic and torchvision cache compatibility.
-- In progress: User review through Open with Live Server. One 18 KB HTML loads original IDX and EDA JSON over HTTP. MLP work deferred.
-- Blockers / errors: No failure in actual Edge HTTP smoke test. Live Server extension itself not automated; user confirmation pending.
-- Attempts and outcomes: Network download required escalation and succeeded. Added extracted IDX files after initial torchvision read failed; retry passed.
-- Changed files: AGENTS.md, docs_for_agent/ rules and progress; moved two .cjs files into project visualization/; updated project README, design, script docs and AI_usage.md. No dataset or HTML-content changes in this revision.
-- Tests run and results: Data preparation passed four MD5 checks; actual Edge over local HTTP passed gallery/EDA, nonblank canvas, class/test filtering and final-image detail without JS exceptions. Temporary checks removed after validation.
-- Decisions / approvals: User chose DL contents at repository root and branch Thái; explicitly authorized commit. Push has not been authorized. origin is https://github.com/tinh633/deep-learning.git.
+- User decision: Explicitly requested 04_result.md and model finalization for the assignment.
+- Selected artifact: practice_1_fashionmnist/outputs/runs/lan_10/best.pt, epoch 12 by minimum validation loss.
+- Verified report scores: train loss 0.170986 / accuracy 93.50%; validation 0.275095 / 90.57%; test 0.320097 / 89.41%.
+- Evidence: model_report.json, train.log and existing plots; log records 23 of 30 planned epochs.
+- Documentation: docs/04_result.md, project README and AI_usage updated. No code or training changes.
+- Limitations: Test was viewed in earlier experiments; no multi-seed stability study or global optimality claim.
+- Git authorization: User explicitly requested committing/pushing current work to Th?i only; no merge into main. Syntax/docs and diff checks passed before upload. Verify final commit and remote state with Git.
 
 ## Next Session
 
-1. Inspect repository state and read AGENTS.md.
-2. Review Git upload scope: rules, docs, project source, HTML and EDA JSON; downloaded data/cache/secrets excluded by .gitignore. Root README preserves repo title and links project/rules. Commit and push require explicit approval.
-2. Open visualization/explorer.html with Live Server from workspace/project root. Actual Edge HTTP test passed; optional .cjs and temporary tools removed. Confirm user's viewing result before further work.
-3. Model design and training remain outside the current revision until the user resumes them.
+1. Review docs/04_result.md with the user.
+2. Keep selected checkpoint and historical runs intact; do not start new experiments without a new request.
+3. Commit only after explicit approval; push only with separate authorization.
 
 ## Archive
 
