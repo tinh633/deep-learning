@@ -1,0 +1,911 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FashionMNIST · Data Explorer</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #172c31;
+        --muted: #63757a;
+        --teal: #087e80;
+        --line: #dce5e4;
+        --paper: #f4f7f5;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font:
+          15px/1.6 system-ui,
+          sans-serif;
+      }
+      header {
+        background: #17383e;
+        color: white;
+        padding: 30px max(24px, calc((100vw - 1280px) / 2));
+      }
+      header small {
+        color: #8ddbd0;
+        letter-spacing: 3px;
+      }
+      h1 {
+        font-size: clamp(28px, 4vw, 46px);
+        margin: 8px 0;
+      }
+      header p {
+        color: #cfdfdf;
+        margin: 0;
+        max-width: 850px;
+      }
+      main {
+        max-width: 1328px;
+        padding: 24px;
+        margin: auto;
+      }
+      nav {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 24px;
+      }
+      a {
+        color: var(--teal);
+      }
+      header a {
+        color: #9be6da;
+      }
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+      .card,
+      section {
+        background: white;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 22px;
+      }
+      .card strong {
+        display: block;
+        font-size: 30px;
+      }
+      .card span,
+      .muted {
+        color: var(--muted);
+      }
+      section {
+        margin-top: 22px;
+      }
+      h2 {
+        font-size: 24px;
+        margin: 0 0 8px;
+      }
+      h3 {
+        margin: 24px 0 8px;
+      }
+      label {
+        font-weight: 600;
+      }
+      select,
+      input,
+      button {
+        font: inherit;
+        border: 1px solid #bdcfcd;
+        border-radius: 8px;
+        padding: 9px 12px;
+        background: white;
+        color: var(--ink);
+      }
+      button {
+        cursor: pointer;
+        background: var(--teal);
+        color: white;
+        border-color: var(--teal);
+      }
+      .controls {
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+        align-items: end;
+        margin: 20px 0;
+      }
+      .controls label {
+        display: grid;
+        gap: 6px;
+      }
+      #status {
+        font-weight: 600;
+        color: var(--teal);
+      }
+      #viewport {
+        height: 590px;
+        overflow: auto;
+        position: relative;
+        background: #edf2f1;
+        border-radius: 10px;
+        border: 1px solid var(--line);
+      }
+      #space {
+        position: relative;
+      }
+      #tiles {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        display: grid;
+        gap: 8px;
+        padding: 8px;
+      }
+      .tile {
+        height: 140px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 3px;
+        background: white;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        color: var(--ink);
+        padding: 6px;
+        font-size: 11px;
+      }
+      .tile:hover {
+        border-color: var(--teal);
+      }
+      canvas {
+        image-rendering: pixelated;
+      }
+      .tile canvas {
+        width: 84px;
+        height: 84px;
+        background: black;
+      }
+      .two {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+      .chart {
+        width: 100%;
+        height: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+      }
+      th,
+      td {
+        text-align: left;
+        padding: 9px;
+        border-bottom: 1px solid var(--line);
+      }
+      th {
+        color: var(--muted);
+      }
+      .table-wrap {
+        overflow: auto;
+      }
+      .means {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 12px;
+      }
+      .mean {
+        background: var(--paper);
+        padding: 12px;
+        text-align: center;
+        border-radius: 9px;
+      }
+      .mean canvas {
+        width: 84px;
+        height: 84px;
+        display: block;
+        margin: 8px auto;
+      }
+      .callout {
+        border-left: 4px solid var(--teal);
+        background: #eaf6f3;
+        padding: 14px 18px;
+        margin: 16px 0;
+      }
+      dialog {
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        max-width: 90vw;
+        padding: 24px;
+      }
+      dialog::backdrop {
+        background: #122a30aa;
+      }
+      #detailImage {
+        width: 280px;
+        height: 280px;
+        max-width: 70vw;
+        display: block;
+        margin: 16px auto;
+      }
+      footer {
+        padding: 28px 0;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      details {
+        margin: 12px 0;
+      }
+      summary {
+        cursor: pointer;
+        font-weight: 600;
+      }
+      @media (max-width: 760px) {
+        .cards {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .two {
+          grid-template-columns: 1fr;
+        }
+        .means {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        main {
+          padding: 12px;
+        }
+        section {
+          padding: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <small>PRACTICE 01 / DATA REVIEW</small>
+      <h1>FashionMNIST Explorer</h1>
+      <p>
+        Khám phá toàn bộ ảnh, kiểm tra phân bố nhãn và chất lượng dữ liệu trước
+        khi xây dựng mô hình.
+      </p>
+    </header>
+    <main>
+      <nav>
+        <a href="#explorer">Kho ảnh</a><a href="#eda">Phân tích EDA</a
+        ><a href="#quality">Chất lượng dữ liệu</a>
+      </nav>
+      <div class="cards">
+        <div class="card">
+          <span>Tổng số ảnh</span><strong>70.000</strong
+          ><span>60.000 train · 10.000 test</span>
+        </div>
+        <div class="card">
+          <span>Nhãn phân loại</span><strong>10</strong
+          ><span>Thời trang & phụ kiện</span>
+        </div>
+        <div class="card">
+          <span>Kích thước ảnh</span><strong>28 × 28</strong
+          ><span>Grayscale · uint8</span>
+        </div>
+        <div class="card">
+          <span>Trạng thái nguồn</span><strong>Đã xác minh</strong
+          ><span>4/4 MD5 khớp nguồn gốc</span>
+        </div>
+      </div>
+      <section id="explorer">
+        <h2>Kho ảnh đầy đủ</h2>
+        <p class="muted">
+          Chọn nhãn và tập dữ liệu. Cuộn để xem tất cả ảnh phù hợp; bấm ảnh để
+          phóng to. ID giữ nguyên thứ tự trong tập gốc, bắt đầu từ 0.
+        </p>
+        <div class="controls">
+          <label
+            >Nhãn<select id="label">
+              <option value="all">Tất cả nhãn</option>
+            </select></label
+          ><label
+            >Tập dữ liệu<select id="split">
+              <option value="all">Train + Test</option>
+              <option value="train">Train</option>
+              <option value="test">Test</option>
+            </select></label
+          ><label
+            >Đến ảnh thứ (bắt đầu từ 1)<input
+              id="position"
+              type="number"
+              min="1"
+              value="1" /></label
+          ><button id="jump">Đi đến</button>
+        </div>
+        <p id="status" role="status" aria-live="polite">
+          Đang khởi động… Mở bằng Open with Live Server trong VS Code; trang cần
+          JavaScript để hiển thị dữ liệu.
+        </p>
+        <div id="viewport" tabindex="0" aria-label="Kho ảnh cuộn được">
+          <div id="space"><div id="tiles"></div></div>
+        </div>
+        <p id="range" class="muted"></p>
+      </section>
+      <section id="eda">
+        <h2>Phân tích khám phá dữ liệu</h2>
+        <p class="muted">
+          Thống kê tính trên toàn bộ dữ liệu, không lấy mẫu. Bộ lọc EDA độc lập
+          với bộ lọc kho ảnh.
+        </p>
+        <label
+          >Tập phân tích
+          <select id="edaSplit">
+            <option value="all">Train + Test</option>
+            <option value="train">Train</option>
+            <option value="test">Test</option>
+          </select></label
+        >
+        <div class="two">
+          <div>
+            <h3>Phân bố lớp</h3>
+            <div id="classChart"></div>
+          </div>
+          <div>
+            <h3>Phân bố cường độ pixel</h3>
+            <div id="pixelChart"></div>
+            <p class="muted">
+              256 mức được gộp thành 32 khoảng, mỗi khoảng 8 mức. Nền tối có thể
+              tạo đỉnh lớn ở gần 0.
+            </p>
+          </div>
+        </div>
+        <h3>Thống kê tổng quan</h3>
+        <div id="summary" class="table-wrap"></div>
+        <div class="two">
+          <div>
+            <h3>Độ sáng trung bình mỗi ảnh</h3>
+            <div id="brightnessChart"></div>
+            <p class="muted">
+              Trục ngang: độ sáng trung bình 0–255; trục dọc: số ảnh. 32 khoảng
+              có độ rộng 8.
+            </p>
+          </div>
+          <div>
+            <h3>Các phân vị độ sáng</h3>
+            <div id="quantiles"></div>
+            <p class="muted">
+              Ảnh rất tối/sáng là ứng viên kiểm tra thủ công, chưa đủ bằng chứng
+              để kết luận lỗi.
+            </p>
+          </div>
+        </div>
+        <h3>So sánh từng nhãn</h3>
+        <div id="classTable" class="table-wrap"></div>
+        <p class="muted">
+          Foreground là tỷ lệ pixel &gt; 0, không phải kết quả phân đoạn vật
+          thể. Độ sáng tính theo thang 0–255.
+        </p>
+        <h3>Ảnh trung bình theo lớp</h3>
+        <div id="means" class="means"></div>
+        <p class="muted">
+          Trung bình pixel của mọi ảnh trong lớp, làm tròn để hiển thị. Đây là
+          ảnh tổng hợp, không phải mẫu thật.
+        </p>
+        <h3>Train so với Test</h3>
+        <div id="comparison" class="table-wrap"></div>
+        <div class="callout">
+          Chuẩn hóa khi huấn luyện nên dùng thống kê của train. Giữ test cho
+          đánh giá cuối; không chọn cấu hình mô hình dựa trên kết quả test.
+        </div>
+      </section>
+      <section id="quality">
+        <h2>Kiểm tra chất lượng & giới hạn</h2>
+        <div id="qualityStats"></div>
+        <details>
+          <summary>Ví dụ nhóm ảnh trùng chính xác (tối đa 10 nhóm)</summary>
+          <div id="duplicateExamples"></div>
+        </details>
+        <ul>
+          <li>
+            Đã kiểm tra checksum, cấu trúc IDX, số ảnh, kích thước và miền nhãn.
+            Dữ liệu số nguyên không có giá trị NaN.
+          </li>
+          <li>
+            Trùng ảnh được kiểm tra bằng SHA-256 trên 784 byte pixel; không phát
+            hiện ảnh gần giống hoặc chứng minh nhãn đúng.
+          </li>
+          <li>
+            Nhóm trùng khác nhãn cần xem xét thủ công; không tự động xóa dữ liệu
+            hoặc sửa nhãn.
+          </li>
+          <li>
+            Ảnh 28×28 có ít chi tiết. Các loại áo có thể khó phân biệt bằng mắt;
+            đây là nhận xét định tính, chưa phải kết quả mô hình.
+          </li>
+          <li>Chưa huấn luyện, chưa có accuracy hoặc confusion matrix.</li>
+        </ul>
+        <details>
+          <summary>Nguồn dữ liệu & checksum</summary>
+          <p>
+            <a
+              href="https://github.com/zalandoresearch/fashion-mnist"
+              target="_blank"
+              rel="noopener"
+              >Repository chính thức của Zalando Research</a
+            >
+          </p>
+          <div id="checksums" class="table-wrap"></div>
+        </details>
+      </section>
+      <footer>
+        Live Server · Python / NumPy · Chỉ tải dữ liệu một lần; lọc tại trình
+        duyệt · Có thể tái tạo từ script prepare_data.py.
+      </footer>
+    </main>
+    <dialog id="detail">
+      <button id="close">Đóng</button>
+      <h2 id="detailTitle"></h2>
+      <canvas id="detailImage" width="28" height="28"></canvas>
+      <p id="detailStats"></p>
+    </dialog>
+
+    <script>
+      "use strict";
+      async function initialize() {
+        const $ = (id) => document.getElementById(id),
+          fmt = (n) => Number(n).toLocaleString("vi-VN"),
+          dec = (n) =>
+            Number(n).toLocaleString("vi-VN", { maximumFractionDigits: 4 }),
+          pct = (n) => dec(n * 100) + "%";
+        if (!/^https?:$/.test(location.protocol))
+          throw Error(
+            "Nhấp phải explorer.html trong VS Code → Open with Live Server. Trang cần HTTP để đọc dữ liệu.",
+          );
+        for (const id of ["label", "split", "position", "jump", "edaSplit"])
+          $(id).disabled = true;
+        async function load(url, kind) {
+          const response = await fetch(new URL(url, location.href), {
+            cache: "no-cache",
+          });
+          if (!response.ok)
+            throw Error(
+              "Không tải được " +
+                url +
+                " (HTTP " +
+                response.status +
+                "). Chạy prepare_data.py và mở Live Server từ workspace.",
+            );
+          return kind === "json" ? response.json() : response.arrayBuffer();
+        }
+        function idx(buffer, count, isImage) {
+          const view = new DataView(buffer),
+            header = isImage ? 16 : 8;
+          if (
+            view.byteLength < header ||
+            view.getUint32(0) !== (isImage ? 2051 : 2049) ||
+            view.getUint32(4) !== count
+          )
+            throw Error("File IDX không hợp lệ");
+          if (
+            isImage &&
+            (view.getUint32(8) !== 28 || view.getUint32(12) !== 28)
+          )
+            throw Error("Kích thước ảnh không hợp lệ");
+          if (buffer.byteLength !== header + count * (isImage ? 784 : 1))
+            throw Error("File IDX thiếu hoặc dư dữ liệu");
+          return new Uint8Array(buffer, header);
+        }
+        $("status").textContent =
+          "Đang tải báo cáo EDA và dữ liệu train/test qua Live Server…";
+        const [R, trainImages, testImages, trainLabels, testLabels] =
+          await Promise.all([
+            load("../outputs/eda.json", "json"),
+            load("../data/FashionMNIST_raw/train-images-idx3-ubyte"),
+            load("../data/FashionMNIST_raw/t10k-images-idx3-ubyte"),
+            load("../data/FashionMNIST_raw/train-labels-idx1-ubyte"),
+            load("../data/FashionMNIST_raw/t10k-labels-idx1-ubyte"),
+          ]);
+        const pixels = new Uint8Array(70000 * 784),
+          labels = new Uint8Array(70000);
+        pixels.set(idx(trainImages, 60000, true));
+        pixels.set(idx(testImages, 10000, true), 60000 * 784);
+        labels.set(idx(trainLabels, 60000, false));
+        labels.set(idx(testLabels, 10000, false), 60000);
+        if (labels.some((x) => x > 9) || R.all.count !== 70000)
+          throw Error("Nhãn hoặc báo cáo không khớp dataset");
+        for (const id of ["label", "split", "position", "jump", "edaSplit"])
+          $(id).disabled = false;
+        R.names.forEach((name, c) => {
+          const o = document.createElement("option");
+          o.value = c;
+          o.textContent = c + " · " + name;
+          $("label").append(o);
+        });
+        function draw(canvas, bytes) {
+          const ctx = canvas.getContext("2d"),
+            data = ctx.createImageData(28, 28);
+          for (let p = 0; p < 784; p++) {
+            data.data[p * 4] =
+              data.data[p * 4 + 1] =
+              data.data[p * 4 + 2] =
+                bytes[p];
+            data.data[p * 4 + 3] = 255;
+          }
+          ctx.putImageData(data, 0, 0);
+        }
+        let matches = [],
+          columns = 1;
+        const rowHeight = 148;
+        function filter() {
+          const split = $("split").value,
+            c = $("label").value;
+          matches = [];
+          const start = split === "test" ? 60000 : 0,
+            end = split === "train" ? 60000 : 70000;
+          for (let i = start; i < end; i++)
+            if (c === "all" || labels[i] === Number(c)) matches.push(i);
+          $("status").textContent =
+            fmt(matches.length) +
+            " ảnh phù hợp · " +
+            (c === "all" ? "Tất cả nhãn" : R.names[Number(c)]) +
+            " · " +
+            $("split").selectedOptions[0].textContent;
+          $("position").max = matches.length;
+          $("position").value = 1;
+          $("viewport").scrollTop = 0;
+          render();
+        }
+        function render() {
+          columns = Math.max(
+            1,
+            Math.floor(($("viewport").clientWidth - 16) / 112),
+          );
+          const rows = Math.ceil(matches.length / columns);
+          $("space").style.height = rows * rowHeight + 8 + "px";
+          const firstRow = Math.max(
+              0,
+              Math.floor($("viewport").scrollTop / rowHeight) - 1,
+            ),
+            lastRow = Math.min(
+              rows,
+              firstRow + Math.ceil($("viewport").clientHeight / rowHeight) + 3,
+            );
+          $("tiles").style.transform =
+            "translateY(" + firstRow * rowHeight + "px)";
+          $("tiles").style.gridTemplateColumns =
+            "repeat(" + columns + ", minmax(0,1fr))";
+          const fragment = document.createDocumentFragment();
+          for (
+            let position = firstRow * columns;
+            position < Math.min(matches.length, lastRow * columns);
+            position++
+          ) {
+            const i = matches[position],
+              tile = document.createElement("button"),
+              canvas = document.createElement("canvas");
+            tile.className = "tile";
+            canvas.width = canvas.height = 28;
+            draw(canvas, pixels.subarray(i * 784, (i + 1) * 784));
+            const caption = document.createElement("span");
+            caption.textContent =
+              i < 60000 ? "train #" + i : "test #" + (i - 60000);
+            const name = document.createElement("span");
+            name.textContent = R.names[labels[i]];
+            tile.setAttribute(
+              "aria-label",
+              position +
+                1 +
+                ": " +
+                caption.textContent +
+                " " +
+                name.textContent,
+            );
+            tile.append(canvas, caption, name);
+            tile.onclick = () => showDetail(i);
+            fragment.append(tile);
+          }
+          $("tiles").replaceChildren(fragment);
+          $("range").textContent =
+            "Đang vẽ vùng " +
+            fmt(firstRow * columns + 1) +
+            "–" +
+            fmt(Math.min(matches.length, lastRow * columns)) +
+            " / " +
+            fmt(matches.length) +
+            " ảnh. Mọi ảnh đều truy cập được qua cuộn hoặc ô Đi đến.";
+        }
+        function showDetail(i) {
+          $("detailTitle").textContent =
+            R.names[labels[i]] +
+            " · " +
+            (i < 60000 ? "train #" + i : "test #" + (i - 60000));
+          const b = pixels.subarray(i * 784, (i + 1) * 784);
+          draw($("detailImage"), b);
+          let sum = 0,
+            foreground = 0;
+          for (const p of b) {
+            sum += p;
+            if (p > 0) foreground++;
+          }
+          $("detailStats").textContent =
+            "Nhãn: " +
+            labels[i] +
+            " · Độ sáng: " +
+            dec(sum / 784) +
+            " · Foreground: " +
+            pct(foreground / 784);
+          $("detail").showModal();
+        }
+        $("close").onclick = () => $("detail").close();
+        $("label").onchange = $("split").onchange = filter;
+        $("jump").onclick = () => {
+          const position = Math.min(
+            matches.length,
+            Math.max(1, Math.floor(Number($("position").value) || 1)),
+          );
+          $("position").value = position;
+          $("viewport").scrollTop =
+            Math.floor((position - 1) / columns) * rowHeight;
+          render();
+        };
+        let pending = false;
+        $("viewport").onscroll = () => {
+          if (!pending) {
+            pending = true;
+            requestAnimationFrame(() => {
+              render();
+              pending = false;
+            });
+          }
+        };
+        new ResizeObserver(render).observe($("viewport"));
+        function table(headers, rows) {
+          return (
+            "<table><thead><tr>" +
+            headers.map((h) => "<th>" + h + "</th>").join("") +
+            "</tr></thead><tbody>" +
+            rows
+              .map(
+                (row) =>
+                  "<tr>" +
+                  row.map((v) => "<td>" + v + "</td>").join("") +
+                  "</tr>",
+              )
+              .join("") +
+            "</tbody></table>"
+          );
+        }
+        function bars(target, values, names, horizontal = false) {
+          const width = 560,
+            height = horizontal ? 350 : 250,
+            left = horizontal ? 108 : 60,
+            bottom = 35,
+            top = 22,
+            plotW = width - left - 16,
+            plotH = height - top - bottom,
+            max = Math.max(...values),
+            step = (horizontal ? plotH : plotW) / values.length;
+          let svg =
+            '<svg class="chart" viewBox="0 0 ' +
+            width +
+            " " +
+            height +
+            '" role="img" aria-label="' +
+            target +
+            '"><text x="' +
+            left +
+            '" y="15" font-size="11" fill="#63757a">Số lượng · tối đa ' +
+            fmt(max) +
+            "</text>";
+          values.forEach((v, i) => {
+            if (horizontal) {
+              const y = top + i * step;
+              svg +=
+                '<text x="0" y="' +
+                (y + step * 0.6) +
+                '" font-size="11">' +
+                names[i] +
+                '</text><rect x="' +
+                left +
+                '" y="' +
+                y +
+                '" width="' +
+                (v / max) * plotW * 0.83 +
+                '" height="' +
+                (step - 7) +
+                '" rx="3" fill="#087e80"><title>' +
+                names[i] +
+                ": " +
+                fmt(v) +
+                '</title></rect><text x="' +
+                (left + (v / max) * plotW * 0.83 + 5) +
+                '" y="' +
+                (y + step * 0.6) +
+                '" font-size="11">' +
+                fmt(v) +
+                "</text>";
+            } else {
+              const h = (v / max) * plotH;
+              svg +=
+                '<rect x="' +
+                (left + i * step) +
+                '" y="' +
+                (top + plotH - h) +
+                '" width="' +
+                Math.max(1, step - 2) +
+                '" height="' +
+                h +
+                '" fill="#087e80"><title>' +
+                names[i] +
+                ": " +
+                fmt(v) +
+                "</title></rect>";
+              if (i % 4 === 0)
+                svg +=
+                  '<text x="' +
+                  (left + i * step) +
+                  '" y="' +
+                  (height - 12) +
+                  '" font-size="11">' +
+                  names[i] +
+                  "</text>";
+            }
+          });
+          svg += "</svg>";
+          $(target).innerHTML = svg;
+        }
+        function eda() {
+          const s = R[$("edaSplit").value];
+          bars("classChart", s.counts, R.names, true);
+          const bins = Array.from({ length: 32 }, (_, i) =>
+              s.histogram.slice(i * 8, i * 8 + 8).reduce((a, b) => a + b, 0),
+            ),
+            binNames = Array.from(
+              { length: 32 },
+              (_, i) => i * 8 + "–" + (i * 8 + 7),
+            );
+          bars("pixelChart", bins, binNames);
+          bars("brightnessChart", s.brightness_histogram, binNames);
+          $("summary").innerHTML = table(
+            ["Chỉ số", "Giá trị"],
+            [
+              ["Số ảnh", fmt(s.count)],
+              ["Số pixel", fmt(s.count * 784)],
+              ["Miền giá trị", s.min + "–" + s.max],
+              ["Mean / std pixel", dec(s.mean) + " / " + dec(s.std)],
+              [
+                "Mean / std sau chia 255",
+                dec(s.normalized_mean) + " / " + dec(s.normalized_std),
+              ],
+              ["Pixel bằng 0", pct(s.zero_ratio)],
+              ["Pixel bằng 255", pct(s.saturated_ratio)],
+              [
+                "Ảnh toàn đen / ảnh hằng",
+                fmt(s.blank) + " / " + fmt(s.constant),
+              ],
+              [
+                "Tỷ lệ lớp lớn nhất / nhỏ nhất",
+                dec(Math.max(...s.counts) / Math.min(...s.counts)),
+              ],
+            ],
+          );
+          $("quantiles").innerHTML = table(
+            ["Phân vị", "Độ sáng"],
+            ["Min", "P1", "P25", "P50 (median)", "P75", "P99", "Max"].map(
+              (q, i) => [q, dec(s.brightness_quantiles[i])],
+            ),
+          );
+          $("classTable").innerHTML = table(
+            [
+              "ID / nhãn",
+              "Số ảnh",
+              "Tỷ lệ",
+              "Độ sáng",
+              "Foreground",
+              "Train",
+              "Test",
+            ],
+            R.names.map((n, c) => [
+              c + " · " + n,
+              fmt(s.counts[c]),
+              pct(s.counts[c] / s.count),
+              dec(s.classes[c].mean),
+              pct(s.classes[c].foreground),
+              fmt(R.train.counts[c]),
+              fmt(R.test.counts[c]),
+            ]),
+          );
+          $("means").replaceChildren();
+          R.names.forEach((n, c) => {
+            const box = document.createElement("div");
+            box.className = "mean";
+            const canvas = document.createElement("canvas");
+            canvas.width = canvas.height = 28;
+            draw(canvas, s.classes[c].mean_image);
+            box.append(canvas, document.createTextNode(c + " · " + n));
+            $("means").append(box);
+          });
+        }
+        $("comparison").innerHTML = table(
+          ["Chỉ số", "Train", "Test", "Test − Train"],
+          [
+            [
+              "Số ảnh",
+              fmt(R.train.count),
+              fmt(R.test.count),
+              fmt(R.test.count - R.train.count),
+            ],
+            [
+              "Mean pixel",
+              dec(R.train.mean),
+              dec(R.test.mean),
+              dec(R.test.mean - R.train.mean),
+            ],
+            [
+              "Std pixel",
+              dec(R.train.std),
+              dec(R.test.std),
+              dec(R.test.std - R.train.std),
+            ],
+            [
+              "Pixel 0",
+              pct(R.train.zero_ratio),
+              pct(R.test.zero_ratio),
+              dec((R.test.zero_ratio - R.train.zero_ratio) * 100) + " điểm %",
+            ],
+          ],
+        );
+        const d = R.duplicates;
+        $("qualityStats").innerHTML = table(
+          ["Kiểm tra trùng chính xác", "Kết quả"],
+          [
+            ["Nhóm trùng toàn bộ", fmt(d.groups)],
+            ["Bản sao dư toàn bộ (sau giữ 1 ảnh / nhóm)", fmt(d.extra_copies)],
+            [
+              "Train: nhóm / bản sao dư",
+              fmt(d.train.groups) + " / " + fmt(d.train.extra_copies),
+            ],
+            [
+              "Test: nhóm / bản sao dư",
+              fmt(d.test.groups) + " / " + fmt(d.test.extra_copies),
+            ],
+            ["Nhóm có ảnh ở cả train và test", fmt(d.cross_split_groups)],
+            [
+              "Nhóm trùng pixel nhưng khác nhãn",
+              fmt(d.conflicting_label_groups),
+            ],
+          ],
+        );
+        $("duplicateExamples").innerHTML = d.examples.length
+          ? d.examples
+              .map(
+                (g, i) =>
+                  "<p>Nhóm " +
+                  (i + 1) +
+                  ": " +
+                  g
+                    .map(
+                      (x) =>
+                        x.split + " #" + x.index + " (nhãn " + x.label + ")",
+                    )
+                    .join(", ") +
+                  "</p>",
+              )
+              .join("")
+          : "Không có nhóm trùng.";
+        $("checksums").innerHTML = table(
+          ["File", "MD5 đã xác minh"],
+          Object.entries(R.checksums),
+        );
+        $("edaSplit").onchange = eda;
+        filter();
+        eda();
+      }
+      initialize().catch((error) => {
+        const status = document.getElementById("status");
+        status.textContent = "Không thể hiển thị dữ liệu: " + error.message;
+        status.style.color = "#b42318";
+        status.setAttribute("role", "alert");
+        console.error(error);
+      });
+    </script>
+  </body>
+</html>
