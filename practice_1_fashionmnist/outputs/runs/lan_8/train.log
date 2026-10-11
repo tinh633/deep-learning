@@ -1,0 +1,38 @@
+2026-10-11 17:19:15,588 | Run: lan_8 | epochs=20 | seed=42
+2026-10-11 17:19:15,589 | Device: cuda | GPU: NVIDIA GeForce RTX 3050 Laptop GPU | PyTorch: 2.11.0+cu126
+2026-10-11 17:19:15,590 | Data: train=54000 | batch_size=64 | batches=844 | shuffle=RandomSampler | transform=ToTensor()
+2026-10-11 17:19:15,590 | Model: Sequential(
+  (0): Flatten(start_dim=1, end_dim=-1)
+  (1): Linear(in_features=784, out_features=256, bias=True)
+  (2): ReLU()
+  (3): Linear(in_features=256, out_features=128, bias=True)
+  (4): ReLU()
+  (5): Linear(in_features=128, out_features=10, bias=True)
+)
+Parameters: 235146
+2026-10-11 17:19:15,590 | Loss: CrossEntropyLoss | options={'reduction': 'mean', 'ignore_index': -100, 'label_smoothing': 0.0}
+2026-10-11 17:19:15,591 | Optimizer: Adam
+2026-10-11 17:19:15,591 | LR decay: StepLR | step_size=10 | gamma=0.3
+2026-10-11 17:19:15,591 | Optimizer group 1: {'lr': 0.001, 'betas': (0.9, 0.999), 'eps': 1e-08, 'weight_decay': 0.0001, 'amsgrad': False, 'maximize': False, 'foreach': None, 'capturable': False, 'differentiable': False, 'fused': None, 'decoupled_weight_decay': False, 'initial_lr': 0.001}
+2026-10-11 17:19:15,591 | Start training | validation/test not evaluated
+2026-10-11 17:19:23,224 | Epoch 1/20 | train_loss=0.5419 | lr=[0.001]
+2026-10-11 17:19:32,491 | Epoch 2/20 | train_loss=0.3847 | lr=[0.001]
+2026-10-11 17:19:44,089 | Epoch 3/20 | train_loss=0.3478 | lr=[0.001]
+2026-10-11 17:19:54,638 | Epoch 4/20 | train_loss=0.3208 | lr=[0.001]
+2026-10-11 17:20:04,582 | Epoch 5/20 | train_loss=0.3051 | lr=[0.001]
+2026-10-11 17:20:14,861 | Epoch 6/20 | train_loss=0.2926 | lr=[0.001]
+2026-10-11 17:20:25,796 | Epoch 7/20 | train_loss=0.2803 | lr=[0.001]
+2026-10-11 17:20:36,581 | Epoch 8/20 | train_loss=0.2668 | lr=[0.001]
+2026-10-11 17:20:47,697 | Epoch 9/20 | train_loss=0.2606 | lr=[0.001]
+2026-10-11 17:20:58,501 | Epoch 10/20 | train_loss=0.2530 | lr=[0.001]
+2026-10-11 17:21:09,206 | Epoch 11/20 | train_loss=0.2099 | lr=[0.0003]
+2026-10-11 17:21:20,453 | Epoch 12/20 | train_loss=0.2015 | lr=[0.0003]
+2026-10-11 17:21:31,198 | Epoch 13/20 | train_loss=0.1951 | lr=[0.0003]
+2026-10-11 17:21:41,503 | Epoch 14/20 | train_loss=0.1898 | lr=[0.0003]
+2026-10-11 17:21:52,591 | Epoch 15/20 | train_loss=0.1852 | lr=[0.0003]
+2026-10-11 17:22:03,423 | Epoch 16/20 | train_loss=0.1823 | lr=[0.0003]
+2026-10-11 17:22:13,819 | Epoch 17/20 | train_loss=0.1759 | lr=[0.0003]
+2026-10-11 17:22:24,873 | Epoch 18/20 | train_loss=0.1722 | lr=[0.0003]
+2026-10-11 17:22:35,337 | Epoch 19/20 | train_loss=0.1678 | lr=[0.0003]
+2026-10-11 17:22:45,846 | Epoch 20/20 | train_loss=0.1643 | lr=[0.0003]
+2026-10-11 17:22:45,868 | Finished training | model saved: D:\newtask\DL\practice_1_fashionmnist\outputs\runs\lan_8\model.pt

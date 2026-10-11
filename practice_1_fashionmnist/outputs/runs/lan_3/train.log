@@ -1,0 +1,19 @@
+2026-10-11 16:13:14,430 | Run: lan_3 | epochs=1 | seed=42
+2026-10-11 16:13:14,430 | Device: cuda | GPU: NVIDIA GeForce RTX 3050 Laptop GPU | PyTorch: 2.11.0+cu126
+2026-10-11 16:13:14,431 | Data: train=128 | batch_size=64 | batches=2 | shuffle=SequentialSampler | transform=ToTensor()
+2026-10-11 16:13:14,431 | Model: Sequential(
+  (0): Flatten(start_dim=1, end_dim=-1)
+  (1): Linear(in_features=784, out_features=128, bias=True)
+  (2): ReLU()
+  (3): Linear(in_features=128, out_features=64, bias=True)
+  (4): ReLU()
+  (5): Linear(in_features=64, out_features=10, bias=True)
+)
+Parameters: 109386
+2026-10-11 16:13:14,431 | Loss: CrossEntropyLoss | options={'reduction': 'mean', 'ignore_index': -100, 'label_smoothing': 0.0}
+2026-10-11 16:13:14,431 | Optimizer: Adam
+2026-10-11 16:13:14,431 | Optimizer group 1: {'lr': 0.01, 'betas': (0.9, 0.999), 'eps': 1e-08, 'weight_decay': 0, 'amsgrad': False, 'maximize': False, 'foreach': None, 'capturable': False, 'differentiable': False, 'fused': None, 'decoupled_weight_decay': False}
+2026-10-11 16:13:14,432 | Start training | validation/test not evaluated
+2026-10-11 16:13:14,729 | Epoch 1/1 | train_loss=2.2508 | lr=[0.01]
+2026-10-11 16:13:14,755 | Finished training | model saved: D:\newtask\DL\practice_1_fashionmnist\outputs\runs\lan_3\model.pt
+Verification run only: trained on 128 samples for 1 epoch; not a full experiment.

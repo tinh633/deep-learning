@@ -907,5 +907,62 @@
         console.error(error);
       });
     </script>
+    <section id="modelReview" style="max-width:1280px;margin:24px auto">
+      <h2>Đánh giá model · lan_10 / best.pt</h2>
+      <p>Checkpoint tốt nhất theo validation loss trong run 10; chưa tuyên bố tối ưu mọi cấu hình.</p>
+      <p id="modelStatus" role="status">Đang tải kết quả model…</p>
+      <div id="modelScores" class="table-wrap"></div>
+      <details><summary>Model và tham số đã sử dụng</summary><pre id="modelConfig" style="white-space:pre-wrap"></pre></details>
+      <h3>Loss theo epoch</h3><div id="modelCurve"></div>
+      <label>Tập đánh giá <select id="modelSplit"><option value="test">Test</option><option value="validation">Validation</option><option value="train">Train</option></select></label>
+      <h3>Confusion matrix</h3><p>Hàng: nhãn thật. Cột: nhãn dự đoán. Bấm ô ngoài đường chéo để xem các ảnh nhầm tương ứng.</p>
+      <div id="modelMatrix" class="table-wrap"></div><div id="modelClassMetrics" class="table-wrap"></div>
+      <h3>Ảnh dự đoán sai</h3><button id="clearPair">Tất cả lỗi</button> <button id="previousErrors">Trang trước</button> <button id="nextErrors">Trang sau</button>
+      <p id="errorCount"></p><div id="errorGallery" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px"></div>
+    </section>
+    <script>
+    async function showModelReport(){
+      const get=id=>document.getElementById(id);
+      const response=await fetch('../outputs/runs/lan_10/model_report.json');
+      if(!response.ok)throw Error('Chạy src/model_report.py trước (HTTP '+response.status+')');
+      const report=await response.json(), eda=await (await fetch('../outputs/eda.json')).json(), names=eda.names;
+      const table=(headers,rows)=>'<table><thead><tr>'+headers.map(x=>'<th>'+x+'</th>').join('')+'</tr></thead><tbody>'+rows.map(row=>'<tr>'+row.map(x=>'<td>'+x+'</td>').join('')+'</tr>').join('')+'</tbody></table>';
+      get('modelStatus').textContent='Đã đánh giá '+report.run+'/'+report.checkpoint+' · best epoch '+report.best_epoch;
+      get('modelScores').innerHTML=table(['Tập','Số ảnh','Loss','Accuracy','Số lỗi'],Object.entries(report.splits).map(([name,s])=>[name,s.count,s.loss.toFixed(4),(s.accuracy*100).toFixed(2)+'%',s.mistakes.length]));
+      get('modelConfig').textContent=report.architecture+'\n\n'+report.training_log.split(/(?=\d{4}-\d{2}-\d{2} .*?\| Epoch)/)[0];
+      const history=report.history, max=Math.max(...history.map(x=>Math.max(x.train_loss,x.val_loss))), points=key=>history.map((x,i)=>(40+i*700/Math.max(1,history.length-1))+','+(230-x[key]/max*190)).join(' ');
+      get('modelCurve').innerHTML='<svg viewBox="0 0 800 270" style="width:100%" role="img" aria-label="Train loss và validation loss theo epoch"><text x="40" y="20">Train: xanh · Validation: đỏ · '+history.length+' epoch ghi nhận</text><polyline fill="none" stroke="#087e80" stroke-width="3" points="'+points('train_loss')+'"/><polyline fill="none" stroke="#c34e44" stroke-width="3" points="'+points('val_loss')+'"/><text x="40" y="260">Epoch 1</text><text x="700" y="260">Epoch '+history.length+'</text></svg>';
+      let page=0,pair=null, filtered=[];const cache={};
+      async function showErrors(){
+        const split=get('modelSplit').value,s=report.splits[split];
+        filtered=s.mistakes.filter(x=>!pair||(x.true===pair[0]&&x.predicted===pair[1]));
+        page=Math.min(page,Math.max(0,Math.ceil(filtered.length/100)-1));
+        get('errorCount').textContent=filtered.length+' ảnh sai'+(pair?' · '+names[pair[0]]+' → '+names[pair[1]]:'')+' · trang '+(page+1)+'/'+Math.max(1,Math.ceil(filtered.length/100));
+        const source=split==='test'?'t10k':'train';
+        if(!cache[source]){const r=await fetch('../data/FashionMNIST_raw/'+source+'-images-idx3-ubyte');if(!r.ok)throw Error('Không tải được ảnh IDX');cache[source]=new Uint8Array(await r.arrayBuffer(),16);}
+        if(get('modelSplit').value!==split)return;
+        const gallery=get('errorGallery');gallery.replaceChildren();
+        for(const error of filtered.slice(page*100,(page+1)*100)){
+          const card=document.createElement('div');card.className='mean';const canvas=document.createElement('canvas');canvas.width=canvas.height=28;
+          const ctx=canvas.getContext('2d'),image=ctx.createImageData(28,28),pixels=cache[source].subarray(error.index*784,(error.index+1)*784);
+          for(let i=0;i<784;i++){image.data[i*4]=image.data[i*4+1]=image.data[i*4+2]=pixels[i];image.data[i*4+3]=255;}ctx.putImageData(image,0,0);
+          const caption=document.createElement('div');caption.textContent=source+' #'+error.index+' | Thật: '+names[error.true]+' | Dự đoán: '+names[error.predicted]+' | Softmax: '+(error.confidence*100).toFixed(1)+'%';card.append(canvas,caption);gallery.append(card);
+        }
+        get('previousErrors').disabled=page===0;get('nextErrors').disabled=(page+1)*100>=filtered.length;
+      }
+      function updateMatrix(){
+        const s=report.splits[get('modelSplit').value],matrix=s.confusion,maxCell=Math.max(...matrix.flat());
+        let html='<table><thead><tr><th>Thật ↓ / Dự đoán →</th>'+names.map((n,i)=>'<th>'+i+' '+n+'</th>').join('')+'</tr></thead><tbody>';
+        matrix.forEach((row,i)=>{html+='<tr><th>'+i+' '+names[i]+'</th>'+row.map((n,j)=>'<td style="background:rgba(8,126,128,'+(n/maxCell*.65)+')"><button data-true="'+i+'" data-pred="'+j+'" style="background:transparent;color:inherit;border:0;padding:4px" '+(i===j?'disabled':'')+'>'+n+'</button></td>').join('')+'</tr>';});get('modelMatrix').innerHTML=html+'</tbody></table>';
+        get('modelMatrix').querySelectorAll('button:not([disabled])').forEach(b=>b.onclick=()=>{pair=[Number(b.dataset.true),Number(b.dataset.pred)];page=0;showErrors().catch(fail);});
+        get('modelClassMetrics').innerHTML=table(['Nhãn','Precision','Recall','Số mẫu'],names.map((n,i)=>{const actual=matrix[i].reduce((a,b)=>a+b,0),predicted=matrix.reduce((sum,row)=>sum+row[i],0);return[n,((predicted?matrix[i][i]/predicted:0)*100).toFixed(2)+'%',((actual?matrix[i][i]/actual:0)*100).toFixed(2)+'%',actual];}));
+        page=0;pair=null;showErrors().catch(fail);
+      }
+      function fail(error){get('modelStatus').textContent='Lỗi báo cáo model: '+error.message;}
+      get('modelSplit').onchange=updateMatrix;get('clearPair').onclick=()=>{page=0;pair=null;showErrors().catch(fail);};
+      get('previousErrors').onclick=()=>{page--;showErrors().catch(fail);};get('nextErrors').onclick=()=>{page++;showErrors().catch(fail);};updateMatrix();
+    }
+    showModelReport().catch(error=>document.getElementById('modelStatus').textContent='Lỗi báo cáo model: '+error.message);
+    </script>
   </body>
 </html>

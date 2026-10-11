@@ -1,0 +1,2 @@
+2026-10-11 17:23:08,931 | Validation | run=lan_8 | samples=6000 | loss=CrossEntropyLoss() | device=cuda
+2026-10-11 17:23:09,807 | Validation loss=0.2729 | accuracy=90.67% | test not evaluated

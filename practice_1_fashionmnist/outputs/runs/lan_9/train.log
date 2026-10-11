@@ -1,0 +1,39 @@
+2026-10-11 17:27:51,931 | Run: lan_9 | epochs=20 | seed=42
+2026-10-11 17:27:51,931 | Device: cuda | GPU: NVIDIA GeForce RTX 3050 Laptop GPU | PyTorch: 2.11.0+cu126
+2026-10-11 17:27:51,932 | Data: train=54000 | batch_size=64 | batches=844 | shuffle=RandomSampler | transform=ToTensor()
+2026-10-11 17:27:51,932 | Model: Sequential(
+  (0): Flatten(start_dim=1, end_dim=-1)
+  (1): Linear(in_features=784, out_features=256, bias=True)
+  (2): ReLU()
+  (3): Linear(in_features=256, out_features=128, bias=True)
+  (4): ReLU()
+  (5): Linear(in_features=128, out_features=10, bias=True)
+)
+Parameters: 235146
+2026-10-11 17:27:51,932 | Loss: CrossEntropyLoss | options={'reduction': 'mean', 'ignore_index': -100, 'label_smoothing': 0.0}
+2026-10-11 17:27:51,932 | Optimizer: Adam
+2026-10-11 17:27:51,932 | LR decay: StepLR | step_size=10 | gamma=0.3
+2026-10-11 17:27:51,932 | Optimizer group 1: {'lr': 0.001, 'betas': (0.9, 0.999), 'eps': 1e-08, 'weight_decay': 0.0001, 'amsgrad': False, 'maximize': False, 'foreach': None, 'capturable': False, 'differentiable': False, 'fused': None, 'decoupled_weight_decay': False, 'initial_lr': 0.001}
+2026-10-11 17:27:51,933 | Start training | best checkpoint: minimum validation loss | test not evaluated
+2026-10-11 17:28:00,953 | Epoch 1/20 | train_loss=0.5419 | val_loss=0.407742 | val_acc=85.13% | best_epoch=1 | lr=[0.001]
+2026-10-11 17:28:11,159 | Epoch 2/20 | train_loss=0.3847 | val_loss=0.339759 | val_acc=87.75% | best_epoch=2 | lr=[0.001]
+2026-10-11 17:28:23,242 | Epoch 3/20 | train_loss=0.3478 | val_loss=0.321376 | val_acc=88.53% | best_epoch=3 | lr=[0.001]
+2026-10-11 17:28:35,117 | Epoch 4/20 | train_loss=0.3208 | val_loss=0.321170 | val_acc=88.43% | best_epoch=4 | lr=[0.001]
+2026-10-11 17:28:45,964 | Epoch 5/20 | train_loss=0.3051 | val_loss=0.302057 | val_acc=88.82% | best_epoch=5 | lr=[0.001]
+2026-10-11 17:28:57,167 | Epoch 6/20 | train_loss=0.2926 | val_loss=0.298966 | val_acc=88.97% | best_epoch=6 | lr=[0.001]
+2026-10-11 17:29:09,966 | Epoch 7/20 | train_loss=0.2803 | val_loss=0.307778 | val_acc=88.72% | best_epoch=6 | lr=[0.001]
+2026-10-11 17:29:21,188 | Epoch 8/20 | train_loss=0.2668 | val_loss=0.291913 | val_acc=89.10% | best_epoch=8 | lr=[0.001]
+2026-10-11 17:29:33,611 | Epoch 9/20 | train_loss=0.2606 | val_loss=0.293452 | val_acc=89.17% | best_epoch=8 | lr=[0.001]
+2026-10-11 17:29:45,909 | Epoch 10/20 | train_loss=0.2530 | val_loss=0.287530 | val_acc=89.90% | best_epoch=10 | lr=[0.001]
+2026-10-11 17:29:57,466 | Epoch 11/20 | train_loss=0.2099 | val_loss=0.301661 | val_acc=89.08% | best_epoch=10 | lr=[0.0003]
+2026-10-11 17:30:09,982 | Epoch 12/20 | train_loss=0.2015 | val_loss=0.267703 | val_acc=90.52% | best_epoch=12 | lr=[0.0003]
+2026-10-11 17:30:22,186 | Epoch 13/20 | train_loss=0.1951 | val_loss=0.280458 | val_acc=90.15% | best_epoch=12 | lr=[0.0003]
+2026-10-11 17:30:34,845 | Epoch 14/20 | train_loss=0.1898 | val_loss=0.266778 | val_acc=90.43% | best_epoch=14 | lr=[0.0003]
+2026-10-11 17:30:47,432 | Epoch 15/20 | train_loss=0.1852 | val_loss=0.264620 | val_acc=90.67% | best_epoch=15 | lr=[0.0003]
+2026-10-11 17:30:59,531 | Epoch 16/20 | train_loss=0.1823 | val_loss=0.268649 | val_acc=90.63% | best_epoch=15 | lr=[0.0003]
+2026-10-11 17:31:11,723 | Epoch 17/20 | train_loss=0.1759 | val_loss=0.266985 | val_acc=90.85% | best_epoch=15 | lr=[0.0003]
+2026-10-11 17:31:24,396 | Epoch 18/20 | train_loss=0.1722 | val_loss=0.266469 | val_acc=90.70% | best_epoch=15 | lr=[0.0003]
+2026-10-11 17:31:35,988 | Epoch 19/20 | train_loss=0.1678 | val_loss=0.273594 | val_acc=90.67% | best_epoch=15 | lr=[0.0003]
+2026-10-11 17:31:48,001 | Epoch 20/20 | train_loss=0.1643 | val_loss=0.272855 | val_acc=90.67% | best_epoch=15 | lr=[0.0003]
+2026-10-11 17:31:48,005 | Finished training | model saved: D:\newtask\DL\practice_1_fashionmnist\outputs\runs\lan_9\model.pt
+2026-10-11 17:31:48,005 | Best checkpoint: best.pt | epoch=15 | val_loss=0.264620

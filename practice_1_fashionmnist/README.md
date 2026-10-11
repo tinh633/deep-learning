@@ -1,6 +1,22 @@
 # Practice 1 — FashionMNIST
 
-Current scope: data preparation and Live Server visualization; no model training.
+Xuất biểu đồ đánh giá: `python practice_1_fashionmnist/src/visualize_metrics.py`. Xem [visualize_metrics.md](docs/scripts/visualize_metrics.md); ảnh lưu trong outputs/runs/lan_10/plots/.
+
+Review run 10: chạy `python practice_1_fashionmnist/src/model_report.py`, rồi mở explorer.html bằng Live Server và cuộn đến **Đánh giá model**. Có confusion matrix và ảnh sai nhãn; xem [model_report.md](docs/scripts/model_report.md).
+
+Chưa chốt mô hình cuối. Mỗi run lưu best.pt theo validation loss thấp nhất trong quá trình train; model.pt là trọng số epoch cuối của run đó.
+
+Current scope: data preparation, MLP training, validation/test evaluation and visualization. Selected checkpoint: lan_10/best.pt; see the result report above.
+
+Huấn luyện MLP: `python practice_1_fashionmnist/src/train.py`. Validation chạy mỗi epoch; best.pt chọn theo validation loss, model.pt lưu epoch cuối, một dòng log mỗi epoch. Run cũ giữ nguyên. Xem [train.md](docs/scripts/train.md).
+
+Đánh giá validation sau train: `python practice_1_fashionmnist/src/evaluate.py`. Mặc định best.pt của run mới nhất; có thể chỉnh run_name/checkpoint. Kết quả append vào evaluate.log. Xem [evaluate.md](docs/scripts/evaluate.md).
+
+So sánh validation/test theo yêu cầu: `python practice_1_fashionmnist/src/test.py`. Chỉnh run_name/checkpoint trong script; kết quả append vào test.log. Xem [test.md](docs/scripts/test.md).
+
+Giới thiệu bài toán: [01_problem.md](docs/01_problem.md).
+
+MLP mẫu: [03_model.md](docs/03_model.md). Chạy kiểm tra forward bằng `python practice_1_fashionmnist/src/model.py`; chỉnh hidden_size trong model.py. Chưa huấn luyện.
 
 ## Open the page
 
@@ -20,6 +36,8 @@ The only HTML is approximately 18 KB. It loads EDA JSON and four extracted IDX f
 - Errors are displayed in the page with instructions.
 
 ## Prepare data
+
+Chuẩn bị train/validation/test cho MLP: `python practice_1_fashionmnist/src/data_pipeline.py`. Seed 42, validation 10%, batch size 64 đặt trực tiếp trong code; script chỉ in số mẫu và kích thước batch, không ghi báo cáo. Xem [thiết kế dữ liệu](docs/02_data_preparation.md) và [script](docs/scripts/data_pipeline.md). Chưa huấn luyện mô hình.
 
 From workspace root: `python practice_1_fashionmnist/src/prepare_data.py`.
 

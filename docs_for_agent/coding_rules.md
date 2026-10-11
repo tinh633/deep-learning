@@ -1,6 +1,14 @@
 # Coding & Validation Rules
 
 ## Code Quality
+- Distinguish the best validation checkpoint within a run from final model selection across experiments. Do not declare a final model or create a final-model report unless the user confirms that decision.
+- Keep validation evaluation separate from basic training when requested. Evaluate saved trained weights with eval/no_grad; append evaluation logs and reserve test evaluation until the user finalizes the model.
+- For training progress, print and save one metrics line per epoch; do not log each batch unless explicitly requested. Initial configuration and final status messages may remain.
+- When the user asks for a minimal training example, keep only the requested training loop and essential persistent logging. Implement evaluation, plots and checkpoint saving as separately reviewed steps rather than bundling them into train.py.
+- For training scripts, prefer the user's direct criterion/optimizer/epoch/batch loop style. Keep output handling concise; do not add source snapshots or separate configuration files unless requested.
+- For introductory practice scripts, follow the user's short library examples: explicit dataset/transform/DataLoader statements, minimal configuration, and no CLI, wrapper functions or generated reports unless needed or requested.
+- Prefer established library APIs for dataset loading, transforms and dataset splitting. Avoid hand-written equivalents; keep any necessary adapter small and document why it exists.
+- For small learning projects, prefer a short, sequential pipeline and framework-provided datasets over custom classes or elaborate validation scaffolding. Keep necessary reproducibility and data checks; explain only non-obvious steps.
 - Favor simple, readable, maintainable implementations over clever abstractions.
 - Use descriptive names and separate responsibilities into sensible modules.
 - Add comments for non-obvious logic, assumptions, and important edge cases.

@@ -1,0 +1,4 @@
+2026-10-11 17:32:09,129 | Run=lan_9 | checkpoint=best.pt | device=cuda | loss=CrossEntropyLoss()
+2026-10-11 17:32:10,081 | Validation | samples=6000 | loss=0.2646 | accuracy=90.67%
+2026-10-11 17:32:11,315 | Test | samples=10000 | loss=0.3099 | accuracy=89.21%
+2026-10-11 17:32:11,316 | Test - Validation | loss=+0.0452 | accuracy=-1.46 percentage points
