@@ -1,6 +1,6 @@
 # FashionMNIST explorer
 
-- Scope: Python preparation and one HTML page using Live Server. No training yet.
+- Scope: data preparation, EDA viewer, MLP training/evaluation and result visualization. Data viewer and model review share one HTML page served by Live Server.
 - Source: author's original IDX files verified against published MD5.
 - Layout: .py in src/, one HTML in visualization/, shallow data/FashionMNIST_raw/, statistics/screenshots in outputs/.
 - HTML loads EDA JSON and extracted IDX asynchronously through relative HTTP paths; no embedded base64 or separate template.

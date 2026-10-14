@@ -4,7 +4,7 @@ Workspace for deep-learning practice projects and reusable agent working rules.
 
 ## Projects
 
-- [Practice 1 — FashionMNIST](practice_1_fashionmnist/README.md): data preparation and Live Server explorer; MLP training has not started.
+- [Practice 1 — FashionMNIST](practice_1_fashionmnist/README.md): data preparation, Live Server explorer, MLP training/evaluation and result report (delivered model: lan_10/best.pt, test accuracy 89.41%).
 
 Downloaded datasets are excluded from Git. Follow the project README to recreate them; source links and checksums are retained in project documentation.
 
