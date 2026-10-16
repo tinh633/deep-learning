@@ -1,27 +1,25 @@
+
 import torch
 from torch import nn
 
-model = nn.Sequential(
+class MLP(nn.Module):
+    def __init__(self, hidden1=512, hidden2=256, dropout=0.2):
+        super().__init__()
+
+        self.network = nn.Sequential(
             nn.Flatten(),
-
-            nn.Linear(784, 256),
+            nn.Linear(784, hidden1),
+            nn.BatchNorm1d(hidden1),
             nn.ReLU(),
-
-            nn.Linear(256, 128),
+            nn.Dropout(dropout),
+            nn.Linear(hidden1, hidden2),
+            nn.BatchNorm1d(hidden2),
             nn.ReLU(),
+            nn.Dropout(dropout),
+            nn.Linear(hidden2, 10)
+        )
 
-            nn.Linear(128, 10)
+    def forward(self, x):
+        return self.network(x)
 
-)
-
-if __name__ == '__main__':
-    from data_pipeline import train_loader
-
-    images, labels = next(iter(train_loader))
-    with torch.no_grad():
-        outputs = model(images)
-    assert outputs.shape == (images.shape[0], 10)
-    assert torch.isfinite(outputs).all()
-    print(model)
-    print('Input:', images.shape)
-    print('Output:', outputs.shape)
+model = MLP()

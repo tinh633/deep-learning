@@ -5,7 +5,7 @@ import torch
 from torch import nn, optim
 
 torch.manual_seed(42)
-from data_pipeline import train_loader, val_loader, transform
+from data_pipeline import train_loader, val_loader, train_transform
 from model import model
 
 num_epochs = 30
@@ -36,7 +36,7 @@ logging.info('Device: %s | GPU: %s | PyTorch: %s', device,
              torch.cuda.get_device_name(device) if device.type == 'cuda' else 'none', torch.__version__)
 logging.info('Data: train=%d | batch_size=%d | batches=%d | shuffle=%s | transform=%s',
              len(train_loader.dataset), train_loader.batch_size, len(train_loader),
-             type(train_loader.sampler).__name__, transform)
+             type(train_loader.sampler).__name__, train_transform)
 logging.info('Model: %s\nParameters: %d', model, sum(p.numel() for p in model.parameters()))
 logging.info('Loss: %s | options=%s', type(criterion).__name__,
              {key: value for key, value in vars(criterion).items() if not key.startswith('_') and key != 'training'})

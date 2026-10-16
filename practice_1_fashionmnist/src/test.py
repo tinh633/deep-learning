@@ -7,7 +7,7 @@ from torch import nn
 from data_pipeline import val_loader, test_loader
 from model import model
 
-run_name = 'lan_10'  # Chọn run muốn kiểm tra; chưa chốt mô hình cuối.
+run_name = 'lan_17'  # Chọn run muốn kiểm tra; chưa chốt mô hình cuối.
 checkpoint = 'best.pt'
 run_folder = Path(__file__).resolve().parents[1] / 'outputs' / 'runs' / run_name
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
