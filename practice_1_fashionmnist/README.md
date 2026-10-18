@@ -1,5 +1,7 @@
 # Practice 1 — FashionMNIST MLP
 
+Người tiếp tục dự án: đọc [tiến độ và yêu cầu bàn giao](progress.md) trước khi chỉnh sửa hoặc chạy thử nghiệm.
+
 ## Các bước
 
 1. [Define problem](docs/01_problem.md)
