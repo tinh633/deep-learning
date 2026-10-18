@@ -954,7 +954,13 @@
     </script>
     <section id="modelReview" style="max-width:1280px;margin:24px auto">
       <h2>Đánh giá model</h2>
-      <p>Chỉ hiển thị kết quả thực tế của checkpoint được chọn theo validation.</p>
+      <p>So sánh best.pt của các run trên cùng train/validation. Baseline: lần 10; mở rộng: lần 11; tăng sâu: lần 12.</p>
+      <h3>Baseline → Mở rộng → Tăng sâu</h3>
+      <div id="architectureComparison" class="table-wrap"></div>
+      <div id="comparisonChart"></div><p id="comparisonConclusion"></p>
+      <div id="pairedErrors" class="table-wrap"></div>
+      <p>Test chỉ hiện ở run đã đánh giá; dấu — nghĩa là chưa đo, không phải 0. So sánh một seed chưa chứng minh cải thiện ổn định.</p>
+      <label>Chi tiết run <select id="modelRun"></select></label>
       <p id="modelStatus" role="status">Đang tải kết quả model…</p>
       <div id="modelScores" class="table-wrap"></div>
       <h3>Thí nghiệm đã thực hiện</h3>
@@ -962,7 +968,7 @@
         Chỉ so sánh validation; nhiều thay đổi cùng lúc không cho phép kết luận riêng từng yếu tố.</p>
       <div id="experimentTable" class="table-wrap"></div>
       <h3>Ví dụ dự đoán đúng và sai</h3>
-      <p>Hàng trên: 5 ảnh đúng đầu tiên. Hàng dưới: tối đa 5 ảnh sai đầu tiên của tập test nếu đã đánh giá,
+      <p>Với run đã xuất ảnh preview: hàng trên là 5 ảnh đúng đầu tiên; hàng dưới là tối đa 5 ảnh sai đầu tiên của tập test nếu đã đánh giá,
         hoặc validation nếu chưa test. Không chọn ảnh theo confidence để làm đẹp kết quả.</p>
       <div id="predictionPreview"></div>
       <details><summary>Model và tham số đã sử dụng</summary><pre id="modelConfig" style="white-space:pre-wrap"></pre></details>
@@ -974,7 +980,8 @@
       <p id="errorCount"></p><div id="errorGallery" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px"></div>
     </section>
     <script>
-    async function showModelReport(){
+    let runReviewPromise;
+    async function showModelReport(selectedRun){
       const get=id=>document.getElementById(id);
       const response=await fetch('../outputs/model_report.json');
       if(response.status===404){
@@ -983,11 +990,44 @@
         return;
       }
       if(!response.ok)throw Error('Không đọc được báo cáo (HTTP '+response.status+')');
-      const report=await response.json(), eda=await (await fetch('../outputs/eda.json')).json(), names=eda.names;
+      const latest=await response.json(), eda=await (await fetch('../outputs/eda.json')).json(), names=eda.names;
+      runReviewPromise ??= fetch('../outputs/run_review.json').then(r=>r.ok?r.json():null);
+      const review=await runReviewPromise, runs=review?.runs || [];
+      const current=runs.find(x=>x.run===(selectedRun || latest.run));
+      const report=current?{...current,architecture:current.architecture.join(' → ')+' → 10',
+        training_log:JSON.stringify({model:current.model_config,train:current.train_config,data:current.data_config},null,2),
+        history:await (await fetch('../outputs/runs/'+current.run+'/metrics.json')).json()}:latest;
+      if(current?.run===latest.run)report.splits=latest.splits;
+      get('modelRun').replaceChildren(...(runs.length?runs:[latest]).map(x=>new Option(x.run,x.run)));
+      get('modelRun').value=report.run;
+      get('modelRun').onchange=()=>showModelReport(get('modelRun').value).catch(fail);
       get('modelSplit').replaceChildren(...Object.keys(report.splits).map(name=>new Option(name,name)));
+      get('modelSplit').value='validation';
       const table=(headers,rows)=>'<table><thead><tr>'+headers.map(x=>'<th>'+x+'</th>').join('')+'</tr></thead><tbody>'+rows.map(row=>'<tr>'+row.map(x=>'<td>'+x+'</td>').join('')+'</tr>').join('')+'</tbody></table>';
+      const pct=x=>(100*x).toFixed(2)+'%', role=x=>({lan_10:'Baseline',lan_11:'Mở rộng',lan_12:'Tăng sâu'}[x.run] || 'Thử nghiệm');
+      const focus=runs.filter(x=>['lan_10','lan_11','lan_12'].includes(x.run));
+      get('architectureComparison').innerHTML=table(['Vai trò / Run','Lớp ẩn','Train acc / loss','Val acc / loss','Gap train–val','Test acc / loss','Sai val','Best epoch'],focus.map(x=>[
+        role(x)+' · '+x.run,x.architecture.join(' → '),pct(x.splits.train.accuracy)+' / '+x.splits.train.loss.toFixed(4),
+        pct(x.splits.validation.accuracy)+' / '+x.splits.validation.loss.toFixed(4),
+        (100*(x.splits.train.accuracy-x.splits.validation.accuracy)).toFixed(2)+' điểm',
+        x.splits.test?pct(x.splits.test.accuracy)+' / '+x.splits.test.loss.toFixed(4):'—',x.splits.validation.mistakes.length,x.best_epoch]));
+      if(focus.length===3){
+        const base=focus[0],wide=focus[1],deep=focus[2],delta=(a,b)=>(100*(a-b)).toFixed(2);
+        get('comparisonConclusion').textContent='Giữ dropout 0,2, Adam lr 0,001, WD 1e-5, StepLR(15; 0,3), 50 epoch và split/seed. '+
+          'Mở rộng so baseline: val +'+delta(wide.splits.validation.accuracy,base.splits.validation.accuracy)+' điểm, giảm 9 lỗi nhưng val loss tăng '+(wide.splits.validation.loss-base.splits.validation.loss).toFixed(4)+'. '+
+          'Tăng sâu so mở rộng: val +'+delta(deep.splits.validation.accuracy,wide.splits.validation.accuracy)+' điểm, giảm 15 lỗi. '+
+          'Tăng sâu so baseline: val +'+delta(deep.splits.validation.accuracy,base.splits.validation.accuracy)+' điểm, giảm 24 lỗi; val loss vẫn cao hơn baseline. Chưa chốt mô hình.';
+        let chart='<svg viewBox="0 0 900 310" style="width:100%" role="img" aria-label="Accuracy train validation test của baseline mở rộng và tăng sâu"><text x="20" y="20">Accuracy (%) · trục từ 0 đến 100 · Train xanh, Validation cam, Test tím</text>';
+        focus.forEach((x,i)=>{['train','validation','test'].forEach((split,j)=>{const s=x.splits[split],pos=80+i*280+j*65;
+          if(s)chart+='<rect x="'+pos+'" y="'+(255-2*s.accuracy*100)+'" width="48" height="'+(2*s.accuracy*100)+'" fill="'+['#087e80','#c76a18','#7854a6'][j]+'"/><text x="'+pos+'" y="'+(247-2*s.accuracy*100)+'" font-size="12">'+pct(s.accuracy)+'</text>';
+          else chart+='<text x="'+pos+'" y="245">—</text>';});chart+='<text x="'+(90+i*280)+'" y="285">'+x.run+' · '+role(x)+'</text>';});
+        get('comparisonChart').innerHTML=chart+'<path d="M45 45V255H875" fill="none" stroke="#555"/><text x="10" y="55">100</text><text x="25" y="255">0</text></svg>';
+      }
+      get('pairedErrors').innerHTML=table(['Chuyển run','Sửa đúng ảnh trước sai','Ảnh trước đúng thành sai','Cùng sai','Giảm ròng lỗi val'],(review?.paired_validation_comparisons || []).map(x=>[
+        x.old+' → '+x.new,x.fixed_ids.length,x.regressed_ids.length,x.shared_wrong_ids.length,x.fixed_ids.length-x.regressed_ids.length]));
       get('modelStatus').textContent='Đã đánh giá '+report.run+'/'+report.checkpoint+' · best epoch '+report.best_epoch;
       get('modelScores').innerHTML=table(['Tập','Số ảnh','Loss','Accuracy','Macro F1','Số lỗi'],Object.entries(report.splits).map(([name,s])=>[name,s.count,s.loss.toFixed(4),(s.accuracy*100).toFixed(2)+'%',s.macro_f1===undefined?'—':s.macro_f1.toFixed(4),s.mistakes.length]));
+      get('predictionPreview').replaceChildren();
       if(report.splits.validation.correct_examples){
         const preview=document.createElement('img');preview.src='../outputs/runs/'+report.run+'/plots/predictions.png';
         preview.alt='Ảnh thật, nhãn thật và nhãn dự đoán từ checkpoint '+report.run;preview.style.width='100%';
@@ -996,7 +1036,11 @@
       const experimentResponse=await fetch('../outputs/experiments.json');
       if(experimentResponse.ok){
         const experiments=await experimentResponse.json();
-        get('experimentTable').innerHTML=table(['Run','Lớp ẩn','Dropout','LR / WD','Step / gamma','Seed / val split','Epoch ghi nhận','Checkpoint epoch','Val acc','Val loss','Min loss (epoch)','Trạng thái'],experiments.map(x=>[
+        get('experimentTable').innerHTML=runs.length?table(['Run / Vai trò','Lớp ẩn','Train acc / loss','Val acc / loss','Test acc / loss','Sai val','Shirt recall val','Macro F1 val','Trạng thái'],runs.map(x=>[
+          x.run+' · '+role(x),x.architecture.join(' → '),pct(x.splits.train.accuracy)+' / '+x.splits.train.loss.toFixed(4),
+          pct(x.splits.validation.accuracy)+' / '+x.splits.validation.loss.toFixed(4),x.splits.test?pct(x.splits.test.accuracy)+' / '+x.splits.test.loss.toFixed(4):'—',
+          x.splits.validation.mistakes.length,pct(x.splits.validation.classes[6].recall),x.splits.validation.macro_f1.toFixed(4),x.completed?'Hoàn tất':'Chưa hoàn tất'
+        ])):table(['Run','Lớp ẩn','Dropout','LR / WD','Step / gamma','Seed / val split','Epoch ghi nhận','Checkpoint epoch','Val acc','Val loss','Min loss (epoch)','Trạng thái'],experiments.map(x=>[
           x.run,x.hidden_sizes.join(' → '),x.model.dropout,
           x.train.lr+' / '+x.train.weight_decay,x.train.decay_step+' / '+x.train.decay_gamma,
           x.data.seed+' / '+x.data.val_size,x.recorded_epochs+'/'+x.train.epochs,x.checkpoint_epoch,
@@ -1014,7 +1058,7 @@
         get('errorCount').textContent=filtered.length+' ảnh sai'+(pair?' · '+names[pair[0]]+' → '+names[pair[1]]:'')+' · trang '+(page+1)+'/'+Math.max(1,Math.ceil(filtered.length/100));
         const source=split==='test'?'t10k':'train';
         if(!cache[source]){const r=await fetch('../data/FashionMNIST_raw/'+source+'-images-idx3-ubyte');if(!r.ok)throw Error('Không tải được ảnh IDX');cache[source]=new Uint8Array(await r.arrayBuffer(),16);}
-        if(get('modelSplit').value!==split)return;
+        if(get('modelSplit').value!==split || get('modelRun').value!==report.run)return;
         const gallery=get('errorGallery');gallery.replaceChildren();
         for(const error of filtered.slice(page*100,(page+1)*100)){
           const card=document.createElement('div');card.className='mean';const canvas=document.createElement('canvas');canvas.width=canvas.height=28;

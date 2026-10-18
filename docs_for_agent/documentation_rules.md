@@ -1,5 +1,9 @@
 # Documentation & Project Layout
 
+- Keep Python scripts as the default workflow; an explicitly requested supplementary notebook may sit at project root, outside src/. Keep its experiment outputs separate from established runs and document actual execution versus synthetic smoke checks.
+
+- For run reviews, use actual checkpoint architecture/config, distinguish interrupted runs and analyze class confusions and fixed/regressed image IDs. Replace stale results in existing workflow docs; aggregate accuracy gains do not imply every class improved.
+
 ## General
 
 - Maximum 150 lines per Markdown file. Split longer files and link them using relative paths.

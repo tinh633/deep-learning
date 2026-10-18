@@ -1,0 +1,51 @@
+2026-10-18 15:28:31,800 | Configuration: {'model': 'BasicCNN', 'settings': {'seed': 42, 'epochs': 50, 'batch_size': 64, 'lr': 0.001, 'weight_decay': 1e-05, 'dropout': 0.2, 'decay_step': 15, 'decay_gamma': 0.3}, 'data_config': {'seed': 42, 'val_size': 0.1, 'batch_size': 64}}
+2026-10-18 15:28:31,801 | Device: cpu | GPU: none | PyTorch: 2.14.1+cpu
+2026-10-18 15:28:31,801 | Model: BasicCNN(
+  (backbone): Sequential(
+    (0): Conv2d(1, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): ReLU()
+    (2): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (3): Conv2d(16, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (4): ReLU()
+    (5): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  )
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (fc1): Linear(in_features=1568, out_features=64, bias=True)
+  (relu): ReLU()
+  (dropout): Dropout(p=0.2, inplace=False)
+  (fc2): Linear(in_features=64, out_features=10, bias=True)
+) | Parameters: 105866
+2026-10-18 15:28:31,803 | Loss: CrossEntropyLoss() | options={'reduction': 'mean', 'ignore_index': -100, 'label_smoothing': 0.0}
+2026-10-18 15:28:31,803 | Optimizer: Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    decoupled_weight_decay: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    initial_lr: 0.001
+    lr: 0.001
+    maximize: False
+    weight_decay: 1e-05
+) | scheduler: <torch.optim.lr_scheduler.StepLR object at 0x000000006313F4D0>
+2026-10-18 15:28:31,804 | Transform: ToTensor | best: maximum val accuracy, tie: minimum val loss | test not evaluated
+2026-10-18 15:28:43,898 | Epoch 1/50 | train_loss=0.631511 | train_acc=76.94% | val_loss=0.396789 | val_acc=85.97% | best_epoch=1 | lr=0.001
+2026-10-18 15:29:13,121 | Epoch 2/50 | train_loss=0.406772 | train_acc=85.48% | val_loss=0.323225 | val_acc=88.40% | best_epoch=2 | lr=0.001
+2026-10-18 15:29:46,273 | Epoch 3/50 | train_loss=0.356407 | train_acc=87.21% | val_loss=0.288443 | val_acc=89.67% | best_epoch=3 | lr=0.001
+2026-10-18 15:30:08,120 | Epoch 4/50 | train_loss=0.326794 | train_acc=88.07% | val_loss=0.271338 | val_acc=89.97% | best_epoch=4 | lr=0.001
+2026-10-18 15:30:32,519 | Epoch 5/50 | train_loss=0.303156 | train_acc=89.07% | val_loss=0.255050 | val_acc=90.57% | best_epoch=5 | lr=0.001
+2026-10-18 15:30:56,091 | Epoch 6/50 | train_loss=0.283976 | train_acc=89.63% | val_loss=0.251553 | val_acc=91.02% | best_epoch=6 | lr=0.001
+2026-10-18 15:31:20,445 | Epoch 7/50 | train_loss=0.269300 | train_acc=90.23% | val_loss=0.237191 | val_acc=91.10% | best_epoch=7 | lr=0.001
+2026-10-18 15:31:46,048 | Epoch 8/50 | train_loss=0.258345 | train_acc=90.49% | val_loss=0.226106 | val_acc=91.70% | best_epoch=8 | lr=0.001
+2026-10-18 15:32:14,057 | Epoch 9/50 | train_loss=0.246236 | train_acc=90.94% | val_loss=0.222758 | val_acc=91.75% | best_epoch=9 | lr=0.001
+2026-10-18 15:32:44,587 | Epoch 10/50 | train_loss=0.234796 | train_acc=91.44% | val_loss=0.223690 | val_acc=91.62% | best_epoch=9 | lr=0.001
+2026-10-18 15:33:21,470 | Epoch 11/50 | train_loss=0.225566 | train_acc=91.67% | val_loss=0.229177 | val_acc=91.65% | best_epoch=9 | lr=0.001
+2026-10-18 15:34:12,519 | Epoch 12/50 | train_loss=0.217014 | train_acc=91.90% | val_loss=0.217412 | val_acc=91.70% | best_epoch=9 | lr=0.001
+2026-10-18 15:35:23,963 | Epoch 13/50 | train_loss=0.209490 | train_acc=92.31% | val_loss=0.208111 | val_acc=92.43% | best_epoch=13 | lr=0.001
+2026-10-18 15:36:59,266 | Epoch 14/50 | train_loss=0.201776 | train_acc=92.50% | val_loss=0.219317 | val_acc=91.87% | best_epoch=13 | lr=0.001
+2026-10-18 15:38:48,243 | Epoch 15/50 | train_loss=0.193437 | train_acc=92.70% | val_loss=0.205999 | val_acc=92.05% | best_epoch=13 | lr=0.001
+2026-10-18 15:40:40,119 | Epoch 16/50 | train_loss=0.166455 | train_acc=93.82% | val_loss=0.197239 | val_acc=92.85% | best_epoch=16 | lr=0.0003
+2026-10-18 15:42:31,891 | Epoch 17/50 | train_loss=0.162008 | train_acc=94.09% | val_loss=0.197886 | val_acc=92.72% | best_epoch=16 | lr=0.0003

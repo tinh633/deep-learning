@@ -5,7 +5,7 @@ DATA_FOLDER = ROOT / 'data' / 'FashionMNIST_raw'
 RUNS_FOLDER = ROOT / 'outputs' / 'runs'
 
 DATA = dict(seed=42, val_size=0.1, batch_size=64)
-MODEL = dict(hidden1=512, hidden2=256, hidden3=128, dropout=0.2)
+MODEL = dict(hidden1=512, hidden2=256, hidden3=128, hidden4=64, dropout=0.2)
 TRAIN = dict(seed=42, epochs=50, lr=0.001, weight_decay=1e-5,
              decay_step=15, decay_gamma=0.3)
 EVALUATE = dict(run='lan_12', checkpoint='best.pt', include_test=True)

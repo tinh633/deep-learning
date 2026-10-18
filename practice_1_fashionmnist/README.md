@@ -32,7 +32,20 @@ Cài requirements.txt, chạy lệnh từ gốc workspace.
 Mở HTML bằng Live Server từ workspace/project root, cuộn đến **EDA sâu** để xem phân tích mới.
 Script 1–5 chạy tuần tự từ trên xuống, không main/if __name__; không import các script chạy.
 data.py và metrics.py là hàm dùng chung, import không kích hoạt tải dữ liệu/train/đánh giá.
-Run đang được chọn để báo cáo là lan_12: train 96,13%, val 91,40%, test 90,05%.
-Xem [đối chiếu lab, repo tham khảo và báo cáo ngắn](docs/05_evaluation.md).
+Run đang được chọn để báo cáo là lan_12 mới: train 96,19%, val 91,73%, test 90,17% (best epoch 48).
+Xem [đánh giá 12 run và phân tích lỗi](docs/05_evaluation.md), kèm CSV/JSON và ảnh sai từng run.
+Đọc [báo cáo thực nghiệm qua các run](docs/06_run_report.md): kiến trúc, tham số, kết quả và so sánh baseline/rộng/sâu.
 HTML có bảng thí nghiệm, metrics theo lớp và ảnh đúng/sai; chưa tự chốt model cuối.
 Chưa commit/push thay đổi này.
+
+## CNN bổ sung
+
+Mở [cnn_basic.ipynb](cnn_basic.ipynb) trong VS Code, chọn Python kernel có requirements của project,
+rồi chạy các cell từ trên xuống. Đây là notebook bổ sung theo yêu cầu; pipeline MLP vẫn dùng src/*.py.
+CNN có hai khối Conv/ReLU/Pool, backbone trả feature map 32×7×7, rồi head Linear 64 → 10.
+Mặc định 50 epoch, cùng split/optimizer/scheduler với MLP 10–12; kết quả ở outputs/cnn_runs/lan_N,
+không ghi đè MLP runs. Mỗi lần chạy lại cell train khởi tạo model và thư mục mới.
+Notebook có bảng so sánh MLP, loss/accuracy, confusion, ảnh sai và feature maps.
+Test mặc định tắt (RUN_TEST=False); chỉ bật sau khi xem validation và quyết định đánh giá checkpoint.
+Đã kiểm tra toàn bộ code cell với 1 epoch trên 16 ảnh tổng hợp và dữ liệu thật tải đúng split;
+chưa train CNN đầy đủ, chưa có kết luận cải thiện so với MLP.
