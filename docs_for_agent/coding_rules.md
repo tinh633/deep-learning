@@ -1,6 +1,21 @@
 # Coding & Validation Rules
 
 ## Code Quality
+
+- Separate readable training blocks with blank lines: setup, batch forward/loss, backward/step, validation and saving. Put epoch-log string formatting in the existing logger module; do not hide the learning loop in extra abstractions.
+
+- For this user's introductory PyTorch projects, follow the Chapter 3 PDF example style: direct library calls, explicitly declared layers, one forward operation per line and a visible epoch/batch loop. Avoid replacing those steps with generic factories or dynamic builders.
+- Adapt slide examples to the actual task: keep validation separate from test, use dataset-appropriate preprocessing, and retain the user's epoch-only logging preference. A reference document is not authorization to add its optional tools or change project scope.
+- Avoid helper modules that only wrap a single call; put one-use preparation/EDA logic in its numbered script. Keep helpers only for shared responsibilities and keep logs separate from the training loop.
+
+- For basic model examples, write one operation per forward line instead of nested layer calls; show each hidden layer, activation and dropout explicitly.
+
+- Prefer explicit layer declarations and a direct forward for small MLPs; avoid dynamic architecture builders, legacy run registries and optimizer factories when the user asks for basic readable code.
+
+- When requested, use model classes with separate __init__/forward, central Python config and a small logging helper to keep training loops readable.
+- Follow the user's requested numbered workflow scripts and direct top-level execution without main/__main__ guards. Shared modules retain importable names and have no task side effects; never import an executable script to reuse helpers.
+- Consolidate experiments into one configurable pipeline; preserve old run artifacts and load their actual architectures explicitly.
+
 - Distinguish the best validation checkpoint within a run from final model selection across experiments. Do not declare a final model or create a final-model report unless the user confirms that decision.
 - Keep validation evaluation separate from basic training when requested. Evaluate saved trained weights with eval/no_grad; append evaluation logs and reserve test evaluation until the user finalizes the model.
 - For training progress, print and save one metrics line per epoch; do not log each batch unless explicitly requested. Initial configuration and final status messages may remain.

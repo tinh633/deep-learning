@@ -275,7 +275,7 @@
     <main>
       <nav>
         <a href="#explorer">Kho ảnh</a><a href="#eda">Phân tích EDA</a
-        ><a href="#quality">Chất lượng dữ liệu</a>
+        ><a href="#deepEda">EDA sâu</a><a href="#quality">Chất lượng dữ liệu</a>
       </nav>
       <div class="cards">
         <div class="card">
@@ -396,6 +396,51 @@
           đánh giá cuối; không chọn cấu hình mô hình dựa trên kết quả test.
         </div>
       </section>
+      <section id="deepEda">
+        <h2>EDA sâu · hiểu dữ liệu trước khi train</h2>
+        <p>Phần này dùng đúng split train/validation của dự án, không dùng test để chọn cách xử lý dữ liệu.
+          Thống kê đầy đủ trên từng split; PCA và ảnh gần giống dùng mẫu có seed cố định.</p>
+        <p id="deepStatus" role="status">Đang tải EDA sâu…</p>
+        <div class="callout">Brightness: trung bình pixel 0–255. Contrast: độ lệch chuẩn pixel mỗi ảnh.
+          Foreground: tỷ lệ pixel &gt; 30; bounding box cũng dùng ngưỡng này, khác ngưỡng &gt; 0 ở EDA cơ bản.
+          Tâm ảnh được tính theo trọng số cường độ pixel; tọa độ x/y từ 0 đến 27.</div>
+        <h3>1. Split có cân bằng và tách biệt không?</h3>
+        <div id="deepBalance" class="table-wrap"></div>
+        <div class="two">
+          <label>Tập xem chi tiết <select id="deepSplit"><option value="train">Train</option><option value="validation">Validation</option></select></label>
+          <label>Nhãn <select id="deepLabel"><option value="all">Tất cả nhãn</option></select></label>
+        </div>
+        <h3>2. Đặc trưng ảnh thay đổi thế nào?</h3>
+        <div id="deepFeatureTable" class="table-wrap"></div>
+        <p>Với tất cả nhãn: hiển thị các phân vị của split. Khi chọn nhãn: so sánh trung bình nhãn đó
+          giữa train và validation. Khác biệt nhỏ không tự chứng minh hai phân bố giống nhau.</p>
+        <details open><summary>Phân bố train và validation</summary>
+          <p>Trục dọc là mật độ để so sánh hai tập có số ảnh khác nhau, không phải số ảnh tuyệt đối.</p>
+          <img src="eda/distributions.png" alt="Mật độ độ sáng, tương phản, foreground và chiều rộng trên train và validation" loading="lazy" style="width:100%">
+        </details>
+        <details><summary>Phân bố từng nhãn trên train</summary>
+          <p>Đường giữa hộp là median; hộp là Q1–Q3. Đồ thị ẩn các điểm ngoài whisker để dễ đọc,
+            không xóa chúng khỏi thống kê hay dữ liệu.</p>
+          <img src="eda/classes.png" alt="Boxplot bốn đặc trưng của 10 nhãn train" loading="lazy" style="width:100%">
+        </details>
+        <h3>3. Ảnh trung bình và độ biến thiên theo nhãn</h3>
+        <p>Hàng trên là ảnh trung bình train. Hàng dưới là độ lệch chuẩn từng pixel:
+          vùng sáng hơn thay đổi nhiều hơn giữa các ảnh cùng nhãn. Đây là ảnh tổng hợp, không phải mẫu thật.</p>
+        <img src="eda/mean_variation.png" alt="Ảnh trung bình và độ biến thiên pixel của 10 nhãn" loading="lazy" style="width:100%">
+        <h3>4. PCA · các nhãn có chồng lấn không?</h3>
+        <p id="deepPca"></p>
+        <p>PCA chỉ fit trên mẫu train; validation chỉ được chiếu bằng phép biến đổi đó.
+          Hai chiều đầu làm mất thông tin: chồng lấn ở đây không chứng minh ảnh không thể phân loại.</p>
+        <img src="eda/pca.png" alt="PCA hai chiều mẫu train và validation, màu theo nhãn" loading="lazy" style="width:100%">
+        <h3>5. Kiểm tra ảnh cực trị bằng mắt</h3>
+        <p>Mỗi split lấy 5 ảnh tối nhất, sáng nhất và tương phản thấp nhất. Bộ lọc nhãn chỉ lọc danh sách
+          cực trị toàn split này; không tính lại cực trị riêng trong từng nhãn. Không tự xóa ảnh hoặc sửa nhãn.</p>
+        <div id="deepExamples" class="means"></div>
+        <h3>6. Các cặp ảnh train gần giống</h3>
+        <p id="deepNeighbors"></p><div id="deepPairs" class="means"></div>
+        <p>Đây là ứng viên kiểm tra thủ công trong một tập con, không phải kiểm tra toàn bộ cặp ảnh,
+          không phải bằng chứng trùng dữ liệu hoặc nhãn sai.</p>
+      </section>
       <section id="quality">
         <h2>Kiểm tra chất lượng & giới hạn</h2>
         <div id="qualityStats"></div>
@@ -420,7 +465,7 @@
             Ảnh 28×28 có ít chi tiết. Các loại áo có thể khó phân biệt bằng mắt;
             đây là nhận xét định tính, chưa phải kết quả mô hình.
           </li>
-          <li>Chưa huấn luyện, chưa có accuracy hoặc confusion matrix.</li>
+          <li>EDA không đo chất lượng mô hình; xem phần đánh giá model khi đã xuất báo cáo checkpoint.</li>
         </ul>
         <details>
           <summary>Nguồn dữ liệu & checksum</summary>
@@ -437,7 +482,7 @@
       </section>
       <footer>
         Live Server · Python / NumPy · Chỉ tải dữ liệu một lần; lọc tại trình
-        duyệt · Có thể tái tạo từ script prepare_data.py.
+        duyệt · Có thể tái tạo từ script 1_preparedata.py.
       </footer>
     </main>
     <dialog id="detail">
@@ -471,7 +516,7 @@
                 url +
                 " (HTTP " +
                 response.status +
-                "). Chạy prepare_data.py và mở Live Server từ workspace.",
+                "). Chạy 1_preparedata.py và mở Live Server từ workspace.",
             );
           return kind === "json" ? response.json() : response.arrayBuffer();
         }
@@ -908,10 +953,18 @@
       });
     </script>
     <section id="modelReview" style="max-width:1280px;margin:24px auto">
-      <h2>Đánh giá model · lan_10 / best.pt</h2>
-      <p>Checkpoint tốt nhất theo validation loss trong run 10; chưa tuyên bố tối ưu mọi cấu hình.</p>
+      <h2>Đánh giá model</h2>
+      <p>Chỉ hiển thị kết quả thực tế của checkpoint được chọn theo validation.</p>
       <p id="modelStatus" role="status">Đang tải kết quả model…</p>
       <div id="modelScores" class="table-wrap"></div>
+      <h3>Thí nghiệm đã thực hiện</h3>
+      <p>Bảng dùng cấu hình lưu trong từng checkpoint, không dùng config hiện tại để mô tả run cũ.
+        Chỉ so sánh validation; nhiều thay đổi cùng lúc không cho phép kết luận riêng từng yếu tố.</p>
+      <div id="experimentTable" class="table-wrap"></div>
+      <h3>Ví dụ dự đoán đúng và sai</h3>
+      <p>Hàng trên: 5 ảnh đúng đầu tiên. Hàng dưới: tối đa 5 ảnh sai đầu tiên của tập test nếu đã đánh giá,
+        hoặc validation nếu chưa test. Không chọn ảnh theo confidence để làm đẹp kết quả.</p>
+      <div id="predictionPreview"></div>
       <details><summary>Model và tham số đã sử dụng</summary><pre id="modelConfig" style="white-space:pre-wrap"></pre></details>
       <h3>Loss theo epoch</h3><div id="modelCurve"></div>
       <label>Tập đánh giá <select id="modelSplit"><option value="test">Test</option><option value="validation">Validation</option><option value="train">Train</option></select></label>
@@ -923,12 +976,33 @@
     <script>
     async function showModelReport(){
       const get=id=>document.getElementById(id);
-      const response=await fetch('../outputs/runs/lan_10/model_report.json');
-      if(!response.ok)throw Error('Chạy src/model_report.py trước (HTTP '+response.status+')');
+      const response=await fetch('../outputs/model_report.json');
+      if(response.status===404){
+        get('modelStatus').textContent='Chưa có model sau khi reset. Train rồi chạy src/5_report.py để xem kết quả.';
+        document.querySelectorAll('#modelReview select, #modelReview button').forEach(x=>x.disabled=true);
+        return;
+      }
+      if(!response.ok)throw Error('Không đọc được báo cáo (HTTP '+response.status+')');
       const report=await response.json(), eda=await (await fetch('../outputs/eda.json')).json(), names=eda.names;
+      get('modelSplit').replaceChildren(...Object.keys(report.splits).map(name=>new Option(name,name)));
       const table=(headers,rows)=>'<table><thead><tr>'+headers.map(x=>'<th>'+x+'</th>').join('')+'</tr></thead><tbody>'+rows.map(row=>'<tr>'+row.map(x=>'<td>'+x+'</td>').join('')+'</tr>').join('')+'</tbody></table>';
       get('modelStatus').textContent='Đã đánh giá '+report.run+'/'+report.checkpoint+' · best epoch '+report.best_epoch;
-      get('modelScores').innerHTML=table(['Tập','Số ảnh','Loss','Accuracy','Số lỗi'],Object.entries(report.splits).map(([name,s])=>[name,s.count,s.loss.toFixed(4),(s.accuracy*100).toFixed(2)+'%',s.mistakes.length]));
+      get('modelScores').innerHTML=table(['Tập','Số ảnh','Loss','Accuracy','Macro F1','Số lỗi'],Object.entries(report.splits).map(([name,s])=>[name,s.count,s.loss.toFixed(4),(s.accuracy*100).toFixed(2)+'%',s.macro_f1===undefined?'—':s.macro_f1.toFixed(4),s.mistakes.length]));
+      if(report.splits.validation.correct_examples){
+        const preview=document.createElement('img');preview.src='../outputs/runs/'+report.run+'/plots/predictions.png';
+        preview.alt='Ảnh thật, nhãn thật và nhãn dự đoán từ checkpoint '+report.run;preview.style.width='100%';
+        get('predictionPreview').append(preview);
+      }else get('predictionPreview').textContent='Chạy 5_report.py để xuất ví dụ cho checkpoint đang chọn.';
+      const experimentResponse=await fetch('../outputs/experiments.json');
+      if(experimentResponse.ok){
+        const experiments=await experimentResponse.json();
+        get('experimentTable').innerHTML=table(['Run','Lớp ẩn','Dropout','LR / WD','Step / gamma','Seed / val split','Epoch ghi nhận','Checkpoint epoch','Val acc','Val loss','Min loss (epoch)','Trạng thái'],experiments.map(x=>[
+          x.run,x.hidden_sizes.join(' → '),x.model.dropout,
+          x.train.lr+' / '+x.train.weight_decay,x.train.decay_step+' / '+x.train.decay_gamma,
+          x.data.seed+' / '+x.data.val_size,x.recorded_epochs+'/'+x.train.epochs,x.checkpoint_epoch,
+          (100*x.validation.accuracy).toFixed(2)+'%',x.validation.loss.toFixed(4),
+          x.minimum_val_loss.toFixed(4)+' ('+x.minimum_loss_epoch+')',x.completed?'Hoàn tất':'Chưa hoàn tất']));
+      }else get('experimentTable').textContent='Chưa xuất bảng thí nghiệm; chạy 5_report.py.';
       get('modelConfig').textContent=report.architecture+'\n\n'+report.training_log.split(/(?=\d{4}-\d{2}-\d{2} .*?\| Epoch)/)[0];
       const history=report.history, max=Math.max(...history.map(x=>Math.max(x.train_loss,x.val_loss))), points=key=>history.map((x,i)=>(40+i*700/Math.max(1,history.length-1))+','+(230-x[key]/max*190)).join(' ');
       get('modelCurve').innerHTML='<svg viewBox="0 0 800 270" style="width:100%" role="img" aria-label="Train loss và validation loss theo epoch"><text x="40" y="20">Train: xanh · Validation: đỏ · '+history.length+' epoch ghi nhận</text><polyline fill="none" stroke="#087e80" stroke-width="3" points="'+points('train_loss')+'"/><polyline fill="none" stroke="#c34e44" stroke-width="3" points="'+points('val_loss')+'"/><text x="40" y="260">Epoch 1</text><text x="700" y="260">Epoch '+history.length+'</text></svg>';
@@ -955,7 +1029,7 @@
         let html='<table><thead><tr><th>Thật ↓ / Dự đoán →</th>'+names.map((n,i)=>'<th>'+i+' '+n+'</th>').join('')+'</tr></thead><tbody>';
         matrix.forEach((row,i)=>{html+='<tr><th>'+i+' '+names[i]+'</th>'+row.map((n,j)=>'<td style="background:rgba(8,126,128,'+(n/maxCell*.65)+')"><button data-true="'+i+'" data-pred="'+j+'" style="background:transparent;color:inherit;border:0;padding:4px" '+(i===j?'disabled':'')+'>'+n+'</button></td>').join('')+'</tr>';});get('modelMatrix').innerHTML=html+'</tbody></table>';
         get('modelMatrix').querySelectorAll('button:not([disabled])').forEach(b=>b.onclick=()=>{pair=[Number(b.dataset.true),Number(b.dataset.pred)];page=0;showErrors().catch(fail);});
-        get('modelClassMetrics').innerHTML=table(['Nhãn','Precision','Recall','Số mẫu'],names.map((n,i)=>{const actual=matrix[i].reduce((a,b)=>a+b,0),predicted=matrix.reduce((sum,row)=>sum+row[i],0);return[n,((predicted?matrix[i][i]/predicted:0)*100).toFixed(2)+'%',((actual?matrix[i][i]/actual:0)*100).toFixed(2)+'%',actual];}));
+        get('modelClassMetrics').innerHTML=table(['Nhãn','Precision','Recall','F1','Số mẫu'],names.map((n,i)=>{const actual=matrix[i].reduce((a,b)=>a+b,0),predicted=matrix.reduce((sum,row)=>sum+row[i],0);return[n,((predicted?matrix[i][i]/predicted:0)*100).toFixed(2)+'%',((actual?matrix[i][i]/actual:0)*100).toFixed(2)+'%',((actual+predicted?2*matrix[i][i]/(actual+predicted):0)*100).toFixed(2)+'%',actual];}));
         page=0;pair=null;showErrors().catch(fail);
       }
       function fail(error){get('modelStatus').textContent='Lỗi báo cáo model: '+error.message;}
@@ -963,6 +1037,71 @@
       get('previousErrors').onclick=()=>{page--;showErrors().catch(fail);};get('nextErrors').onclick=()=>{page++;showErrors().catch(fail);};updateMatrix();
     }
     showModelReport().catch(error=>document.getElementById('modelStatus').textContent='Lỗi báo cáo model: '+error.message);
+    </script>
+    <script>
+    async function showDeepEda(){
+      const get=id=>document.getElementById(id);
+      const response=await fetch('../outputs/deep_eda.json');
+      if(!response.ok)throw Error('Chạy src/2_eda.py để tạo EDA sâu (HTTP '+response.status+')');
+      const data=await response.json(), names=data.names;
+      const features=['Độ sáng (0–255)','Tương phản (0–255)','Foreground (tỷ lệ 0–1)',
+        'Rộng bbox (pixel)','Cao bbox (pixel)','Tâm x (pixel)','Tâm y (pixel)'];
+      const table=(heads,rows)=>'<table><thead><tr>'+heads.map(x=>'<th>'+x+'</th>').join('')+
+        '</tr></thead><tbody>'+rows.map(row=>'<tr>'+row.map(x=>'<td>'+x+'</td>').join('')+'</tr>').join('')+'</tbody></table>';
+      get('deepBalance').innerHTML=table(['Nhãn','Train','Validation'],names.map((n,i)=>[i+' · '+n,
+        data.splits.train.counts[i],data.splits.validation.counts[i]]));
+      get('deepStatus').textContent='Train '+data.splits.train.count.toLocaleString('vi-VN')+
+        ' · Validation '+data.splits.validation.count.toLocaleString('vi-VN')+' · seed '+data.seed+
+        ' · Không giao nhau: '+(data.checks.disjoint?'Có':'Không')+' · Ảnh trống: '+data.checks.blank+
+        ' · Ảnh hằng: '+data.checks.constant;
+      get('deepLabel').append(...names.map((name,i)=>new Option(i+' · '+name,i)));
+      get('deepPca').textContent='Fit trên '+data.pca.train_samples+' ảnh train (500/nhãn), chiếu '+
+        data.pca.validation_samples+' ảnh validation (100/nhãn). Hai PC đầu giải thích '+
+        (100*(data.pca.explained_variance[0]+data.pca.explained_variance[1])).toFixed(2)+
+        '% phương sai của mẫu train; '+data.pca.components+' PC giải thích '+
+        (100*data.pca.explained_variance.reduce((a,b)=>a+b,0)).toFixed(2)+'%.';
+      get('deepNeighbors').textContent='Tìm láng giềng gần nhất trên '+data.neighbors.samples+
+        ' ảnh train lấy từ mẫu PCA. Khoảng cách RMSE trên pixel [0,1]; nhỏ hơn nghĩa là giống hơn theo pixel.';
+      function card(pixels,caption){
+        const item=document.createElement('div');item.className='mean';
+        const canvas=document.createElement('canvas');canvas.width=canvas.height=28;
+        const ctx=canvas.getContext('2d'),image=ctx.createImageData(28,28);
+        pixels.forEach((v,i)=>{image.data[i*4]=image.data[i*4+1]=image.data[i*4+2]=v;image.data[i*4+3]=255;});
+        ctx.putImageData(image,0,0);
+        const text=document.createElement('p');text.textContent=caption;item.append(canvas,text);return item;
+      }
+      const reasons={'darkest':'Tối nhất','brightest':'Sáng nhất','lowest contrast':'Tương phản thấp'};
+      function update(){
+        const split=get('deepSplit').value,label=get('deepLabel').value,s=data.splits[split];
+        if(label==='all'){
+          get('deepFeatureTable').innerHTML=table(['Đặc trưng','Min','P1','Q1','Median','Q3','P99','Max'],
+            features.map((name,i)=>[name,...s.quantiles.map(row=>row[i].toFixed(3))]));
+        }else{
+          const c=Number(label);
+          get('deepFeatureTable').innerHTML=table(['Trung bình nhãn '+names[c],'Train','Validation','Val − Train'],
+            features.map((name,i)=>{const a=data.splits.train.classes[c].mean[i],b=data.splits.validation.classes[c].mean[i];
+              return[name,a.toFixed(3),b.toFixed(3),(b-a).toFixed(3)];}));
+        }
+        const examples=data.examples.filter(x=>x.split===split&&(label==='all'||x.label===Number(label)));
+        get('deepExamples').replaceChildren(...examples.map(x=>card(x.pixels,
+          reasons[x.reason]+' · ảnh train gốc #'+x.index+' · '+names[x.label]+
+          ' · sáng '+x.features[0].toFixed(1)+' · tương phản '+x.features[1].toFixed(1))));
+        if(!examples.length)get('deepExamples').textContent='Không có ảnh của nhãn này trong danh sách cực trị đã lấy.';
+        get('deepExamples').dataset.count=examples.length;
+      }
+      data.near_pairs.forEach(pair=>{
+        const group=document.createElement('div');
+        const caption=document.createElement('p');caption.textContent='RMSE '+pair.rmse.toFixed(4)+
+          (pair.labels[0]===pair.labels[1]?' · cùng nhãn':' · khác nhãn');group.append(caption);
+        pair.indices.forEach((index,i)=>group.append(card(pair.pixels[i],'Train #'+index+' · '+names[pair.labels[i]])));
+        get('deepPairs').append(group);
+      });
+      get('deepSplit').onchange=update;get('deepLabel').onchange=update;update();
+    }
+    showDeepEda().catch(error=>{
+      document.getElementById('deepStatus').textContent='Chưa hiển thị được EDA sâu: '+error.message;
+      document.getElementById('deepSplit').disabled=true;document.getElementById('deepLabel').disabled=true;
+    });
     </script>
   </body>
 </html>
