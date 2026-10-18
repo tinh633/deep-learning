@@ -3,8 +3,8 @@
 File: config.py, model.py, 3_train.py và logger.py trong src.
 Chạy `python practice_1_fashionmnist/src/3_train.py` khi người dùng yêu cầu train.
 
-- MODEL hiện tại: hidden1=512, hidden2=216, hidden3=128, dropout=0.2.
-- FashionMLP khai báo fc1/fc2/fc3/fc4; forward tách từng thao tác, trả logits.
+- MODEL hiện tại: hidden1=512, hidden2=256, hidden3=128, hidden4=64, dropout=0.2.
+- FashionMLP khai báo từng lớp; hidden4 tùy chọn để nạp checkpoint ba lớp ẩn cũ. Forward trả logits.
 - CrossEntropyLoss, Adam và StepLR gọi trực tiếp, không optimizer factory.
 - TRAIN chứa seed/epochs/lr/weight_decay và decay; validation sau mỗi epoch.
 - logger.py tạo lan_1, lan_2, ...; cấu hình ghi một lần, metrics một dòng/epoch.
@@ -25,12 +25,13 @@ Chạy `python practice_1_fashionmnist/src/3_train.py` khi người dùng yêu c
 |---|---|---|---|
 | Baseline | lan_10 | 256 → 128 → 64 | Mốc đối chiếu |
 | MLP rộng | lan_11 | 512 → 256 → 128 | Tăng width, giữ 3 lớp ẩn |
-| MLP sâu — kế hoạch | lan_12 | 512 → 256 → 128 → 64 | Thêm lớp thứ tư so với bản rộng |
+| MLP sâu | lan_12 | 512 → 256 → 128 → 64 | Thêm lớp thứ tư so với bản rộng |
 
 Giữ dropout 0.2, Adam lr=0.001, weight_decay=1e-5, 50 epoch, StepLR(15,0.3),
 batch 64, seed/split 42 và cùng tiêu chí checkpoint để đối chiếu.
-Đây là kế hoạch độ sâu mới; chưa sửa model hoặc chạy lan_12 trong bước ghi nhận này.
-lan_11 đang có log train; không sửa code/khởi chạy thêm khi người dùng đang train.
+Người dùng đã yêu cầu chạy lan_12; model/config đã hỗ trợ lớp ẩn thứ tư.
+lan_11 đã hoàn tất: best epoch 50, val accuracy 91,4833%, val loss 0,308205.
+Giữ nguyên cấu hình train để so sánh; chưa chạy test cho lần thử này.
 
 Thứ tự tiếp theo: hoàn tất hai MLP → so validation/chọn MLP → phân tích lỗi MLP
 → thêm một CNN cơ bản như thí nghiệm bổ sung → so sánh với MLP trên cùng dữ liệu.
@@ -106,6 +107,19 @@ Bằng chứng: [train](../outputs/runs/lan_8/train.log), [evaluate](../outputs/
 [so sánh](../outputs/runs/lan_8/regularization_comparison.json).
 
 Tiếp theo: [evaluation](05_evaluation.md).
+
+### Kết quả MLP sâu — lan_12
+
+Đã hoàn tất 50 epoch; best.pt được chọn ở epoch 48 theo validation accuracy.
+Nạp lại cùng checkpoint ở eval mode: train accuracy **96,1889%**, loss **0,100915**;
+validation accuracy **91,7333%**, loss **0,299211** (6.000 ảnh).
+So với lan_11: accuracy tăng **0,25 điểm phần trăm** (15 ảnh), loss giảm **0,008993**.
+So với baseline lan_10: accuracy tăng **0,40 điểm phần trăm**, nhưng loss cao hơn **0,021222**.
+Gap train-val còn **4,4556 điểm phần trăm**; chưa thể kết luận đã hết overfitting.
+Val loss nhỏ nhất ở epoch 16 là 0,269588, khác checkpoint tốt nhất theo accuracy.
+Chưa chạy test, chưa chốt model; HTML vẫn là báo cáo lịch sử, chưa xuất lại cho run mới.
+Bằng chứng: [train log](../outputs/runs/lan_12/train.log),
+[eval log](../outputs/runs/lan_12/evaluate.log), [metrics](../outputs/runs/lan_12/metrics.json).
 
 ## Phong cách tham khảo đã đọc
 

@@ -14,6 +14,10 @@
       "decay_step": 10,
       "decay_gamma": 0.3
     },
+    "hidden_sizes": [
+      256,
+      128
+    ],
     "data": {
       "seed": 42,
       "val_size": 0.1,
@@ -29,11 +33,7 @@
     "minimum_val_loss": 0.27509533524513247,
     "minimum_loss_epoch": 12,
     "selection": "val_accuracy_then_val_loss",
-    "completed": true,
-    "hidden_sizes": [
-      256,
-      128
-    ]
+    "completed": true
   },
   {
     "run": "lan_2",
@@ -50,6 +50,10 @@
       "decay_step": 10,
       "decay_gamma": 0.3
     },
+    "hidden_sizes": [
+      256,
+      128
+    ],
     "data": {
       "seed": 42,
       "val_size": 0.1,
@@ -65,11 +69,7 @@
     "minimum_val_loss": 0.26252123564481733,
     "minimum_loss_epoch": 22,
     "selection": "val_accuracy_then_val_loss",
-    "completed": true,
-    "hidden_sizes": [
-      256,
-      128
-    ]
+    "completed": true
   },
   {
     "run": "lan_3",
@@ -86,6 +86,10 @@
       "decay_step": 10,
       "decay_gamma": 0.3
     },
+    "hidden_sizes": [
+      256,
+      128
+    ],
     "data": {
       "seed": 42,
       "val_size": 0.1,
@@ -101,11 +105,7 @@
     "minimum_val_loss": 0.2804886117776235,
     "minimum_loss_epoch": 11,
     "selection": "val_accuracy_then_val_loss",
-    "completed": false,
-    "hidden_sizes": [
-      256,
-      128
-    ]
+    "completed": false
   },
   {
     "run": "lan_4",
@@ -122,6 +122,10 @@
       "decay_step": 10,
       "decay_gamma": 0.3
     },
+    "hidden_sizes": [
+      256,
+      128
+    ],
     "data": {
       "seed": 42,
       "val_size": 0.1,
@@ -137,11 +141,7 @@
     "minimum_val_loss": 0.2857988823056221,
     "minimum_loss_epoch": 12,
     "selection": "val_accuracy_then_val_loss",
-    "completed": true,
-    "hidden_sizes": [
-      256,
-      128
-    ]
+    "completed": true
   },
   {
     "run": "lan_5",
@@ -158,6 +158,11 @@
       "decay_step": 10,
       "decay_gamma": 0.3
     },
+    "hidden_sizes": [
+      256,
+      128,
+      64
+    ],
     "data": {
       "seed": 42,
       "val_size": 0.1,
@@ -173,12 +178,7 @@
     "minimum_val_loss": 0.28362259397904077,
     "minimum_loss_epoch": 11,
     "selection": "val_accuracy_then_val_loss",
-    "completed": false,
-    "hidden_sizes": [
-      256,
-      128,
-      64
-    ]
+    "completed": false
   },
   {
     "run": "lan_6",
@@ -195,6 +195,11 @@
       "decay_step": 15,
       "decay_gamma": 0.3
     },
+    "hidden_sizes": [
+      256,
+      128,
+      64
+    ],
     "data": {
       "seed": 42,
       "val_size": 0.1,
@@ -210,12 +215,7 @@
     "minimum_val_loss": 0.2783539745211601,
     "minimum_loss_epoch": 12,
     "selection": "val_accuracy_then_val_loss",
-    "completed": true,
-    "hidden_sizes": [
-      256,
-      128,
-      64
-    ]
+    "completed": true
   },
   {
     "run": "lan_7",
@@ -233,6 +233,11 @@
       "decay_step": 15,
       "decay_gamma": 0.3
     },
+    "hidden_sizes": [
+      256,
+      128,
+      64
+    ],
     "data": {
       "seed": 42,
       "val_size": 0.1,
@@ -248,12 +253,7 @@
     "minimum_val_loss": 0.2728407599925995,
     "minimum_loss_epoch": 17,
     "selection": "val_accuracy_then_val_loss",
-    "completed": true,
-    "hidden_sizes": [
-      256,
-      128,
-      64
-    ]
+    "completed": true
   },
   {
     "run": "lan_8",
@@ -271,6 +271,11 @@
       "decay_step": 15,
       "decay_gamma": 0.3
     },
+    "hidden_sizes": [
+      256,
+      128,
+      64
+    ],
     "data": {
       "seed": 42,
       "val_size": 0.1,
@@ -286,12 +291,7 @@
     "minimum_val_loss": 0.2712223834792773,
     "minimum_loss_epoch": 18,
     "selection": "val_accuracy_then_val_loss",
-    "completed": true,
-    "hidden_sizes": [
-      256,
-      128,
-      64
-    ]
+    "completed": true
   },
   {
     "run": "lan_9",
@@ -309,6 +309,11 @@
       "decay_step": 25,
       "decay_gamma": 0.3
     },
+    "hidden_sizes": [
+      256,
+      128,
+      64
+    ],
     "data": {
       "seed": 42,
       "val_size": 0.1,
@@ -324,12 +329,7 @@
     "minimum_val_loss": 0.277730976998806,
     "minimum_loss_epoch": 26,
     "selection": "val_accuracy_then_val_loss",
-    "completed": true,
-    "hidden_sizes": [
-      256,
-      128,
-      64
-    ]
+    "completed": true
   },
   {
     "run": "lan_10",
@@ -347,6 +347,11 @@
       "decay_step": 15,
       "decay_gamma": 0.3
     },
+    "hidden_sizes": [
+      256,
+      128,
+      64
+    ],
     "data": {
       "seed": 42,
       "val_size": 0.1,
@@ -362,18 +367,13 @@
     "minimum_val_loss": 0.26677082006136577,
     "minimum_loss_epoch": 26,
     "selection": "val_accuracy_then_val_loss",
-    "completed": true,
-    "hidden_sizes": [
-      256,
-      128,
-      64
-    ]
+    "completed": true
   },
   {
-    "run": "lan_12",
+    "run": "lan_11",
     "model": {
       "hidden1": 512,
-      "hidden2": 216,
+      "hidden2": 256,
       "hidden3": 128,
       "dropout": 0.2
     },
@@ -385,26 +385,66 @@
       "decay_step": 15,
       "decay_gamma": 0.3
     },
+    "hidden_sizes": [
+      512,
+      256,
+      128
+    ],
     "data": {
       "seed": 42,
       "val_size": 0.1,
       "batch_size": 64
     },
     "recorded_epochs": 50,
-    "checkpoint_epoch": 42,
+    "checkpoint_epoch": 50,
     "validation": {
-      "loss": 0.2951170018116633,
-      "accuracy": 0.914,
+      "loss": 0.30820454184214274,
+      "accuracy": 0.9148333333333334,
       "count": 6000
     },
-    "minimum_val_loss": 0.26377742664019266,
-    "minimum_loss_epoch": 22,
+    "minimum_val_loss": 0.2702881238261859,
+    "minimum_loss_epoch": 17,
     "selection": "val_accuracy_then_val_loss",
-    "completed": true,
+    "completed": true
+  },
+  {
+    "run": "lan_12",
+    "model": {
+      "hidden1": 512,
+      "hidden2": 256,
+      "hidden3": 128,
+      "hidden4": 64,
+      "dropout": 0.2
+    },
+    "train": {
+      "seed": 42,
+      "epochs": 50,
+      "lr": 0.001,
+      "weight_decay": 1e-05,
+      "decay_step": 15,
+      "decay_gamma": 0.3
+    },
     "hidden_sizes": [
       512,
-      216,
-      128
-    ]
+      256,
+      128,
+      64
+    ],
+    "data": {
+      "seed": 42,
+      "val_size": 0.1,
+      "batch_size": 64
+    },
+    "recorded_epochs": 50,
+    "checkpoint_epoch": 48,
+    "validation": {
+      "loss": 0.29921108387907347,
+      "accuracy": 0.9173333333333333,
+      "count": 6000
+    },
+    "minimum_val_loss": 0.2695880008339882,
+    "minimum_loss_epoch": 16,
+    "selection": "val_accuracy_then_val_loss",
+    "completed": true
   }
 ]
