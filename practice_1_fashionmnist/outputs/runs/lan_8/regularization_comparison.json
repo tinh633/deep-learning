@@ -1,0 +1,45 @@
+{
+  "lan_6": {
+    "epoch": 22,
+    "weight_decay": 0.0,
+    "train": {
+      "loss": 0.11080165699676231,
+      "accuracy": 0.9576111111111111,
+      "count": 54000
+    },
+    "validation": {
+      "loss": 0.31295870459079744,
+      "accuracy": 0.9103333333333333,
+      "count": 6000
+    }
+  },
+  "lan_7": {
+    "epoch": 26,
+    "weight_decay": 0.0001,
+    "train": {
+      "loss": 0.12479184363506458,
+      "accuracy": 0.9550555555555555,
+      "count": 54000
+    },
+    "validation": {
+      "loss": 0.30025218971570333,
+      "accuracy": 0.9085,
+      "count": 6000
+    }
+  },
+  "lan_8": {
+    "epoch": 22,
+    "dropout": 0.1,
+    "weight_decay": 0.0,
+    "train": {
+      "loss": 0.14507187316152784,
+      "accuracy": 0.9446111111111111,
+      "count": 54000
+    },
+    "validation": {
+      "loss": 0.27834504640102387,
+      "accuracy": 0.9096666666666666,
+      "count": 6000
+    }
+  }
+}

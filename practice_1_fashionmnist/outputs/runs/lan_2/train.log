@@ -1,35 +1,59 @@
-2026-10-11 16:07:17,837 | Run: lan_2 | epochs=20 | seed=42
-2026-10-11 16:07:17,838 | Device: cuda | GPU: NVIDIA GeForce RTX 3050 Laptop GPU | PyTorch: 2.11.0+cu126
-2026-10-11 16:07:17,838 | Data: train=54000 | batch_size=64 | batches=844 | shuffle=RandomSampler | transform=ToTensor()
-2026-10-11 16:07:17,838 | Model: Sequential(
-  (0): Flatten(start_dim=1, end_dim=-1)
-  (1): Linear(in_features=784, out_features=128, bias=True)
-  (2): ReLU()
-  (3): Linear(in_features=128, out_features=10, bias=True)
-)
-Parameters: 101770
-2026-10-11 16:07:17,839 | Loss: CrossEntropyLoss | options={'reduction': 'mean', 'ignore_index': -100, 'label_smoothing': 0.0}
-2026-10-11 16:07:17,839 | Optimizer: Adam
-2026-10-11 16:07:17,839 | Optimizer group 1: {'lr': 0.01, 'betas': (0.9, 0.999), 'eps': 1e-08, 'weight_decay': 0, 'amsgrad': False, 'maximize': False, 'foreach': None, 'capturable': False, 'differentiable': False, 'fused': None, 'decoupled_weight_decay': False}
-2026-10-11 16:07:17,848 | Start training | validation/test not evaluated
-2026-10-11 16:07:24,285 | Epoch 1/20 | train_loss=0.5064 | lr=[0.01]
-2026-10-11 16:07:30,770 | Epoch 2/20 | train_loss=0.4110 | lr=[0.01]
-2026-10-11 16:07:38,621 | Epoch 3/20 | train_loss=0.3914 | lr=[0.01]
-2026-10-11 16:07:46,679 | Epoch 4/20 | train_loss=0.3699 | lr=[0.01]
-2026-10-11 16:07:54,946 | Epoch 5/20 | train_loss=0.3583 | lr=[0.01]
-2026-10-11 16:08:03,667 | Epoch 6/20 | train_loss=0.3506 | lr=[0.01]
-2026-10-11 16:08:11,887 | Epoch 7/20 | train_loss=0.3433 | lr=[0.01]
-2026-10-11 16:08:19,794 | Epoch 8/20 | train_loss=0.3312 | lr=[0.01]
-2026-10-11 16:08:27,751 | Epoch 9/20 | train_loss=0.3343 | lr=[0.01]
-2026-10-11 16:08:36,085 | Epoch 10/20 | train_loss=0.3286 | lr=[0.01]
-2026-10-11 16:08:44,146 | Epoch 11/20 | train_loss=0.3225 | lr=[0.01]
-2026-10-11 16:08:52,267 | Epoch 12/20 | train_loss=0.3231 | lr=[0.01]
-2026-10-11 16:08:59,938 | Epoch 13/20 | train_loss=0.3184 | lr=[0.01]
-2026-10-11 16:09:08,337 | Epoch 14/20 | train_loss=0.3092 | lr=[0.01]
-2026-10-11 16:09:17,005 | Epoch 15/20 | train_loss=0.3086 | lr=[0.01]
-2026-10-11 16:09:25,227 | Epoch 16/20 | train_loss=0.3072 | lr=[0.01]
-2026-10-11 16:09:32,995 | Epoch 17/20 | train_loss=0.3122 | lr=[0.01]
-2026-10-11 16:09:40,693 | Epoch 18/20 | train_loss=0.2996 | lr=[0.01]
-2026-10-11 16:09:51,428 | Epoch 19/20 | train_loss=0.3027 | lr=[0.01]
-2026-10-11 16:10:07,426 | Epoch 20/20 | train_loss=0.3030 | lr=[0.01]
-2026-10-11 16:10:07,427 | Finished training
+2026-10-14 22:13:22,649 | Configuration: {'model_config': {'hidden1': 256, 'hidden2': 128, 'dropout': 0.2}, 'data_config': {'seed': 42, 'val_size': 0.1, 'batch_size': 64}, 'train_config': {'seed': 42, 'epochs': 30, 'lr': 0.001, 'weight_decay': 0.0, 'decay_step': 10, 'decay_gamma': 0.3}}
+2026-10-14 22:13:22,650 | Device: cuda | GPU: NVIDIA GeForce RTX 3050 Laptop GPU | PyTorch: 2.11.0+cu126
+2026-10-14 22:13:22,650 | Model: FashionMLP(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (fc1): Linear(in_features=784, out_features=256, bias=True)
+  (fc2): Linear(in_features=256, out_features=128, bias=True)
+  (fc3): Linear(in_features=128, out_features=10, bias=True)
+  (relu): ReLU()
+  (dropout1): Dropout(p=0.2, inplace=False)
+  (dropout2): Dropout(p=0.2, inplace=False)
+) | Parameters: 235146
+2026-10-14 22:13:22,660 | Loss: CrossEntropyLoss() | options={'reduction': 'mean', 'ignore_index': -100, 'label_smoothing': 0.0}
+2026-10-14 22:13:22,660 | Optimizer: Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    decoupled_weight_decay: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    initial_lr: 0.001
+    lr: 0.001
+    maximize: False
+    weight_decay: 0.0
+) | scheduler: <torch.optim.lr_scheduler.StepLR object at 0x00000000574CD2B0>
+2026-10-14 22:13:22,661 | Transform: ToTensor | best: maximum val accuracy, tie: minimum val loss | test not evaluated
+2026-10-14 22:13:28,622 | Epoch 1/30 | train_loss=0.579106 | train_acc=79.29% | val_loss=0.431811 | val_acc=84.22% | best_epoch=1 | lr=0.001
+2026-10-14 22:13:34,690 | Epoch 2/30 | train_loss=0.412447 | train_acc=85.05% | val_loss=0.346923 | val_acc=87.55% | best_epoch=2 | lr=0.001
+2026-10-14 22:13:42,942 | Epoch 3/30 | train_loss=0.372495 | train_acc=86.22% | val_loss=0.326343 | val_acc=88.03% | best_epoch=3 | lr=0.001
+2026-10-14 22:13:51,687 | Epoch 4/30 | train_loss=0.348958 | train_acc=87.18% | val_loss=0.316893 | val_acc=88.58% | best_epoch=4 | lr=0.001
+2026-10-14 22:14:00,332 | Epoch 5/30 | train_loss=0.333088 | train_acc=87.64% | val_loss=0.304182 | val_acc=88.92% | best_epoch=5 | lr=0.001
+2026-10-14 22:14:08,773 | Epoch 6/30 | train_loss=0.319462 | train_acc=88.24% | val_loss=0.307256 | val_acc=88.97% | best_epoch=6 | lr=0.001
+2026-10-14 22:14:17,521 | Epoch 7/30 | train_loss=0.306398 | train_acc=88.51% | val_loss=0.309085 | val_acc=88.58% | best_epoch=6 | lr=0.001
+2026-10-14 22:14:25,809 | Epoch 8/30 | train_loss=0.294910 | train_acc=88.95% | val_loss=0.291248 | val_acc=89.17% | best_epoch=8 | lr=0.001
+2026-10-14 22:14:34,033 | Epoch 9/30 | train_loss=0.289357 | train_acc=89.23% | val_loss=0.300092 | val_acc=88.52% | best_epoch=8 | lr=0.001
+2026-10-14 22:14:42,538 | Epoch 10/30 | train_loss=0.283527 | train_acc=89.48% | val_loss=0.291332 | val_acc=89.25% | best_epoch=10 | lr=0.001
+2026-10-14 22:14:51,026 | Epoch 11/30 | train_loss=0.245497 | train_acc=90.77% | val_loss=0.270958 | val_acc=89.67% | best_epoch=11 | lr=0.0003
+2026-10-14 22:14:59,279 | Epoch 12/30 | train_loss=0.235745 | train_acc=91.14% | val_loss=0.265900 | val_acc=90.30% | best_epoch=12 | lr=0.0003
+2026-10-14 22:15:07,602 | Epoch 13/30 | train_loss=0.231365 | train_acc=91.34% | val_loss=0.268210 | val_acc=90.27% | best_epoch=12 | lr=0.0003
+2026-10-14 22:15:15,837 | Epoch 14/30 | train_loss=0.225020 | train_acc=91.49% | val_loss=0.270216 | val_acc=90.20% | best_epoch=12 | lr=0.0003
+2026-10-14 22:15:24,257 | Epoch 15/30 | train_loss=0.222736 | train_acc=91.56% | val_loss=0.269646 | val_acc=90.22% | best_epoch=12 | lr=0.0003
+2026-10-14 22:15:32,502 | Epoch 16/30 | train_loss=0.217063 | train_acc=91.69% | val_loss=0.268827 | val_acc=90.20% | best_epoch=12 | lr=0.0003
+2026-10-14 22:15:40,939 | Epoch 17/30 | train_loss=0.214473 | train_acc=91.73% | val_loss=0.269140 | val_acc=90.10% | best_epoch=12 | lr=0.0003
+2026-10-14 22:15:50,138 | Epoch 18/30 | train_loss=0.211477 | train_acc=91.95% | val_loss=0.265461 | val_acc=90.52% | best_epoch=18 | lr=0.0003
+2026-10-14 22:15:59,072 | Epoch 19/30 | train_loss=0.208120 | train_acc=92.10% | val_loss=0.268581 | val_acc=90.57% | best_epoch=19 | lr=0.0003
+2026-10-14 22:16:08,087 | Epoch 20/30 | train_loss=0.203675 | train_acc=92.23% | val_loss=0.263506 | val_acc=90.55% | best_epoch=19 | lr=0.0003
+2026-10-14 22:16:16,957 | Epoch 21/30 | train_loss=0.190830 | train_acc=92.86% | val_loss=0.263174 | val_acc=90.77% | best_epoch=21 | lr=9e-05
+2026-10-14 22:16:25,769 | Epoch 22/30 | train_loss=0.186801 | train_acc=92.81% | val_loss=0.262521 | val_acc=90.87% | best_epoch=22 | lr=9e-05
+2026-10-14 22:16:34,504 | Epoch 23/30 | train_loss=0.187542 | train_acc=92.93% | val_loss=0.263089 | val_acc=90.92% | best_epoch=23 | lr=9e-05
+2026-10-14 22:16:42,915 | Epoch 24/30 | train_loss=0.183770 | train_acc=93.01% | val_loss=0.264423 | val_acc=91.00% | best_epoch=24 | lr=9e-05
+2026-10-14 22:16:51,248 | Epoch 25/30 | train_loss=0.181065 | train_acc=93.13% | val_loss=0.263961 | val_acc=90.80% | best_epoch=24 | lr=9e-05
+2026-10-14 22:16:59,972 | Epoch 26/30 | train_loss=0.181776 | train_acc=93.14% | val_loss=0.264940 | val_acc=90.75% | best_epoch=24 | lr=9e-05
+2026-10-14 22:17:08,482 | Epoch 27/30 | train_loss=0.178349 | train_acc=93.23% | val_loss=0.265852 | val_acc=90.78% | best_epoch=24 | lr=9e-05
+2026-10-14 22:17:17,144 | Epoch 28/30 | train_loss=0.179186 | train_acc=93.22% | val_loss=0.266006 | val_acc=90.97% | best_epoch=24 | lr=9e-05
+2026-10-14 22:17:25,539 | Epoch 29/30 | train_loss=0.176697 | train_acc=93.29% | val_loss=0.266430 | val_acc=90.75% | best_epoch=24 | lr=9e-05
+2026-10-14 22:17:34,052 | Epoch 30/30 | train_loss=0.177598 | train_acc=93.22% | val_loss=0.268433 | val_acc=90.65% | best_epoch=24 | lr=9e-05
+2026-10-14 22:17:34,060 | Finished | best_epoch=24 | output=D:\newtask\DL\practice_1_fashionmnist\outputs\runs\lan_2

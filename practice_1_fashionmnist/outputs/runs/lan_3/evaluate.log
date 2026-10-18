@@ -1,4 +1,0 @@
-2026-10-11 16:13:21,373 | Validation | run=lan_3 | samples=6000 | loss=CrossEntropyLoss() | device=cuda
-2026-10-11 16:13:22,201 | Validation loss=2.2595 | accuracy=19.93% | test not evaluated
-2026-10-11 16:13:40,567 | Validation | run=lan_3 | samples=6000 | loss=CrossEntropyLoss() | device=cuda
-2026-10-11 16:13:41,442 | Validation loss=2.2595 | accuracy=19.93% | test not evaluated

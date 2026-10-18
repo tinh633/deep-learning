@@ -38,6 +38,11 @@ Workspace/
 
 ## File Placement
 
+- Keep small projects organized around workflow steps. Prefer a few step documents over per-script documents when the user asks for fewer files; show execution order in README.
+- When numbered scripts execute at top level by user request, document their order and keep shared data/metrics functions in plain modules; update all imports and commands together during renaming.
+- User-requested EDA visual assets may be generated under visualization/eda/ for HTML; keep EDA numeric reports, logs and checkpoints in outputs/.
+
+
 - For model visualization, extend the existing single HTML page and read script-generated reports from outputs/. Use real original image indices for prediction examples; distinguish fixed-checkpoint evaluation from online training metrics and label confusion-matrix axes explicitly.
 
 - At training start, record the actual loss type/options and optimizer type/parameter groups, plus model, seed, data/batch/transform and device settings once in the run log. Read optimizer settings from the actual instance, not a fixed optimizer name. Epoch logs include loss and current learning rate.
@@ -87,7 +92,7 @@ Link to detailed documents instead of duplicating them in README.
 
 ## Script Documentation
 
-- Every script such as `src/train.py` maps to `docs/scripts/train.md`.
+- Document every script role, but group related scripts in workflow-step documents for small projects when requested; do not require docs/scripts in that case.
 - Explain purpose, inputs, outputs, main logic, dependencies, testing, and known issues.
 - Update the paired document whenever the script's behavior or interface changes.
 - Do not document each trivial line of code.

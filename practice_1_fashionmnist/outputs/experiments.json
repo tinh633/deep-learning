@@ -1,0 +1,410 @@
+[
+  {
+    "run": "lan_1",
+    "model": {
+      "hidden1": 256,
+      "hidden2": 128,
+      "dropout": 0.0
+    },
+    "train": {
+      "seed": 42,
+      "epochs": 30,
+      "lr": 0.001,
+      "weight_decay": 0.0,
+      "decay_step": 10,
+      "decay_gamma": 0.3
+    },
+    "data": {
+      "seed": 42,
+      "val_size": 0.1,
+      "batch_size": 64
+    },
+    "recorded_epochs": 30,
+    "checkpoint_epoch": 24,
+    "validation": {
+      "loss": 0.29572007463375727,
+      "accuracy": 0.9118333333333334,
+      "count": 6000
+    },
+    "minimum_val_loss": 0.27509533524513247,
+    "minimum_loss_epoch": 12,
+    "selection": "val_accuracy_then_val_loss",
+    "completed": true,
+    "hidden_sizes": [
+      256,
+      128
+    ]
+  },
+  {
+    "run": "lan_2",
+    "model": {
+      "hidden1": 256,
+      "hidden2": 128,
+      "dropout": 0.2
+    },
+    "train": {
+      "seed": 42,
+      "epochs": 30,
+      "lr": 0.001,
+      "weight_decay": 0.0,
+      "decay_step": 10,
+      "decay_gamma": 0.3
+    },
+    "data": {
+      "seed": 42,
+      "val_size": 0.1,
+      "batch_size": 64
+    },
+    "recorded_epochs": 30,
+    "checkpoint_epoch": 24,
+    "validation": {
+      "loss": 0.2644228966832161,
+      "accuracy": 0.91,
+      "count": 6000
+    },
+    "minimum_val_loss": 0.26252123564481733,
+    "minimum_loss_epoch": 22,
+    "selection": "val_accuracy_then_val_loss",
+    "completed": true,
+    "hidden_sizes": [
+      256,
+      128
+    ]
+  },
+  {
+    "run": "lan_3",
+    "model": {
+      "hidden1": 256,
+      "hidden2": 128,
+      "dropout": 0.1
+    },
+    "train": {
+      "seed": 42,
+      "epochs": 30,
+      "lr": 0.003,
+      "weight_decay": 0.0,
+      "decay_step": 10,
+      "decay_gamma": 0.3
+    },
+    "data": {
+      "seed": 42,
+      "val_size": 0.1,
+      "batch_size": 64
+    },
+    "recorded_epochs": 11,
+    "checkpoint_epoch": 11,
+    "validation": {
+      "loss": 0.2804886117776235,
+      "accuracy": 0.8975,
+      "count": 6000
+    },
+    "minimum_val_loss": 0.2804886117776235,
+    "minimum_loss_epoch": 11,
+    "selection": "val_accuracy_then_val_loss",
+    "completed": false,
+    "hidden_sizes": [
+      256,
+      128
+    ]
+  },
+  {
+    "run": "lan_4",
+    "model": {
+      "hidden1": 256,
+      "hidden2": 128,
+      "dropout": 0.0
+    },
+    "train": {
+      "seed": 42,
+      "epochs": 30,
+      "lr": 0.003,
+      "weight_decay": 0.0,
+      "decay_step": 10,
+      "decay_gamma": 0.3
+    },
+    "data": {
+      "seed": 42,
+      "val_size": 0.1,
+      "batch_size": 64
+    },
+    "recorded_epochs": 30,
+    "checkpoint_epoch": 22,
+    "validation": {
+      "loss": 0.34072800105810164,
+      "accuracy": 0.9061666666666667,
+      "count": 6000
+    },
+    "minimum_val_loss": 0.2857988823056221,
+    "minimum_loss_epoch": 12,
+    "selection": "val_accuracy_then_val_loss",
+    "completed": true,
+    "hidden_sizes": [
+      256,
+      128
+    ]
+  },
+  {
+    "run": "lan_5",
+    "model": {
+      "hidden1": 256,
+      "hidden2": 128,
+      "dropout": 0.0
+    },
+    "train": {
+      "seed": 42,
+      "epochs": 30,
+      "lr": 0.003,
+      "weight_decay": 0.0,
+      "decay_step": 10,
+      "decay_gamma": 0.3
+    },
+    "data": {
+      "seed": 42,
+      "val_size": 0.1,
+      "batch_size": 64
+    },
+    "recorded_epochs": 29,
+    "checkpoint_epoch": 24,
+    "validation": {
+      "loss": 0.37862735176086426,
+      "accuracy": 0.9071666666666667,
+      "count": 6000
+    },
+    "minimum_val_loss": 0.28362259397904077,
+    "minimum_loss_epoch": 11,
+    "selection": "val_accuracy_then_val_loss",
+    "completed": false,
+    "hidden_sizes": [
+      256,
+      128,
+      64
+    ]
+  },
+  {
+    "run": "lan_6",
+    "model": {
+      "hidden1": 256,
+      "hidden2": 128,
+      "dropout": 0.0
+    },
+    "train": {
+      "seed": 42,
+      "epochs": 30,
+      "lr": 0.001,
+      "weight_decay": 0.0,
+      "decay_step": 15,
+      "decay_gamma": 0.3
+    },
+    "data": {
+      "seed": 42,
+      "val_size": 0.1,
+      "batch_size": 64
+    },
+    "recorded_epochs": 30,
+    "checkpoint_epoch": 22,
+    "validation": {
+      "loss": 0.3129587154984474,
+      "accuracy": 0.9103333333333333,
+      "count": 6000
+    },
+    "minimum_val_loss": 0.2783539745211601,
+    "minimum_loss_epoch": 12,
+    "selection": "val_accuracy_then_val_loss",
+    "completed": true,
+    "hidden_sizes": [
+      256,
+      128,
+      64
+    ]
+  },
+  {
+    "run": "lan_7",
+    "model": {
+      "hidden1": 256,
+      "hidden2": 128,
+      "hidden3": 64,
+      "dropout": 0.0
+    },
+    "train": {
+      "seed": 42,
+      "epochs": 30,
+      "lr": 0.001,
+      "weight_decay": 0.0001,
+      "decay_step": 15,
+      "decay_gamma": 0.3
+    },
+    "data": {
+      "seed": 42,
+      "val_size": 0.1,
+      "batch_size": 64
+    },
+    "recorded_epochs": 30,
+    "checkpoint_epoch": 26,
+    "validation": {
+      "loss": 0.30025218109289803,
+      "accuracy": 0.9085,
+      "count": 6000
+    },
+    "minimum_val_loss": 0.2728407599925995,
+    "minimum_loss_epoch": 17,
+    "selection": "val_accuracy_then_val_loss",
+    "completed": true,
+    "hidden_sizes": [
+      256,
+      128,
+      64
+    ]
+  },
+  {
+    "run": "lan_8",
+    "model": {
+      "hidden1": 256,
+      "hidden2": 128,
+      "hidden3": 64,
+      "dropout": 0.1
+    },
+    "train": {
+      "seed": 42,
+      "epochs": 30,
+      "lr": 0.001,
+      "weight_decay": 0.0,
+      "decay_step": 15,
+      "decay_gamma": 0.3
+    },
+    "data": {
+      "seed": 42,
+      "val_size": 0.1,
+      "batch_size": 64
+    },
+    "recorded_epochs": 30,
+    "checkpoint_epoch": 22,
+    "validation": {
+      "loss": 0.27834505432844164,
+      "accuracy": 0.9096666666666666,
+      "count": 6000
+    },
+    "minimum_val_loss": 0.2712223834792773,
+    "minimum_loss_epoch": 18,
+    "selection": "val_accuracy_then_val_loss",
+    "completed": true,
+    "hidden_sizes": [
+      256,
+      128,
+      64
+    ]
+  },
+  {
+    "run": "lan_9",
+    "model": {
+      "hidden1": 256,
+      "hidden2": 128,
+      "hidden3": 64,
+      "dropout": 0.2
+    },
+    "train": {
+      "seed": 42,
+      "epochs": 50,
+      "lr": 0.001,
+      "weight_decay": 0.0,
+      "decay_step": 25,
+      "decay_gamma": 0.3
+    },
+    "data": {
+      "seed": 42,
+      "val_size": 0.1,
+      "batch_size": 64
+    },
+    "recorded_epochs": 50,
+    "checkpoint_epoch": 41,
+    "validation": {
+      "loss": 0.2879510926405589,
+      "accuracy": 0.9105,
+      "count": 6000
+    },
+    "minimum_val_loss": 0.277730976998806,
+    "minimum_loss_epoch": 26,
+    "selection": "val_accuracy_then_val_loss",
+    "completed": true,
+    "hidden_sizes": [
+      256,
+      128,
+      64
+    ]
+  },
+  {
+    "run": "lan_10",
+    "model": {
+      "hidden1": 256,
+      "hidden2": 128,
+      "hidden3": 64,
+      "dropout": 0.2
+    },
+    "train": {
+      "seed": 42,
+      "epochs": 50,
+      "lr": 0.001,
+      "weight_decay": 1e-05,
+      "decay_step": 15,
+      "decay_gamma": 0.3
+    },
+    "data": {
+      "seed": 42,
+      "val_size": 0.1,
+      "batch_size": 64
+    },
+    "recorded_epochs": 50,
+    "checkpoint_epoch": 39,
+    "validation": {
+      "loss": 0.2779891072710355,
+      "accuracy": 0.9133333333333333,
+      "count": 6000
+    },
+    "minimum_val_loss": 0.26677082006136577,
+    "minimum_loss_epoch": 26,
+    "selection": "val_accuracy_then_val_loss",
+    "completed": true,
+    "hidden_sizes": [
+      256,
+      128,
+      64
+    ]
+  },
+  {
+    "run": "lan_12",
+    "model": {
+      "hidden1": 512,
+      "hidden2": 216,
+      "hidden3": 128,
+      "dropout": 0.2
+    },
+    "train": {
+      "seed": 42,
+      "epochs": 50,
+      "lr": 0.001,
+      "weight_decay": 1e-05,
+      "decay_step": 15,
+      "decay_gamma": 0.3
+    },
+    "data": {
+      "seed": 42,
+      "val_size": 0.1,
+      "batch_size": 64
+    },
+    "recorded_epochs": 50,
+    "checkpoint_epoch": 42,
+    "validation": {
+      "loss": 0.2951170018116633,
+      "accuracy": 0.914,
+      "count": 6000
+    },
+    "minimum_val_loss": 0.26377742664019266,
+    "minimum_loss_epoch": 22,
+    "selection": "val_accuracy_then_val_loss",
+    "completed": true,
+    "hidden_sizes": [
+      512,
+      216,
+      128
+    ]
+  }
+]
