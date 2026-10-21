@@ -1,7 +1,7 @@
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA_FOLDER = ROOT / 'data' / 'FashionMNIST_raw'
+DATA_FOLDER = ROOT / 'data' / 'FashionMNIST' / 'raw'
 RUNS_FOLDER = ROOT / 'outputs' / 'runs'
 
 DATA = dict(seed=42, val_size=0.1, batch_size=64)
