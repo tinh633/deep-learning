@@ -118,3 +118,24 @@ pooling giảm độ phân giải, không giữ nguyên mọi chi tiết. Không
 Mỗi phần phải có artifact tái kiểm tra, báo cáo ngắn điều đã làm/kết quả/giới hạn và docs cập nhật.
 Chưa có kết quả CNN hoàn tất hoặc so sánh cuối MLP–CNN; không trình bày kế hoạch như thành tích đã đạt.
 Chỉ mở rộng phần tiếp theo sau review theo cách làm từng bước của người dùng.
+
+
+model = nn.Sequential(
+    nn.Conv2d(3,32,3,padding="same"),nn.BatchNorm2d(32),nn.ReLU(),
+    nn.Conv2d(32,32,3,padding="same"),nn.BatchNorm2d(32),nn.ReLU(),
+    nn.MaxPool2d(2),
+
+    nn.Conv2d(32,64,3,padding="same"),nn.BatchNorm2d(64),nn.ReLU(),
+    nn.Conv2d(64,64,3,padding="same"),nn.BatchNorm2d(64),nn.ReLU(),
+    nn.MaxPool2d(2),
+
+    nn.Conv2d(64,128,3,padding="same"),nn.BatchNorm2d(128),nn.ReLU(),
+    nn.Conv2d(128,128,3,padding="same"),nn.BatchNorm2d(128),nn.ReLU(),
+    nn.MaxPool2d(2),
+
+    nn.Flatten(),
+    nn.LazyLinear(256),
+    nn.ReLU(),
+    nn.Dropout(0.4),
+    nn.LazyLinear(10)
+).to(device)
