@@ -1,0 +1,1151 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FashionMNIST · Data Explorer</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #172c31;
+        --muted: #63757a;
+        --teal: #087e80;
+        --line: #dce5e4;
+        --paper: #f4f7f5;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font:
+          15px/1.6 system-ui,
+          sans-serif;
+      }
+      header {
+        background: #17383e;
+        color: white;
+        padding: 30px max(24px, calc((100vw - 1280px) / 2));
+      }
+      header small {
+        color: #8ddbd0;
+        letter-spacing: 3px;
+      }
+      h1 {
+        font-size: clamp(28px, 4vw, 46px);
+        margin: 8px 0;
+      }
+      header p {
+        color: #cfdfdf;
+        margin: 0;
+        max-width: 850px;
+      }
+      main {
+        max-width: 1328px;
+        padding: 24px;
+        margin: auto;
+      }
+      nav {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 24px;
+      }
+      a {
+        color: var(--teal);
+      }
+      header a {
+        color: #9be6da;
+      }
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+      .card,
+      section {
+        background: white;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 22px;
+      }
+      .card strong {
+        display: block;
+        font-size: 30px;
+      }
+      .card span,
+      .muted {
+        color: var(--muted);
+      }
+      section {
+        margin-top: 22px;
+      }
+      h2 {
+        font-size: 24px;
+        margin: 0 0 8px;
+      }
+      h3 {
+        margin: 24px 0 8px;
+      }
+      label {
+        font-weight: 600;
+      }
+      select,
+      input,
+      button {
+        font: inherit;
+        border: 1px solid #bdcfcd;
+        border-radius: 8px;
+        padding: 9px 12px;
+        background: white;
+        color: var(--ink);
+      }
+      button {
+        cursor: pointer;
+        background: var(--teal);
+        color: white;
+        border-color: var(--teal);
+      }
+      .controls {
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+        align-items: end;
+        margin: 20px 0;
+      }
+      .controls label {
+        display: grid;
+        gap: 6px;
+      }
+      #status {
+        font-weight: 600;
+        color: var(--teal);
+      }
+      #viewport {
+        height: 590px;
+        overflow: auto;
+        position: relative;
+        background: #edf2f1;
+        border-radius: 10px;
+        border: 1px solid var(--line);
+      }
+      #space {
+        position: relative;
+      }
+      #tiles {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        display: grid;
+        gap: 8px;
+        padding: 8px;
+      }
+      .tile {
+        height: 140px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 3px;
+        background: white;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        color: var(--ink);
+        padding: 6px;
+        font-size: 11px;
+      }
+      .tile:hover {
+        border-color: var(--teal);
+      }
+      canvas {
+        image-rendering: pixelated;
+      }
+      .tile canvas {
+        width: 84px;
+        height: 84px;
+        background: black;
+      }
+      .two {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+      .chart {
+        width: 100%;
+        height: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+      }
+      th,
+      td {
+        text-align: left;
+        padding: 9px;
+        border-bottom: 1px solid var(--line);
+      }
+      th {
+        color: var(--muted);
+      }
+      .table-wrap {
+        overflow: auto;
+      }
+      .means {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 12px;
+      }
+      .mean {
+        background: var(--paper);
+        padding: 12px;
+        text-align: center;
+        border-radius: 9px;
+      }
+      .mean canvas {
+        width: 84px;
+        height: 84px;
+        display: block;
+        margin: 8px auto;
+      }
+      .callout {
+        border-left: 4px solid var(--teal);
+        background: #eaf6f3;
+        padding: 14px 18px;
+        margin: 16px 0;
+      }
+      dialog {
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        max-width: 90vw;
+        padding: 24px;
+      }
+      dialog::backdrop {
+        background: #122a30aa;
+      }
+      #detailImage {
+        width: 280px;
+        height: 280px;
+        max-width: 70vw;
+        display: block;
+        margin: 16px auto;
+      }
+      footer {
+        padding: 28px 0;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      details {
+        margin: 12px 0;
+      }
+      summary {
+        cursor: pointer;
+        font-weight: 600;
+      }
+      @media (max-width: 760px) {
+        .cards {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .two {
+          grid-template-columns: 1fr;
+        }
+        .means {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        main {
+          padding: 12px;
+        }
+        section {
+          padding: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <small>PRACTICE 01 / DATA REVIEW</small>
+      <h1>FashionMNIST Explorer</h1>
+      <p>
+        Khám phá toàn bộ ảnh, kiểm tra phân bố nhãn và chất lượng dữ liệu trước
+        khi xây dựng mô hình.
+      </p>
+    </header>
+    <main>
+      <nav>
+        <a href="#explorer">Kho ảnh</a><a href="#eda">Phân tích EDA</a
+        ><a href="#deepEda">EDA sâu</a><a href="#quality">Chất lượng dữ liệu</a>
+      </nav>
+      <div class="cards">
+        <div class="card">
+          <span>Tổng số ảnh</span><strong>70.000</strong
+          ><span>60.000 train · 10.000 test</span>
+        </div>
+        <div class="card">
+          <span>Nhãn phân loại</span><strong>10</strong
+          ><span>Thời trang & phụ kiện</span>
+        </div>
+        <div class="card">
+          <span>Kích thước ảnh</span><strong>28 × 28</strong
+          ><span>Grayscale · uint8</span>
+        </div>
+        <div class="card">
+          <span>Trạng thái nguồn</span><strong>Đã xác minh</strong
+          ><span>4/4 MD5 khớp nguồn gốc</span>
+        </div>
+      </div>
+      <section id="explorer">
+        <h2>Kho ảnh đầy đủ</h2>
+        <p class="muted">
+          Chọn nhãn và tập dữ liệu. Cuộn để xem tất cả ảnh phù hợp; bấm ảnh để
+          phóng to. ID giữ nguyên thứ tự trong tập gốc, bắt đầu từ 0.
+        </p>
+        <div class="controls">
+          <label
+            >Nhãn<select id="label">
+              <option value="all">Tất cả nhãn</option>
+            </select></label
+          ><label
+            >Tập dữ liệu<select id="split">
+              <option value="all">Train + Test</option>
+              <option value="train">Train</option>
+              <option value="test">Test</option>
+            </select></label
+          ><label
+            >Đến ảnh thứ (bắt đầu từ 1)<input
+              id="position"
+              type="number"
+              min="1"
+              value="1" /></label
+          ><button id="jump">Đi đến</button>
+        </div>
+        <p id="status" role="status" aria-live="polite">
+          Đang khởi động… Mở bằng Open with Live Server trong VS Code; trang cần
+          JavaScript để hiển thị dữ liệu.
+        </p>
+        <div id="viewport" tabindex="0" aria-label="Kho ảnh cuộn được">
+          <div id="space"><div id="tiles"></div></div>
+        </div>
+        <p id="range" class="muted"></p>
+      </section>
+      <section id="eda">
+        <h2>Phân tích khám phá dữ liệu</h2>
+        <p class="muted">
+          Thống kê tính trên toàn bộ dữ liệu, không lấy mẫu. Bộ lọc EDA độc lập
+          với bộ lọc kho ảnh.
+        </p>
+        <label
+          >Tập phân tích
+          <select id="edaSplit">
+            <option value="all">Train + Test</option>
+            <option value="train">Train</option>
+            <option value="test">Test</option>
+          </select></label
+        >
+        <div class="two">
+          <div>
+            <h3>Phân bố lớp</h3>
+            <div id="classChart"></div>
+          </div>
+          <div>
+            <h3>Phân bố cường độ pixel</h3>
+            <div id="pixelChart"></div>
+            <p class="muted">
+              256 mức được gộp thành 32 khoảng, mỗi khoảng 8 mức. Nền tối có thể
+              tạo đỉnh lớn ở gần 0.
+            </p>
+          </div>
+        </div>
+        <h3>Thống kê tổng quan</h3>
+        <div id="summary" class="table-wrap"></div>
+        <div class="two">
+          <div>
+            <h3>Độ sáng trung bình mỗi ảnh</h3>
+            <div id="brightnessChart"></div>
+            <p class="muted">
+              Trục ngang: độ sáng trung bình 0–255; trục dọc: số ảnh. 32 khoảng
+              có độ rộng 8.
+            </p>
+          </div>
+          <div>
+            <h3>Các phân vị độ sáng</h3>
+            <div id="quantiles"></div>
+            <p class="muted">
+              Ảnh rất tối/sáng là ứng viên kiểm tra thủ công, chưa đủ bằng chứng
+              để kết luận lỗi.
+            </p>
+          </div>
+        </div>
+        <h3>So sánh từng nhãn</h3>
+        <div id="classTable" class="table-wrap"></div>
+        <p class="muted">
+          Foreground là tỷ lệ pixel &gt; 0, không phải kết quả phân đoạn vật
+          thể. Độ sáng tính theo thang 0–255.
+        </p>
+        <h3>Ảnh trung bình theo lớp</h3>
+        <div id="means" class="means"></div>
+        <p class="muted">
+          Trung bình pixel của mọi ảnh trong lớp, làm tròn để hiển thị. Đây là
+          ảnh tổng hợp, không phải mẫu thật.
+        </p>
+        <h3>Train so với Test</h3>
+        <div id="comparison" class="table-wrap"></div>
+        <div class="callout">
+          Chuẩn hóa khi huấn luyện nên dùng thống kê của train. Giữ test cho
+          đánh giá cuối; không chọn cấu hình mô hình dựa trên kết quả test.
+        </div>
+      </section>
+      <section id="deepEda">
+        <h2>EDA sâu · hiểu dữ liệu trước khi train</h2>
+        <p>Phần này dùng đúng split train/validation của dự án, không dùng test để chọn cách xử lý dữ liệu.
+          Thống kê đầy đủ trên từng split; PCA và ảnh gần giống dùng mẫu có seed cố định.</p>
+        <p id="deepStatus" role="status">Đang tải EDA sâu…</p>
+        <div class="callout">Brightness: trung bình pixel 0–255. Contrast: độ lệch chuẩn pixel mỗi ảnh.
+          Foreground: tỷ lệ pixel &gt; 30; bounding box cũng dùng ngưỡng này, khác ngưỡng &gt; 0 ở EDA cơ bản.
+          Tâm ảnh được tính theo trọng số cường độ pixel; tọa độ x/y từ 0 đến 27.</div>
+        <h3>1. Split có cân bằng và tách biệt không?</h3>
+        <div id="deepBalance" class="table-wrap"></div>
+        <div class="two">
+          <label>Tập xem chi tiết <select id="deepSplit"><option value="train">Train</option><option value="validation">Validation</option></select></label>
+          <label>Nhãn <select id="deepLabel"><option value="all">Tất cả nhãn</option></select></label>
+        </div>
+        <h3>2. Đặc trưng ảnh thay đổi thế nào?</h3>
+        <div id="deepFeatureTable" class="table-wrap"></div>
+        <p>Với tất cả nhãn: hiển thị các phân vị của split. Khi chọn nhãn: so sánh trung bình nhãn đó
+          giữa train và validation. Khác biệt nhỏ không tự chứng minh hai phân bố giống nhau.</p>
+        <details open><summary>Phân bố train và validation</summary>
+          <p>Trục dọc là mật độ để so sánh hai tập có số ảnh khác nhau, không phải số ảnh tuyệt đối.</p>
+          <img src="eda/distributions.png" alt="Mật độ độ sáng, tương phản, foreground và chiều rộng trên train và validation" loading="lazy" style="width:100%">
+        </details>
+        <details><summary>Phân bố từng nhãn trên train</summary>
+          <p>Đường giữa hộp là median; hộp là Q1–Q3. Đồ thị ẩn các điểm ngoài whisker để dễ đọc,
+            không xóa chúng khỏi thống kê hay dữ liệu.</p>
+          <img src="eda/classes.png" alt="Boxplot bốn đặc trưng của 10 nhãn train" loading="lazy" style="width:100%">
+        </details>
+        <h3>3. Ảnh trung bình và độ biến thiên theo nhãn</h3>
+        <p>Hàng trên là ảnh trung bình train. Hàng dưới là độ lệch chuẩn từng pixel:
+          vùng sáng hơn thay đổi nhiều hơn giữa các ảnh cùng nhãn. Đây là ảnh tổng hợp, không phải mẫu thật.</p>
+        <img src="eda/mean_variation.png" alt="Ảnh trung bình và độ biến thiên pixel của 10 nhãn" loading="lazy" style="width:100%">
+        <h3>4. PCA · các nhãn có chồng lấn không?</h3>
+        <p id="deepPca"></p>
+        <p>PCA chỉ fit trên mẫu train; validation chỉ được chiếu bằng phép biến đổi đó.
+          Hai chiều đầu làm mất thông tin: chồng lấn ở đây không chứng minh ảnh không thể phân loại.</p>
+        <img src="eda/pca.png" alt="PCA hai chiều mẫu train và validation, màu theo nhãn" loading="lazy" style="width:100%">
+        <h3>5. Kiểm tra ảnh cực trị bằng mắt</h3>
+        <p>Mỗi split lấy 5 ảnh tối nhất, sáng nhất và tương phản thấp nhất. Bộ lọc nhãn chỉ lọc danh sách
+          cực trị toàn split này; không tính lại cực trị riêng trong từng nhãn. Không tự xóa ảnh hoặc sửa nhãn.</p>
+        <div id="deepExamples" class="means"></div>
+        <h3>6. Các cặp ảnh train gần giống</h3>
+        <p id="deepNeighbors"></p><div id="deepPairs" class="means"></div>
+        <p>Đây là ứng viên kiểm tra thủ công trong một tập con, không phải kiểm tra toàn bộ cặp ảnh,
+          không phải bằng chứng trùng dữ liệu hoặc nhãn sai.</p>
+      </section>
+      <section id="quality">
+        <h2>Kiểm tra chất lượng & giới hạn</h2>
+        <div id="qualityStats"></div>
+        <details>
+          <summary>Ví dụ nhóm ảnh trùng chính xác (tối đa 10 nhóm)</summary>
+          <div id="duplicateExamples"></div>
+        </details>
+        <ul>
+          <li>
+            Đã kiểm tra checksum, cấu trúc IDX, số ảnh, kích thước và miền nhãn.
+            Dữ liệu số nguyên không có giá trị NaN.
+          </li>
+          <li>
+            Trùng ảnh được kiểm tra bằng SHA-256 trên 784 byte pixel; không phát
+            hiện ảnh gần giống hoặc chứng minh nhãn đúng.
+          </li>
+          <li>
+            Nhóm trùng khác nhãn cần xem xét thủ công; không tự động xóa dữ liệu
+            hoặc sửa nhãn.
+          </li>
+          <li>
+            Ảnh 28×28 có ít chi tiết. Các loại áo có thể khó phân biệt bằng mắt;
+            đây là nhận xét định tính, chưa phải kết quả mô hình.
+          </li>
+          <li>EDA không đo chất lượng mô hình; xem phần đánh giá model khi đã xuất báo cáo checkpoint.</li>
+        </ul>
+        <details>
+          <summary>Nguồn dữ liệu & checksum</summary>
+          <p>
+            <a
+              href="https://github.com/zalandoresearch/fashion-mnist"
+              target="_blank"
+              rel="noopener"
+              >Repository chính thức của Zalando Research</a
+            >
+          </p>
+          <div id="checksums" class="table-wrap"></div>
+        </details>
+      </section>
+      <footer>
+        Live Server · Python / NumPy · Chỉ tải dữ liệu một lần; lọc tại trình
+        duyệt · Có thể tái tạo từ script 1_preparedata.py.
+      </footer>
+    </main>
+    <dialog id="detail">
+      <button id="close">Đóng</button>
+      <h2 id="detailTitle"></h2>
+      <canvas id="detailImage" width="28" height="28"></canvas>
+      <p id="detailStats"></p>
+    </dialog>
+
+    <script>
+      "use strict";
+      async function initialize() {
+        const $ = (id) => document.getElementById(id),
+          fmt = (n) => Number(n).toLocaleString("vi-VN"),
+          dec = (n) =>
+            Number(n).toLocaleString("vi-VN", { maximumFractionDigits: 4 }),
+          pct = (n) => dec(n * 100) + "%";
+        if (!/^https?:$/.test(location.protocol))
+          throw Error(
+            "Nhấp phải explorer.html trong VS Code → Open with Live Server. Trang cần HTTP để đọc dữ liệu.",
+          );
+        for (const id of ["label", "split", "position", "jump", "edaSplit"])
+          $(id).disabled = true;
+        async function load(url, kind) {
+          const response = await fetch(new URL(url, location.href), {
+            cache: "no-cache",
+          });
+          if (!response.ok)
+            throw Error(
+              "Không tải được " +
+                url +
+                " (HTTP " +
+                response.status +
+                "). Chạy 1_preparedata.py và mở Live Server từ workspace.",
+            );
+          return kind === "json" ? response.json() : response.arrayBuffer();
+        }
+        function idx(buffer, count, isImage) {
+          const view = new DataView(buffer),
+            header = isImage ? 16 : 8;
+          if (
+            view.byteLength < header ||
+            view.getUint32(0) !== (isImage ? 2051 : 2049) ||
+            view.getUint32(4) !== count
+          )
+            throw Error("File IDX không hợp lệ");
+          if (
+            isImage &&
+            (view.getUint32(8) !== 28 || view.getUint32(12) !== 28)
+          )
+            throw Error("Kích thước ảnh không hợp lệ");
+          if (buffer.byteLength !== header + count * (isImage ? 784 : 1))
+            throw Error("File IDX thiếu hoặc dư dữ liệu");
+          return new Uint8Array(buffer, header);
+        }
+        $("status").textContent =
+          "Đang tải báo cáo EDA và dữ liệu train/test qua Live Server…";
+        const [R, trainImages, testImages, trainLabels, testLabels] =
+          await Promise.all([
+            load("../outputs/eda.json", "json"),
+            load("../data/FashionMNIST_raw/train-images-idx3-ubyte"),
+            load("../data/FashionMNIST_raw/t10k-images-idx3-ubyte"),
+            load("../data/FashionMNIST_raw/train-labels-idx1-ubyte"),
+            load("../data/FashionMNIST_raw/t10k-labels-idx1-ubyte"),
+          ]);
+        const pixels = new Uint8Array(70000 * 784),
+          labels = new Uint8Array(70000);
+        pixels.set(idx(trainImages, 60000, true));
+        pixels.set(idx(testImages, 10000, true), 60000 * 784);
+        labels.set(idx(trainLabels, 60000, false));
+        labels.set(idx(testLabels, 10000, false), 60000);
+        if (labels.some((x) => x > 9) || R.all.count !== 70000)
+          throw Error("Nhãn hoặc báo cáo không khớp dataset");
+        for (const id of ["label", "split", "position", "jump", "edaSplit"])
+          $(id).disabled = false;
+        R.names.forEach((name, c) => {
+          const o = document.createElement("option");
+          o.value = c;
+          o.textContent = c + " · " + name;
+          $("label").append(o);
+        });
+        function draw(canvas, bytes) {
+          const ctx = canvas.getContext("2d"),
+            data = ctx.createImageData(28, 28);
+          for (let p = 0; p < 784; p++) {
+            data.data[p * 4] =
+              data.data[p * 4 + 1] =
+              data.data[p * 4 + 2] =
+                bytes[p];
+            data.data[p * 4 + 3] = 255;
+          }
+          ctx.putImageData(data, 0, 0);
+        }
+        let matches = [],
+          columns = 1;
+        const rowHeight = 148;
+        function filter() {
+          const split = $("split").value,
+            c = $("label").value;
+          matches = [];
+          const start = split === "test" ? 60000 : 0,
+            end = split === "train" ? 60000 : 70000;
+          for (let i = start; i < end; i++)
+            if (c === "all" || labels[i] === Number(c)) matches.push(i);
+          $("status").textContent =
+            fmt(matches.length) +
+            " ảnh phù hợp · " +
+            (c === "all" ? "Tất cả nhãn" : R.names[Number(c)]) +
+            " · " +
+            $("split").selectedOptions[0].textContent;
+          $("position").max = matches.length;
+          $("position").value = 1;
+          $("viewport").scrollTop = 0;
+          render();
+        }
+        function render() {
+          columns = Math.max(
+            1,
+            Math.floor(($("viewport").clientWidth - 16) / 112),
+          );
+          const rows = Math.ceil(matches.length / columns);
+          $("space").style.height = rows * rowHeight + 8 + "px";
+          const firstRow = Math.max(
+              0,
+              Math.floor($("viewport").scrollTop / rowHeight) - 1,
+            ),
+            lastRow = Math.min(
+              rows,
+              firstRow + Math.ceil($("viewport").clientHeight / rowHeight) + 3,
+            );
+          $("tiles").style.transform =
+            "translateY(" + firstRow * rowHeight + "px)";
+          $("tiles").style.gridTemplateColumns =
+            "repeat(" + columns + ", minmax(0,1fr))";
+          const fragment = document.createDocumentFragment();
+          for (
+            let position = firstRow * columns;
+            position < Math.min(matches.length, lastRow * columns);
+            position++
+          ) {
+            const i = matches[position],
+              tile = document.createElement("button"),
+              canvas = document.createElement("canvas");
+            tile.className = "tile";
+            canvas.width = canvas.height = 28;
+            draw(canvas, pixels.subarray(i * 784, (i + 1) * 784));
+            const caption = document.createElement("span");
+            caption.textContent =
+              i < 60000 ? "train #" + i : "test #" + (i - 60000);
+            const name = document.createElement("span");
+            name.textContent = R.names[labels[i]];
+            tile.setAttribute(
+              "aria-label",
+              position +
+                1 +
+                ": " +
+                caption.textContent +
+                " " +
+                name.textContent,
+            );
+            tile.append(canvas, caption, name);
+            tile.onclick = () => showDetail(i);
+            fragment.append(tile);
+          }
+          $("tiles").replaceChildren(fragment);
+          $("range").textContent =
+            "Đang vẽ vùng " +
+            fmt(firstRow * columns + 1) +
+            "–" +
+            fmt(Math.min(matches.length, lastRow * columns)) +
+            " / " +
+            fmt(matches.length) +
+            " ảnh. Mọi ảnh đều truy cập được qua cuộn hoặc ô Đi đến.";
+        }
+        function showDetail(i) {
+          $("detailTitle").textContent =
+            R.names[labels[i]] +
+            " · " +
+            (i < 60000 ? "train #" + i : "test #" + (i - 60000));
+          const b = pixels.subarray(i * 784, (i + 1) * 784);
+          draw($("detailImage"), b);
+          let sum = 0,
+            foreground = 0;
+          for (const p of b) {
+            sum += p;
+            if (p > 0) foreground++;
+          }
+          $("detailStats").textContent =
+            "Nhãn: " +
+            labels[i] +
+            " · Độ sáng: " +
+            dec(sum / 784) +
+            " · Foreground: " +
+            pct(foreground / 784);
+          $("detail").showModal();
+        }
+        $("close").onclick = () => $("detail").close();
+        $("label").onchange = $("split").onchange = filter;
+        $("jump").onclick = () => {
+          const position = Math.min(
+            matches.length,
+            Math.max(1, Math.floor(Number($("position").value) || 1)),
+          );
+          $("position").value = position;
+          $("viewport").scrollTop =
+            Math.floor((position - 1) / columns) * rowHeight;
+          render();
+        };
+        let pending = false;
+        $("viewport").onscroll = () => {
+          if (!pending) {
+            pending = true;
+            requestAnimationFrame(() => {
+              render();
+              pending = false;
+            });
+          }
+        };
+        new ResizeObserver(render).observe($("viewport"));
+        function table(headers, rows) {
+          return (
+            "<table><thead><tr>" +
+            headers.map((h) => "<th>" + h + "</th>").join("") +
+            "</tr></thead><tbody>" +
+            rows
+              .map(
+                (row) =>
+                  "<tr>" +
+                  row.map((v) => "<td>" + v + "</td>").join("") +
+                  "</tr>",
+              )
+              .join("") +
+            "</tbody></table>"
+          );
+        }
+        function bars(target, values, names, horizontal = false) {
+          const width = 560,
+            height = horizontal ? 350 : 250,
+            left = horizontal ? 108 : 60,
+            bottom = 35,
+            top = 22,
+            plotW = width - left - 16,
+            plotH = height - top - bottom,
+            max = Math.max(...values),
+            step = (horizontal ? plotH : plotW) / values.length;
+          let svg =
+            '<svg class="chart" viewBox="0 0 ' +
+            width +
+            " " +
+            height +
+            '" role="img" aria-label="' +
+            target +
+            '"><text x="' +
+            left +
+            '" y="15" font-size="11" fill="#63757a">Số lượng · tối đa ' +
+            fmt(max) +
+            "</text>";
+          values.forEach((v, i) => {
+            if (horizontal) {
+              const y = top + i * step;
+              svg +=
+                '<text x="0" y="' +
+                (y + step * 0.6) +
+                '" font-size="11">' +
+                names[i] +
+                '</text><rect x="' +
+                left +
+                '" y="' +
+                y +
+                '" width="' +
+                (v / max) * plotW * 0.83 +
+                '" height="' +
+                (step - 7) +
+                '" rx="3" fill="#087e80"><title>' +
+                names[i] +
+                ": " +
+                fmt(v) +
+                '</title></rect><text x="' +
+                (left + (v / max) * plotW * 0.83 + 5) +
+                '" y="' +
+                (y + step * 0.6) +
+                '" font-size="11">' +
+                fmt(v) +
+                "</text>";
+            } else {
+              const h = (v / max) * plotH;
+              svg +=
+                '<rect x="' +
+                (left + i * step) +
+                '" y="' +
+                (top + plotH - h) +
+                '" width="' +
+                Math.max(1, step - 2) +
+                '" height="' +
+                h +
+                '" fill="#087e80"><title>' +
+                names[i] +
+                ": " +
+                fmt(v) +
+                "</title></rect>";
+              if (i % 4 === 0)
+                svg +=
+                  '<text x="' +
+                  (left + i * step) +
+                  '" y="' +
+                  (height - 12) +
+                  '" font-size="11">' +
+                  names[i] +
+                  "</text>";
+            }
+          });
+          svg += "</svg>";
+          $(target).innerHTML = svg;
+        }
+        function eda() {
+          const s = R[$("edaSplit").value];
+          bars("classChart", s.counts, R.names, true);
+          const bins = Array.from({ length: 32 }, (_, i) =>
+              s.histogram.slice(i * 8, i * 8 + 8).reduce((a, b) => a + b, 0),
+            ),
+            binNames = Array.from(
+              { length: 32 },
+              (_, i) => i * 8 + "–" + (i * 8 + 7),
+            );
+          bars("pixelChart", bins, binNames);
+          bars("brightnessChart", s.brightness_histogram, binNames);
+          $("summary").innerHTML = table(
+            ["Chỉ số", "Giá trị"],
+            [
+              ["Số ảnh", fmt(s.count)],
+              ["Số pixel", fmt(s.count * 784)],
+              ["Miền giá trị", s.min + "–" + s.max],
+              ["Mean / std pixel", dec(s.mean) + " / " + dec(s.std)],
+              [
+                "Mean / std sau chia 255",
+                dec(s.normalized_mean) + " / " + dec(s.normalized_std),
+              ],
+              ["Pixel bằng 0", pct(s.zero_ratio)],
+              ["Pixel bằng 255", pct(s.saturated_ratio)],
+              [
+                "Ảnh toàn đen / ảnh hằng",
+                fmt(s.blank) + " / " + fmt(s.constant),
+              ],
+              [
+                "Tỷ lệ lớp lớn nhất / nhỏ nhất",
+                dec(Math.max(...s.counts) / Math.min(...s.counts)),
+              ],
+            ],
+          );
+          $("quantiles").innerHTML = table(
+            ["Phân vị", "Độ sáng"],
+            ["Min", "P1", "P25", "P50 (median)", "P75", "P99", "Max"].map(
+              (q, i) => [q, dec(s.brightness_quantiles[i])],
+            ),
+          );
+          $("classTable").innerHTML = table(
+            [
+              "ID / nhãn",
+              "Số ảnh",
+              "Tỷ lệ",
+              "Độ sáng",
+              "Foreground",
+              "Train",
+              "Test",
+            ],
+            R.names.map((n, c) => [
+              c + " · " + n,
+              fmt(s.counts[c]),
+              pct(s.counts[c] / s.count),
+              dec(s.classes[c].mean),
+              pct(s.classes[c].foreground),
+              fmt(R.train.counts[c]),
+              fmt(R.test.counts[c]),
+            ]),
+          );
+          $("means").replaceChildren();
+          R.names.forEach((n, c) => {
+            const box = document.createElement("div");
+            box.className = "mean";
+            const canvas = document.createElement("canvas");
+            canvas.width = canvas.height = 28;
+            draw(canvas, s.classes[c].mean_image);
+            box.append(canvas, document.createTextNode(c + " · " + n));
+            $("means").append(box);
+          });
+        }
+        $("comparison").innerHTML = table(
+          ["Chỉ số", "Train", "Test", "Test − Train"],
+          [
+            [
+              "Số ảnh",
+              fmt(R.train.count),
+              fmt(R.test.count),
+              fmt(R.test.count - R.train.count),
+            ],
+            [
+              "Mean pixel",
+              dec(R.train.mean),
+              dec(R.test.mean),
+              dec(R.test.mean - R.train.mean),
+            ],
+            [
+              "Std pixel",
+              dec(R.train.std),
+              dec(R.test.std),
+              dec(R.test.std - R.train.std),
+            ],
+            [
+              "Pixel 0",
+              pct(R.train.zero_ratio),
+              pct(R.test.zero_ratio),
+              dec((R.test.zero_ratio - R.train.zero_ratio) * 100) + " điểm %",
+            ],
+          ],
+        );
+        const d = R.duplicates;
+        $("qualityStats").innerHTML = table(
+          ["Kiểm tra trùng chính xác", "Kết quả"],
+          [
+            ["Nhóm trùng toàn bộ", fmt(d.groups)],
+            ["Bản sao dư toàn bộ (sau giữ 1 ảnh / nhóm)", fmt(d.extra_copies)],
+            [
+              "Train: nhóm / bản sao dư",
+              fmt(d.train.groups) + " / " + fmt(d.train.extra_copies),
+            ],
+            [
+              "Test: nhóm / bản sao dư",
+              fmt(d.test.groups) + " / " + fmt(d.test.extra_copies),
+            ],
+            ["Nhóm có ảnh ở cả train và test", fmt(d.cross_split_groups)],
+            [
+              "Nhóm trùng pixel nhưng khác nhãn",
+              fmt(d.conflicting_label_groups),
+            ],
+          ],
+        );
+        $("duplicateExamples").innerHTML = d.examples.length
+          ? d.examples
+              .map(
+                (g, i) =>
+                  "<p>Nhóm " +
+                  (i + 1) +
+                  ": " +
+                  g
+                    .map(
+                      (x) =>
+                        x.split + " #" + x.index + " (nhãn " + x.label + ")",
+                    )
+                    .join(", ") +
+                  "</p>",
+              )
+              .join("")
+          : "Không có nhóm trùng.";
+        $("checksums").innerHTML = table(
+          ["File", "MD5 đã xác minh"],
+          Object.entries(R.checksums),
+        );
+        $("edaSplit").onchange = eda;
+        filter();
+        eda();
+      }
+      initialize().catch((error) => {
+        const status = document.getElementById("status");
+        status.textContent = "Không thể hiển thị dữ liệu: " + error.message;
+        status.style.color = "#b42318";
+        status.setAttribute("role", "alert");
+        console.error(error);
+      });
+    </script>
+    <section id="modelReview" style="max-width:1280px;margin:24px auto">
+      <h2>Đánh giá model</h2>
+      <p>So sánh best.pt của các run trên cùng train/validation. Baseline: lần 10; mở rộng: lần 11; tăng sâu: lần 12.</p>
+      <h3>Baseline → Mở rộng → Tăng sâu</h3>
+      <div id="architectureComparison" class="table-wrap"></div>
+      <div id="comparisonChart"></div><p id="comparisonConclusion"></p>
+      <div id="pairedErrors" class="table-wrap"></div>
+      <p>Test chỉ hiện ở run đã đánh giá; dấu — nghĩa là chưa đo, không phải 0. So sánh một seed chưa chứng minh cải thiện ổn định.</p>
+      <label>Chi tiết run <select id="modelRun"></select></label>
+      <p id="modelStatus" role="status">Đang tải kết quả model…</p>
+      <div id="modelScores" class="table-wrap"></div>
+      <h3>Thí nghiệm đã thực hiện</h3>
+      <p>Bảng dùng cấu hình lưu trong từng checkpoint, không dùng config hiện tại để mô tả run cũ.
+        Chỉ so sánh validation; nhiều thay đổi cùng lúc không cho phép kết luận riêng từng yếu tố.</p>
+      <div id="experimentTable" class="table-wrap"></div>
+      <h3>Ví dụ dự đoán đúng và sai</h3>
+      <p>Với run đã xuất ảnh preview: hàng trên là 5 ảnh đúng đầu tiên; hàng dưới là tối đa 5 ảnh sai đầu tiên của tập test nếu đã đánh giá,
+        hoặc validation nếu chưa test. Không chọn ảnh theo confidence để làm đẹp kết quả.</p>
+      <div id="predictionPreview"></div>
+      <details><summary>Model và tham số đã sử dụng</summary><pre id="modelConfig" style="white-space:pre-wrap"></pre></details>
+      <h3>Loss theo epoch</h3><div id="modelCurve"></div>
+      <label>Tập đánh giá <select id="modelSplit"><option value="test">Test</option><option value="validation">Validation</option><option value="train">Train</option></select></label>
+      <h3>Confusion matrix</h3><p>Hàng: nhãn thật. Cột: nhãn dự đoán. Bấm ô ngoài đường chéo để xem các ảnh nhầm tương ứng.</p>
+      <div id="modelMatrix" class="table-wrap"></div><div id="modelClassMetrics" class="table-wrap"></div>
+      <h3>Ảnh dự đoán sai</h3><button id="clearPair">Tất cả lỗi</button> <button id="previousErrors">Trang trước</button> <button id="nextErrors">Trang sau</button>
+      <p id="errorCount"></p><div id="errorGallery" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px"></div>
+    </section>
+    <script>
+    let runReviewPromise;
+    async function showModelReport(selectedRun){
+      const get=id=>document.getElementById(id);
+      const response=await fetch('../outputs/model_report.json');
+      if(response.status===404){
+        get('modelStatus').textContent='Chưa có model sau khi reset. Train rồi chạy src/5_report.py để xem kết quả.';
+        document.querySelectorAll('#modelReview select, #modelReview button').forEach(x=>x.disabled=true);
+        return;
+      }
+      if(!response.ok)throw Error('Không đọc được báo cáo (HTTP '+response.status+')');
+      const latest=await response.json(), eda=await (await fetch('../outputs/eda.json')).json(), names=eda.names;
+      runReviewPromise ??= fetch('../outputs/run_review.json').then(r=>r.ok?r.json():null);
+      const review=await runReviewPromise, runs=review?.runs || [];
+      const current=runs.find(x=>x.run===(selectedRun || latest.run));
+      const report=current?{...current,architecture:current.architecture.join(' → ')+' → 10',
+        training_log:JSON.stringify({model:current.model_config,train:current.train_config,data:current.data_config},null,2),
+        history:await (await fetch('../outputs/runs/'+current.run+'/metrics.json')).json()}:latest;
+      if(current?.run===latest.run)report.splits=latest.splits;
+      get('modelRun').replaceChildren(...(runs.length?runs:[latest]).map(x=>new Option(x.run,x.run)));
+      get('modelRun').value=report.run;
+      get('modelRun').onchange=()=>showModelReport(get('modelRun').value).catch(fail);
+      get('modelSplit').replaceChildren(...Object.keys(report.splits).map(name=>new Option(name,name)));
+      get('modelSplit').value='validation';
+      const table=(headers,rows)=>'<table><thead><tr>'+headers.map(x=>'<th>'+x+'</th>').join('')+'</tr></thead><tbody>'+rows.map(row=>'<tr>'+row.map(x=>'<td>'+x+'</td>').join('')+'</tr>').join('')+'</tbody></table>';
+      const pct=x=>(100*x).toFixed(2)+'%', role=x=>({lan_10:'Baseline',lan_11:'Mở rộng',lan_12:'Tăng sâu'}[x.run] || 'Thử nghiệm');
+      const focus=runs.filter(x=>['lan_10','lan_11','lan_12'].includes(x.run));
+      get('architectureComparison').innerHTML=table(['Vai trò / Run','Lớp ẩn','Train acc / loss','Val acc / loss','Gap train–val','Test acc / loss','Sai val','Best epoch'],focus.map(x=>[
+        role(x)+' · '+x.run,x.architecture.join(' → '),pct(x.splits.train.accuracy)+' / '+x.splits.train.loss.toFixed(4),
+        pct(x.splits.validation.accuracy)+' / '+x.splits.validation.loss.toFixed(4),
+        (100*(x.splits.train.accuracy-x.splits.validation.accuracy)).toFixed(2)+' điểm',
+        x.splits.test?pct(x.splits.test.accuracy)+' / '+x.splits.test.loss.toFixed(4):'—',x.splits.validation.mistakes.length,x.best_epoch]));
+      if(focus.length===3){
+        const base=focus[0],wide=focus[1],deep=focus[2],delta=(a,b)=>(100*(a-b)).toFixed(2);
+        get('comparisonConclusion').textContent='Giữ dropout 0,2, Adam lr 0,001, WD 1e-5, StepLR(15; 0,3), 50 epoch và split/seed. '+
+          'Mở rộng so baseline: val +'+delta(wide.splits.validation.accuracy,base.splits.validation.accuracy)+' điểm, giảm 9 lỗi nhưng val loss tăng '+(wide.splits.validation.loss-base.splits.validation.loss).toFixed(4)+'. '+
+          'Tăng sâu so mở rộng: val +'+delta(deep.splits.validation.accuracy,wide.splits.validation.accuracy)+' điểm, giảm 15 lỗi. '+
+          'Tăng sâu so baseline: val +'+delta(deep.splits.validation.accuracy,base.splits.validation.accuracy)+' điểm, giảm 24 lỗi; val loss vẫn cao hơn baseline. Chưa chốt mô hình.';
+        let chart='<svg viewBox="0 0 900 310" style="width:100%" role="img" aria-label="Accuracy train validation test của baseline mở rộng và tăng sâu"><text x="20" y="20">Accuracy (%) · trục từ 0 đến 100 · Train xanh, Validation cam, Test tím</text>';
+        focus.forEach((x,i)=>{['train','validation','test'].forEach((split,j)=>{const s=x.splits[split],pos=80+i*280+j*65;
+          if(s)chart+='<rect x="'+pos+'" y="'+(255-2*s.accuracy*100)+'" width="48" height="'+(2*s.accuracy*100)+'" fill="'+['#087e80','#c76a18','#7854a6'][j]+'"/><text x="'+pos+'" y="'+(247-2*s.accuracy*100)+'" font-size="12">'+pct(s.accuracy)+'</text>';
+          else chart+='<text x="'+pos+'" y="245">—</text>';});chart+='<text x="'+(90+i*280)+'" y="285">'+x.run+' · '+role(x)+'</text>';});
+        get('comparisonChart').innerHTML=chart+'<path d="M45 45V255H875" fill="none" stroke="#555"/><text x="10" y="55">100</text><text x="25" y="255">0</text></svg>';
+      }
+      get('pairedErrors').innerHTML=table(['Chuyển run','Sửa đúng ảnh trước sai','Ảnh trước đúng thành sai','Cùng sai','Giảm ròng lỗi val'],(review?.paired_validation_comparisons || []).map(x=>[
+        x.old+' → '+x.new,x.fixed_ids.length,x.regressed_ids.length,x.shared_wrong_ids.length,x.fixed_ids.length-x.regressed_ids.length]));
+      get('modelStatus').textContent='Đã đánh giá '+report.run+'/'+report.checkpoint+' · best epoch '+report.best_epoch;
+      get('modelScores').innerHTML=table(['Tập','Số ảnh','Loss','Accuracy','Macro F1','Số lỗi'],Object.entries(report.splits).map(([name,s])=>[name,s.count,s.loss.toFixed(4),(s.accuracy*100).toFixed(2)+'%',s.macro_f1===undefined?'—':s.macro_f1.toFixed(4),s.mistakes.length]));
+      get('predictionPreview').replaceChildren();
+      if(report.splits.validation.correct_examples){
+        const preview=document.createElement('img');preview.src='../outputs/runs/'+report.run+'/plots/predictions.png';
+        preview.alt='Ảnh thật, nhãn thật và nhãn dự đoán từ checkpoint '+report.run;preview.style.width='100%';
+        get('predictionPreview').append(preview);
+      }else get('predictionPreview').textContent='Chạy 5_report.py để xuất ví dụ cho checkpoint đang chọn.';
+      const experimentResponse=await fetch('../outputs/experiments.json');
+      if(experimentResponse.ok){
+        const experiments=await experimentResponse.json();
+        get('experimentTable').innerHTML=runs.length?table(['Run / Vai trò','Lớp ẩn','Train acc / loss','Val acc / loss','Test acc / loss','Sai val','Shirt recall val','Macro F1 val','Trạng thái'],runs.map(x=>[
+          x.run+' · '+role(x),x.architecture.join(' → '),pct(x.splits.train.accuracy)+' / '+x.splits.train.loss.toFixed(4),
+          pct(x.splits.validation.accuracy)+' / '+x.splits.validation.loss.toFixed(4),x.splits.test?pct(x.splits.test.accuracy)+' / '+x.splits.test.loss.toFixed(4):'—',
+          x.splits.validation.mistakes.length,pct(x.splits.validation.classes[6].recall),x.splits.validation.macro_f1.toFixed(4),x.completed?'Hoàn tất':'Chưa hoàn tất'
+        ])):table(['Run','Lớp ẩn','Dropout','LR / WD','Step / gamma','Seed / val split','Epoch ghi nhận','Checkpoint epoch','Val acc','Val loss','Min loss (epoch)','Trạng thái'],experiments.map(x=>[
+          x.run,x.hidden_sizes.join(' → '),x.model.dropout,
+          x.train.lr+' / '+x.train.weight_decay,x.train.decay_step+' / '+x.train.decay_gamma,
+          x.data.seed+' / '+x.data.val_size,x.recorded_epochs+'/'+x.train.epochs,x.checkpoint_epoch,
+          (100*x.validation.accuracy).toFixed(2)+'%',x.validation.loss.toFixed(4),
+          x.minimum_val_loss.toFixed(4)+' ('+x.minimum_loss_epoch+')',x.completed?'Hoàn tất':'Chưa hoàn tất']));
+      }else get('experimentTable').textContent='Chưa xuất bảng thí nghiệm; chạy 5_report.py.';
+      get('modelConfig').textContent=report.architecture+'\n\n'+report.training_log.split(/(?=\d{4}-\d{2}-\d{2} .*?\| Epoch)/)[0];
+      const history=report.history, max=Math.max(...history.map(x=>Math.max(x.train_loss,x.val_loss))), points=key=>history.map((x,i)=>(40+i*700/Math.max(1,history.length-1))+','+(230-x[key]/max*190)).join(' ');
+      get('modelCurve').innerHTML='<svg viewBox="0 0 800 270" style="width:100%" role="img" aria-label="Train loss và validation loss theo epoch"><text x="40" y="20">Train: xanh · Validation: đỏ · '+history.length+' epoch ghi nhận</text><polyline fill="none" stroke="#087e80" stroke-width="3" points="'+points('train_loss')+'"/><polyline fill="none" stroke="#c34e44" stroke-width="3" points="'+points('val_loss')+'"/><text x="40" y="260">Epoch 1</text><text x="700" y="260">Epoch '+history.length+'</text></svg>';
+      let page=0,pair=null, filtered=[];const cache={};
+      async function showErrors(){
+        const split=get('modelSplit').value,s=report.splits[split];
+        filtered=s.mistakes.filter(x=>!pair||(x.true===pair[0]&&x.predicted===pair[1]));
+        page=Math.min(page,Math.max(0,Math.ceil(filtered.length/100)-1));
+        get('errorCount').textContent=filtered.length+' ảnh sai'+(pair?' · '+names[pair[0]]+' → '+names[pair[1]]:'')+' · trang '+(page+1)+'/'+Math.max(1,Math.ceil(filtered.length/100));
+        const source=split==='test'?'t10k':'train';
+        if(!cache[source]){const r=await fetch('../data/FashionMNIST_raw/'+source+'-images-idx3-ubyte');if(!r.ok)throw Error('Không tải được ảnh IDX');cache[source]=new Uint8Array(await r.arrayBuffer(),16);}
+        if(get('modelSplit').value!==split || get('modelRun').value!==report.run)return;
+        const gallery=get('errorGallery');gallery.replaceChildren();
+        for(const error of filtered.slice(page*100,(page+1)*100)){
+          const card=document.createElement('div');card.className='mean';const canvas=document.createElement('canvas');canvas.width=canvas.height=28;
+          const ctx=canvas.getContext('2d'),image=ctx.createImageData(28,28),pixels=cache[source].subarray(error.index*784,(error.index+1)*784);
+          for(let i=0;i<784;i++){image.data[i*4]=image.data[i*4+1]=image.data[i*4+2]=pixels[i];image.data[i*4+3]=255;}ctx.putImageData(image,0,0);
+          const caption=document.createElement('div');caption.textContent=source+' #'+error.index+' | Thật: '+names[error.true]+' | Dự đoán: '+names[error.predicted]+' | Softmax: '+(error.confidence*100).toFixed(1)+'%';card.append(canvas,caption);gallery.append(card);
+        }
+        get('previousErrors').disabled=page===0;get('nextErrors').disabled=(page+1)*100>=filtered.length;
+      }
+      function updateMatrix(){
+        const s=report.splits[get('modelSplit').value],matrix=s.confusion,maxCell=Math.max(...matrix.flat());
+        let html='<table><thead><tr><th>Thật ↓ / Dự đoán →</th>'+names.map((n,i)=>'<th>'+i+' '+n+'</th>').join('')+'</tr></thead><tbody>';
+        matrix.forEach((row,i)=>{html+='<tr><th>'+i+' '+names[i]+'</th>'+row.map((n,j)=>'<td style="background:rgba(8,126,128,'+(n/maxCell*.65)+')"><button data-true="'+i+'" data-pred="'+j+'" style="background:transparent;color:inherit;border:0;padding:4px" '+(i===j?'disabled':'')+'>'+n+'</button></td>').join('')+'</tr>';});get('modelMatrix').innerHTML=html+'</tbody></table>';
+        get('modelMatrix').querySelectorAll('button:not([disabled])').forEach(b=>b.onclick=()=>{pair=[Number(b.dataset.true),Number(b.dataset.pred)];page=0;showErrors().catch(fail);});
+        get('modelClassMetrics').innerHTML=table(['Nhãn','Precision','Recall','F1','Số mẫu'],names.map((n,i)=>{const actual=matrix[i].reduce((a,b)=>a+b,0),predicted=matrix.reduce((sum,row)=>sum+row[i],0);return[n,((predicted?matrix[i][i]/predicted:0)*100).toFixed(2)+'%',((actual?matrix[i][i]/actual:0)*100).toFixed(2)+'%',((actual+predicted?2*matrix[i][i]/(actual+predicted):0)*100).toFixed(2)+'%',actual];}));
+        page=0;pair=null;showErrors().catch(fail);
+      }
+      function fail(error){get('modelStatus').textContent='Lỗi báo cáo model: '+error.message;}
+      get('modelSplit').onchange=updateMatrix;get('clearPair').onclick=()=>{page=0;pair=null;showErrors().catch(fail);};
+      get('previousErrors').onclick=()=>{page--;showErrors().catch(fail);};get('nextErrors').onclick=()=>{page++;showErrors().catch(fail);};updateMatrix();
+    }
+    showModelReport().catch(error=>document.getElementById('modelStatus').textContent='Lỗi báo cáo model: '+error.message);
+    </script>
+    <script>
+    async function showDeepEda(){
+      const get=id=>document.getElementById(id);
+      const response=await fetch('../outputs/deep_eda.json');
+      if(!response.ok)throw Error('Chạy src/2_eda.py để tạo EDA sâu (HTTP '+response.status+')');
+      const data=await response.json(), names=data.names;
+      const features=['Độ sáng (0–255)','Tương phản (0–255)','Foreground (tỷ lệ 0–1)',
+        'Rộng bbox (pixel)','Cao bbox (pixel)','Tâm x (pixel)','Tâm y (pixel)'];
+      const table=(heads,rows)=>'<table><thead><tr>'+heads.map(x=>'<th>'+x+'</th>').join('')+
+        '</tr></thead><tbody>'+rows.map(row=>'<tr>'+row.map(x=>'<td>'+x+'</td>').join('')+'</tr>').join('')+'</tbody></table>';
+      get('deepBalance').innerHTML=table(['Nhãn','Train','Validation'],names.map((n,i)=>[i+' · '+n,
+        data.splits.train.counts[i],data.splits.validation.counts[i]]));
+      get('deepStatus').textContent='Train '+data.splits.train.count.toLocaleString('vi-VN')+
+        ' · Validation '+data.splits.validation.count.toLocaleString('vi-VN')+' · seed '+data.seed+
+        ' · Không giao nhau: '+(data.checks.disjoint?'Có':'Không')+' · Ảnh trống: '+data.checks.blank+
+        ' · Ảnh hằng: '+data.checks.constant;
+      get('deepLabel').append(...names.map((name,i)=>new Option(i+' · '+name,i)));
+      get('deepPca').textContent='Fit trên '+data.pca.train_samples+' ảnh train (500/nhãn), chiếu '+
+        data.pca.validation_samples+' ảnh validation (100/nhãn). Hai PC đầu giải thích '+
+        (100*(data.pca.explained_variance[0]+data.pca.explained_variance[1])).toFixed(2)+
+        '% phương sai của mẫu train; '+data.pca.components+' PC giải thích '+
+        (100*data.pca.explained_variance.reduce((a,b)=>a+b,0)).toFixed(2)+'%.';
+      get('deepNeighbors').textContent='Tìm láng giềng gần nhất trên '+data.neighbors.samples+
+        ' ảnh train lấy từ mẫu PCA. Khoảng cách RMSE trên pixel [0,1]; nhỏ hơn nghĩa là giống hơn theo pixel.';
+      function card(pixels,caption){
+        const item=document.createElement('div');item.className='mean';
+        const canvas=document.createElement('canvas');canvas.width=canvas.height=28;
+        const ctx=canvas.getContext('2d'),image=ctx.createImageData(28,28);
+        pixels.forEach((v,i)=>{image.data[i*4]=image.data[i*4+1]=image.data[i*4+2]=v;image.data[i*4+3]=255;});
+        ctx.putImageData(image,0,0);
+        const text=document.createElement('p');text.textContent=caption;item.append(canvas,text);return item;
+      }
+      const reasons={'darkest':'Tối nhất','brightest':'Sáng nhất','lowest contrast':'Tương phản thấp'};
+      function update(){
+        const split=get('deepSplit').value,label=get('deepLabel').value,s=data.splits[split];
+        if(label==='all'){
+          get('deepFeatureTable').innerHTML=table(['Đặc trưng','Min','P1','Q1','Median','Q3','P99','Max'],
+            features.map((name,i)=>[name,...s.quantiles.map(row=>row[i].toFixed(3))]));
+        }else{
+          const c=Number(label);
+          get('deepFeatureTable').innerHTML=table(['Trung bình nhãn '+names[c],'Train','Validation','Val − Train'],
+            features.map((name,i)=>{const a=data.splits.train.classes[c].mean[i],b=data.splits.validation.classes[c].mean[i];
+              return[name,a.toFixed(3),b.toFixed(3),(b-a).toFixed(3)];}));
+        }
+        const examples=data.examples.filter(x=>x.split===split&&(label==='all'||x.label===Number(label)));
+        get('deepExamples').replaceChildren(...examples.map(x=>card(x.pixels,
+          reasons[x.reason]+' · ảnh train gốc #'+x.index+' · '+names[x.label]+
+          ' · sáng '+x.features[0].toFixed(1)+' · tương phản '+x.features[1].toFixed(1))));
+        if(!examples.length)get('deepExamples').textContent='Không có ảnh của nhãn này trong danh sách cực trị đã lấy.';
+        get('deepExamples').dataset.count=examples.length;
+      }
+      data.near_pairs.forEach(pair=>{
+        const group=document.createElement('div');
+        const caption=document.createElement('p');caption.textContent='RMSE '+pair.rmse.toFixed(4)+
+          (pair.labels[0]===pair.labels[1]?' · cùng nhãn':' · khác nhãn');group.append(caption);
+        pair.indices.forEach((index,i)=>group.append(card(pair.pixels[i],'Train #'+index+' · '+names[pair.labels[i]])));
+        get('deepPairs').append(group);
+      });
+      get('deepSplit').onchange=update;get('deepLabel').onchange=update;update();
+    }
+    showDeepEda().catch(error=>{
+      document.getElementById('deepStatus').textContent='Chưa hiển thị được EDA sâu: '+error.message;
+      document.getElementById('deepSplit').disabled=true;document.getElementById('deepLabel').disabled=true;
+    });
+    </script>
+  </body>
+</html>
