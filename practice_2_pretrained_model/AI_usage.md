@@ -134,3 +134,12 @@
 - Người dùng yêu cầu dừng và commit/push trạng thái hiện tại lên origin nhánh Thái.
 - Kiểm tra không còn train/evaluate đang chạy; lan_1 CPU chưa hoàn tất, chưa có kết quả GPU chính thức.
 - Ghi tiến độ bàn giao, kiểm tra cú pháp/tài liệu và phạm vi Git; kết quả upload báo sau thao tác.
+
+## Bỏ atlas, dùng pixel/canvas như Practice 1
+
+- User xác nhận bỏ eda_images, không xuất 60.000 PNG; yêu cầu kiểm tra và push lại Thái.
+- EDA xuất 6 RGB gzip HWC uint8; viewer giải nén/vẽ canvas, hỗ trợ HTTP hoặc chọn file cục bộ.
+- Kiểm tra đủ 60.000 pixel/nhãn và hashes qua; Edge kiểm tra canvas/chunk boundaries,
+  filter/phân trang/preview, local-file không mạng và mobile width 390 qua.
+- Xác minh đúng đường dẫn rồi xóa riêng 236 atlas PNG; giữ archive/batches CIFAR gốc.
+- Git chỉ mở ngoại lệ cho data/CIFAR10_web/*.rgb.gz, không upload archive/batches/env.

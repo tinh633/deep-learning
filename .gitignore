@@ -1,6 +1,13 @@
 # Downloaded datasets: recreate from each project's preparation script.
 **/data/
 
+# Browser RGB streams for Practice 2; keep original archives/pickle batches ignored.
+!practice_2_pretrained_model/data/
+practice_2_pretrained_model/data/*
+!practice_2_pretrained_model/data/CIFAR10_web/
+practice_2_pretrained_model/data/CIFAR10_web/*
+!practice_2_pretrained_model/data/CIFAR10_web/*.rgb.gz
+
 # Python caches and local virtual environments.
 __pycache__/
 *.py[cod]

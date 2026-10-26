@@ -1,5 +1,12 @@
 # Current Project Progress
 
+- Latest viewer change: user approved replacing atlases with binary pixels/canvas like Practice 1,
+  removing redundant PNGs and pushing to origin Thái. EDA exports six deterministic RGB gzip files
+  under data/CIFAR10_web; only these data artifacts are unignored. HTML supports HTTP/local files.
+  All 60k pixels/labels/hashes verified; real Edge canvas bytes/chunk boundaries/filter/pagination/
+  preview/offline-file path/mobile checks passed. Removed exactly generated 236-atlas directory;
+  original CIFAR archives/batches retained/ignored. No training, no history rewrite.
+
 - Session handoff 2026-10-27: user requested stop work and commit/push current files to
   origin Thái (https://github.com/tinh633/deep-learning.git). No train/evaluate processes
   remain running. lan_1 is the interrupted CPU attempt; log marks it incomplete, not a result.
