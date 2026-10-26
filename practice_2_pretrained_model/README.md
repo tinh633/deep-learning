@@ -117,15 +117,15 @@ Giao diện theo mẫu Practice 1: header xanh đậm, teal, menu ngang, thẻ t
 1. Đợi CIFAR-10 tải và kiểm tra checksum xong.
 2. Từ gốc workspace chạy `python practice_2_pretrained_model/src/1_eda.py`.
 3. Mở `visualization/eda.html` qua Live Server để đọc `outputs/eda.json` tự động.
-   Hoặc mở HTML trực tiếp rồi chọn file `outputs/eda.json` bằng nút chọn file.
+   Hoặc mở HTML trực tiếp, chọn `outputs/eda.json` và 6 file `.rgb.gz` trong `data/CIFAR10_web/`.
 
 - Một trang [eda.html](visualization/eda.html) chứa bộ lọc split/lớp, toàn bộ ảnh có ID,
   bảng phân bố lớp, histogram RGB, preprocessing và nhóm ảnh trùng SHA-256.
 - Gallery đủ 60.000 ảnh: lọc từng/tất cả split, lớp, tìm ID hoặc khoảng ID (100-200),
   sắp xếp, 50/100/200 ảnh mỗi trang, nhảy trang và bấm ảnh để xem lớn pixel/mượt.
-- `1_eda.py` xuất 236 atlas PNG lossless trong `visualization/eda_images/` (~130 MB).
-  Giữ thư mục này cạnh HTML; chỉ tải atlas của ảnh đang xem, không cần phục vụ dataset gốc.
-- JSON lưu chỉ số/nhãn cho toàn bộ gallery; 360 thumbnail mẫu cũ chỉ là artifact phụ.
+- `1_eda.py` xuất 6 file `data/CIFAR10_web/*.rgb.gz`; HTML giải nén RGB và vẽ canvas như Practice 1.
+- Không dùng atlas hoặc PNG riêng. Chỉ pixel phục vụ viewer được đưa lên Git; archive/batches gốc vẫn ignore.
+- JSON lưu ID/nhãn và SHA-256 từng chunk; train/validation dùng chung nguồn train, không nhân đôi pixel.
 - Stats RGB chỉ tính train; test chỉ kiểm tra cấu trúc/ảnh trùng, không dùng tuning.
 - Đã kiểm tra dữ liệu giả và dữ liệu thật; Edge headless qua HTTP đọc JSON thật và render
   bảng, gallery, histogram thành công. Chưa tự động hóa thao tác Live Server IDE.
@@ -133,13 +133,13 @@ Giao diện theo mẫu Practice 1: header xanh đậm, teal, menu ngang, thẻ t
 ## Kết quả EDA thật
 
 - Train/validation/test: 45.000/5.000/10.000; mỗi lớp tương ứng 4.500/500/1.000 ảnh.
-- Split phủ đủ train chính thức, không giao ID; 360 thumbnail/nhãn khớp ảnh gốc.
+- Split phủ đủ train chính thức, không giao ID; 60.000 ảnh RGB/nhãn khớp dữ liệu gốc.
 - Không có nhóm trùng pixel RGB chính xác trong 60.000 ảnh; chưa khảo sát near-duplicate.
 - RGB train mean: 0,491137 / 0,482111 / 0,446449; std: 0,246869 / 0,243430 / 0,261603.
 - Đây là thống kê mô tả; preprocessing vẫn dùng ImageNet theo kế hoạch pretrained.
 - Kiểm tra độc lập mean/std từ histogram khớp; batch cả ba split là 64×3×224×224, hữu hạn.
 - Phiên đã bàn giao: GPU/pretrained A/worker 2 đã smoke test; tiếp theo chạy lượt GPU chính thức khi người dùng sẵn sàng.
-- Đã đối chiếu pixel/nhãn của toàn bộ 60.000 ảnh atlas với dataset gốc và kiểm tra filter,
+- Đã đối chiếu 6 chunk RGB đủ 60.000 ảnh với dataset gốc, kiểm tra canvas/filter,
   ID/khoảng ID, trang cuối, preview trong Edge. Đã xem screenshot desktop/mobile.
 
 ## Model đã triển khai

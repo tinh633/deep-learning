@@ -209,8 +209,6 @@
     .photo {
       width: 100%;
       aspect-ratio: 1;
-      background-size: 1600% 1600%;
-      background-repeat: no-repeat;
       border-radius: 4px;
       image-rendering: pixelated;
     }
@@ -418,7 +416,8 @@
           id="file"
           type="file"
           accept=".json,application/json" /></label
-      ><span id="status" role="status">Đang đọc báo cáo…</span>
+      ><label>Pixel RGB khi mở trực tiếp<input id="pixels" type="file" accept=".gz" multiple /></label>
+      <span id="status" role="status">Đang đọc báo cáo…</span>
     </div>
     <div id="content" hidden>
       <div id="cards" class="cards"></div>
@@ -562,11 +561,11 @@
     <p id="previewMeta" class="muted"></p>
     <div class="previewgrid">
       <figure>
-        <div id="pixel" class="photo"></div>
+        <canvas id="pixel" class="photo" width="32" height="32"></canvas>
         <figcaption>Phóng lớn pixel gốc 32 × 32</figcaption>
       </figure>
       <figure>
-        <div id="smooth" class="photo"></div>
+        <canvas id="smooth" class="photo" width="32" height="32"></canvas>
         <figcaption>Hiển thị mượt để đối chiếu</figcaption>
       </figure>
     </div>
@@ -603,18 +602,56 @@
       f.append(i, c);
       return f;
     }
-    function sprite(node, item) {
-      const g = report.splits[item.split].gallery,
-        t = item.position % g.tiles_per_sheet;
-      node.style.backgroundImage = `url("${g.sheets[Math.floor(item.position / g.tiles_per_sheet)]}")`;
-      node.style.backgroundPosition = `${((t % g.columns) / (g.columns - 1)) * 100}% ${(Math.floor(t / g.columns) / (g.columns - 1)) * 100}%`;
+    const pixelCache = new Map(), localPixels = new Map();
+    async function readPixels(chunk) {
+      if (!pixelCache.has(chunk.file)) {
+        const pending = (async () => {
+          const local = localPixels.get(chunk.file.split('/').pop());
+          let stream;
+          if (local) stream = local.stream();
+          else {
+            const response = await fetch(chunk.file);
+            if (!response.ok) throw Error('Không đọc được pixel RGB: HTTP ' + response.status);
+            stream = response.body;
+          }
+          const buffer = await new Response(stream.pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();
+          if (buffer.byteLength !== chunk.count * 3072) throw Error('Kích thước RGB không đúng');
+          return new Uint8Array(buffer);
+        })();
+        pixelCache.set(chunk.file, pending);
+        pending.catch(() => pixelCache.delete(chunk.file));
+      }
+      return pixelCache.get(chunk.file);
+    }
+    async function drawPhoto(canvas, item) {
+      const source = report.splits[item.split].gallery.source;
+      const chunk = report.pixel_sources[source].find(x => item.id >= x.start && item.id < x.start + x.count);
+      const key = source + ':' + item.id;
+      canvas.dataset.image = key;
+      try {
+        const pixels = await readPixels(chunk);
+        if (canvas.dataset.image !== key) return;
+        canvas.width = canvas.height = 32;
+        const context = canvas.getContext('2d'), image = context.createImageData(32, 32);
+        const offset = (item.id - chunk.start) * 3072;
+        for (let i = 0; i < 1024; i++) {
+          image.data[i * 4] = pixels[offset + i * 3];
+          image.data[i * 4 + 1] = pixels[offset + i * 3 + 1];
+          image.data[i * 4 + 2] = pixels[offset + i * 3 + 2];
+          image.data[i * 4 + 3] = 255;
+        }
+        context.putImageData(image, 0, 0);
+        canvas.dataset.loaded = key;
+      } catch (error) {
+        el('status').textContent = error.message + '. Mở bằng Live Server hoặc chọn các file .rgb.gz bên dưới.';
+      }
     }
     function preview(item) {
       el("previewTitle").textContent = report.classes[item.label];
       el("previewMeta").textContent =
         `${item.split} · ID ${item.id} · RGB 32 × 32 · uint8`;
-      sprite(el("pixel"), item);
-      sprite(el("smooth"), item);
+      drawPhoto(el("pixel"), item);
+      drawPhoto(el("smooth"), item);
       el("preview").showModal();
     }
     function drawDistribution() {
@@ -702,7 +739,7 @@
       el("gallery").replaceChildren(
         ...filtered.slice(start, start + size).map((item) => {
           const b = document.createElement("button"),
-            p = document.createElement("div"),
+            p = document.createElement("canvas"),
             name = document.createElement("b"),
             meta = document.createElement("small");
           b.className = "tile";
@@ -711,7 +748,7 @@
             `${item.split} ID ${item.id} ${report.classes[item.label]}`,
           );
           p.className = "photo";
-          sprite(p, item);
+          drawPhoto(p, item);
           name.textContent = report.classes[item.label];
           meta.textContent = `${item.split} · #${item.id}`;
           b.append(p, name, meta);
@@ -799,7 +836,7 @@
         !data.classes ||
         !data.splits ||
         !data.train_rgb ||
-        Object.values(data.splits).some((s) => !s.gallery)
+        !data.pixel_sources || Object.values(data.splits).some((s) => !s.gallery?.source)
       )
         throw Error("Báo cáo chưa có gallery đầy đủ, hãy chạy lại 1_eda.py");
       report = data;
@@ -903,7 +940,7 @@
       el("content").hidden = true;
       el("status").textContent =
         error.message +
-        ". Chạy src/1_eda.py, rồi mở qua Live Server hoặc chọn outputs/eda.json. Giữ thư mục eda_images cạnh HTML.";
+        ". Chạy src/1_eda.py, rồi mở qua Live Server; nếu mở trực tiếp hãy chọn eda.json và các file .rgb.gz trong data/CIFAR10_web.";
     }
     ["split", "label", "order", "size"].forEach((id) =>
       el(id).addEventListener("change", filter),
@@ -938,6 +975,15 @@
           render(JSON.parse(await e.target.files[0].text()));
       } catch (error) {
         fail(error);
+      }
+    };
+    el("pixels").onchange = (event) => {
+      localPixels.clear();
+      pixelCache.clear();
+      for (const file of event.target.files) localPixels.set(file.name, file);
+      if (report) {
+        paint();
+        el('status').textContent = 'Đã chọn ' + localPixels.size + ' file pixel RGB.';
       }
     };
     fetch("../outputs/eda.json")

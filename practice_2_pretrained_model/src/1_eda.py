@@ -1,4 +1,5 @@
 import base64
+import gzip
 import hashlib
 import io
 import json
@@ -9,7 +10,7 @@ import numpy as np
 from PIL import Image
 from torchvision import transforms
 
-from config import DATA, IMAGENET_MEAN, IMAGENET_STD, OUTPUT_FOLDER, PROJECT_FOLDER
+from config import DATA, DATA_FOLDER, IMAGENET_MEAN, IMAGENET_STD, OUTPUT_FOLDER
 from data import load_datasets, load_split
 
 
@@ -26,11 +27,22 @@ splits = dict(train=(original, train_ids), validation=(original, val_ids),
               test=(test, list(range(len(test)))))
 report = dict(created=datetime.now(timezone.utc).isoformat(), seed=DATA['seed'],
               classes=original.classes, splits={}, duplicates=[],
-              source='CIFAR-10 official Python batches',
-              sample_policy='12 images/class/split, sampled without replacement using seed 42')
+              source='CIFAR-10 official Python batches', pixel_sources={})
 hash_groups = defaultdict(list)
-image_folder = PROJECT_FOLDER / 'visualization' / 'eda_images'
-image_folder.mkdir(parents=True, exist_ok=True)
+pixel_folder = DATA_FOLDER / 'CIFAR10_web'
+pixel_folder.mkdir(parents=True, exist_ok=True)
+# Browser-readable RGB bytes, not PNG atlases or Python pickle batches.
+for source_name, dataset in (('train', original), ('test', test)):
+    chunks = []
+    for start in range(0, len(dataset), 10000):
+        pixels = dataset.data[start:start + 10000].tobytes()
+        filename = f'{source_name}_{start // 10000}.rgb.gz'
+        with (pixel_folder / filename).open('wb') as output:
+            with gzip.GzipFile(filename='', mode='wb', fileobj=output, mtime=0) as compressed:
+                compressed.write(pixels)
+        chunks.append(dict(file=f'../data/CIFAR10_web/{filename}', start=start,
+                           count=len(pixels) // 3072, sha256=hashlib.sha256(pixels).hexdigest()))
+    report['pixel_sources'][source_name] = chunks
 rgb_sum = np.zeros(3, dtype=np.float64)
 rgb_squared_sum = np.zeros(3, dtype=np.float64)
 pixel_count = 0
@@ -39,8 +51,6 @@ histogram = np.zeros((3, 256), dtype=np.int64)
 for split_name, (dataset, ids) in splits.items():
     labels = np.asarray(dataset.targets)
     ids = np.asarray(ids)
-    samples = []
-    rng = np.random.default_rng(DATA['seed'])
     minimum, maximum = 255, 0
     for start in range(0, len(ids), 1000):
         batch_ids = ids[start:start + 1000]
@@ -57,30 +67,14 @@ for split_name, (dataset, ids) in splits.items():
         for index, image in zip(batch_ids, batch):
             digest = hashlib.sha256(image.tobytes()).hexdigest()
             hash_groups[digest].append(dict(split=split_name, id=int(index), label=int(labels[index])))
-    for label in range(len(original.classes)):
-        candidates = ids[labels[ids] == label]
-        chosen = rng.choice(candidates, size=min(12, len(candidates)), replace=False)
-        for index in chosen:
-            samples.append(dict(id=int(index), label=label,
-                                image=image_url(Image.fromarray(dataset.data[index]))))
     report['splits'][split_name] = dict(
         count=len(ids), counts=np.bincount(labels[ids], minlength=10).tolist(),
         shape=list(dataset.data.shape[1:]), dtype=str(dataset.data.dtype),
-        pixel_range=[minimum, maximum], samples=samples)
-    # Lossless atlases let the browser browse all images without 60,000 tiny files.
+        pixel_range=[minimum, maximum])
     gallery_ids = np.sort(ids)
-    sheets = []
-    for start in range(0, len(gallery_ids), 256):
-        sheet = Image.new('RGB', (512, 512))
-        for tile, index in enumerate(gallery_ids[start:start + 256]):
-            sheet.paste(Image.fromarray(dataset.data[index]),
-                        ((tile % 16) * 32, (tile // 16) * 32))
-        filename = f'{split_name}_{start // 256:03d}.png'
-        sheet.save(image_folder / filename)
-        sheets.append('eda_images/' + filename)
     report['splits'][split_name]['gallery'] = dict(
-        ids=gallery_ids.tolist(), labels=labels[gallery_ids].tolist(), sheets=sheets,
-        tiles_per_sheet=256, columns=16, tile_size=32)
+        ids=gallery_ids.tolist(), labels=labels[gallery_ids].tolist(),
+        source='test' if split_name == 'test' else 'train')
     print(f'{split_name}: {len(ids)} images; class counts={report["splits"][split_name]["counts"]}')
 
 mean = rgb_sum / pixel_count
