@@ -56,3 +56,10 @@ The user repeatedly requested short direct code, explicit forward operations and
 Current requirements and running instructions are in README.md and the five docs files.
 
 - Source upload result: c5dc80b successfully pushed to origin/Thai. Only src included; source status clean and local/remote commit hashes match. Other working changes remain uncommitted locally.
+
+## 2026-10-26 — Đồng bộ Git theo yêu cầu người dùng
+
+- Người dùng cho phép commit/push toàn bộ thay đổi để cập nhật Practice 1 và chuẩn bị Practice 2.
+- Codex kiểm tra diff notebook: dùng lại build_loaders trực tiếp, scalar metrics; output CPU tới epoch 17/50.
+- Cập nhật progress đúng trạng thái; giữ nội dung notebook và src.ipynb của người dùng.
+- Chỉ kiểm tra cấu trúc notebook/cú pháp và tài liệu; không chạy lại train hoặc tuyên bố CNN hoàn tất.

@@ -1,6 +1,6 @@
 # Bàn giao tiến độ — FashionMNIST: MLP và CNN
 
-Cập nhật: 2026-10-18. Tài liệu này ghi yêu cầu đã thống nhất để người tiếp theo triển khai từng phần.
+Cập nhật: 2026-10-26. Tài liệu này ghi yêu cầu đã thống nhất để người tiếp theo triển khai từng phần.
 Đọc AGENTS.md ở gốc workspace, docs_for_agent và kiểm tra file/Git thực tế trước khi sửa.
 Lần bàn giao này chỉ viết kế hoạch/tiến độ; không train, không đổi source và không chốt CNN.
 
@@ -57,8 +57,10 @@ Run 12 có val accuracy tốt nhất trong MLP hiện có; không nhầm “base
 - CNN outputs riêng tại outputs/cnn_runs/lan_N; không lẫn vào MLP outputs/runs/lan_N.
 - CNN lần 1 mới có log tới epoch 17/50, best epoch 16 val 92,85%, loss 0,197239.
   Chưa có dòng Finished, chưa đủ cơ sở gọi là baseline CNN đã chốt hoặc kết quả cuối.
-- Notebook đã thêm num_workers=2 nhưng kiểm tra worker Windows gặp lỗi tài nguyên;
-  chưa chứng minh nhanh hơn. Dùng num_workers=0 làm phương án an toàn khi kiểm tra lại.
+- Notebook hiện dùng trực tiếp `build_loaders`, đã bỏ wrapper worker/pinned memory và
+  chuyển về cộng metrics bằng scalar. Output lưu trong notebook báo CPU, đến epoch 17/50.
+- Ngày 2026-10-26: người dùng yêu cầu commit/push toàn bộ thay đổi hiện có; giữ notebook
+  đúng trạng thái hiện tại, chưa chạy lại train hoặc xác nhận kết quả CNN hoàn tất.
 
 ## 4. Việc tiếp theo — thực hiện tuần tự
 
