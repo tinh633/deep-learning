@@ -115,10 +115,10 @@ This file transparently records actual collaboration with AI agents:
 
 Record only actions and contributions that actually occurred. If long, archive detailed logs in linked Markdown files under `docs/`.
 
-## docs_for_agent/progress.md
+## Progress and session handoff
 
-- Serves as a cross-session project handoff, not just a checklist.
-- Track current phase, task states, last session, blockers, changed files, test evidence, and next steps.
-- Update after significant milestones and before ending a session.
-- Archive older sessions when the file approaches 150 lines.
-- Distinguish implemented, validated, user-approved, and committed states.
+- Each practice owns `<practice>/progress.md` for its phase, task states, blockers, changed files, test evidence, Git status and next steps.
+- `docs_for_agent/` holds shared working rules; its progress.md is only a short index linking to practice progress files.
+- Read the active practice's progress at session start; update it after milestones and before ending the session.
+- Distinguish implemented, validated, user-approved and committed states; verify actual files/Git before repeating old status.
+- Keep each file within 150 lines; archive older sessions within the corresponding practice when needed.
