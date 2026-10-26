@@ -33,6 +33,7 @@
 - Each Markdown file must contain at most 150 lines; split and cross-link if needed.
 - Document script roles in the project workflow documents. For small projects, group related scripts by step instead of requiring one Markdown file per script when the user requests fewer files.
 - Number runnable Python scripts when requested (1_preparedata, 2_eda, ...); write their task flow directly without main/entry guards when requested. Keep shared importable data/metrics modules free of task side effects; do not import runnable scripts. Keep model, configuration and logging separate when requested.
+- On Windows with DataLoader workers above zero, protect executable train/evaluate code with a main guard to prevent child-process re-execution; keep the loops direct and visible.
 - Keep comments focused on non-obvious logic; use clear names and small modules.
 - Do not create placeholder files or unnecessary folders.
 - Keep `src/` for project Python (.py) files only; place HTML, UI assets and visualization checks in `visualization/`.

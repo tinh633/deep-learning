@@ -1,0 +1,114 @@
+{
+  "settings": {
+    "model_name": "resnet18",
+    "experiment": "A",
+    "model_config": {
+      "head": "H1",
+      "fine_tune": false,
+      "lr": 0.001,
+      "batch_size": 64
+    },
+    "pretrained": true,
+    "train": {
+      "seed": 42,
+      "epochs": 20,
+      "weight_decay": 0.0
+    },
+    "data": {
+      "seed": 42,
+      "val_size": 5000,
+      "image_size": 224,
+      "batch_size": 64,
+      "num_workers": 2,
+      "pin_memory": false
+    },
+    "split_file": "D:\\newtask\\DL\\practice_2_pretrained_model\\outputs\\cifar10_split.json",
+    "split_sha256": "688e7031a0cbfbab2c89f5d316f1ad7010c6c290e41584820930ebe110e7a8fb",
+    "source": "torchvision.datasets.CIFAR10",
+    "input_shape": [
+      3,
+      224,
+      224
+    ]
+  },
+  "environment": {
+    "os": "Windows-11-10.0.26200-SP0",
+    "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+    "cpu": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+    "cpu_physical_cores": 12,
+    "cpu_logical_cores": 16,
+    "ram_bytes": 16890978304,
+    "torch": "2.14.1+cpu",
+    "torchvision": "0.29.1+cpu",
+    "cuda_build": null,
+    "cudnn": null,
+    "device": "cpu",
+    "gpu": [],
+    "precision": "float32; AMP disabled",
+    "deterministic_algorithms": false,
+    "cudnn_benchmark": false,
+    "cudnn_deterministic": true,
+    "cublas_workspace_config": "unset"
+  },
+  "parameters": {
+    "total": 11181642,
+    "trainable": 5130,
+    "frozen": 11176512,
+    "trainable_names": [
+      "head.weight",
+      "head.bias"
+    ]
+  },
+  "data": {
+    "train": {
+      "size": 45000,
+      "batches": 704,
+      "batch_size": 64,
+      "num_workers": 2,
+      "pin_memory": false,
+      "sampler": "RandomSampler",
+      "transform": "Compose(\n    Resize(size=(224, 224), interpolation=bilinear, max_size=None, antialias=True)\n    RandomHorizontalFlip(p=0.5)\n    ToTensor()\n    Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225))\n)"
+    },
+    "validation": {
+      "size": 5000,
+      "batches": 79,
+      "batch_size": 64,
+      "num_workers": 2,
+      "pin_memory": false,
+      "sampler": "SequentialSampler",
+      "transform": "Compose(\n    Resize(size=(224, 224), interpolation=bilinear, max_size=None, antialias=True)\n    ToTensor()\n    Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225))\n)"
+    }
+  },
+  "weights": "ResNet18_Weights.IMAGENET1K_V1",
+  "feature_size": 512,
+  "optimizer": {
+    "name": "Adam",
+    "groups": [
+      {
+        "lr": 0.001,
+        "betas": [
+          0.9,
+          0.999
+        ],
+        "eps": 1e-08,
+        "weight_decay": 0.0,
+        "amsgrad": false,
+        "maximize": false,
+        "foreach": null,
+        "capturable": false,
+        "differentiable": false,
+        "fused": null,
+        "decoupled_weight_decay": false,
+        "parameter_count": 5130
+      }
+    ]
+  },
+  "loss": {
+    "name": "CrossEntropyLoss",
+    "reduction": "mean",
+    "ignore_index": -100,
+    "label_smoothing": 0.0
+  },
+  "scheduler": null,
+  "batchnorm": "running statistics frozen; affine trained only in opened blocks"
+}

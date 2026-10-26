@@ -8,7 +8,21 @@
 - Khảo sát thay classification head, freeze/unfreeze, learning rate và batch size.
 - Theo dõi bằng TensorBoard; đánh giá và phân tích kết quả theo cùng quy trình.
 - Kế hoạch ban đầu: **18 lượt train chính thức = 3 model × 6 cấu hình**.
-- Đây là thiết kế để người dùng review trước khi viết code; chưa có kết quả train.
+- Kế hoạch đã được chấp nhận; data/EDA/model đã triển khai, chưa có kết quả train.
+- [README](README.md) ghi tổ chức 7 file Python, EDA, logging và trình tự triển khai.
+
+### Lý do chọn ba model
+
+| Model | Điểm nổi bật | Vai trò trong lab |
+|---|---|---|
+| VGG16 | Các lớp convolution 3×3 xếp tuần tự theo block | Đối chứng kiến trúc tuần tự, dễ quan sát backbone/head |
+| ResNet18 | Residual connection cộng đầu vào với đầu ra nhánh biến đổi | Khảo sát đặc trưng pretrained của kiến trúc residual |
+| DenseNet121 | Nối các feature từ lớp trước trong cùng dense block | Khảo sát tái sử dụng feature qua dense connections |
+
+Ba model đại diện ba cách kết nối khác nhau, đủ để so sánh có trọng tâm trong 18 lượt;
+VGG và DenseNet cũng bám các ví dụ trong đề. Không mặc định model nào chính xác hơn.
+Kết quả còn phụ thuộc pretraining, độ sâu, số tham số và head; không quy mọi chênh lệch
+cho riêng kiểu kết nối. VGG16 đã thay head nên không so nguyên bản ba model ImageNet.
 
 ## 2. Dữ liệu và điều kiện chung
 
@@ -37,9 +51,9 @@ ghi tổng tham số, tham số được train và kích thước feature đầu
 - Chuẩn hóa đầu ra backbone bằng adaptive average pooling 1×1 rồi flatten.
 - Head H1: `Linear(D, 10)`, với D là số kênh feature của từng backbone.
 - Head H2: `Linear(D, 256) → ReLU → Dropout(0.2) → Linear(256, 10)`.
-- Cùng quy tắc head cho cả ba model; D khác nhau nên số tham số không bằng nhau.
-- VGG16 dùng head gọn thay toàn bộ head gốc; ghi rõ đây là model đã điều chỉnh.
 - Giữ nguyên cấu trúc và trọng số pretrained bên trong feature extractor.
+
+Giải thích lựa chọn và giới hạn so sánh H1/H2 tại [Model_QA.md](Model_QA.md).
 
 ## 4. Freeze và unfreeze
 
@@ -48,7 +62,6 @@ ghi tổng tham số, tham số được train và kích thước feature đầu
 - **Fine-tune:** chỉ mở nhóm cuối trong bảng; các nhóm trước vẫn đóng băng.
 - Khi fine-tune, BatchNorm giữ running statistics ở chế độ eval; affine parameters
   chỉ được train nếu thuộc nhóm đã mở. Head luôn ở chế độ train trong bước train.
-- Dùng cùng quy tắc cho ba model; kiểm tra danh sách tham số được cập nhật.
 - Các nhóm cuối có quy mô khác nhau: đây là so sánh theo cùng chính sách mở block,
   không phải so sánh với số tham số được train bằng nhau.
 
@@ -73,7 +86,6 @@ Mỗi hàng bên dưới phải chạy đủ **VGG16, ResNet18 và DenseNet121**
 - Nếu OOM/lỗi số học, ghi trạng thái thất bại; review điều chỉnh chung trước khi chạy lại.
 - Batch 32 tạo nhiều optimizer step hơn batch 64; ghi số step và thời gian thực tế.
 - Ma trận có kiểm soát từng thay đổi, chưa khảo sát đầy đủ mọi tương tác tham số.
-- Không tự thêm model, head hoặc lượt tuning ngoài 18 lượt khi chưa thống nhất.
 
 ## 6. TensorBoard, lưu kết quả và đánh giá
 
@@ -81,10 +93,9 @@ Mỗi hàng bên dưới phải chạy đủ **VGG16, ResNet18 và DenseNet121**
 - Lưu model/weights identifier, split, seed, preprocessing, head, freeze policy,
   optimizer, LR, batch, epoch, tham số train, phiên bản thư viện và thiết bị.
 - TensorBoard ghi theo epoch: train/val loss, accuracy, LR và thời gian epoch.
-- Console/file log ghi một dòng mỗi epoch; không cần log từng batch.
+- Console/file log ghi một dòng mỗi epoch, không log từng batch hoặc mở rộng ngân sách chưa duyệt.
 - Lưu best checkpoint theo validation accuracy; hòa thì chọn validation loss thấp hơn,
   nếu vẫn hòa giữ epoch sớm hơn. Lưu epoch và metrics tương ứng.
-- So sánh ba model trong từng hàng A–F; so sánh các cặp ở bảng trong cùng model.
 - Báo cáo validation accuracy/loss, best epoch, thời gian train, tham số train và
   bộ nhớ GPU đỉnh nếu đo được trên cùng thiết bị.
 - Chọn cấu hình tốt nhất của mỗi model bằng validation và khóa cả ba trước khi test.
@@ -112,11 +123,13 @@ Mỗi hàng bên dưới phải chạy đủ **VGG16, ResNet18 và DenseNet121**
 Không đặt accuracy bắt buộc vì đề bài không quy định. Hoàn thành khi có đủ bằng chứng
 trong bảng, báo cáo đúng giới hạn thí nghiệm và không trộn validation với test.
 
-## 8. Bước tiếp theo và ghi nhận AI
+## 8. Tiến độ và bước tiếp theo
 
-- Người dùng review kế hoạch, đặc biệt ngân sách 18 lượt × 20 epoch, trước triển khai.
-- Sau khi thống nhất: chuẩn bị dữ liệu, khám phá model, kiểm tra forward/gradient và
-  smoke test riêng; smoke test không được tính là kết quả của 18 lượt chính thức.
-- Chưa triển khai source, tải dataset/weights, chạy train hoặc đánh giá trong bước này.
-- Ngày 2026-10-26: người dùng chọn CIFAR-10 và ba model đã đề xuất, yêu cầu thí nghiệm
-  đồng bộ, ngân sách rõ ràng, bám checklist; Codex soạn kế hoạch và kiểm tra tài liệu.
+- Data/EDA thật đã kiểm tra; `model.py` có PretrainedCNN, `config.py` đủ A–F, mặc định ResNet18/A.
+- 12 tổ hợp weights ngẫu nhiên qua forward/gradient/update; frozen weights/BN không đổi, eval đúng.
+- H1 tổng tham số VGG16/ResNet18/DenseNet121: 14.719.818 / 11.181.642 / 6.964.106;
+  fine-tune trainable tương ứng: 7.084.554 / 8.398.858 / 2.170.378.
+- Train/evaluate đã smoke test riêng; các kiểm tra tạm không thuộc 18 lượt chính thức.
+- Logger/train đã triển khai, smoke test tạm A/E trên CIFAR-10 nhỏ đã qua; xem [Training.md](Training.md).
+- ResNet18 pretrained A đã qua GPU smoke trong `.venv` với worker 2; chưa có lượt GPU chính thức hoàn tất.
+- Làm từng phần có review; ghi nhận đóng góp/kiểm tra tại [AI_usage.md](AI_usage.md).
