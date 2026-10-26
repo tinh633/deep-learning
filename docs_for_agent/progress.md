@@ -1,5 +1,9 @@
 # Project Progress
 
+- 2026-10-26 upload: user accepted Practice 2 plan and explicitly authorized committing/pushing all current changes on Thái. Include current Practice 1 CNN notebook, handoff/AI notes, root src.ipynb and both Practice 2 Markdown files. Current CNN uses direct build_loaders and scalar metrics; stored output is CPU through epoch 17/50, not completed training. Practice 2 workflow_description_gen_ai_practice_2.md shown in IDE does not exist on disk. No new training; Git upload outcome to be reported after push.
+
+- 2026-10-26: Practice 2 planning only. User selected CIFAR-10 and VGG16/ResNet18/DenseNet121; requested one startup Markdown with matched experiments and checklist coverage. Added practice_2_pretrained_model/Experiment_Plan.md: proposed 18 runs (6 shared configurations × 3 models), fixed split, head/freeze/LR/batch controls, TensorBoard and validation-first selection. Includes AI usage record. Await plan review before implementation; no training, dataset download, commit or push. Existing notebook changes and src.ipynb left untouched.
+
 - User authorized committing/pushing handoff documentation to branch Thái with a message asking successors to read progress for remaining work and reread the whole project. Scope: project progress.md, README link, agent progress and AI usage; no main merge or force push.
 
 - Latest handoff: user clarified MLP runs 1–9 exploratory, run 10 is the agreed baseline, 11 wider, 12 keeps width and adds depth. Created project progress.md with verified status, staged CNN baseline/tuning plan, best-MLP vs best-CNN comparison, rigorous paired-image error analysis and readable HTML axes/ticks. Existing cnn_basic.ipynb must be extended, not duplicated. CNN run1 remains incomplete at epoch17. This turn documents only; no training or UI/source changes, no commit/push. See ../practice_1_fashionmnist/progress.md for authoritative next-work scope.
