@@ -6,6 +6,7 @@
 
 - For this user's introductory PyTorch projects, follow the Chapter 3 PDF example style: direct library calls, explicitly declared layers, one forward operation per line and a visible epoch/batch loop. Avoid replacing those steps with generic factories or dynamic builders.
 - Adapt slide examples to the actual task: keep validation separate from test, use dataset-appropriate preprocessing, and retain the user's epoch-only logging preference. A reference document is not authorization to add its optional tools or change project scope.
+- Lecturer screenshots establish coding style only; detailed settings follow the agreed experiment. Keep train/evaluate sequential and readable, with full environment/model/config logging delegated to the logger rather than extra training abstractions. Include EDA as a reviewed workflow step before training.
 - Avoid helper modules that only wrap a single call; put one-use preparation/EDA logic in its numbered script. Keep helpers only for shared responsibilities and keep logs separate from the training loop.
 
 - For basic model examples, write one operation per forward line instead of nested layer calls; show each hidden layer, activation and dropout explicitly.
@@ -14,6 +15,7 @@
 
 - When requested, use model classes with separate __init__/forward, central Python config and a small logging helper to keep training loops readable.
 - Follow the user's requested numbered workflow scripts and direct top-level execution without main/__main__ guards. Shared modules retain importable names and have no task side effects; never import an executable script to reuse helpers.
+- Exception for Windows DataLoader num_workers > 0: guard executable code with `if __name__ == '__main__':` to prevent spawn recursion, keeping loops directly inside the guard without adding a Trainer framework.
 - Consolidate experiments into one configurable pipeline; preserve old run artifacts and load their actual architectures explicitly.
 
 - Distinguish the best validation checkpoint within a run from final model selection across experiments. Do not declare a final model or create a final-model report unless the user confirms that decision.
