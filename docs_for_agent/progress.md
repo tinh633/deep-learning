@@ -1,118 +1,15 @@
-# Current Project Progress
+# Chỉ mục tiến độ các practice
 
-- Latest viewer change: user approved replacing atlases with binary pixels/canvas like Practice 1,
-  removing redundant PNGs and pushing to origin Thái. EDA exports six deterministic RGB gzip files
-  under data/CIFAR10_web; only these data artifacts are unignored. HTML supports HTTP/local files.
-  All 60k pixels/labels/hashes verified; real Edge canvas bytes/chunk boundaries/filter/pagination/
-  preview/offline-file path/mobile checks passed. Removed exactly generated 236-atlas directory;
-  original CIFAR archives/batches retained/ignored. No training, no history rewrite.
+`docs_for_agent/` lưu cách làm việc chung. Tiến độ, kết quả kiểm tra và bàn giao
+chi tiết được ghi trong `progress.md` của từng practice.
 
-- Session handoff 2026-10-27: user requested stop work and commit/push current files to
-  origin Thái (https://github.com/tinh633/deep-learning.git). No train/evaluate processes
-  remain running. lan_1 is the interrupted CPU attempt; log marks it incomplete, not a result.
-  GPU setup and small smoke test are verified; official 20-epoch GPU training not started.
-  Next session: read AGENTS/rules, reconcile Git/artifacts, then let user start/review ResNet18 A
-  using .venv. Keep RUN_TEST=False and all existing datasets/runs. Commit/push outcome in chat.
+- [Practice 1 — FashionMNIST](../practice_1_fashionmnist/progress.md).
+- [Practice 2 — Pretrained CNN](../practice_2_pretrained_model/progress.md).
+- [Lịch sử workspace](progress_old.md): ghi chép cũ, không phải trạng thái hiện tại.
 
-- Current GPU state (2026-10-27): .venv now torch 2.11.0+cu126 / torchvision 0.26.0+cu126,
-  CUDA True, RTX 3050 Laptop 4GB. pip check passed. Requirements pins CUDA versions.
-  User CPU run was stopped by verified PID for DLL replacement; artifacts retained and log
-  annotated incomplete. .venv-gpu remains unused after user stopped separate-env setup.
-  User chose num_workers=2; main guards added to train/evaluate for Windows (rules updated).
-  Initial worker smoke failed OpenBLAS allocation; default BLAS/OMP/MKL threads limited to 1.
-  Re-test passed actual guarded training script: pretrained ResNet18 A, batch64, worker2,
-  CIFAR128/64, 1 epoch, checkpoint/TensorBoard, peak CUDA allocation 488.8 MiB.
-  Temporary script/artifacts removed. No official GPU run started; user can run with .venv.
-  Training/README/plan/AI usage synchronized; no commit/push. Earlier CPU-only notes are history.
+## Quy tắc sử dụng
 
-- 2026-10-27: implemented 3_evaluate.py; config EVAL_RUN and RUN_TEST=False. Loads checkpoint
-  settings/state without ImageNet download, validates split hash, deterministic train eval.
-  Per-split JSON includes all predictions/IDs, class metrics/confusion; top wrong RGB PNGs
-  under visualization/runs. logger now shares get_environment and supports evaluate.log.
-  Real 8/4 CIFAR random-weight smoke train/eval passed checkpoint/sklearn/ID/zero-support
-  checks; test sentinel untouched, enabled-test branch tested on 5 synthetic images only.
-  Split mismatch rejected without replacing old reports. Temporary artifacts removed.
-  Next after review: verify pretrained weights/device before first official run. No official
-  train/test, CUDA verification, commit or push; Training/README/plan/AI usage synchronized.
-
-- Latest: implemented logger.py/2_train.py and requirements.txt; added PRETRAINED config.
-  Installed TensorBoard 2.21 in workspace .venv (torch 2.14.1+cpu, torchvision 0.29.1+cpu).
-  A/E temporary smoke on real 8/4 CIFAR subset, random weights, 2 epochs passed;
-  best checkpoint reload metrics and TensorBoard six scalars per epoch matched.
-  Setup failure/interrupt logging passed. No official runs, CUDA or pretrained verification.
-  Training.md records commands/artifacts/limits; review training before official runs.
-- Additional checks passed: H2 one epoch and loss options logging; interrupt mid-epoch 2
-  preserves epoch 1 history/checkpoint and records Interrupted. All artifacts temporary.
-
-- User requested separate evolving model/parameter Q&A. Created Practice 2 Model_QA.md,
-  moved H1/H2 explanations out of experiment plan; linked plan/README and updated AI usage.
-  Documentation only, no model/config change or commit/push.
-
-- Documentation update: added H1/H2 rationale, head parameter counts and A/D attribution
-  limitations to Experiment_Plan.md per user request; condensed stale progress section.
-
-- Current model milestone: implemented src/model.py PretrainedCNN and config A–F.
-  Explicit torchvision VGG16/ResNet18/DenseNet121, H1/H2, freeze/final-block fine-tune,
-  BatchNorm eval enforced on train(). All 12 model/head/policy synthetic forward/backward/
-  SGD-update checks passed, including frozen weights/BN unchanged and eval mode.
-  Checks used random weights, not ImageNet download or CIFAR training. API defaults pretrained.
-  Next after review: logger + direct train/validation/checkpoint/TensorBoard and smoke test.
-  README/plan/AI usage synchronized. No train/evaluate implementation, commit or push.
-
-- Latest visual direction: user requested Practice 1 explorer.html as reference. Replaced
-  sidebar layout with matching dark teal header, horizontal nav, centered content/cards,
-  teal controls and bounded scrolling gallery. Preserved all 60k browsing features.
-  Real Edge desktop/mobile interactions/overflow and screenshot inspection passed;
-  reverified all 60k sorted atlas pixel/label mappings. No training/commit/push.
-
-- Latest UI: redesigned EDA page; browses all 60k originals via 236 lossless PNG atlases
-  (~130 MB) generated by 1_eda.py. Split/class/ID/range filters, sorting, pagination and zoom.
-  Full atlas pixel/label comparison passed; Edge interactions and screenshots checked.
-  Gallery indices sorted by original ID to minimize atlas requests on default pages.
-  No model/train changes or commit/push. README/AI usage synchronized.
-
-- Current milestone: actual CIFAR-10 EDA completed successfully. Saved split and eda.json.
-  45k/5k/10k balanced; split IDs disjoint; zero exact pixel duplicate groups across 60k.
-  All 360 thumbnails/labels match raw data, histogram-derived RGB stats match, all loaders
-  return finite 64x3x224x224 batches. Edge headless HTTP real-report rendering passed.
-  README/AI usage updated. Await EDA review before model/head/gradient implementation.
-  No model training/evaluation or commit/push. Incomplete EDA/download notes below are history.
-
-- Download finished: resumed session 89494 exited 0. torchvision verified archive/extracted
-  CIFAR-10 and loaded 50,000 official train plus 10,000 test images successfully.
-  Dataset is ready; actual split/EDA generation remains next. Earlier incomplete entries below
-  are history, not current download status.
-
-- Download recovery: original torchvision session 80404 exited with DNS getaddrinfo failure
-  at 119767040 bytes (70.2%). Confirmed official source responds again. Resumed via curl
-  --continue-at - with retries in session 89494; HTTP resume accepted and bytes increasing.
-  That command will verify/extract via torchvision after curl succeeds. Not yet complete.
-
-- Latest: implemented Practice 2 src/1_eda.py and visualization/eda.html per user request.
-  EDA exports outputs/eda.json (stats, sample thumbnails, exact duplicates, preprocessing).
-  Viewer supports HTTP fetch and local JSON picker. Synthetic end-to-end counts/histogram/
-  samples/duplicates passed; Node syntax and real Edge headless DOM missing/render checks passed.
-  Actual CIFAR download still incomplete; no real EDA results or training. Next verify download,
-  run real EDA and review; no commit/push. README/AI usage synchronized.
-
-- Latest implementation: user requested all 7 Python files and data loading code.
-  Created src/config.py and data.py; five other files have status docstrings only.
-  Synthetic split checks and syntax passed. CIFAR-10 download is running in exec session
-  80404 (network-approved); slow official source, not yet integrity/real-loader verified.
-  Next: check download status, validate real loaders/split, then EDA review. No train/commit/push.
-
-- Updated 2026-10-26. Earlier handoff/history: [progress_old.md](progress_old.md).
-- Latest: user requested folder structure. Created Practice 2 src/, data/, outputs/ and
-  visualization/; updated README/AI usage. Empty folders are local only; no placeholders.
-- Practice 2: user accepted CIFAR-10, VGG16/ResNet18/DenseNet121 and the 18-run plan.
-- Latest request: document the subsequent discussions and why these three models were selected.
-- Updated practice_2_pretrained_model/Experiment_Plan.md; added README.md and AI_usage.md.
-- README specifies 7 planned Python files, direct train/evaluate loops, comprehensive logger,
-  EDA before training, split integrity, duplicate checks and review gates.
-- Lecturer screenshots illustrate style only; actual experiment details follow the agreed plan.
-- Updated coding_rules.md to retain these working preferences.
-- This task changes documentation only. No source, dataset/weights download, EDA or training.
-- Validation: Markdown line limits, local links and diff whitespace checks; no model tests.
-- Next: review these documents, then implement data preparation/EDA as the first reviewable part.
-- New edits are not committed/pushed. Earlier upload on Thái finished at 6fe148b;
-  remote renamed prior progress.md to progress_old.md, preserved as history.
+- Đầu phiên đọc AGENTS.md, quy tắc chung và progress.md của practice đang làm.
+- Đối chiếu file, artifact và Git thực tế trước khi dựa vào tiến độ đã ghi.
+- Cập nhật tiến độ riêng sau mốc quan trọng và trước khi kết thúc phiên.
+- Giữ chỉ mục này ngắn; không ghi lịch sử train hoặc triển khai chi tiết tại đây.

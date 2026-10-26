@@ -6,7 +6,7 @@
 - VGG16, ResNet18, DenseNet121; 6 cấu hình chung/model, tổng 18 lượt × 20 epoch.
 - Dùng `.py` làm luồng chính; chưa cần notebook hoặc hai bản triển khai song song.
 - Đã triển khai đủ 7 file Python và chạy EDA thật; train/evaluate mới được smoke test.
-- [Training.md](Training.md) ghi train/evaluate, checkpoint, TensorBoard và giới hạn kiểm tra; chưa train chính thức.
+- [progress.md](progress.md) ghi tiến độ/bàn giao; [Training.md](Training.md) ghi cách train/evaluate và giới hạn kiểm tra.
 
 ## Tổ chức source dự kiến — 7 file
 

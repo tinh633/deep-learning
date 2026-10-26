@@ -143,3 +143,8 @@
   filter/phân trang/preview, local-file không mạng và mobile width 390 qua.
 - Xác minh đúng đường dẫn rồi xóa riêng 236 atlas PNG; giữ archive/batches CIFAR gốc.
 - Git chỉ mở ngoại lệ cho data/CIFAR10_web/*.rgb.gz, không upload archive/batches/env.
+- Theo yêu cầu cleanup sau đó, xác minh và xóa riêng `.venv-gpu` tạo dở;
+  giữ nguyên `.venv` CUDA đang dùng, không sửa dataset hoặc source.
+- Theo yêu cầu mới, tạo progress.md riêng cho Practice 2, chuyển docs_for_agent/progress.md
+  thành chỉ mục; đồng bộ quy tắc chung và README, không thay source hoặc chạy train.
+- Viết lại progress.md: tóm tắt việc đã làm và flow còn lại; người dùng đã yêu cầu commit/push toàn bộ thay đổi, gồm xóa artifact CPU lan_1 cũ.
