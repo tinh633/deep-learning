@@ -124,7 +124,7 @@ Giao diện theo mẫu Practice 1: header xanh đậm, teal, menu ngang, thẻ t
 - Gallery đủ 60.000 ảnh: lọc từng/tất cả split, lớp, tìm ID hoặc khoảng ID (100-200),
   sắp xếp, 50/100/200 ảnh mỗi trang, nhảy trang và bấm ảnh để xem lớn pixel/mượt.
 - `1_eda.py` xuất 6 file `data/CIFAR10_web/*.rgb.gz`; HTML giải nén RGB và vẽ canvas như Practice 1.
-- Không dùng atlas hoặc PNG riêng. Chỉ pixel phục vụ viewer được đưa lên Git; archive/batches gốc vẫn ignore.
+- Toàn bộ data (kể cả RGB cho viewer) không đưa lên Git; tải CIFAR-10 rồi chạy 1_eda.py để tạo lại trên máy.
 - JSON lưu ID/nhãn và SHA-256 từng chunk; train/validation dùng chung nguồn train, không nhân đôi pixel.
 - Stats RGB chỉ tính train; test chỉ kiểm tra cấu trúc/ảnh trùng, không dùng tuning.
 - Đã kiểm tra dữ liệu giả và dữ liệu thật; Edge headless qua HTTP đọc JSON thật và render

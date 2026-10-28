@@ -41,6 +41,7 @@
 - After each change, synchronize relevant project documents and progress; record reusable user preferences in `docs_for_agent/` and this entry point when appropriate.
 - Work on one reviewable part at a time and wait for user feedback before the next part when step-by-step review is requested.
 - Do not delete important data, add paid services, change major architecture, or expand scope without approval.
+- Do not commit dataset files, including derived pixel data for HTML viewers; ignore data directories and regenerate locally. Keep local data when removing it from Git tracking.
 
 ## Reference Rules
 
