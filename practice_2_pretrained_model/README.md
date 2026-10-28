@@ -21,7 +21,7 @@ practice_2_pretrained_model/
 ├── README.md
 ├── Experiment_Plan.md
 ├── Practice_2_Pretrained_CNN_Requirements.md
-└── AI_usage.md
+└── AI_Usage_Step.md  # Theo giai đoạn, tổng hợp vào docs/AI_Usage_Full.md
 ```
 
 Đã tạo và triển khai đủ 7 file Python; kết quả kiểm tra được ghi trong tài liệu workflow.
@@ -96,7 +96,7 @@ không tự lấy config hiện tại thay cấu hình checkpoint, không tự c
 Mỗi phần cập nhật tài liệu/progress và bằng chứng kiểm tra; chờ phản hồi trước phần tiếp theo.
 ## Phần dữ liệu đã triển khai
 
-- `config.py`: đường dẫn tính từ file, seed 42, validation 5.000, batch 64, worker 2; `.venv` đã bật CUDA.
+- `config.py`: seed 42, validation 5.000, batch 64, worker 0 sau lỗi shared memory Windows; `.venv` dùng CUDA.
 - `load_datasets(download=True)`: tải train/test bằng torchvision, giữ ảnh gốc cho EDA.
 - `load_split(targets)`: lưu `outputs/cifar10_split.json`, kiểm tra coverage, class ratio
   và cấu hình khi dùng lại; không tự ghi đè split cũ không tương thích.
@@ -138,7 +138,7 @@ Giao diện theo mẫu Practice 1: header xanh đậm, teal, menu ngang, thẻ t
 - RGB train mean: 0,491137 / 0,482111 / 0,446449; std: 0,246869 / 0,243430 / 0,261603.
 - Đây là thống kê mô tả; preprocessing vẫn dùng ImageNet theo kế hoạch pretrained.
 - Kiểm tra độc lập mean/std từ histogram khớp; batch cả ba split là 64×3×224×224, hữu hạn.
-- Phiên đã bàn giao: GPU/pretrained A/worker 2 đã smoke test; tiếp theo chạy lượt GPU chính thức khi người dùng sẵn sàng.
+- ResNet18 A lan_1 đủ 20 epoch, best epoch 18 val 88,54%; VGG16 A đang train GPU tại lan_2, worker 0.
 - Đã đối chiếu 6 chunk RGB đủ 60.000 ảnh với dataset gốc, kiểm tra canvas/filter,
   ID/khoảng ID, trang cuối, preview trong Edge. Đã xem screenshot desktop/mobile.
 

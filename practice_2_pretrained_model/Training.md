@@ -3,7 +3,7 @@
 ## Trạng thái
 
 - `logger.py`, `2_train.py` và `3_evaluate.py` đã triển khai và smoke test.
-- Các kiểm tra của agent là smoke test; lượt CPU người dùng đã dừng để chuyển GPU, chưa hoàn tất.
+- ResNet18 A chính thức đã hoàn tất 20 epoch; best epoch 18 val 88,54%, loss 0,337606, chưa test.
 - `.venv` hiện dùng Python 3.14, torch 2.11.0+cu126, torchvision 0.26.0+cu126,
   TensorBoard 2.21.0; ResNet18 pretrained đã qua smoke test CUDA và worker 2.
 - Đã cài TensorBoard vào `.venv`; các dependency nằm trong `requirements.txt`.
@@ -111,7 +111,8 @@ Mở địa chỉ localhost do TensorBoard in ra. Không có dashboard kết qu�
 ```
 
 - `torch.cuda.is_available()` là True; GPU NVIDIA GeForce RTX 3050 Laptop GPU.
-- `num_workers=2`, `pin_memory=False` theo config người dùng. Không đổi LR/head/batch của A.
+- Hiện `num_workers=0`, `pin_memory=False`: lượt worker 2 từng lỗi Windows shared memory 1455.
+  Lượt ResNet18 A chạy lại đã hoàn tất, đổi tên lan_2 → lan_1; lượt lỗi đã xóa theo yêu cầu người dùng.
 - Train/evaluate có main guard để worker Windows không chạy lặp toàn bộ script.
 - Giới hạn BLAS/OMP/MKL về 1 thread nếu biến môi trường chưa được đặt; logger lưu giá trị thực tế.
   Bổ sung sau lỗi OpenBLAS thiếu bộ nhớ ở lần kiểm tra worker đầu tiên.
@@ -121,3 +122,15 @@ Mở địa chỉ localhost do TensorBoard in ra. Không có dashboard kết qu�
 - `pip check` không có dependency lỗi. Script và artifact smoke tạm đã xóa.
 - Chưa chạy lượt GPU 20 epoch; khởi chạy mới sẽ tạo lan_N mới, không resume lượt CPU cũ.
 - Trong VS Code chọn interpreter `D:\newtask\DL\.venv\Scripts\python.exe`.
+
+## Resume after interruption
+
+- Set RESUME_RUN='lan_2' in src/config.py to resume last.pt in the same run; None creates a new run.
+- Keep model, experiment, train/data settings and split unchanged; the script checks them before resuming.
+- last.pt stores model, Adam, epoch, metrics and Python/NumPy/PyTorch/CUDA/DataLoader RNG at each completed epoch using temporary-file replacement.
+- best.pt retains the strongest validation checkpoint. An interrupted epoch is repeated from its beginning.
+- Legacy best-only checkpoints reset Adam/random states with a warning; exact continuation is unavailable for those files.
+- Current lan_2 has a full epoch-1 checkpoint and resumes at epoch 2. lan_1 has only best epoch 18; its epoch-20 weights cannot be recreated.
+- Text logs and TensorBoard record metrics once per epoch; no live.jsonl/progress.json or per-batch scalar updates.
+- visualization/eda.html embeds localhost:6006 directly; start TensorBoard using the command shown on the page, or open it in a separate tab.
+- Checkpoints, datasets and event files stay local; cloning the repository alone does not restore a trained model.

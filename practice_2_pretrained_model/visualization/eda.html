@@ -393,6 +393,11 @@
       }
     }
   </style>
+  <style>
+    #training iframe { width: 100%; height: 780px; border: 1px solid var(--line); border-radius: 8px; margin-top: 18px; background: white; }
+    #training pre { overflow-x: auto; padding: 14px; border-radius: 8px; background: var(--paper); font-size: 12px; }
+    @media (max-width: 600px) { #training iframe { height: 650px; } }
+  </style>
   <header>
     <small>PRACTICE 02 · PRETRAINED CNN</small>
     <h1>CIFAR-10 · Data Explorer</h1>
@@ -404,12 +409,22 @@
   </header>
   <main>
     <nav aria-label="Các phần EDA">
+      <a href="#training">Theo dõi train</a>
       <a href="#overview">Tổng quan</a>
       <a href="#explorer">Duyệt toàn bộ ảnh</a>
       <a href="#statistics">Thống kê RGB</a>
       <a href="#preprocessing">Preprocessing</a>
       <a href="#quality">Kiểm tra dữ liệu</a>
     </nav>
+    <section id="training">
+      <div class="heading"><div><h2>Theo dõi huấn luyện · TensorBoard</h2><p class="muted">Loss, accuracy và learning rate từ log TensorBoard của các lượt train.</p></div></div>
+      <p>Khởi động TensorBoard trong terminal tại thư mục gốc dự án:</p>
+      <pre>.\.venv\Scripts\python.exe -m tensorboard.main --logdir practice_2_pretrained_model/outputs/runs --host 127.0.0.1 --port 6006 --reload_interval 2</pre>
+      <p class="muted">Chọn run ở thanh bên TensorBoard. Bật tự làm mới trong Settings để cập nhật biểu đồ. Có thể mở tab riêng để theo dõi độc lập với EDA.</p>
+      <button type="button" onclick="document.getElementById('tensorboardFrame').src = 'http://localhost:6006/#scalars'">Tải lại TensorBoard</button>
+      <a href="http://localhost:6006/#scalars" target="_blank" rel="noopener">Mở TensorBoard ở tab riêng</a>
+      <iframe id="tensorboardFrame" src="http://localhost:6006/#scalars" title="TensorBoard theo dõi huấn luyện"></iframe>
+    </section>
     <div class="load">
       <label
         >Nạp báo cáo nếu mở HTML trực tiếp<input
@@ -550,8 +565,7 @@
         <p id="metadata" class="muted"></p>
       </section>
       <footer>
-        Practice 2 · Dataset Explorer. Chưa có kết quả huấn luyện hoặc dự đoán
-        trong trang này.
+        Practice 2 · EDA và theo dõi huấn luyện. Test chỉ đánh giá sau khi khóa cấu hình.
       </footer>
     </div>
   </main>

@@ -4,11 +4,11 @@
 
 - Bám [yêu cầu và checklist Practice 2](Practice_2_Pretrained_CNN_Requirements.md).
 - Dùng duy nhất CIFAR-10, bài toán phân loại ảnh RGB thành 10 lớp.
-- So sánh VGG16, ResNet18 và DenseNet121 với trọng số pretrained ImageNet.
+- So sánh VGG16, ResNet18 và DenseNet121 với weights pretrained **ImageNet-1K (1.000 lớp), IMAGENET1K_V1**.
 - Khảo sát thay classification head, freeze/unfreeze, learning rate và batch size.
 - Theo dõi bằng TensorBoard; đánh giá và phân tích kết quả theo cùng quy trình.
 - Kế hoạch ban đầu: **18 lượt train chính thức = 3 model × 6 cấu hình**.
-- Kế hoạch đã được chấp nhận; data/EDA/model đã triển khai, chưa có kết quả train.
+- Kế hoạch đã được chấp nhận; ResNet18 A đã hoàn tất, tiến độ cập nhật tại [progress.md](progress.md).
 - [README](README.md) ghi tổ chức 7 file Python, EDA, logging và trình tự triển khai.
 
 ### Lý do chọn ba model
@@ -22,7 +22,7 @@
 Ba model đại diện ba cách kết nối khác nhau, đủ để so sánh có trọng tâm trong 18 lượt;
 VGG và DenseNet cũng bám các ví dụ trong đề. Không mặc định model nào chính xác hơn.
 Kết quả còn phụ thuộc pretraining, độ sâu, số tham số và head; không quy mọi chênh lệch
-cho riêng kiểu kết nối. VGG16 đã thay head nên không so nguyên bản ba model ImageNet.
+cho riêng kiểu kết nối. VGG16 đã thay head nên không so nguyên bản ba model ImageNet-1K.
 
 ## 2. Dữ liệu và điều kiện chung
 
@@ -42,11 +42,17 @@ cho riêng kiểu kết nối. VGG16 đã thay head nên không so nguyên bản
 Trước khi train, in kiến trúc gốc, xác định feature extractor và classification head;
 ghi tổng tham số, tham số được train và kích thước feature đầu vào head.
 
-| Model | Feature extractor giữ lại | Head gốc được thay | Nhóm cuối mở khi fine-tune |
-|---|---|---|---|
-| VGG16 | `features` | Toàn bộ `classifier` | Các conv của block 5 |
-| ResNet18 | Backbone trước `fc` | `fc` | `layer4` |
-| DenseNet121 | `features` | `classifier` | `denseblock4` và `norm5` |
+| Model | Weights pretrained ImageNet-1K | Feature extractor giữ lại | Head gốc được thay | Nhóm cuối mở khi fine-tune |
+|---|---|---|---|---|
+| VGG16 | `VGG16_Weights.IMAGENET1K_V1` | `features` | Toàn bộ `classifier` | Các conv của block 5 |
+| ResNet18 | `ResNet18_Weights.IMAGENET1K_V1` | Backbone trước `fc` | `fc` | `layer4` |
+| DenseNet121 | `DenseNet121_Weights.IMAGENET1K_V1` | `features` | `classifier` | `denseblock4` và `norm5` |
+
+- Nguồn weights: torchvision/PyTorch chính thức, không phải weights ImageNet-21K/22K.
+- Trong torchvision đang dùng, `DEFAULT` của cả ba model trỏ đến đúng `IMAGENET1K_V1` ở bảng.
+- **1K** là 1.000 lớp của tập pretraining; **V1** là phiên bản weights, không phải phiên bản kiến trúc.
+- Thay head ImageNet 1.000 lớp bằng head CIFAR-10 10 lớp; mỗi lượt khởi tạo từ cùng weights đã định.
+- Tài liệu nguồn: [VGG16](https://docs.pytorch.org/vision/stable/models/generated/torchvision.models.vgg16.html), [ResNet18](https://docs.pytorch.org/vision/stable/models/generated/torchvision.models.resnet18.html), [DenseNet121](https://docs.pytorch.org/vision/stable/models/generated/torchvision.models.densenet121.html).
 
 - Chuẩn hóa đầu ra backbone bằng adaptive average pooling 1×1 rồi flatten.
 - Head H1: `Linear(D, 10)`, với D là số kênh feature của từng backbone.
@@ -111,7 +117,7 @@ Mỗi hàng bên dưới phải chạy đủ **VGG16, ResNet18 và DenseNet121**
 |---|---|
 | 1. Dataset | CIFAR-10; split cố định, thống kê và kiểm tra dữ liệu |
 | 2. Models | VGG16, ResNet18, DenseNet121; bảng khám phá kiến trúc |
-| 3. Load pretrained | Trọng số ImageNet, lưu định danh weights thực tế |
+| 3. Load pretrained | ImageNet-1K (1.000 lớp), IMAGENET1K_V1 theo bảng model; lưu định danh thực tế |
 | 4. Transfer learning | A–D: backbone freeze, head mới H1/H2 |
 | 5. Fine-tuning | E–F: mở nhóm cuối, kiểm tra gradient/tham số cập nhật |
 | 6. Hyperparameters | A/B và E/F đổi LR; A/C đổi batch, đồng bộ cả ba model |
@@ -125,11 +131,11 @@ trong bảng, báo cáo đúng giới hạn thí nghiệm và không trộn vali
 
 ## 8. Tiến độ và bước tiếp theo
 
-- Data/EDA thật đã kiểm tra; `model.py` có PretrainedCNN, `config.py` đủ A–F, mặc định ResNet18/A.
+- Data/EDA thật đã kiểm tra; `model.py` có PretrainedCNN, `config.py` đủ A–F; xem progress để biết lượt hiện tại.
 - 12 tổ hợp weights ngẫu nhiên qua forward/gradient/update; frozen weights/BN không đổi, eval đúng.
 - H1 tổng tham số VGG16/ResNet18/DenseNet121: 14.719.818 / 11.181.642 / 6.964.106;
   fine-tune trainable tương ứng: 7.084.554 / 8.398.858 / 2.170.378.
 - Train/evaluate đã smoke test riêng; các kiểm tra tạm không thuộc 18 lượt chính thức.
 - Logger/train đã triển khai, smoke test tạm A/E trên CIFAR-10 nhỏ đã qua; xem [Training.md](Training.md).
-- ResNet18 pretrained A đã qua GPU smoke trong `.venv` với worker 2; chưa có lượt GPU chính thức hoàn tất.
-- Làm từng phần có review; ghi nhận đóng góp/kiểm tra tại [AI_usage.md](AI_usage.md).
+- ResNet18 A đã hoàn tất 20 epoch trên GPU, best epoch 18 val 88,54%; kết quả test chưa đo.
+- Ghi từng giai đoạn ở [AI_Usage_Step.md](AI_Usage_Step.md), rồi tổng hợp vào [AI_Usage_Full.md](docs/AI_Usage_Full.md).

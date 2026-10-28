@@ -15,3 +15,9 @@ venv/
 !.env.example
 *.tmp
 *.part
+
+# Local training weights, TensorBoard events and dataset-derived error images.
+*.pt
+*.pth
+**/events.out.tfevents.*
+practice_2_pretrained_model/visualization/runs/

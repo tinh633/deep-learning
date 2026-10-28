@@ -1,0 +1,11 @@
+{
+  "liveServer.settings.ignoreFiles": [
+    ".vscode/**",
+    "**/.git/**",
+    "**/.venv/**",
+    "**/__pycache__/**",
+    "**/outputs/**",
+    "**/data/**",
+    "**/events.out.tfevents.*"
+  ]
+}
