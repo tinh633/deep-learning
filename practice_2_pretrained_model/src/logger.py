@@ -9,6 +9,12 @@ import torch
 import torchvision
 
 
+def save_json(path, value):
+    temporary = path.with_suffix(path.suffix + '.tmp')
+    temporary.write_text(json.dumps(value, indent=2, allow_nan=False), encoding='utf-8')
+    temporary.replace(path)
+
+
 def create_run(runs_folder):
     runs_folder.mkdir(parents=True, exist_ok=True)
     number = 1
@@ -16,6 +22,9 @@ def create_run(runs_folder):
         folder = runs_folder / f'lan_{number}'
         try:
             folder.mkdir()
+            names = [p.name for p in runs_folder.iterdir()
+                     if p.is_dir() and p.name.startswith('lan_') and p.name[4:].isdigit()]
+            save_json(runs_folder / 'index.json', sorted(names, key=lambda n: int(n[4:])))
             return folder
         except FileExistsError:
             number += 1
@@ -82,7 +91,7 @@ def log_setup(logger, writer, folder, model, criterion, optimizer, loaders, sett
                               ignore_index=criterion.ignore_index,
                               label_smoothing=criterion.label_smoothing), scheduler=None,
                     batchnorm='running statistics frozen; affine trained only in opened blocks')
-    (folder / 'config.json').write_text(json.dumps(metadata, indent=2), encoding='utf-8')
+    save_json(folder / 'config.json', metadata)
     logger.info('Environment: %s', environment)
     logger.info('Configuration: %s', settings)
     logger.info('Data: %s', data)

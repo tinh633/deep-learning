@@ -114,6 +114,8 @@ This file transparently records actual collaboration with AI agents:
 - AI collaboration log: task, agent actions, affected files, user contributions, verification, and open issues.
 
 Record only actions and contributions that actually occurred. If long, archive detailed logs in linked Markdown files under `docs/`.
+- Respect each practice's chosen names: Practice 2 uses root `AI_Usage_Step.md` for stage logs and `docs/AI_Usage_Full.md` for full history.
+- At stage boundaries/handoff, merge verified Step entries into Full and mark the transfer; preserve history and the 150-line limit per file.
 
 ## Progress and session handoff
 

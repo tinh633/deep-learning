@@ -1,7 +1,11 @@
 # Tiến độ và bàn giao — Practice 2
 
-Cập nhật: 2026-10-27. **Đã chuẩn bị pipeline, EDA và GPU; chưa có lượt train chính thức hoàn tất.**
-Phiên sau bắt đầu từ mục 3, đối chiếu file/Git thực tế trước khi thực hiện.
+Cập nhật: 2026-10-28. **ResNet18 A hoàn tất tại lan_1; VGG16 A đang chạy tại lan_2 trên GPU.**
+Theo yêu cầu người dùng đã xóa lượt lỗi, đổi tên lượt ResNet18 thành công lan_2 → lan_1.
+Weights VGG16 tải xong và SHA-256 khớp; preflight GPU batch64 qua, peak khoảng 2.446 MiB.
+Pipeline cũ 66286 từng dừng do sandbox không đọc được cache; đã chạy lại với quyền đọc phù hợp.
+Session hiện tại 95990: VGG16 A bắt đầu 16:00:25, worker 0, batch 64, 20 epoch; chưa xác nhận epoch hoàn tất.
+Không khởi chạy thêm lượt trùng. Config/log lan_2 xác nhận CUDA và IMAGENET1K_V1.
 
 ## 1. Tóm tắt việc đã làm
 
@@ -15,7 +19,7 @@ Phiên sau bắt đầu từ mục 3, đối chiếu file/Git thực tế trư�
 | Train/log | Vòng lặp trực tiếp, validation mỗi epoch, log máy/config/kiến trúc, TensorBoard, best checkpoint |
 | Evaluate | Đọc config checkpoint, xác minh split hash; metrics/confusion/per-class/ID/confidence/ảnh sai |
 | GPU | `.venv` CUDA hoạt động với RTX 3050 Laptop 4 GB; worker 2 có guard Windows và giới hạn BLAS threads |
-| Tài liệu | README, kế hoạch, Training, Model_QA và AI_usage; tiến độ riêng tại file này |
+| Tài liệu | README, kế hoạch, Training, Model_QA, AI_Usage_Step/Full; tiến độ riêng tại file này |
 
 **Bằng chứng đã có:**
 
@@ -29,16 +33,23 @@ Phiên sau bắt đầu từ mục 3, đối chiếu file/Git thực tế trư�
 
 ## 2. Trạng thái cần nhớ
 
-- Config hiện tại: **ResNet18 / A / pretrained=True / H1 / freeze backbone**.
+- Config hiện tại: **VGG16 / A / pretrained=True / H1 / freeze backbone**.
 - Adam LR 0,001, weight decay 0, batch 64, 20 epoch; ảnh 224×224, seed 42.
-- `num_workers=2`, `pin_memory=False`; giữ `RUN_TEST=False`.
+- `num_workers=0`, `pin_memory=False`; giữ `RUN_TEST=False`. GPU vẫn được dùng khi worker bằng 0.
 - `.venv`: torch 2.11.0+cu126, torchvision 0.26.0+cu126, TensorBoard 2.21.0; pip check qua.
-- `.venv-gpu` thừa đã xóa. Lượt CPU lan_1 trước đây bị dừng, không phải kết quả hoàn tất.
-- Lần kiểm tra hiện tại: outputs/runs không có thư mục run; Git đang báo xóa artifact lan_1 cũ.
-  Không tự khôi phục/xóa thêm; xác nhận trạng thái khi bắt đầu phiên tiếp theo.
-- Đã push pipeline/GPU ở `8d0e610`, chuyển atlas sang RGB/canvas ở `5c7832e`, nhánh `Thái`.
+- `.venv-gpu` thừa đã xóa. Run lỗi worker 2 đã xóa theo yêu cầu; từng lỗi shared mapping Windows 1455.
+- `lan_1` hiện là ResNet18 A thành công (trước đổi tên là lan_2), 20/20 epoch và 14.080 optimizer steps.
+- Best epoch 18: val 88,54%, loss 0,337606; đã đối chiếu history và load được checkpoint.
+- Hoàn tất lúc 14:20:32; tổng thời gian khoảng 3.437 giây. Đây chưa phải kết quả test.
+- Log cũ giữ nguyên đường dẫn lịch sử lan_2; đã thêm dòng ghi nhận đổi tên sang lan_1.
+- Đã evaluate lan_1: train 89,6533%, loss 0,295765; val 88,54%, loss 0,337606, macro-F1 0,885577.
+- Báo cáo metrics/ID/confusion và PNG lỗi đã lưu; tổng số mẫu/lỗi khớp, test chưa chạy.
+- Commit bàn giao gần nhất: `e7c2848` trên `Thái`; lượt train mới và cập nhật tiến độ chưa commit/push.
 - Người dùng đã yêu cầu commit/push toàn bộ tài liệu/cleanup sau review; đối chiếu commit mới nhất bằng Git.
 - 236 atlas PNG đã xóa; giữ 6 file RGB phục vụ HTML. Archive/Python batches và env không nằm trên Git.
+- Yêu cầu mới: không commit bất kỳ data nào, kể cả RGB viewer. Bỏ theo dõi 6 file RGB đã push,
+  giữ file trên máy, bỏ ngoại lệ Git ignore; clone mới cần tải CIFAR-10 và chạy lại EDA.
+- Đã push 4bdb86b lên Thái: không còn file data trong cây Git hiện tại; không rewrite lịch sử cũ.
 
 ## 3. Flow chưa làm — tiếp tục theo thứ tự
 
@@ -50,10 +61,10 @@ Phiên sau bắt đầu từ mục 3, đối chiếu file/Git thực tế trư�
 
 ### Bước 2 — Chạy và review baseline A
 
-- [ ] Người dùng bắt đầu ResNet18 A; kiểm tra log `device=cuda`, đúng pretrained/freeze/head/split.
-- [ ] Chạy đủ 20 epoch; xác minh log Finished, history đủ epoch và best checkpoint load được.
-- [ ] Dùng 3_evaluate.py để đánh giá train/validation, không bật test; xem loss/gap/lớp yếu/ảnh sai.
-- [ ] Review lượt đầu với người dùng; không tự chuyển sang đợt train dài.
+- [x] Theo yêu cầu người dùng đã bắt đầu ResNet18 A; log xác nhận CUDA, pretrained/freeze/head/split đúng.
+- [x] ResNet18 A đủ 20 epoch; xác minh Finished, 20 history rows và best checkpoint đọc được.
+- [x] Evaluate ResNet18 A train/validation, test tắt; đã xuất metrics/confusion/per-class/ảnh sai.
+- [x] Người dùng yêu cầu tiếp tục lượt tiếp theo; thực hiện VGG16 A theo thứ tự ba model ở cấu hình A.
 - [ ] Chạy VGG16 A và DenseNet121 A với cùng điều kiện; weights pretrained hai model này chưa kiểm tra thực tế.
 
 ### Bước 3 — Hoàn thành thí nghiệm có kiểm soát
@@ -75,13 +86,29 @@ Phiên sau bắt đầu từ mục 3, đối chiếu file/Git thực tế trư�
 - [ ] Review và khóa một checkpoint cho mỗi model bằng validation trước khi bật test.
 - [ ] Đánh giá ba checkpoint đã khóa trên test; không dùng test để chọn lại hyperparameters.
 - [ ] Hoàn thiện báo cáo so sánh, giới hạn một seed và tổng kết checklist; không áp accuracy mục tiêu tự đặt.
-- [ ] Cập nhật tiến độ/AI_usage và bàn giao; chỉ commit/push khi người dùng yêu cầu.
+- [ ] Cập nhật progress và AI_Usage_Step; cuối giai đoạn tổng hợp vào AI_Usage_Full; chỉ commit/push khi được yêu cầu.
 
 ## 4. Tài liệu để tiếp tục
 
 - [Experiment_Plan.md](Experiment_Plan.md): cấu hình A–F, kiểm soát thí nghiệm và checklist.
 - [Training.md](Training.md): lệnh train/evaluate/TensorBoard, artifact và xử lý Windows/GPU.
 - [Model_QA.md](Model_QA.md): giải thích model/head/thông số, bổ sung câu hỏi mới tại đây.
-- [AI_usage.md](AI_usage.md): lịch sử phối hợp; [README.md](README.md): cấu trúc và EDA.
+- [AI_Usage_Step.md](AI_Usage_Step.md): ghi từng giai đoạn; [AI_Usage_Full.md](docs/AI_Usage_Full.md): lịch sử tổng hợp.
+- [README.md](README.md): cấu trúc và EDA. Đã đổi tên/hợp nhất log Full/Step theo yêu cầu; không đổi source.
+- Kế hoạch đã bổ sung đúng ImageNet-1K/IMAGENET1K_V1 cho cả ba model, khớp torchvision local; không đổi weights trong code.
 
 Chưa hoàn thành bước nào thì giữ trạng thái chưa làm; chỉ cập nhật sau khi có artifact/bằng chứng.
+
+## Handoff - 2026-10-29
+
+- ResNet18 A (lan_1): completed 20 epochs; best epoch 18, validation accuracy 88.54%. No last checkpoint exists for this older run.
+- VGG16 A (lan_2): restarted from scratch at user request, then stopped after epoch 1. best.pt/last.pt verified with Adam state; next epoch is 2.
+- RESUME_RUN='lan_2'; no training restart authorized in this Git session. Local checkpoints are required to resume.
+- New checkpoints save optimizer and Python/NumPy/Torch/CUDA/DataLoader RNG; resume validates experiment, data and split settings.
+- CPU smoke checks passed for best/last saving, same-folder resume, state restoration and legacy fallback.
+- Text logs and TensorBoard now record epoch metrics only; batch tracking, live.jsonl and progress.json removed.
+- EDA HTML embeds TensorBoard directly; no training.js or custom train dashboard. Server/API previously verified; browser embedding not yet verified.
+- Live Server ignores outputs/data/events to prevent artifact changes from reloading the page; cause was inferred, not reproduced in browser.
+- Earlier temporary legacy resume/reset-Adam trial was deleted when the user requested a fresh lan_2. See AI usage records for history.
+- Git excludes datasets, weights, TensorBoard events and dataset-derived error images; local files remain available.
+- User authorized commit and push to Thai branch on 2026-10-29. Check Git history for final commit identity.
