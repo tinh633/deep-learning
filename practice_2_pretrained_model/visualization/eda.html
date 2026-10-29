@@ -1,0 +1,1011 @@
+<!doctype html>
+<html lang="vi">
+  <meta charset="utf-8" /><meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  /><title>CIFAR-10 · Dataset Explorer</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172c31;
+      --muted: #63757a;
+      --teal: #087e80;
+      --line: #dce5e4;
+      --paper: #f4f7f5;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font:
+        15px/1.6 system-ui,
+        sans-serif;
+    }
+    header {
+      background: #17383e;
+      color: white;
+      padding: 30px max(24px, calc((100vw - 1280px) / 2));
+    }
+    header small {
+      color: #8ddbd0;
+      letter-spacing: 3px;
+    }
+    header p {
+      color: #cfdfdf;
+      margin: 0;
+      max-width: 850px;
+    }
+    h1 {
+      font-size: clamp(28px, 4vw, 46px);
+      margin: 8px 0;
+    }
+    main {
+      max-width: 1328px;
+      padding: 24px;
+      margin: auto;
+    }
+    nav {
+      display: flex;
+      gap: 12px 24px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+    a {
+      color: var(--teal);
+      text-underline-offset: 4px;
+    }
+    h2 {
+      font-size: 24px;
+      margin: 0 0 8px;
+    }
+    .muted {
+      color: var(--muted);
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+      margin: 24px 0;
+    }
+    .card,
+    section {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 22px;
+    }
+    .card strong {
+      display: block;
+      font-size: 30px;
+      margin: 5px 0;
+    }
+    .card small {
+      color: var(--muted);
+      font-size: 13px;
+    }
+    section {
+      margin-top: 22px;
+      scroll-margin-top: 24px;
+    }
+    .heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    .pill {
+      background: #e7f5ef;
+      color: #17675d;
+      padding: 7px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    label {
+      font-weight: 600;
+    }
+    select,
+    input,
+    button {
+      font: inherit;
+      border: 1px solid #bdcfcd;
+      border-radius: 8px;
+      padding: 9px 12px;
+      background: white;
+      color: var(--ink);
+    }
+    button {
+      cursor: pointer;
+      background: var(--teal);
+      color: white;
+      border-color: var(--teal);
+    }
+    button:hover {
+      background: #06686a;
+    }
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    a:focus-visible {
+      outline: 3px solid #7bcfc5;
+      outline-offset: 3px;
+    }
+    button:disabled {
+      opacity: 0.4;
+      cursor: default;
+    }
+    .controls {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      align-items: end;
+      margin: 20px 0;
+    }
+    .controls label {
+      display: grid;
+      gap: 6px;
+      font-size: 13px;
+      max-width: 100%;
+    }
+    .controls input {
+      width: 190px;
+      max-width: 100%;
+    }
+    .load {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 18px;
+      padding: 16px 20px;
+      background: #eaf2ef;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+    }
+    .load label {
+      display: grid;
+      gap: 6px;
+      font-size: 12px;
+      max-width: 100%;
+    }
+    .load input {
+      max-width: 100%;
+      width: 280px;
+      font-size: 12px;
+    }
+    #status {
+      color: var(--teal);
+      font-weight: 600;
+      font-size: 13px;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(118px, 1fr));
+      gap: 10px;
+      padding: 10px;
+      margin: 20px 0;
+      max-height: 650px;
+      overflow-y: auto;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #edf2f1;
+      scrollbar-gutter: stable;
+    }
+    .tile {
+      min-width: 0;
+      padding: 9px;
+      background: white;
+      color: var(--ink);
+      border: 1px solid var(--line);
+      text-align: center;
+    }
+    .tile:hover {
+      background: #f7fcfa;
+      border-color: var(--teal);
+    }
+    .photo {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 4px;
+      image-rendering: pixelated;
+    }
+    .tile .photo {
+      width: 84px;
+      height: 84px;
+      margin: auto;
+    }
+    .tile b {
+      display: block;
+      margin-top: 6px;
+      font-size: 12px;
+      text-transform: capitalize;
+    }
+    .tile small {
+      color: var(--muted);
+      font-size: 10px;
+    }
+    .pager {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .pager input {
+      width: 80px;
+    }
+    .columns {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+    .columns > * {
+      min-width: 0;
+    }
+    .classrow {
+      display: grid;
+      grid-template-columns: 88px minmax(0, 1fr) 60px;
+      align-items: center;
+      gap: 12px;
+      margin: 12px 0;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .track {
+      height: 15px;
+      background: #e9f0ed;
+      border-radius: 4px;
+    }
+    .bar {
+      height: 100%;
+      background: #4caaa1;
+      border-radius: 4px;
+    }
+    .classrow:hover .bar {
+      background: var(--teal);
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      font-size: 13px;
+    }
+    th,
+    td {
+      padding: 11px 8px;
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+    }
+    th {
+      color: var(--muted);
+      font-size: 12px;
+    }
+    svg {
+      width: 100%;
+      height: auto;
+    }
+    .prep {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+    figure {
+      margin: 0;
+    }
+    figure img {
+      width: 100%;
+      border-radius: 8px;
+      image-rendering: pixelated;
+    }
+    figcaption {
+      margin-top: 9px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .notice {
+      background: #fff7e5;
+      color: #806323;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+    }
+    .empty {
+      grid-column: 1/-1;
+      padding: 40px;
+      text-align: center;
+      color: var(--muted);
+    }
+    .scroll {
+      overflow: auto;
+    }
+    details {
+      margin-top: 15px;
+      overflow-wrap: anywhere;
+    }
+    footer {
+      color: var(--muted);
+      font-size: 12px;
+      margin: 30px 0 10px;
+    }
+    dialog {
+      width: 95%;
+      max-width: 720px;
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: 0 20px 100px #17383e55;
+    }
+    dialog::backdrop {
+      background: #172c3199;
+    }
+    .previewgrid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+    #close {
+      float: right;
+    }
+    #smooth {
+      image-rendering: auto;
+    }
+    [hidden] {
+      display: none !important;
+    }
+    @media (max-width: 800px) {
+      .cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .columns {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .heading {
+        align-items: start;
+        flex-direction: column;
+      }
+      .prep {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    @media (max-width: 480px) {
+      main {
+        padding: 16px;
+      }
+      section {
+        padding: 16px;
+      }
+      header {
+        padding: 24px 18px;
+      }
+      .card {
+        padding: 16px;
+      }
+      .gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .pager > div {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+  <style>
+    #training iframe { width: 100%; height: 780px; border: 1px solid var(--line); border-radius: 8px; margin-top: 18px; background: white; }
+    #training pre { overflow-x: auto; padding: 14px; border-radius: 8px; background: var(--paper); font-size: 12px; }
+    @media (max-width: 600px) { #training iframe { height: 650px; } }
+  </style>
+  <header>
+    <small>PRACTICE 02 · PRETRAINED CNN</small>
+    <h1>CIFAR-10 · Data Explorer</h1>
+    <p>
+      Khám phá toàn bộ 60.000 ảnh RGB trước khi huấn luyện VGG16, ResNet18 và
+      DenseNet121. Kiểm tra phân bố lớp, dữ liệu gốc và preprocessing trong cùng
+      một trang.
+    </p>
+  </header>
+  <main>
+    <nav aria-label="Các phần EDA">
+      <a href="#training">Theo dõi train</a>
+      <a href="#overview">Tổng quan</a>
+      <a href="#explorer">Duyệt toàn bộ ảnh</a>
+      <a href="#statistics">Thống kê RGB</a>
+      <a href="#preprocessing">Preprocessing</a>
+      <a href="#quality">Kiểm tra dữ liệu</a>
+    </nav>
+    <section id="training">
+      <div class="heading"><div><h2>Theo dõi huấn luyện · TensorBoard</h2><p class="muted">Loss, accuracy và learning rate từ log TensorBoard của các lượt train.</p></div></div>
+      <p>Khởi động TensorBoard trong terminal tại thư mục gốc dự án:</p>
+      <pre>.\.venv\Scripts\python.exe -m tensorboard.main --logdir practice_2_pretrained_model/outputs/runs --host 127.0.0.1 --port 6006 --reload_interval 2</pre>
+      <p class="muted">Chọn run ở thanh bên TensorBoard. Bật tự làm mới trong Settings để cập nhật biểu đồ. Có thể mở tab riêng để theo dõi độc lập với EDA.</p>
+      <button type="button" onclick="document.getElementById('tensorboardFrame').src = 'http://localhost:6006/#scalars'">Tải lại TensorBoard</button>
+      <a href="http://localhost:6006/#scalars" target="_blank" rel="noopener">Mở TensorBoard ở tab riêng</a>
+      <iframe id="tensorboardFrame" src="http://localhost:6006/#scalars" title="TensorBoard theo dõi huấn luyện"></iframe>
+    </section>
+    <div class="load">
+      <label
+        >Nạp báo cáo nếu mở HTML trực tiếp<input
+          id="file"
+          type="file"
+          accept=".json,application/json" /></label
+      ><label>Pixel RGB khi mở trực tiếp<input id="pixels" type="file" accept=".gz" multiple /></label>
+      <span id="status" role="status">Đang đọc báo cáo…</span>
+    </div>
+    <div id="content" hidden>
+      <div id="cards" class="cards"></div>
+      <section id="overview">
+        <div class="heading">
+          <div>
+            <h2>Tổng quan & phân bố lớp</h2>
+            <span class="muted"
+              >Split cố định. Nhấn lớp để mở gallery tương ứng.</span
+            >
+          </div>
+          <span class="pill">Seed 42 · RGB 32 × 32</span>
+        </div>
+        <div class="columns">
+          <div id="summary" class="scroll"></div>
+          <div>
+            <p id="distSplit" class="muted"></p>
+            <div id="distribution"></div>
+            <p class="muted">
+              Thanh biểu diễn số ảnh từ 0 đến lớp nhiều ảnh nhất.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section id="explorer">
+        <div class="heading">
+          <div>
+            <h2>Dataset Explorer</h2>
+            <span class="muted"
+              >Toàn bộ 60.000 ảnh · PNG không mất dữ liệu · nhấn ảnh để phóng
+              lớn.</span
+            >
+          </div>
+          <span id="found" class="pill"></span>
+        </div>
+        <div class="controls">
+          <label
+            >Split<select id="split">
+              <option value="train">Train</option>
+              <option value="validation">Validation</option>
+              <option value="test">Test · kiểm tra dữ liệu</option>
+              <option value="all">Tất cả split</option>
+            </select></label
+          ><label>Lớp<select id="label"></select></label
+          ><label
+            >ID gốc<input
+              id="search"
+              type="search"
+              placeholder="VD: 42 hoặc 100-200" /></label
+          ><label
+            >Sắp xếp<select id="order">
+              <option value="id">ID tăng dần</option>
+              <option value="label">Lớp, rồi ID</option>
+            </select></label
+          ><label
+            >Ảnh / trang<select id="size">
+              <option>50</option>
+              <option selected>100</option>
+              <option>200</option>
+            </select></label
+          ><button id="reset">Đặt lại</button>
+        </div>
+        <p id="testWarning" class="notice" hidden>
+          Test chỉ để kiểm tra dữ liệu; không dùng ảnh test để điều chỉnh
+          model/preprocessing.
+        </p>
+        <p class="muted">
+          ID train/validation thuộc bộ train chính thức; ID test thuộc bộ test
+          riêng. Mỗi ảnh luôn có tên split để phân biệt.
+        </p>
+        <div id="gallery" class="gallery"></div>
+        <div class="pager">
+          <span id="range" class="muted"></span>
+          <div>
+            <button id="prev">← Trước</button> Trang
+            <input
+              id="page"
+              aria-label="Trang"
+              type="number"
+              min="1"
+              value="1"
+            />
+            <span id="pages" class="muted"></span>
+            <button id="next">Sau →</button>
+          </div>
+        </div>
+      </section>
+      <section id="statistics">
+        <h2>Màu sắc & cường độ pixel</h2>
+        <p class="muted">
+          Chỉ tính trên train. Mean/std trên [0,1], population std; histogram
+          trên pixel gốc [0,255].
+        </p>
+        <div class="columns">
+          <div id="rgb"></div>
+          <svg
+            id="hist"
+            viewBox="0 0 1000 300"
+            role="img"
+            aria-label="Histogram RGB, pixel 0 đến 255, trục dọc số pixel"
+          ></svg>
+        </div>
+        <p class="muted">
+          Đây là thống kê mô tả; model vẫn dùng chuẩn hóa ImageNet theo kế
+          hoạch.
+        </p>
+      </section>
+      <section id="preprocessing">
+        <h2>Từ ảnh gốc đến đầu vào model</h2>
+        <p id="prepInfo" class="muted"></p>
+        <div id="prep" class="prep"></div>
+        <p id="normalized" class="muted"></p>
+        <p class="notice">
+          Flip được ép bật để minh họa; lúc train xác suất 0,5. Ảnh cuối đã đảo
+          normalization để hiển thị. Resize 32 → 224 không tạo thêm chi tiết
+          ảnh.
+        </p>
+      </section>
+      <section id="quality">
+        <h2>Kiểm tra toàn vẹn dữ liệu</h2>
+        <p id="dupSummary"></p>
+        <p class="muted">
+          SHA-256 trên pixel RGB gốc, khác kiểm tra trùng ID. Không tự
+          xóa/repartition; phương pháp này không phát hiện near-duplicate.
+        </p>
+        <details>
+          <summary>Chi tiết nhóm trùng</summary>
+          <div id="duplicates" class="scroll"></div>
+        </details>
+        <p id="metadata" class="muted"></p>
+      </section>
+      <footer>
+        Practice 2 · EDA và theo dõi huấn luyện. Test chỉ đánh giá sau khi khóa cấu hình.
+      </footer>
+    </div>
+  </main>
+  <dialog id="preview">
+    <button id="close" aria-label="Đóng">✕</button>
+    <h2 id="previewTitle"></h2>
+    <p id="previewMeta" class="muted"></p>
+    <div class="previewgrid">
+      <figure>
+        <canvas id="pixel" class="photo" width="32" height="32"></canvas>
+        <figcaption>Phóng lớn pixel gốc 32 × 32</figcaption>
+      </figure>
+      <figure>
+        <canvas id="smooth" class="photo" width="32" height="32"></canvas>
+        <figcaption>Hiển thị mượt để đối chiếu</figcaption>
+      </figure>
+    </div>
+  </dialog>
+  <script>
+    "use strict";
+    let report,
+      items = [],
+      filtered = [],
+      currentPage = 1;
+    const el = (id) => document.getElementById(id),
+      fmt = (n) => Number(n).toLocaleString("vi-VN");
+    function table(headers, rows) {
+      const t = document.createElement("table"),
+        tr = t.createTHead().insertRow();
+      headers.forEach((x) => {
+        const th = document.createElement("th");
+        th.textContent = x;
+        tr.append(th);
+      });
+      rows.forEach((row) => {
+        const r = t.insertRow();
+        row.forEach((x) => (r.insertCell().textContent = x));
+      });
+      return t;
+    }
+    function picture(url, title) {
+      const f = document.createElement("figure"),
+        i = document.createElement("img"),
+        c = document.createElement("figcaption");
+      i.src = url;
+      i.alt = title;
+      c.textContent = title;
+      f.append(i, c);
+      return f;
+    }
+    const pixelCache = new Map(), localPixels = new Map();
+    async function readPixels(chunk) {
+      if (!pixelCache.has(chunk.file)) {
+        const pending = (async () => {
+          const local = localPixels.get(chunk.file.split('/').pop());
+          let stream;
+          if (local) stream = local.stream();
+          else {
+            const response = await fetch(chunk.file);
+            if (!response.ok) throw Error('Không đọc được pixel RGB: HTTP ' + response.status);
+            stream = response.body;
+          }
+          const buffer = await new Response(stream.pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();
+          if (buffer.byteLength !== chunk.count * 3072) throw Error('Kích thước RGB không đúng');
+          return new Uint8Array(buffer);
+        })();
+        pixelCache.set(chunk.file, pending);
+        pending.catch(() => pixelCache.delete(chunk.file));
+      }
+      return pixelCache.get(chunk.file);
+    }
+    async function drawPhoto(canvas, item) {
+      const source = report.splits[item.split].gallery.source;
+      const chunk = report.pixel_sources[source].find(x => item.id >= x.start && item.id < x.start + x.count);
+      const key = source + ':' + item.id;
+      canvas.dataset.image = key;
+      try {
+        const pixels = await readPixels(chunk);
+        if (canvas.dataset.image !== key) return;
+        canvas.width = canvas.height = 32;
+        const context = canvas.getContext('2d'), image = context.createImageData(32, 32);
+        const offset = (item.id - chunk.start) * 3072;
+        for (let i = 0; i < 1024; i++) {
+          image.data[i * 4] = pixels[offset + i * 3];
+          image.data[i * 4 + 1] = pixels[offset + i * 3 + 1];
+          image.data[i * 4 + 2] = pixels[offset + i * 3 + 2];
+          image.data[i * 4 + 3] = 255;
+        }
+        context.putImageData(image, 0, 0);
+        canvas.dataset.loaded = key;
+      } catch (error) {
+        el('status').textContent = error.message + '. Mở bằng Live Server hoặc chọn các file .rgb.gz bên dưới.';
+      }
+    }
+    function preview(item) {
+      el("previewTitle").textContent = report.classes[item.label];
+      el("previewMeta").textContent =
+        `${item.split} · ID ${item.id} · RGB 32 × 32 · uint8`;
+      drawPhoto(el("pixel"), item);
+      drawPhoto(el("smooth"), item);
+      el("preview").showModal();
+    }
+    function drawDistribution() {
+      const selected = el("split").value,
+        counts = report.classes.map((_, i) =>
+          Object.entries(report.splits)
+            .filter(([s]) => selected === "all" || s === selected)
+            .reduce((n, [, s]) => n + s.counts[i], 0),
+        ),
+        max = Math.max(...counts);
+      el("distSplit").textContent = "Phân bố lớp · " + selected;
+      el("distribution").replaceChildren(
+        ...counts.map((count, i) => {
+          const row = document.createElement("div");
+          row.className = "classrow";
+          row.tabIndex = 0;
+          row.role = "button";
+          row.setAttribute("aria-label", report.classes[i] + ": " + count);
+          const name = document.createElement("span"),
+            track = document.createElement("div"),
+            bar = document.createElement("div"),
+            value = document.createElement("span");
+          name.textContent = report.classes[i];
+          track.className = "track";
+          bar.className = "bar";
+          bar.style.width = (count / max) * 100 + "%";
+          value.textContent = fmt(count);
+          track.append(bar);
+          row.append(name, track, value);
+          const select = () => {
+            el("label").value = i;
+            filter();
+            el("explorer").scrollIntoView({ behavior: "smooth" });
+          };
+          row.onclick = select;
+          row.onkeydown = (e) => {
+            if (e.key === "Enter") select();
+          };
+          return row;
+        }),
+      );
+    }
+    function filter() {
+      const split = el("split").value,
+        label = el("label").value,
+        query = el("search").value.trim();
+      let low = 0,
+        high = Infinity;
+      if (query) {
+        const m = query.match(/^(\d+)(?:\s*-\s*(\d+))?$/);
+        if (!m) {
+          filtered = [];
+          currentPage = 1;
+          paint();
+          el("range").textContent =
+            "Nhập ID nguyên hoặc khoảng ID, ví dụ 100-200.";
+          return;
+        }
+        low = Number(m[1]);
+        high = Number(m[2] ?? m[1]);
+      }
+      filtered = items.filter(
+        (x) =>
+          (split === "all" || x.split === split) &&
+          (label === "all" || x.label === Number(label)) &&
+          x.id >= low &&
+          x.id <= high,
+      );
+      filtered.sort(
+        (a, b) =>
+          (el("order").value === "label" ? a.label - b.label : 0) ||
+          a.id - b.id ||
+          a.split.localeCompare(b.split),
+      );
+      currentPage = 1;
+      el("testWarning").hidden = split !== "test" && split !== "all";
+      drawDistribution();
+      paint();
+    }
+    function paint() {
+      const size = Number(el("size").value),
+        pages = Math.max(1, Math.ceil(filtered.length / size));
+      currentPage = Math.max(1, Math.min(currentPage, pages));
+      const start = (currentPage - 1) * size;
+      el("gallery").replaceChildren(
+        ...filtered.slice(start, start + size).map((item) => {
+          const b = document.createElement("button"),
+            p = document.createElement("canvas"),
+            name = document.createElement("b"),
+            meta = document.createElement("small");
+          b.className = "tile";
+          b.setAttribute(
+            "aria-label",
+            `${item.split} ID ${item.id} ${report.classes[item.label]}`,
+          );
+          p.className = "photo";
+          drawPhoto(p, item);
+          name.textContent = report.classes[item.label];
+          meta.textContent = `${item.split} · #${item.id}`;
+          b.append(p, name, meta);
+          b.onclick = () => preview(item);
+          return b;
+        }),
+      );
+      if (!filtered.length) {
+        const p = document.createElement("div");
+        p.className = "empty";
+        p.textContent = "Không tìm thấy ảnh phù hợp. Thử đổi bộ lọc hoặc ID.";
+        el("gallery").append(p);
+      }
+      el("found").textContent = fmt(filtered.length) + " ảnh";
+      el("range").textContent = filtered.length
+        ? `${fmt(start + 1)}–${fmt(Math.min(start + size, filtered.length))} / ${fmt(filtered.length)} ảnh`
+        : "0 ảnh";
+      el("page").value = currentPage;
+      el("page").max = pages;
+      el("pages").textContent = "/ " + fmt(pages);
+      el("prev").disabled = currentPage === 1;
+      el("next").disabled = currentPage === pages;
+    }
+    function histogram() {
+      const h = report.train_rgb.histogram,
+        max = Math.max(...h.flat()),
+        svg = el("hist"),
+        ns = "http://www.w3.org/2000/svg";
+      svg.replaceChildren();
+      function n(tag, attrs, text) {
+        const x = document.createElementNS(ns, tag);
+        Object.entries(attrs).forEach(([k, v]) => x.setAttribute(k, v));
+        if (text !== undefined) x.textContent = text;
+        svg.append(x);
+      }
+      for (let i = 0; i <= 4; i++) {
+        const y = 245 - i * 52;
+        n("line", { x1: 100, y1: y, x2: 960, y2: y, stroke: "#e5eaf2" });
+        n(
+          "text",
+          { x: 94, y: y + 4, "text-anchor": "end", "font-size": 13 },
+          fmt(Math.round((max * i) / 4)),
+        );
+      }
+      [0, 64, 128, 192, 255].forEach((x) =>
+        n(
+          "text",
+          {
+            x: 100 + (x / 255) * 860,
+            y: 265,
+            "text-anchor": "middle",
+            "font-size": 13,
+          },
+          x,
+        ),
+      );
+      n(
+        "text",
+        { x: 520, y: 294, "text-anchor": "middle", "font-size": 14 },
+        "Giá trị pixel gốc",
+      );
+      n("text", { x: 100, y: 20, "font-size": 14 }, "Số pixel");
+      h.forEach((values, c) => {
+        n("polyline", {
+          points: values
+            .map((v, i) => `${100 + (i / 255) * 860},${245 - (v / max) * 208}`)
+            .join(" "),
+          fill: "none",
+          stroke: ["#df626b", "#3aaf87", "#537fe5"][c],
+          "stroke-width": 2,
+        });
+        n(
+          "text",
+          {
+            x: 730 + c * 70,
+            y: 20,
+            fill: ["#df626b", "#3aaf87", "#537fe5"][c],
+          },
+          ["R", "G", "B"][c],
+        );
+      });
+    }
+    function render(data) {
+      if (
+        !data.classes ||
+        !data.splits ||
+        !data.train_rgb ||
+        !data.pixel_sources || Object.values(data.splits).some((s) => !s.gallery?.source)
+      )
+        throw Error("Báo cáo chưa có gallery đầy đủ, hãy chạy lại 1_eda.py");
+      report = data;
+      items = [];
+      Object.entries(data.splits).forEach(([split, s]) =>
+        s.gallery.ids.forEach((id, position) =>
+          items.push({
+            split,
+            id,
+            position,
+            label: s.gallery.labels[position],
+          }),
+        ),
+      );
+      el("content").hidden = false;
+      el("status").textContent =
+        "Đã nạp " + fmt(items.length) + " ảnh · sẵn sàng khám phá";
+      el("cards").replaceChildren(
+        ...[
+          ["Toàn bộ dữ liệu", fmt(items.length), "Ảnh gốc có thể duyệt"],
+          ["Training", fmt(data.splits.train.count), "Học trọng số"],
+          ["Validation", fmt(data.splits.validation.count), "Chọn cấu hình"],
+          ["Test", fmt(data.splits.test.count), "Đánh giá cuối"],
+        ].map(([title, value, note]) => {
+          const d = document.createElement("div");
+          d.className = "card";
+          const a = document.createElement("small"),
+            b = document.createElement("strong"),
+            c = document.createElement("small");
+          a.textContent = title;
+          b.textContent = value;
+          c.textContent = note;
+          d.append(a, b, c);
+          return d;
+        }),
+      );
+      el("summary").replaceChildren(
+        table(
+          ["Split", "Số ảnh", "Shape", "Pixel"],
+          Object.entries(data.splits).map(([name, s]) => [
+            name,
+            fmt(s.count),
+            s.shape.join(" × "),
+            s.pixel_range.join("–"),
+          ]),
+        ),
+      );
+      el("label").replaceChildren();
+      const all = document.createElement("option");
+      all.value = "all";
+      all.textContent = "Tất cả lớp";
+      el("label").append(all);
+      data.classes.forEach((name, i) => {
+        const o = document.createElement("option");
+        o.value = i;
+        o.textContent = name;
+        el("label").append(o);
+      });
+      el("rgb").replaceChildren(
+        table(
+          ["Kênh", "Mean [0,1]", "Std [0,1]"],
+          ["R", "G", "B"].map((c, i) => [
+            c,
+            data.train_rgb.mean[i].toFixed(6),
+            data.train_rgb.std[i].toFixed(6),
+          ]),
+        ),
+      );
+      histogram();
+      const p = data.preprocessing;
+      el("prepInfo").textContent =
+        `Train ID ${p.id} · ${data.classes[p.label]}`;
+      el("prep").replaceChildren(
+        ...[
+          ["original", "01 · Gốc 32 × 32"],
+          ["resized", "02 · Resize 224 × 224"],
+          ["flipped", "03 · Horizontal flip"],
+          ["restored", "04 · Đảo normalization"],
+        ].map(([key, name]) => picture(p[key], name)),
+      );
+      el("normalized").textContent =
+        `Tensor normalized: min ${p.normalized_min.toFixed(3)}, max ${p.normalized_max.toFixed(3)} · mean R/G/B: ${p.normalized_channel_mean.map((x) => x.toFixed(3)).join(" / ")}`;
+      el("dupSummary").textContent =
+        `${fmt(data.duplicates.length)} nhóm trùng pixel chính xác · ${fmt(data.duplicates.filter((g) => g.cross_split).length)} nhóm qua nhiều split.`;
+      el("duplicates").replaceChildren(
+        table(
+          ["SHA-256", "Ảnh (split:ID:lớp)"],
+          data.duplicates.map((g) => [
+            g.sha256,
+            g.members
+              .map((m) => `${m.split}:${m.id}:${data.classes[m.label]}`)
+              .join(", "),
+          ]),
+        ),
+      );
+      el("metadata").textContent =
+        `${data.source} · seed ${data.seed} · tạo lúc ${data.created}`;
+      filter();
+    }
+    function fail(error) {
+      el("content").hidden = true;
+      el("status").textContent =
+        error.message +
+        ". Chạy src/1_eda.py, rồi mở qua Live Server; nếu mở trực tiếp hãy chọn eda.json và các file .rgb.gz trong data/CIFAR10_web.";
+    }
+    ["split", "label", "order", "size"].forEach((id) =>
+      el(id).addEventListener("change", filter),
+    );
+    el("search").addEventListener("input", filter);
+    el("prev").onclick = () => {
+      currentPage--;
+      paint();
+    };
+    el("next").onclick = () => {
+      currentPage++;
+      paint();
+    };
+    el("page").onchange = () => {
+      currentPage = Number(el("page").value) || 1;
+      paint();
+    };
+    el("reset").onclick = () => {
+      el("split").value = "train";
+      el("label").value = "all";
+      el("search").value = "";
+      el("order").value = "id";
+      filter();
+    };
+    el("close").onclick = () => el("preview").close();
+    el("preview").onclick = (e) => {
+      if (e.target === el("preview")) el("preview").close();
+    };
+    el("file").onchange = async (e) => {
+      try {
+        if (e.target.files[0])
+          render(JSON.parse(await e.target.files[0].text()));
+      } catch (error) {
+        fail(error);
+      }
+    };
+    el("pixels").onchange = (event) => {
+      localPixels.clear();
+      pixelCache.clear();
+      for (const file of event.target.files) localPixels.set(file.name, file);
+      if (report) {
+        paint();
+        el('status').textContent = 'Đã chọn ' + localPixels.size + ' file pixel RGB.';
+      }
+    };
+    fetch("../outputs/eda.json")
+      .then((r) => {
+        if (!r.ok) throw Error("Chưa đọc được báo cáo (HTTP " + r.status + ")");
+        return r.json();
+      })
+      .then(render)
+      .catch(fail);
+  </script>
+</html>
