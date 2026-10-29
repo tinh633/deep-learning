@@ -1,7 +1,7 @@
 # Tiến độ và bàn giao — Practice 2
 
-Cập nhật 2026-10-29: **train đang tạm dừng; notebook và kế hoạch sáu lượt đang hoàn thiện.**
-Config RESUME_RUN='lan_1', VGG16 A, checkpoint cuối epoch 1.
+Cập nhật 2026-10-29: **đã dọn lan_1 cũ; sẵn sàng train mới theo kế hoạch sáu lượt.**
+Config RESUME_RUN=None, VGG16 A, bắt đầu epoch1; không còn checkpoint local của lượt cũ.
 
 ## 1. Giai đoạn hiện tại
 
@@ -9,7 +9,7 @@ Dừng train, giảm còn 2 model × 3 cấu hình, tạo notebook báo cáo.
 
 Phạm vi sáu lượt giảm thời gian thí nghiệm và giữ đủ đối chiếu trong checklist.
 
-Giữ checkpoint; notebook đọc artifact. Giải thích 5W1H chỉ đặt ở đầu file Python trong src, không áp thành mẫu cho tài liệu/notebook.
+Notebook đọc artifact của các lượt chạy mới. Giải thích 5W1H chỉ đặt ở đầu file Python trong src, không áp thành mẫu cho tài liệu/notebook.
 
 ## 2. Việc đã làm và bằng chứng
 
@@ -22,8 +22,8 @@ Giữ checkpoint; notebook đọc artifact. Giải thích 5W1H chỉ đặt ở 
 - Trước tái cấu trúc: CPU train liên tục/ngắt-resume khớp weights; evaluate khớp sklearn/ID/PNG, test tắt và split sai bị từ chối.
 - Mốc trước lượt VGG16 mới: 0a4eb77 đã push Thái. Đợt bàn giao tiếp theo gồm notebook báo cáo, ma trận sáu lượt, source đã dọn và artifact epoch1; mã commit đối chiếu Git history.
 - Đã dừng launcher PID 2728 và Python PID 18928; GPU 0 MiB/0% tại thời điểm kiểm tra.
-- lan_1 hiện là VGG16 A: 1/20 epoch, val accuracy 79,62%, loss 0,671030; chưa có kết quả test.
-- best.pt/last.pt đều epoch 1, có optimizer/RNG; khớp config A của kế hoạch mới. Resume sẽ bắt đầu epoch 2.
+- Lượt VGG16 A cũ từng hoàn tất 1/20 epoch, val79,62%, loss .671030; chưa có kết quả test. Thư mục lan_1 đã xóa khi dọn bản bàn giao.
+- Không còn best/last cũ để resume. Lượt mới khởi tạo từ pretrained và tạo lan_1 mới; giữ dataset/split/EDA local.
 - Notebook mới gồm mục tiêu, EDA, preprocessing, model, ma trận, luồng train, artifact/curves, evaluate và kết luận/checklist.
 - Đã thực thi toàn bộ code cell trên CPU với artifact local: qua; không train/download/evaluate test, không lưu outputs ảnh vào notebook.
 - Kiểm tra nhánh thiếu dataset/EDA/runs/reports qua; A/B/C có đúng freeze/LR/batch cho sáu tổ hợp; compile src/diff check qua và Markdown tối đa 150 dòng. Chưa kiểm tra giao diện notebook trong IDE.
@@ -45,12 +45,14 @@ model.py chỉ còn VGG16/DenseNet121 và Linear 10 lớp; state_dict VGG16 A đ
 - Kiểm tra giả qua: perfect/chance AUC, rates, lớp vắng, thiếu/score sai, plots và từ chối khác split; smoke evaluate xuất Nx10 đúng thứ tự. Chưa chạy test CIFAR-10 chính thức.
 - Toàn bộ code cell notebook mới chạy qua với artifact hiện tại chưa có test report; RUN_TEST=False, outputs trống, compile/diff và giới hạn Markdown qua.
 - Đã thêm PR/per-class AP/macro-micro AP và paired error analysis theo ID: bảng bốn nhóm, theo lớp, ảnh local. Kiểm tra giả AP perfect/chance, ghép ID, nhãn sai/ID trùng, gallery và thiếu report qua; không chạy test thật.
+- Notebook cell 7.0 đã có chạy evaluate qua script hiện có, chọn danh sách run và bật test riêng; mặc định chỉ đọc. Báo cáo được dò lại trực tiếp từ thư mục run, không phụ thuộc history/config.json.
+- Smoke checkpoint-only tạm qua: đánh giá train/val và test có xác suất Nx10, config khôi phục khi thành công/lỗi, weights không đổi. Không evaluate checkpoint chính thức.
 Mã B/C cũ khác B/C mới; phân loại artifact bằng model_config thực, không chỉ theo chữ A/B/C.
 
 ## 4. Việc tiếp theo, theo thứ tự
 
 1. Kiểm tra nội dung notebook và cấu hình ma trận sáu lượt.
-2. Resume lan_1 VGG16 A từ last.pt, epoch 2; cấu hình giữ nguyên.
+2. Train mới VGG16 A từ epoch1 với RESUME_RUN=None; lượt đầu tạo lan_1.
 3. Evaluate train/validation của A, test vẫn tắt; chạy DenseNet121 A, rồi B và C của cả hai model.
 4. Cập nhật notebook từ artifact thật; phân biệt run dở/chưa chạy/hoàn tất.
 5. So sánh validation và khóa hai checkpoint trước khi bật test.

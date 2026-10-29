@@ -94,7 +94,7 @@ Mỗi hàng chạy đủ **VGG16 và DenseNet121**; tổng sáu lượt, tối �
 
 1. Mở [Practice_2_Report.ipynb](Practice_2_Report.ipynb), chọn .venv, Run All để đọc EDA/artifact.
 2. Kiểm tra notebook và cấu hình; train hiện đang tạm dừng.
-3. Tiếp tục VGG16 A từ last.pt đã giữ; epoch đã hoàn tất không chạy lại.
+3. Train mới VGG16 A từ pretrained, RESUME_RUN=None; tạo checkpoint từ lượt mới.
 4. Chạy các lượt còn lại theo ma trận mới, cập nhật notebook từ artifact.
 5. Review/khóa checkpoint, evaluate test rồi hoàn thiện nhận xét.
 

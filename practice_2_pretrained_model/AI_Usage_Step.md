@@ -1,5 +1,11 @@
 # AI Usage Step — Ghi chú giai đoạn hiện tại
 
+## 2026-10-29 — Đánh giá checkpoint từ notebook
+
+- Cell 7.0 chọn EVALUATION_RUNS, RUN_EVALUATION, EVALUATE_TEST; mặc định hai cờ False. Dùng runpy chạy 3_evaluate.py, không tạo pipeline thứ hai.
+- Hỗ trợ best.pt đầy đủ metadata ngay cả khi thiếu history/config.json; reader nạp lại báo cáo từ thư mục run, dùng tiếp các cell TPR/FPR/ROC/PR/lỗi.
+- Smoke tạm qua: no-op mặc định, train/val và test Nx10, config khôi phục khi lỗi/thành công, checkpoint không đổi. Chưa đánh giá test thật; đã tổng hợp Full.
+
 ## 2026-10-29 — Phân tích chỉ số sau test
 
 - Bổ sung PR curve/AP theo lớp, macro/micro AP và đối chiếu bốn nhóm đúng/sai cùng ID, thống kê theo lớp và ảnh test local.
@@ -46,7 +52,7 @@
 
 ## Trạng thái và phần còn lại
 
-- Train đang dừng; checkpoint cuối epoch1. Đợt bàn giao Git gồm notebook, tài liệu, source đồng bộ sáu lượt và log/config/history; weights/events/data giữ local.
+- Đã xóa lan_1 gồm checkpoint/log/config/history và events của lượt cũ. RESUME_RUN=None, VGG16 A sẵn sàng train mới từ epoch1; dataset/split/EDA giữ nguyên.
 - Notebook UI trong IDE chưa được kiểm tra; kiểm tra hiện có thực thi code cell trên CPU.
 - Tiếp theo: hoàn thiện notebook, tiếp tục A của hai model, sau đó B/C; test chỉ sau khóa checkpoint bằng validation.
 - Các mục đã tổng hợp vào [AI_Usage_Full.md](docs/AI_Usage_Full.md).

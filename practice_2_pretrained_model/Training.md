@@ -25,6 +25,8 @@ Không import runnable script để dùng lại code; không tạo pipeline trai
 
 - Mở Practice_2_Report.ipynb bằng kernel .venv; chạy từ gốc workspace hoặc thư mục practice.
 - Run All không train, không tải weights, không evaluate test; thiếu artifact thì báo thiếu.
+- Cell 7.0 có EVALUATION_RUNS, RUN_EVALUATION và EVALUATE_TEST. Hai cờ mặc định False; bật thực thi để gọi lại 3_evaluate.py, bật test riêng sau khóa checkpoint. Cell đọc báo cáo sau đó nạp kết quả mới.
+- Có thể cung cấp outputs/runs/lan_N/best.pt đầy đủ model_state/settings/classes/weights/epoch mà không có history/config.json; cần CIFAR-10 local và split JSON trùng SHA-256. State_dict riêng lẻ chưa đủ.
 - Cell kiến trúc chỉ tạo model weights ngẫu nhiên trên CPU, không phải kết quả học.
 - Giữ notebook không có outputs ảnh/pixel để Git không chứa dataset dẫn xuất; chạy local để xem.
 - Dataset thiếu: tải rõ ràng qua data.load_datasets(download=True) trước, không tự tải khi import.
@@ -50,7 +52,7 @@ Chạy EDA từ gốc workspace:
 
 - num_workers=0 tránh lỗi Windows shared mapping 1455; GPU vẫn dùng bình thường.
 - Giữ main guard để an toàn khi đổi worker; không cần Trainer/callback framework.
-- Cấu hình hiện tại trỏ resume lan_1 VGG16 A đã tạm dừng; không tự chạy từ notebook.
+- Cấu hình bàn giao: VGG16 A, RESUME_RUN=None, bắt đầu từ epoch1 với pretrained weights; chưa có checkpoint local để resume.
 - PretrainedCNN nhận name/fine_tune/pretrained; head cố định Linear 10 lớp, không có lựa chọn head.
 - Không chạy B/C cũ theo tên mã: B/C mới khác kế hoạch 18 lượt, kiểm tra model_config thực.
 

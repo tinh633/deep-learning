@@ -133,3 +133,13 @@ Các lượt thử, lượt lỗi và kết quả lịch sử không thay thế 
 - Notebook có PR OvR, per-class/macro/micro AP, bảng bốn nhóm đúng/sai giữa hai checkpoint, thống kê theo lớp và gallery ảnh test local.
 - Ghép theo ID/nhãn/split/lớp; không tự chọn checkpoint theo test, trường hợp nhiều report cần PAIR_LABELS. AP dùng average_precision_score, không nhầm diện tích hình thang.
 - Kiểm tra giả perfect/chance AP, ID alignment, nhãn sai/ID trùng, gallery và thiếu report qua; chưa chạy test chính thức, không lưu outputs ảnh.
+
+## 2026-10-29 — Cell thực thi đánh giá checkpoint
+
+- Notebook 7.0 chọn danh sách run, bật evaluate và test riêng (mặc định False), thực thi 3_evaluate.py; cấu hình chỉ thay tạm và được khôi phục.
+- Checkpoint đầy đủ model_state/settings/classes/weights/epoch cùng dataset/split local đủ để đánh giá; reader không cần history/config.json để đọc report mới.
+- Smoke tạm no-op/train-val/test Nx10/config restore/checkpoint unchanged qua; không đánh giá test thật hoặc train lại model.
+
+## 2026-10-29 — Bản bàn giao train mới
+- Xóa outputs/runs/lan_1 sau khi xác minh không có tiến trình train; bỏ cả weights/events và log/config/history cũ, giữ dataset/split/EDA.
+- Đặt RESUME_RUN=None cho VGG16 A từ epoch1; notebook cell đánh giá giữ hai cờ mặc định False. Chuẩn bị commit bản bàn giao, không khởi chạy train.
