@@ -27,6 +27,7 @@
 - Prefer established library APIs for dataset loading, transforms and dataset splitting. Avoid hand-written equivalents; keep any necessary adapter small and document why it exists.
 - For small learning projects, prefer a short, sequential pipeline and framework-provided datasets over custom classes or elaborate validation scaffolding. Keep necessary reproducibility and data checks; explain only non-obvious steps.
 - Favor simple, readable, maintainable implementations over clever abstractions.
+- When simplifying scripts, keep the train/evaluate sequence visible, expand dense result-building expressions, and reuse existing shared helpers. Do not add files or hide the learning loop behind a framework merely to reduce line counts.
 - Use descriptive names and separate responsibilities into sensible modules.
 - Add comments for non-obvious logic, assumptions, and important edge cases.
 - Avoid unnecessary dependencies, speculative features, and unrelated refactoring.

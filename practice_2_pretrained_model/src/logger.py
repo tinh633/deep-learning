@@ -1,12 +1,75 @@
 import json
+import hashlib
 import logging
+import math
 import os
 import platform
+import random
 import sys
 
+import numpy as np
 import psutil
 import torch
 import torchvision
+
+
+def resume_training(folder, model, optimizer, train_loader, settings, logger):
+    """Restore a completed epoch; return its saved history."""
+    path = folder / 'last.pt'
+    if not path.exists():
+        path = folder / 'best.pt'
+    saved = torch.load(path, map_location='cpu', weights_only=False)
+    for key in ('model_name', 'experiment', 'model_config', 'train', 'data', 'split_sha256'):
+        if saved['settings'][key] != settings[key]:
+            raise ValueError(f'Resume setting changed: {key}')
+
+    history = json.loads((folder / 'history.json').read_text(encoding='utf-8'))
+    history = [row for row in history if row['epoch'] <= saved['epoch']]
+    if [row['epoch'] for row in history] != list(range(1, saved['epoch'] + 1)):
+        raise ValueError('History does not match checkpoint epoch')
+    model.load_state_dict(saved['model_state'])
+    model.weights_name = saved['weights']
+    if 'optimizer_state' in saved:
+        optimizer.load_state_dict(saved['optimizer_state'])
+        random.setstate(saved['random_state'])
+        np.random.set_state(saved['numpy_state'])
+        torch.set_rng_state(saved['torch_state'])
+        train_loader.generator.set_state(saved['loader_state'])
+        if next(model.parameters()).is_cuda and saved['cuda_state'] is not None:
+            torch.cuda.set_rng_state_all(saved['cuda_state'])
+        logger.info('Resuming | epoch=%d | optimizer/random states restored', saved['epoch'])
+    else:
+        logger.warning('Resuming legacy checkpoint | epoch=%d | Adam/random reset', saved['epoch'])
+    save_json(folder / 'history.json', history)
+    return history
+
+
+def save_epoch(folder, model, optimizer, train_loader, settings, history, row):
+    """Persist best/last weights and the state needed for a later resume."""
+    if not all(math.isfinite(value) for value in row.values()):
+        raise ValueError('Non-finite epoch metrics')
+    history.append(row)
+    best = max(history, key=lambda item: (item['val_accuracy'], -item['val_loss'], -item['epoch']))
+    saved = dict(
+        model_state=model.state_dict(), settings=settings, weights=model.weights_name,
+        epoch=row['epoch'], metrics=row, classes=train_loader.dataset.dataset.classes,
+        optimizer_state=optimizer.state_dict(), random_state=random.getstate(),
+        numpy_state=np.random.get_state(), torch_state=torch.get_rng_state(),
+        cuda_state=torch.cuda.get_rng_state_all() if next(model.parameters()).is_cuda else None,
+        loader_state=train_loader.generator.get_state())
+    if best['epoch'] == row['epoch']:
+        torch.save(saved, folder / 'best.pt.tmp')
+        (folder / 'best.pt.tmp').replace(folder / 'best.pt')
+    save_json(folder / 'history.json', history)
+    torch.save(saved, folder / 'last.pt.tmp')
+    (folder / 'last.pt.tmp').replace(folder / 'last.pt')
+    return best['epoch']
+
+
+def file_sha256(path):
+    """Identify a split/checkpoint without loading the whole file into memory."""
+    with path.open('rb') as source:
+        return hashlib.file_digest(source, 'sha256').hexdigest()
 
 
 def save_json(path, value):
@@ -22,9 +85,6 @@ def create_run(runs_folder):
         folder = runs_folder / f'lan_{number}'
         try:
             folder.mkdir()
-            names = [p.name for p in runs_folder.iterdir()
-                     if p.is_dir() and p.name.startswith('lan_') and p.name[4:].isdigit()]
-            save_json(runs_folder / 'index.json', sorted(names, key=lambda n: int(n[4:])))
             return folder
         except FileExistsError:
             number += 1
@@ -34,14 +94,18 @@ def open_log(folder, filename='train.log'):
     logger = logging.getLogger(str((folder / filename).resolve()))
     logger.setLevel(logging.INFO)
     logger.propagate = False
-    for handler in logger.handlers[:]:
-        handler.close()
-        logger.removeHandler(handler)
+    close_log(logger)
     for handler in (logging.FileHandler(folder / filename, encoding='utf-8'),
                     logging.StreamHandler()):
         handler.setFormatter(logging.Formatter('%(asctime)s | %(message)s'))
         logger.addHandler(handler)
     return logger
+
+
+def close_log(logger):
+    for handler in logger.handlers[:]:
+        handler.close()
+        logger.removeHandler(handler)
 
 
 def get_environment(device):

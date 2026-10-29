@@ -20,7 +20,7 @@ def image_url(image):
     return 'data:image/png;base64,' + base64.b64encode(buffer.getvalue()).decode('ascii')
 
 
-# Raw images remain unchanged; only train/validation guide model decisions.
+# 1. Load original data and the fixed split.
 original, test = load_datasets(download=False)
 train_ids, val_ids = load_split(original.targets)
 splits = dict(train=(original, train_ids), validation=(original, val_ids),
@@ -28,6 +28,8 @@ splits = dict(train=(original, train_ids), validation=(original, val_ids),
 report = dict(created=datetime.now(timezone.utc).isoformat(), seed=DATA['seed'],
               classes=original.classes, splits={}, duplicates=[],
               source='CIFAR-10 official Python batches', pixel_sources={})
+
+# 2. Export compressed RGB chunks for the HTML viewer.
 hash_groups = defaultdict(list)
 pixel_folder = DATA_FOLDER / 'CIFAR10_web'
 pixel_folder.mkdir(parents=True, exist_ok=True)
@@ -43,6 +45,8 @@ for source_name, dataset in (('train', original), ('test', test)):
         chunks.append(dict(file=f'../data/CIFAR10_web/{filename}', start=start,
                            count=len(pixels) // 3072, sha256=hashlib.sha256(pixels).hexdigest()))
     report['pixel_sources'][source_name] = chunks
+
+# 3. Class counts, pixel statistics and duplicate detection.
 rgb_sum = np.zeros(3, dtype=np.float64)
 rgb_squared_sum = np.zeros(3, dtype=np.float64)
 pixel_count = 0
@@ -85,7 +89,7 @@ for digest, members in hash_groups.items():
         report['duplicates'].append(dict(sha256=digest, members=members,
                                          cross_split=len({m['split'] for m in members}) > 1))
 
-# Use a train image only; forced flip illustrates the possible augmentation.
+# 4. Illustrate preprocessing with a train image only; forced flip illustrates the possible augmentation.
 index = int(train_ids[0])
 image = Image.fromarray(original.data[index])
 resize = transforms.Resize((DATA['image_size'], DATA['image_size']),
@@ -103,6 +107,7 @@ report['preprocessing'] = dict(
     normalized_min=float(normalized.min()), normalized_max=float(normalized.max()),
     normalized_channel_mean=normalized.mean(dim=(1, 2)).tolist(),
     restored=image_url(transforms.ToPILImage()(restored.clamp(0, 1))))
+# 5. Validate counts and save the EDA report.
 assert len(train_ids) == 45000 and len(val_ids) == 5000 and len(test) == 10000
 assert not set(train_ids) & set(val_ids)
 assert all(sum(split['counts']) == split['count'] for split in report['splits'].values())
