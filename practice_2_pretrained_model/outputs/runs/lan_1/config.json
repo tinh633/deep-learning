@@ -1,0 +1,125 @@
+{
+  "settings": {
+    "model_name": "densenet121",
+    "experiment": "A",
+    "model_config": {
+      "head": "H1",
+      "fine_tune": false,
+      "lr": 0.001,
+      "batch_size": 64
+    },
+    "pretrained": true,
+    "train": {
+      "seed": 42,
+      "epochs": 20,
+      "weight_decay": 0.0
+    },
+    "data": {
+      "seed": 42,
+      "val_size": 5000,
+      "image_size": 224,
+      "batch_size": 64,
+      "num_workers": 0,
+      "pin_memory": false
+    },
+    "split_file": "/home/gess/Documents/deep-learning-Th-i/practice_2_pretrained_model/outputs/cifar10_split.json",
+    "split_sha256": "fa5a9fcd6b5d9d717eb35b10c728300f1a01c666c4e524a6faa3de47fc7ce5c3",
+    "source": "torchvision.datasets.CIFAR10",
+    "input_shape": [
+      3,
+      224,
+      224
+    ]
+  },
+  "environment": {
+    "os": "Linux-6.18.55-2-cachyos-lts-x86_64-with-glibc2.44",
+    "python": "3.14.8 (main, Oct 13 2026, 10:33:10) [GCC 16.2.1 20260810]",
+    "cpu": "unavailable",
+    "cpu_physical_cores": 6,
+    "cpu_logical_cores": 12,
+    "ram_bytes": 33365159936,
+    "torch": "2.14.1+cu130",
+    "torchvision": "0.29.1+cu130",
+    "cuda_build": "13.0",
+    "cudnn": 92400,
+    "device": "cuda",
+    "gpu": [
+      {
+        "index": 0,
+        "name": "Quadro T2000",
+        "vram_bytes": 3911581696
+      }
+    ],
+    "precision": "float32; AMP disabled",
+    "deterministic_algorithms": false,
+    "cudnn_benchmark": false,
+    "cudnn_deterministic": true,
+    "cublas_workspace_config": "unset",
+    "blas_threads": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1"
+    }
+  },
+  "parameters": {
+    "total": 6964106,
+    "trainable": 10250,
+    "frozen": 6953856,
+    "trainable_names": [
+      "head.weight",
+      "head.bias"
+    ]
+  },
+  "data": {
+    "train": {
+      "size": 45000,
+      "batches": 704,
+      "batch_size": 64,
+      "num_workers": 0,
+      "pin_memory": false,
+      "sampler": "RandomSampler",
+      "transform": "Compose(\n    Resize(size=(224, 224), interpolation=bilinear, max_size=None, antialias=True)\n    RandomHorizontalFlip(p=0.5)\n    ToTensor()\n    Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225))\n)"
+    },
+    "validation": {
+      "size": 5000,
+      "batches": 79,
+      "batch_size": 64,
+      "num_workers": 0,
+      "pin_memory": false,
+      "sampler": "SequentialSampler",
+      "transform": "Compose(\n    Resize(size=(224, 224), interpolation=bilinear, max_size=None, antialias=True)\n    ToTensor()\n    Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225))\n)"
+    }
+  },
+  "weights": "DenseNet121_Weights.IMAGENET1K_V1",
+  "feature_size": 1024,
+  "optimizer": {
+    "name": "Adam",
+    "groups": [
+      {
+        "lr": 0.001,
+        "betas": [
+          0.9,
+          0.999
+        ],
+        "eps": 1e-08,
+        "weight_decay": 0.0,
+        "amsgrad": false,
+        "maximize": false,
+        "foreach": null,
+        "capturable": false,
+        "differentiable": false,
+        "fused": null,
+        "decoupled_weight_decay": false,
+        "parameter_count": 10250
+      }
+    ]
+  },
+  "loss": {
+    "name": "CrossEntropyLoss",
+    "reduction": "mean",
+    "ignore_index": -100,
+    "label_smoothing": 0.0
+  },
+  "scheduler": null,
+  "batchnorm": "running statistics frozen; affine trained only in opened blocks"
+}
