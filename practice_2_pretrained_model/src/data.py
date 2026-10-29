@@ -1,3 +1,11 @@
+"""What: Đọc CIFAR-10, chia train/validation và tạo DataLoader.
+Why: Mọi model dùng cùng dữ liệu và preprocessing, tránh lệch so sánh.
+Who: EDA, train và evaluate gọi các hàm trong module này.
+When: Chuẩn bị dữ liệu trước EDA/forward; chỉ tải khi yêu cầu download=True.
+Where: data/ chứa ảnh; outputs/cifar10_split.json chứa split cố định.
+How: torchvision, chia phân tầng seed 42, augmentation chỉ trên train.
+"""
+
 import json
 import random
 

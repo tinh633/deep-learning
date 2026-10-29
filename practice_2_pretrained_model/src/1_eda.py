@@ -1,3 +1,11 @@
+"""What: Khảo sát ảnh, phân bố lớp, RGB, ảnh trùng và preprocessing.
+Why: Hiểu dữ liệu trước train và tạo bằng chứng cho phần trình bày.
+Who: Người học chạy script, notebook/HTML đọc report để xem.
+When: Sau khi tải dataset, trước các lượt train chính thức.
+Where: Đọc data/ và split; ghi outputs/eda.json, data/CIFAR10_web/.
+How: Thống kê theo split, RGB chỉ từ train, hash pixel và xuất RGB gzip.
+"""
+
 import base64
 import gzip
 import hashlib

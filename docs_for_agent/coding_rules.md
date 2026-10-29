@@ -31,6 +31,7 @@
 - Use descriptive names and separate responsibilities into sensible modules.
 - Add comments for non-obvious logic, assumptions, and important edge cases.
 - Avoid unnecessary dependencies, speculative features, and unrelated refactoring.
+- After an approved scope reduction, remove inactive model/head options and obsolete call paths; update scripts, notebook and current workflow docs together. Preserve relevant checkpoint state_dict keys and validate resume before continuing training.
 - Preserve existing behavior outside the approved task.
 - Do not delete or overwrite important data without authorization.
 - Keep only `.py` project source files in `src/`; visualization assets and visual/browser verification scripts belong in `visualization/`.

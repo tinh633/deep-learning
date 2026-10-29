@@ -1,3 +1,11 @@
+"""What: Ghi log/config/TensorBoard và lưu/khôi phục trạng thái epoch.
+Why: Giữ bằng chứng thí nghiệm và resume mà không làm rối vòng học.
+Who: Các script train/evaluate gọi hàm cần thiết trong module này.
+When: Đầu run, cuối mỗi epoch và khi resume/kết thúc.
+Where: outputs/runs/lan_N chứa config, history, log, best/last và events.
+How: Log theo epoch, hash nhận diện file, ghi file tạm rồi replace.
+"""
+
 import json
 import hashlib
 import logging
@@ -15,10 +23,7 @@ import torchvision
 
 def resume_training(folder, model, optimizer, train_loader, settings, logger):
     """Restore a completed epoch; return its saved history."""
-    path = folder / 'last.pt'
-    if not path.exists():
-        path = folder / 'best.pt'
-    saved = torch.load(path, map_location='cpu', weights_only=False)
+    saved = torch.load(folder / 'last.pt', map_location='cpu', weights_only=False)
     for key in ('model_name', 'experiment', 'model_config', 'train', 'data', 'split_sha256'):
         if saved['settings'][key] != settings[key]:
             raise ValueError(f'Resume setting changed: {key}')
@@ -29,17 +34,14 @@ def resume_training(folder, model, optimizer, train_loader, settings, logger):
         raise ValueError('History does not match checkpoint epoch')
     model.load_state_dict(saved['model_state'])
     model.weights_name = saved['weights']
-    if 'optimizer_state' in saved:
-        optimizer.load_state_dict(saved['optimizer_state'])
-        random.setstate(saved['random_state'])
-        np.random.set_state(saved['numpy_state'])
-        torch.set_rng_state(saved['torch_state'])
-        train_loader.generator.set_state(saved['loader_state'])
-        if next(model.parameters()).is_cuda and saved['cuda_state'] is not None:
-            torch.cuda.set_rng_state_all(saved['cuda_state'])
-        logger.info('Resuming | epoch=%d | optimizer/random states restored', saved['epoch'])
-    else:
-        logger.warning('Resuming legacy checkpoint | epoch=%d | Adam/random reset', saved['epoch'])
+    optimizer.load_state_dict(saved['optimizer_state'])
+    random.setstate(saved['random_state'])
+    np.random.set_state(saved['numpy_state'])
+    torch.set_rng_state(saved['torch_state'])
+    train_loader.generator.set_state(saved['loader_state'])
+    if next(model.parameters()).is_cuda and saved['cuda_state'] is not None:
+        torch.cuda.set_rng_state_all(saved['cuda_state'])
+    logger.info('Resuming | epoch=%d | optimizer/random states restored', saved['epoch'])
     save_json(folder / 'history.json', history)
     return history
 

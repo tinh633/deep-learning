@@ -1,147 +1,102 @@
-# Huấn luyện, logging và đánh giá — Practice 2
+# Practice 2 — Vận hành train/evaluate
 
-## Trạng thái
+## 1. Phạm vi
 
-- `logger.py`, `2_train.py` và `3_evaluate.py` đã triển khai và smoke test.
-- ResNet18 A chính thức đã hoàn tất 20 epoch; best epoch 18 val 88,54%, loss 0,337606, chưa test.
-- `.venv` hiện dùng Python 3.14, torch 2.11.0+cu126, torchvision 0.26.0+cu126,
-  TensorBoard 2.21.0; ResNet18 pretrained đã qua smoke test CUDA và worker 2.
-- Đã cài TensorBoard vào `.venv`; các dependency nằm trong `requirements.txt`.
+- 2 model (VGG16/DenseNet121) × 3 cấu hình A/B/C, tối đa 20 epoch/lượt.
+- A/B đo tác động fine-tune; B/C đo tác động LR; bám checklist và tiết kiệm thời gian.
+- Cùng split seed 42, batch 64, Adam/CE, không scheduler/early stopping.
 
-## Trước khi train chính thức
+## 2. Các file và thứ tự đọc
 
-1. Dùng môi trường Python có các dependency trong `requirements.txt`.
-2. Kiểm tra dữ liệu/split và review EDA, model, logging/training.
-3. Trong `src/config.py`, chọn `MODEL_NAME` và `EXPERIMENT` A–F.
-4. Giữ `PRETRAINED=True` cho các lượt chính thức. Lần đầu model có thể tải ImageNet weights.
-5. `TRAIN` cố định 20 epoch, weight decay 0; optimizer Adam, không scheduler.
-6. Dùng đúng `.venv`; kiểm tra log có `device=cuda`. RTX 3050 Laptop 4 GB đã được xác minh.
+| File | Vai trò/đầu ra |
+|---|---|
+| Practice_2_Report.ipynb | Mục tiêu, EDA, kiến trúc, ma trận, đọc artifact/biểu đồ và kết luận |
+| config.py | MODEL_NAME, EXPERIMENT, RESUME_RUN, EPOCHS và các hằng số |
+| data.py | Dataset/split/transforms/DataLoader; training=False tắt augmentation/shuffle |
+| model.py | Hai backbone, head Linear 10 lớp, freeze/unfreeze và BatchNorm |
+| logger.py | Log môi trường/config/TensorBoard và best/last/resume state |
+| 1_eda.py | outputs/eda.json và RGB viewer local |
+| 2_train.py | Vòng lặp train/validation trực tiếp, metrics theo epoch |
+| 3_evaluate.py | Đọc config checkpoint thật, metrics/confusion/per-class/ID/ảnh sai |
 
-Từ gốc workspace, sau review có thể chạy:
+Không import runnable script để dùng lại code; không tạo pipeline train trong notebook.
+
+## 3. Notebook và EDA
+
+- Mở Practice_2_Report.ipynb bằng kernel .venv; chạy từ gốc workspace hoặc thư mục practice.
+- Run All không train, không tải weights, không evaluate test; thiếu artifact thì báo thiếu.
+- Cell kiến trúc chỉ tạo model weights ngẫu nhiên trên CPU, không phải kết quả học.
+- Giữ notebook không có outputs ảnh/pixel để Git không chứa dataset dẫn xuất; chạy local để xem.
+- Dataset thiếu: tải rõ ràng qua data.load_datasets(download=True) trước, không tự tải khi import.
+
+Chạy EDA từ gốc workspace:
+
+```powershell
+.\.venv\Scripts\python.exe practice_2_pretrained_model/src/1_eda.py
+```
+
+## 4. Chuẩn bị train
+
+1. Kiểm tra không có tiến trình train khác; dùng .venv CUDA đã cài.
+2. Chọn MODEL_NAME='vgg16' hoặc 'densenet121', EXPERIMENT='A'/'B'/'C'.
+3. A freeze LR .001; B fine-tune LR .001; C fine-tune LR .0001; tất cả H1/batch64.
+4. Lượt mới đặt RESUME_RUN=None; mỗi lượt khởi tạo từ pretrained ImageNet-1K V1.
+5. Resume đặt tên run đang dở, giữ đúng model/cấu hình/split/ngân sách của checkpoint.
+6. Giữ RUN_TEST=False. Không tự chuyển từ A sang B/C bằng weights đã học của A.
 
 ```powershell
 .\.venv\Scripts\python.exe practice_2_pretrained_model/src/2_train.py
 ```
 
-Lệnh này chạy một lượt thật theo config hiện tại, không phải smoke test.
-Chưa chạy lệnh nguyên cấu hình chính thức trong phiên triển khai này.
-`RESUME_RUN=None` tạo lượt mới; chọn tên run để tiếp tục từ checkpoint cuối epoch.
+- num_workers=0 tránh lỗi Windows shared mapping 1455; GPU vẫn dùng bình thường.
+- Giữ main guard để an toàn khi đổi worker; không cần Trainer/callback framework.
+- Cấu hình hiện tại trỏ resume lan_1 VGG16 A đã tạm dừng; không tự chạy từ notebook.
+- PretrainedCNN nhận name/fine_tune/pretrained; head cố định Linear 10 lớp, không có lựa chọn head.
+- Không chạy B/C cũ theo tên mã: B/C mới khác kế hoạch 18 lượt, kiểm tra model_config thực.
 
-## Luồng code
+## 5. Log, checkpoint và ngắt phiên
 
-- Script train: guard Windows → setup → vòng lặp epoch/batch trực tiếp → validation → checkpoint.
-- Forward/loss/backward/step ở ngay trong script; không Trainer hoặc callback.
-- Optimizer chỉ nhận các tham số `requires_grad=True`, gồm head và block được mở.
-- `model.train()` giữ chính sách frozen backbone/BatchNorm; validation dùng eval/no_grad.
-- Chỉ train/validation được duyệt; test loader không được iterate và không có test metrics.
-- Chọn best theo val accuracy, hòa thì val loss, vẫn hòa giữ epoch sớm nhất.
-- Non-finite loss/metrics báo lỗi. Interrupt/lỗi giữ artifact đã hoàn thành, không ghi Finished.
+- Đầu lượt: máy/thư viện/device, source/split hash, seed, transforms, kiến trúc, tham số, loss/optimizer.
+- Mỗi epoch: train/val loss, accuracy, LR, seconds, best epoch; TensorBoard cùng sáu scalar.
+- Không log batch, không tạo live.jsonl/progress.json.
+- best.pt: val accuracy cao hơn; hòa chọn loss thấp hơn; vẫn hòa giữ epoch sớm hơn.
+- last.pt: model/Adam/random Python/NumPy/Torch/CUDA/DataLoader state ở epoch hoàn tất gần nhất.
+- Ghi checkpoint/JSON bằng file tạm rồi replace; không ghi đè trực tiếp file tốt đang có.
+- Ngắt giữa epoch: phần epoch đang dở không được lưu làm epoch hoàn tất; resume chạy lại epoch đó.
+- Resume bắt buộc last.pt có đầy đủ Adam/RNG; không fallback best hoặc reset optimizer.
+- Checkpoint local cần giữ; clone Git không có weights để resume vì weights bị ignore.
+- SHA-256 chỉ xác minh split/định danh checkpoint, không tham gia tính loss/accuracy.
 
-## Artifact mỗi lượt
+## 6. Đánh giá
 
-Trong `outputs/runs/lan_N/`:
-
-| Artifact | Nội dung |
-|---|---|
-| `train.log` | Cấu hình đầy đủ, kiến trúc, mỗi epoch và trạng thái cuối |
-| `config.json` | Máy/thư viện/device, split hash, transforms, tham số, loss/optimizer thực tế |
-| `history.json` | Train/validation loss/accuracy, LR, thời gian từng epoch hoàn tất |
-| `best.pt` | State dict, config, weights identifier, epoch, metrics và tên lớp |
-| `tensorboard/` | Event files: config/architecture và metrics mỗi epoch |
-
-Best checkpoint được ghi qua file tạm rồi thay thế, tránh ghi đè trực tiếp checkpoint tốt nhất.
-`last.pt` lưu optimizer và random state để resume; `best.pt` phục vụ đánh giá theo validation.
-Log cuối ghi tổng thời gian, số optimizer step, số epoch hoàn tất và GPU memory peak nếu có.
-Log flush trong quá trình chạy; TensorBoard writer và log handlers được đóng ở finally.
-
-## Xem TensorBoard
-
-```powershell
-.\.venv\Scripts\python.exe -m tensorboard.main --logdir practice_2_pretrained_model/outputs/runs
-```
-
-Mở địa chỉ localhost do TensorBoard in ra. Không có dashboard kết quả chính thức khi chưa train.
-
-## Bằng chứng smoke test
-
-- ResNet18 A/E, weights ngẫu nhiên, 2 epoch trên 8 train/4 validation CIFAR-10 thật.
-- Reload best checkpoint cho validation loss/accuracy khớp; sáu scalar TensorBoard đủ mỗi epoch.
-- Kiểm tra lỗi và interrupt lúc setup: có trạng thái đúng, không Finished giả.
-- H2 một epoch và loss options trong config.json đã kiểm tra; ngắt giữa epoch 2 giữ được
-  history/checkpoint epoch 1, trạng thái Interrupted đúng, không báo Finished.
-- Các kiểm tra ghi vào thư mục tạm đã xóa; không tính vào 18 lượt A–F.
-- Đây là kiểm tra luồng, không dùng accuracy để đánh giá chất lượng hoặc chọn model.
-
-## Đánh giá checkpoint
-
-1. Chọn `EVAL_RUN='lan_N'` trong config.py, trỏ đến run có `best.pt`.
-2. Giữ `RUN_TEST=False` khi đối chiếu train/validation và chọn cấu hình.
-3. Chỉ bật test sau review và khóa ba checkpoint theo kế hoạch; không chọn bằng test.
+Chọn EVAL_RUN, đọc best.pt và cấu hình đã lưu; không dùng config model hiện tại thay checkpoint.
 
 ```powershell
 .\.venv\Scripts\python.exe practice_2_pretrained_model/src/3_evaluate.py
 ```
 
-- Script dùng config trong checkpoint, load state dict strict và không tải lại ImageNet weights.
-- Kiểm tra SHA-256 split trước khi chạy; dùng split hiện tại chỉ khi khớp checkpoint.
-- Train eval không shuffle/augmentation, model ở eval/no_grad; khác metrics online khi train.
-- Ghi thêm `evaluate.log`: máy/device, checkpoint hash, config/weights, kiến trúc, metrics và trạng thái.
-- Mỗi split có `{split}_metrics.json`: loss, accuracy, macro-F1, precision/recall/F1/support,
-  TP/TN/FP/FN từng lớp, confusion count/chuẩn hóa và tất cả ID/nhãn/dự đoán/confidence.
-- Confusion: hàng nhãn thật, cột dự đoán; macro-F1 tính đủ 10 lớp, zero-support dùng zero_division=0.
-- Lưu tối đa 24 ảnh sai confidence cao nhất tại `visualization/runs/lan_N/{split}_errors.png`,
-  với split, ID gốc, nhãn thật/dự đoán và confidence. Không kết luận nhãn gốc sai từ dự đoán.
-- Mỗi báo cáo lưu checkpoint hash và thời gian đánh giá; không đụng báo cáo test cũ khi test tắt.
-- Kết quả từng run phục vụ so sánh sau này; chưa thêm bảng so sánh model vào HTML EDA.
+- Mặc định chỉ train/validation; training=False dùng preprocessing evaluation và không shuffle.
+- model.eval()/no_grad(); lưu *_metrics.json, evaluate.log và ảnh sai local.
+- Báo cáo loss, accuracy, macro-F1, precision/recall/F1/support/TP/TN/FP/FN, confusion, ID và confidence.
+- Per-class có thêm TPR/FPR/specificity; mẫu số 0 lưu null. Test report lưu probabilities N×10 và probability_class_order, cùng thứ tự predictions; train/validation không lưu ma trận score.
+- Notebook phân tích ROC OvR từng lớp, macro/micro AUC và bảng/đường cong so sánh sau test. Báo cáo cũ thiếu score chỉ tính được tỷ lệ confusion, không suy ra AUC.
+- PR/AP dùng cùng xác suất test; AP không phải tích phân hình thang. Đối chiếu lỗi ghép theo ID/nhãn, có bảng bốn nhóm, theo lớp và tối đa bốn ảnh mỗi nhóm sai; cặp nhiều checkpoint chọn bằng PAIR_LABELS, không xếp hạng test tự động.
+- Khóa một checkpoint/model bằng validation, xác nhận rồi mới bật RUN_TEST và test hai checkpoint.
+- Không tự dùng test để chọn epoch/LR, không xem run dở như kết quả hoàn tất.
+- Evaluate đọc trusted local checkpoint với weights_only=False vì checkpoint hiện có NumPy RNG.
 
-## Kiểm tra phần evaluate
-
-- Train/evaluate trên 8 train/4 validation CIFAR thật, weights ngẫu nhiên trong thư mục tạm.
-- Loss/accuracy khớp checkpoint; sklearn metrics, TP/TN/FP/FN, zero-support, IDs và PNG sai: qua.
-- Test mặc định bị chặn bằng sentinel; nhánh RUN_TEST=True kiểm tra trên 5 ảnh giả, không dùng test thật.
-- Split hash sai bị từ chối, báo cáo cũ được giữ. Các artifact tạm đã xóa.
-- ResNet18 A đã evaluate train/validation; không chạy test. Smoke bổ sung dùng CPU và dữ liệu tạm.
-
-## Chuyển `.venv` sang GPU — 2026-10-27
-
-- Cài đúng cặp CUDA từ nguồn PyTorch; requirements.txt ghim lại phiên bản đã kiểm tra:
+## 7. TensorBoard
 
 ```powershell
-.\.venv\Scripts\python.exe -m pip install torch==2.11.0 torchvision==0.26.0 --index-url https://download.pytorch.org/whl/cu126
+.\.venv\Scripts\python.exe -m tensorboard.main --logdir practice_2_pretrained_model/outputs/runs --host 127.0.0.1 --port 6006 --reload_interval 2
 ```
 
-- `torch.cuda.is_available()` là True; GPU NVIDIA GeForce RTX 3050 Laptop GPU.
-- Hiện `num_workers=0`, `pin_memory=False`: lượt worker 2 từng lỗi Windows shared memory 1455.
-  Lượt ResNet18 A chạy lại đã hoàn tất, đổi tên lan_2 → lan_1; lượt lỗi đã xóa theo yêu cầu người dùng.
-- Train/evaluate có main guard để worker Windows không chạy lặp toàn bộ script.
-- Giới hạn BLAS/OMP/MKL về 1 thread nếu biến môi trường chưa được đặt; logger lưu giá trị thực tế.
-  Bổ sung sau lỗi OpenBLAS thiếu bộ nhớ ở lần kiểm tra worker đầu tiên.
-- GPU smoke: ResNet18 pretrained A, batch 64, 128 train/64 validation CIFAR thật, 1 epoch.
-  Worker 2, checkpoint/TensorBoard qua; peak CUDA allocated khoảng 488,8 MiB.
-- Chỉ kiểm tra luồng trên tập nhỏ; không dùng thời gian/accuracy này làm kết quả full epoch.
-- `pip check` không có dependency lỗi. Script và artifact smoke tạm đã xóa.
-- ResNet18 A đã hoàn tất 20 epoch trên GPU; VGG16 A hiện dừng sau epoch 1.
-- Trong VS Code chọn interpreter `D:\newtask\DL\.venv\Scripts\python.exe`.
+Mở localhost:6006 hoặc iframe trong visualization/eda.html. Server không cần để notebook đọc history.
+Live Server ignore outputs/data/events để giảm reload theo thay đổi artifact; nguyên nhân reload chưa tái hiện bằng browser.
 
-## Resume after interruption
+## 8. Bằng chứng kiểm tra và giới hạn
 
-Config/train review: edit MODEL_NAME, EXPERIMENT and RESUME_RUN at the top of config.py; EPOCHS/SEED/NUM_WORKERS are plain constants. HEAD/FINE_TUNE/LEARNING_RATE/BATCH_SIZE follow the selected experiment. get_settings() assembles checkpoint metadata; train reads config constants directly. Existing checkpoint settings remain compatible.
-
-Code cleanup (2026-10-29): keep the existing seven modules and direct train/evaluate loops. Group each script into visible steps, reuse JSON/log/file hashing helpers, and isolate only error-gallery drawing inside evaluate. Preserve old checkpoint/report formats and epoch-only logging; no new training run during refactoring.
-
-After user review, train was shortened further: logger owns `resume_training` and `save_epoch`; train keeps direct data/model/loss/optimizer, train/validation loops and epoch metrics. CPU continuous/resumed weights matched again; changed resume settings were rejected. No Trainer class or extra module was added.
-
-- `build_loaders(training=False)` prepares deterministic evaluation data without augmentation/shuffling.
-- SHA-256 identifies the saved split/checkpoint; `file_sha256` in logger reads files as a stream. No effect on prediction metrics.
-- Evaluate loads trusted local checkpoints with `weights_only=False` to support existing NumPy RNG state.
-- Verification: CPU continuous vs interrupted/resumed weights matched; sklearn metrics/IDs/error PNG and split mismatch checks passed on temporary data. Official runs were not changed.
-
-- Set RESUME_RUN='lan_2' in src/config.py to resume last.pt in the same run; None creates a new run.
-- Keep model, experiment, train/data settings and split unchanged; the script checks them before resuming.
-- last.pt stores model, Adam, epoch, metrics and Python/NumPy/PyTorch/CUDA/DataLoader RNG at each completed epoch using temporary-file replacement.
-- best.pt retains the strongest validation checkpoint. An interrupted epoch is repeated from its beginning.
-- Legacy best-only checkpoints reset Adam/random states with a warning; exact continuation is unavailable for those files.
-- Current lan_2 has a full epoch-1 checkpoint and resumes at epoch 2. lan_1 has only best epoch 18; its epoch-20 weights cannot be recreated.
-- Text logs and TensorBoard record metrics once per epoch; no live.jsonl/progress.json or per-batch scalar updates.
-- visualization/eda.html embeds localhost:6006 directly; start TensorBoard using the command shown on the page, or open it in a separate tab.
-- Checkpoints, datasets and event files stay local; cloning the repository alone does not restore a trained model.
+- Trước tái cấu trúc: CPU continuous/ngắt-resume khớp weights; best/last/history qua, config/split sai bị chặn.
+- Evaluate smoke khớp sklearn/ID/ảnh sai/test tắt; DataLoader CIFAR thật giữ 45k/5k/10k và tắt augmentation khi eval.
+- Notebook: toàn bộ code cell local, nhánh thiếu artifact và config/checkpoint tương thích đã kiểm tra qua; UI IDE chưa kiểm tra.
+- Không coi smoke test là kết quả sáu lượt chính thức. Xem progress.md cho kiểm tra mới nhất.

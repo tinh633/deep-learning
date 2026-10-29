@@ -1,116 +1,68 @@
 # Tiến độ và bàn giao — Practice 2
 
-Cập nhật: 2026-10-29. **Train đang dừng; outputs/runs hiện trống, checkpoint cũ không còn trên máy.**
-Người dùng yêu cầu push rồi train thử. Config còn RESUME_RUN='lan_2' nhưng không thể resume khi thiếu checkpoint; đang chờ chọn lượt train mới hay smoke ngắn.
-Đang làm gọn src: chia bước rõ ràng, dùng chung ghi JSON/đóng log/hash; giữ nguyên dữ liệu và checkpoint cũ.
-Đã sửa evaluate đọc checkpoint chứa NumPy RNG; kiểm tra CPU resume và metrics qua.
-Sau phản hồi tiếp theo: rút gọn train bằng resume_training/save_epoch trong logger; giữ vòng lặp học trực tiếp. Smoke CPU mới qua, chưa train chính thức.
-Đang review riêng config/train: config dùng hằng số rõ tên; bảng A-F suy ra head/fine-tune/LR/batch. Metadata được tạo bởi get_settings(), train không tự ghép dictionary cấu hình. Không sửa run thật.
-Kiểm tra qua: config mới khớp checkpoint lan_2 hiện có; CPU train liên tục và ngắt/resume khớp weights, best/last và history; compile toàn src và diff check qua.
+Cập nhật 2026-10-29: **train đang tạm dừng; notebook và kế hoạch sáu lượt đang hoàn thiện.**
+Config RESUME_RUN='lan_1', VGG16 A, checkpoint cuối epoch 1.
 
-## 1. Tóm tắt việc đã làm
+## 1. Giai đoạn hiện tại
 
-| Phần | Đã hoàn thành |
-|---|---|
-| Thiết kế | CIFAR-10, VGG16/ResNet18/DenseNet121; 6 cấu hình chung/model, tổng 18 lượt × 20 epoch |
-| Dữ liệu | Tải/kiểm tra CIFAR-10; split seed 42: 45.000/5.000/10.000, không giao ID train/validation |
-| EDA | Phân bố lớp, RGB/histogram, preprocessing, kiểm tra trùng pixel; 0 nhóm trùng chính xác |
-| Viewer | Một eda.html, canvas đọc 6 RGB gzip; duyệt đủ 60.000 ảnh, lọc/tìm ID/phân trang/preview |
-| Model | Ba backbone, H1/H2, freeze hoặc mở nhóm cuối; giữ BatchNorm running statistics |
-| Train/log | Vòng lặp trực tiếp, validation mỗi epoch, log máy/config/kiến trúc, TensorBoard, best checkpoint |
-| Evaluate | Đọc config checkpoint, xác minh split hash; metrics/confusion/per-class/ID/confidence/ảnh sai |
-| GPU | `.venv` CUDA hoạt động với RTX 3050 Laptop 4 GB; worker 2 có guard Windows và giới hạn BLAS threads |
-| Tài liệu | README, kế hoạch, Training, Model_QA, AI_Usage_Step/Full; tiến độ riêng tại file này |
+Dừng train, giảm còn 2 model × 3 cấu hình, tạo notebook báo cáo.
 
-**Bằng chứng đã có:**
+Phạm vi sáu lượt giảm thời gian thí nghiệm và giữ đủ đối chiếu trong checklist.
 
-- 12 tổ hợp model/head/freeze qua forward/gradient/update/eval với weights ngẫu nhiên.
-- Smoke CPU train/evaluate khớp checkpoint/scikit-learn; kiểm tra split sai và interrupt đã qua.
-- Smoke GPU pretrained ResNet18 A: batch 64, worker 2, 128 train/64 validation, 1 epoch qua;
-  checkpoint/TensorBoard hoạt động, peak CUDA allocated khoảng 488,8 MiB.
-- Đối chiếu đủ 60.000 pixel/nhãn/hashes; Edge kiểm tra canvas, lọc/phân trang/preview,
-  đọc file cục bộ không mạng và bố cục mobile đã qua.
-- Smoke artifact đã xóa; các kiểm tra trên không được tính là kết quả của 18 lượt chính thức.
+Giữ checkpoint; notebook đọc artifact. Giải thích 5W1H chỉ đặt ở đầu file Python trong src, không áp thành mẫu cho tài liệu/notebook.
 
-## 2. Trạng thái cần nhớ
+## 2. Việc đã làm và bằng chứng
 
-- Config hiện tại: **VGG16 / A / pretrained=True / H1 / freeze backbone**.
-- Adam LR 0,001, weight decay 0, batch 64, 20 epoch; ảnh 224×224, seed 42.
-- `num_workers=0`, `pin_memory=False`; giữ `RUN_TEST=False`. GPU vẫn được dùng khi worker bằng 0.
-- `.venv`: torch 2.11.0+cu126, torchvision 0.26.0+cu126, TensorBoard 2.21.0; pip check qua.
-- `.venv-gpu` thừa đã xóa. Run lỗi worker 2 đã xóa theo yêu cầu; từng lỗi shared mapping Windows 1455.
-- `lan_1` hiện là ResNet18 A thành công (trước đổi tên là lan_2), 20/20 epoch và 14.080 optimizer steps.
-- Best epoch 18: val 88,54%, loss 0,337606; đã đối chiếu history và load được checkpoint.
-- Hoàn tất lúc 14:20:32; tổng thời gian khoảng 3.437 giây. Đây chưa phải kết quả test.
-- Log cũ giữ nguyên đường dẫn lịch sử lan_2; đã thêm dòng ghi nhận đổi tên sang lan_1.
-- Đã evaluate lan_1: train 89,6533%, loss 0,295765; val 88,54%, loss 0,337606, macro-F1 0,885577.
-- Báo cáo metrics/ID/confusion và PNG lỗi đã lưu; tổng số mẫu/lỗi khớp, test chưa chạy.
-- Commit bàn giao gần nhất: `e7c2848` trên `Thái`; lượt train mới và cập nhật tiến độ chưa commit/push.
-- Người dùng đã yêu cầu commit/push toàn bộ tài liệu/cleanup sau review; đối chiếu commit mới nhất bằng Git.
-- 236 atlas PNG đã xóa; giữ 6 file RGB phục vụ HTML. Archive/Python batches và env không nằm trên Git.
-- Yêu cầu mới: không commit bất kỳ data nào, kể cả RGB viewer. Bỏ theo dõi 6 file RGB đã push,
-  giữ file trên máy, bỏ ngoại lệ Git ignore; clone mới cần tải CIFAR-10 và chạy lại EDA.
-- Đã push 4bdb86b lên Thái: không còn file data trong cây Git hiện tại; không rewrite lịch sử cũ.
+- CIFAR-10 local còn đủ; split seed 42: 45.000/5.000/10.000, phân tầng và không giao ID.
+- EDA report/RGB viewer: phân bố lớp, RGB train/histogram, preprocessing, 0 nhóm trùng pixel chính xác.
+- HTML duyệt toàn bộ 60.000 ảnh, bộ lọc/preview; dữ liệu và weights không đưa lên Git.
+- Pipeline 7 Python: config/data/model/logger/EDA/train/evaluate, vòng lặp học trực tiếp.
+- Log/TensorBoard theo epoch, không live.jsonl/progress.json hoặc batch tracking.
+- Resume giữ model/Adam/RNG/DataLoader, có best/last atomic, kiểm tra cấu hình và split.
+- Trước tái cấu trúc: CPU train liên tục/ngắt-resume khớp weights; evaluate khớp sklearn/ID/PNG, test tắt và split sai bị từ chối.
+- Mốc trước lượt VGG16 mới: 0a4eb77 đã push Thái. Đợt bàn giao tiếp theo gồm notebook báo cáo, ma trận sáu lượt, source đã dọn và artifact epoch1; mã commit đối chiếu Git history.
+- Đã dừng launcher PID 2728 và Python PID 18928; GPU 0 MiB/0% tại thời điểm kiểm tra.
+- lan_1 hiện là VGG16 A: 1/20 epoch, val accuracy 79,62%, loss 0,671030; chưa có kết quả test.
+- best.pt/last.pt đều epoch 1, có optimizer/RNG; khớp config A của kế hoạch mới. Resume sẽ bắt đầu epoch 2.
+- Notebook mới gồm mục tiêu, EDA, preprocessing, model, ma trận, luồng train, artifact/curves, evaluate và kết luận/checklist.
+- Đã thực thi toàn bộ code cell trên CPU với artifact local: qua; không train/download/evaluate test, không lưu outputs ảnh vào notebook.
+- Kiểm tra nhánh thiếu dataset/EDA/runs/reports qua; A/B/C có đúng freeze/LR/batch cho sáu tổ hợp; compile src/diff check qua và Markdown tối đa 150 dòng. Chưa kiểm tra giao diện notebook trong IDE.
 
-## 3. Flow chưa làm — tiếp tục theo thứ tự
+## 3. Kế hoạch mới
 
-### Bước 1 — Kiểm tra đầu phiên, chuẩn bị lượt đầu
+| Mã | Backbone | LR | Head/batch/epoch | Đối chiếu |
+|---|---|---:|---|---|
+| A | Freeze | .001 | H1 / 64 / 20 | Baseline |
+| B | Mở nhóm cuối | .001 | H1 / 64 / 20 | A/B: fine-tune |
+| C | Mở nhóm cuối | .0001 | H1 / 64 / 20 | B/C: LR |
 
-- [ ] Đọc AGENTS.md/quy tắc chung, file này và Training.md; kiểm tra Git, config và artifact thực tế.
-- [ ] Xác nhận dùng đúng `.venv`, CUDA=True, còn đủ dữ liệu/split; nếu chuyển máy phải tải lại CIFAR-10 gốc.
-- [ ] Kiểm tra tiến trình đang chạy trước khi train; không khởi tạo hai lượt vô tình cùng lúc.
+Chạy mỗi hàng với VGG16 và DenseNet121, tổng 6 lượt. Không H2/ResNet trong lịch mới, không scheduler/ensemble/TTA.
+model.py chỉ còn VGG16/DenseNet121 và Linear 10 lớp; state_dict VGG16 A được giữ nguyên.
+- Đã bỏ tham số chọn head, thuộc tính head_name/HEAD/TRAIN dư thừa và fallback resume best/reset Adam. Train/evaluate/notebook đồng bộ API; metadata H1 vẫn giữ để nạp checkpoint hiện có.
+- CPU kiểm tra hai backbone × freeze/fine-tune qua shape/gradient/BatchNorm; logits H1 khớp code trước khi dọn. Bản sao last.pt VGG16 A resume/lưu epoch tiếp theo qua; artifact gốc không đổi.
+- Smoke tạm train/save/resume/evaluate theo API mới qua, validation ID/confusion đúng, test tắt; train chính thức vẫn dừng.
+- Notebook có phân tích sau test: tỷ lệ theo lớp, ROC OvR, macro/micro AUC, bảng/curves so sánh; evaluate chỉ lưu xác suất đầy đủ cho test, không đổi RUN_TEST=False.
+- Kiểm tra giả qua: perfect/chance AUC, rates, lớp vắng, thiếu/score sai, plots và từ chối khác split; smoke evaluate xuất Nx10 đúng thứ tự. Chưa chạy test CIFAR-10 chính thức.
+- Toàn bộ code cell notebook mới chạy qua với artifact hiện tại chưa có test report; RUN_TEST=False, outputs trống, compile/diff và giới hạn Markdown qua.
+- Đã thêm PR/per-class AP/macro-micro AP và paired error analysis theo ID: bảng bốn nhóm, theo lớp, ảnh local. Kiểm tra giả AP perfect/chance, ghép ID, nhãn sai/ID trùng, gallery và thiếu report qua; không chạy test thật.
+Mã B/C cũ khác B/C mới; phân loại artifact bằng model_config thực, không chỉ theo chữ A/B/C.
 
-### Bước 2 — Chạy và review baseline A
+## 4. Việc tiếp theo, theo thứ tự
 
-- [x] Theo yêu cầu người dùng đã bắt đầu ResNet18 A; log xác nhận CUDA, pretrained/freeze/head/split đúng.
-- [x] ResNet18 A đủ 20 epoch; xác minh Finished, 20 history rows và best checkpoint đọc được.
-- [x] Evaluate ResNet18 A train/validation, test tắt; đã xuất metrics/confusion/per-class/ảnh sai.
-- [x] Người dùng yêu cầu tiếp tục lượt tiếp theo; thực hiện VGG16 A theo thứ tự ba model ở cấu hình A.
-- [ ] Tiếp tục VGG16 A từ epoch 2 khi được yêu cầu; sau đó DenseNet121 A. VGG16 weights đã kiểm tra.
+1. Kiểm tra nội dung notebook và cấu hình ma trận sáu lượt.
+2. Resume lan_1 VGG16 A từ last.pt, epoch 2; cấu hình giữ nguyên.
+3. Evaluate train/validation của A, test vẫn tắt; chạy DenseNet121 A, rồi B và C của cả hai model.
+4. Cập nhật notebook từ artifact thật; phân biệt run dở/chưa chạy/hoàn tất.
+5. So sánh validation và khóa hai checkpoint trước khi bật test.
+6. Hoàn thiện per-class/confusion/ảnh sai, chi phí train và nhận xét giới hạn một seed.
+7. Cập nhật nhật ký, trạng thái Git và kết quả kiểm tra.
 
-### Bước 3 — Hoàn thành thí nghiệm có kiểm soát
+## 5. Lưu ý bàn giao
 
-- [ ] Tiếp tục B → C → D → E → F theo kế hoạch, mỗi cấu hình chạy đủ ba model.
-- [ ] B đổi LR, C đổi batch, D đổi head, E/F mở nhóm cuối với hai LR; không thêm tổ hợp ngoài ngân sách.
-- [ ] Lưu run/config/checkpoint/epoch/thời gian; đánh dấu thất bại/gián đoạn, không ghi đè run cũ.
-- [ ] So sánh ba model trong cùng cấu hình và các cặp cấu hình trong cùng model bằng validation.
-
-### Bước 4 — Tổng hợp và phân tích kết quả
-
-- [ ] Lập bảng 18 lượt: cấu hình, trạng thái, best epoch, val loss/accuracy, tham số và chi phí thực tế.
-- [ ] Phân tích per-class, confusion, ảnh sai chung/được sửa/sai thêm trên cùng ID và cùng split.
-- [ ] Bổ sung kết quả model/learning curves/so sánh lỗi vào HTML hiện có nếu cần; hiện viewer chỉ có EDA.
-- [ ] Viết nhận xét dựa trên dữ liệu; không kết luận chỉ từ accuracy hoặc gán tác dụng riêng cho từng thành phần H2.
-
-### Bước 5 — Khóa cấu hình rồi đánh giá test
-
-- [ ] Review và khóa một checkpoint cho mỗi model bằng validation trước khi bật test.
-- [ ] Đánh giá ba checkpoint đã khóa trên test; không dùng test để chọn lại hyperparameters.
-- [ ] Hoàn thiện báo cáo so sánh, giới hạn một seed và tổng kết checklist; không áp accuracy mục tiêu tự đặt.
-- [ ] Cập nhật progress và AI_Usage_Step; cuối giai đoạn tổng hợp vào AI_Usage_Full; chỉ commit/push khi được yêu cầu.
-
-## 4. Tài liệu để tiếp tục
-
-- [Experiment_Plan.md](Experiment_Plan.md): cấu hình A–F, kiểm soát thí nghiệm và checklist.
-- [Training.md](Training.md): lệnh train/evaluate/TensorBoard, artifact và xử lý Windows/GPU.
-- [Model_QA.md](Model_QA.md): giải thích model/head/thông số, bổ sung câu hỏi mới tại đây.
-- [AI_Usage_Step.md](AI_Usage_Step.md): ghi từng giai đoạn; [AI_Usage_Full.md](docs/AI_Usage_Full.md): lịch sử tổng hợp.
-- [README.md](README.md): cấu trúc và EDA. Đã đổi tên/hợp nhất log Full/Step theo yêu cầu; không đổi source.
-- Kế hoạch đã bổ sung đúng ImageNet-1K/IMAGENET1K_V1 cho cả ba model, khớp torchvision local; không đổi weights trong code.
-
-Chưa hoàn thành bước nào thì giữ trạng thái chưa làm; chỉ cập nhật sau khi có artifact/bằng chứng.
-
-## Handoff - 2026-10-29
-
-- ResNet18 A (lan_1): completed 20 epochs; best epoch 18, validation accuracy 88.54%. No last checkpoint exists for this older run.
-- VGG16 A (lan_2): restarted from scratch at user request, then stopped after epoch 1. best.pt/last.pt verified with Adam state; next epoch is 2.
-- RESUME_RUN='lan_2'; no training restart authorized in this Git session. Local checkpoints are required to resume.
-- New checkpoints save optimizer and Python/NumPy/Torch/CUDA/DataLoader RNG; resume validates experiment, data and split settings.
-- CPU smoke checks passed for best/last saving, same-folder resume, state restoration and legacy fallback.
-- Text logs and TensorBoard now record epoch metrics only; batch tracking, live.jsonl and progress.json removed.
-- EDA HTML embeds TensorBoard directly; no training.js or custom train dashboard. Server/API previously verified; browser embedding not yet verified.
-- Live Server ignores outputs/data/events to prevent artifact changes from reloading the page; cause was inferred, not reproduced in browser.
-- Earlier temporary legacy resume/reset-Adam trial was deleted when the user requested a fresh lan_2. See AI usage records for history.
-- Git excludes datasets, weights, TensorBoard events and dataset-derived error images; local files remain available.
-- User authorized commit and push to Thai branch on 2026-10-29. Check Git history for final commit identity.
-- Kiểm tra trước push lần tiếp theo: outputs/runs trống, Git ghi nhận xóa các báo cáo/log cũ. Không thể phục hồi weights từ Git vì checkpoint luôn được ignore. Lịch sử kết quả phía trên chỉ là kết quả từng ghi nhận.
+- Lượt ResNet18 A cũ từng đạt best val 88,54%, nhưng outputs/runs cũ đã trống trước lượt VGG16 hiện tại; chỉ là lịch sử, không ghép vào ma trận mới.
+- Đừng nhầm lan_1 mới với lan_1 ResNet cũ. Nguồn nhận diện là config.json và checkpoint thực.
+- Notebook không tự chạy train/test; cell kiến trúc tạo model ngẫu nhiên CPU chỉ để xem cấu trúc.
+- Đã bỏ bố cục 5W1H khỏi tài liệu/notebook, thêm docstring ngắn ở đầu 7 file src; không đổi logic hay code cell. Compile qua, train vẫn dừng.
+- Notebook trình bày mục tiêu/phương pháp/thí nghiệm/kết quả/giới hạn, tài liệu tham khảo ở cuối. Logic phân tích giữ nguyên; train vẫn dừng.
+- Markdown đã chuẩn hóa thành ghi chú kỹ thuật; Full theo lịch sử ngày, Step theo giai đoạn, không kể hội thoại. Giữ thông tin đo được, lỗi, kiểm tra và bước tiếp theo.
+- Xem Experiment_Plan.md, Training.md, Practice_2_Report.ipynb, AI_Usage_Step.md và docs/AI_Usage_Full.md.
