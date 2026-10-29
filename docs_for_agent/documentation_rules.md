@@ -6,6 +6,12 @@
 
 ## General
 
+- Apply 5W1H only to a concise opening comment/docstring in project src/ Python files: What, Why, Who (caller/user), When (workflow step), Where (inputs/outputs), How (main processing). Do not repeat it for every function or impose it on Markdown/notebooks; organize those naturally by purpose, workflow and results.
+- Report measured results with model, split, checkpoint epoch, configuration and artifact source. Separate plans, smoke tests, interrupted runs and completed experiments; never invent missing results or equate validation with test.
+- A presentation notebook explains the workflow and reads artifacts; Python scripts remain the single training implementation. Run All must not start training, download weights, or evaluate test automatically.
+- Write presentation notebooks as academic reports: objectives, methods, experiment design, measured results and limitations. Put development history and operational status in technical progress/AI usage journals instead. Omit conversational content and agent instructions from project reports. References may appear as a normal bibliography.
+- Write project Markdown, including progress/AI usage journals, as technical notes: dated work, design decisions, files, checks, measured results and next steps. Avoid conversation transcripts or requester/agent narration; preserve AI assistance transparency through task/tool/validation records rather than quoted requests.
+
 - Maximum 150 lines per Markdown file. Split longer files and link them using relative paths.
 - Keep documentation concise, factual, and synchronized with code.
 - Do not create empty placeholder documents or folders.

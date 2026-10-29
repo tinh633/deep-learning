@@ -1,3 +1,11 @@
+"""What: Train và validation một model/cấu hình đã chọn.
+Why: Đo ảnh hưởng freeze/fine-tune/LR và giữ checkpoint để tiếp tục.
+Who: Người học khởi chạy rõ ràng; notebook không gọi script này.
+When: Sau EDA/review, theo epoch; resume từ epoch đã hoàn tất gần nhất.
+Where: DataLoader từ data.py, device CPU/CUDA, artifact outputs/runs/lan_N.
+How: Forward/loss/backward/Adam, validation no_grad, ghi best/last mỗi epoch.
+"""
+
 import os
 
 # Windows workers import this file; avoid multiplying BLAS thread pools.
@@ -47,7 +55,6 @@ if __name__ == '__main__':
         train_loader, val_loader, _ = build_loaders(config.DATA, download=False)
         model = PretrainedCNN(
             name=config.MODEL_NAME,
-            head=config.HEAD,
             fine_tune=config.FINE_TUNE,
             pretrained=config.PRETRAINED and config.RESUME_RUN is None,
         )

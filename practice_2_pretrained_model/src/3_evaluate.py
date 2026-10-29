@@ -1,3 +1,11 @@
+"""What: Đánh giá checkpoint và phân tích lớp/ảnh dự đoán sai.
+Why: Kiểm tra chất lượng model ngoài loss/accuracy trong lúc train.
+Who: Người học chọn EVAL_RUN; chỉ bật test sau khi khóa checkpoint.
+When: Sau train hoặc khi review checkpoint, không tự chạy từ notebook.
+Where: Đọc best.pt/split; ghi metrics/log và ảnh sai của đúng run.
+How: Khôi phục config thực, eval/no_grad, metrics sklearn và gallery lỗi.
+"""
+
 import os
 
 # Windows workers import this file; avoid multiplying BLAS thread pools.
@@ -63,8 +71,8 @@ if __name__ == '__main__':
         if split_hash != settings['split_sha256']:
             raise ValueError('Current split does not match checkpoint split SHA-256.')
         model_config = settings['model_config']
-        model = PretrainedCNN(settings['model_name'], model_config['head'],
-                              model_config['fine_tune'], pretrained=False)
+        model = PretrainedCNN(settings['model_name'],
+                              fine_tune=model_config['fine_tune'], pretrained=False)
         model.load_state_dict(saved['model_state'], strict=True)
         model = model.to(device)
         model.eval()
@@ -91,6 +99,7 @@ if __name__ == '__main__':
         for split, loader in loaders.items():
             split_started = time.perf_counter()
             targets, predictions, confidences = [], [], []
+            probabilities = []
             loss_sum = 0.0
             with torch.no_grad():
                 for images, labels in loader:
@@ -98,7 +107,10 @@ if __name__ == '__main__':
                     labels = labels.to(device)
                     outputs = model(images)
                     loss = criterion(outputs, labels)
-                    confidence, predicted = outputs.softmax(dim=1).max(dim=1)
+                    scores = outputs.softmax(dim=1)
+                    confidence, predicted = scores.max(dim=1)
+                    if split == 'test':
+                        probabilities.extend(scores.cpu().tolist())
                     loss_sum += loss.item() * len(labels)
                     targets.extend(labels.cpu().tolist())
                     predictions.extend(predicted.cpu().tolist())
@@ -126,7 +138,10 @@ if __name__ == '__main__':
                 per_class.append(dict(
                     label=i, name=name, precision=float(precision[i]), recall=float(recall[i]),
                     f1=float(f1[i]), support=int(support[i]), tp=int(tp[i]), tn=int(tn[i]),
-                    fp=int(fp[i]), fn=int(fn[i])))
+                    fp=int(fp[i]), fn=int(fn[i]),
+                    tpr=float(tp[i] / support[i]) if support[i] else None,
+                    fpr=float(fp[i] / (fp[i] + tn[i])) if fp[i] + tn[i] else None,
+                    specificity=float(tn[i] / (fp[i] + tn[i])) if fp[i] + tn[i] else None))
 
             result = dict(
                 checkpoint=str(checkpoint_path), checkpoint_sha256=checkpoint_hash,
@@ -145,6 +160,15 @@ if __name__ == '__main__':
                 raise ValueError('Prediction count does not match dataset size.')
             if not math.isfinite(result['loss']) or not np.isfinite(confidences).all():
                 raise ValueError('Non-finite evaluation result.')
+            # ROC needs every class score, in the same row order as predictions.
+            if split == 'test':
+                scores = np.asarray(probabilities)
+                if (scores.shape != (len(records), len(classes)) or
+                        not np.isfinite(scores).all() or
+                        not np.allclose(scores.sum(axis=1), 1, atol=1e-5)):
+                    raise ValueError('Invalid test probabilities.')
+                result['probabilities'] = probabilities
+                result['probability_class_order'] = classes
             save_json(folder / f'{split}_metrics.json', result)
 
             examples = sorted(wrong, key=lambda row: (-row['confidence'], row['id']))[:24]

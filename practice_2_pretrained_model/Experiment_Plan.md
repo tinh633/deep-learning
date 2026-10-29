@@ -1,141 +1,102 @@
-# Practice 2 — Kế hoạch thí nghiệm Pretrained CNN trên CIFAR-10
+# Practice 2 — Kế hoạch 6 lượt train
 
-## 1. Mục tiêu và phạm vi
+## 1. Phạm vi
 
-- Bám [yêu cầu và checklist Practice 2](Practice_2_Pretrained_CNN_Requirements.md).
-- Dùng duy nhất CIFAR-10, bài toán phân loại ảnh RGB thành 10 lớp.
-- So sánh VGG16, ResNet18 và DenseNet121 với weights pretrained **ImageNet-1K (1.000 lớp), IMAGENET1K_V1**.
-- Khảo sát thay classification head, freeze/unfreeze, learning rate và batch size.
-- Theo dõi bằng TensorBoard; đánh giá và phân tích kết quả theo cùng quy trình.
-- Kế hoạch ban đầu: **18 lượt train chính thức = 3 model × 6 cấu hình**.
-- Kế hoạch đã được chấp nhận; ResNet18 A đã hoàn tất, tiến độ cập nhật tại [progress.md](progress.md).
-- [README](README.md) ghi tổ chức 7 file Python, EDA, logging và trình tự triển khai.
+Phân loại CIFAR-10 bằng VGG16 và DenseNet121 pretrained ImageNet-1K.
 
-### Lý do chọn ba model
+Đáp ứng checklist VGG/DenseNet, transfer learning, fine-tuning và thay đổi hyperparameter với thời gian vừa phải.
 
-| Model | Điểm nổi bật | Vai trò trong lab |
-|---|---|---|
-| VGG16 | Các lớp convolution 3×3 xếp tuần tự theo block | Đối chứng kiến trúc tuần tự, dễ quan sát backbone/head |
-| ResNet18 | Residual connection cộng đầu vào với đầu ra nhánh biến đổi | Khảo sát đặc trưng pretrained của kiến trúc residual |
-| DenseNet121 | Nối các feature từ lớp trước trong cùng dense block | Khảo sát tái sử dụng feature qua dense connections |
+Cùng split, preprocessing, seed, optimizer và ngân sách 20 epoch; đổi từng yếu tố.
 
-Ba model đại diện ba cách kết nối khác nhau, đủ để so sánh có trọng tâm trong 18 lượt;
-VGG và DenseNet cũng bám các ví dụ trong đề. Không mặc định model nào chính xác hơn.
-Kết quả còn phụ thuộc pretraining, độ sâu, số tham số và head; không quy mọi chênh lệch
-cho riêng kiểu kết nối. VGG16 đã thay head nên không so nguyên bản ba model ImageNet-1K.
+Thay kế hoạch cũ 3 model × 6 cấu hình bằng **2 model × 3 cấu hình = 6 lượt**.
+Không đặt accuracy bắt buộc. Không thêm ensemble/TTA/HPO/scheduler vào phạm vi này.
+model.py chỉ triển khai VGG16/DenseNet121 với head Linear 10 lớp.
 
-## 2. Dữ liệu và điều kiện chung
+## 2. Lý do chọn model và kiến trúc
 
-- Chia 50.000 ảnh train chính thức thành 45.000 train và 5.000 validation.
-- Chia phân tầng theo lớp, seed 42; lưu chỉ số và dùng đúng một split cho mọi lượt.
-- Giữ riêng 10.000 ảnh test chính thức; không dùng để chọn cấu hình hoặc epoch.
-- Kiểm tra số lượng, phân bố lớp, nhãn và tính không giao nhau giữa các split.
-- Ảnh đầu vào thống nhất 224×224; dùng cùng nội suy và chuẩn hóa ImageNet.
-- Train: resize, random horizontal flip, chuyển tensor và chuẩn hóa.
-- Validation/test: resize, chuyển tensor và chuẩn hóa; không augmentation ngẫu nhiên.
-- Không dùng augmentation riêng cho từng model; ghi rõ ảnh gốc chỉ có 32×32.
-- Mọi lượt dùng cùng seed 42 và cùng quy tắc seed cho DataLoader/augmentation.
-- Cố định phiên bản thư viện, thiết bị và chế độ số học; lưu cấu hình thực tế.
+| Model | Đặc điểm | Backbone/head dùng trong lab | Fine-tune mở phần nào? |
+|---|---|---|---|
+| VGG16 | Các block convolution 3×3 tuần tự, dễ giải thích | features → GAP 1×1 → flatten → Linear(512,10) | Ba conv cuối: features.24/26/28 |
+| DenseNet121 | Nối feature các lớp trước, tái sử dụng đặc trưng | features → ReLU → GAP 1×1 → flatten → Linear(1024,10) | denseblock4 và norm5 |
 
-## 3. Khám phá kiến trúc và thay head
+- Pretrained: torchvision ImageNet-1K (1.000 lớp), IMAGENET1K_V1 cho cả hai model.
+- Thay head 1.000 lớp bằng H1: Linear(D,10). Không thử H2 trong kế hoạch mới.
+- Freeze: backbone không học, chỉ head nhận gradient.
+- Fine-tune: mở nhóm cuối cùng head; phần trước vẫn freeze.
+- Giữ running statistics BatchNorm; affine chỉ học nếu thuộc nhóm mở.
+- Không đổi tên state_dict hoặc kiến trúc VGG16 A đã train; giữ khả năng resume.
 
-Trước khi train, in kiến trúc gốc, xác định feature extractor và classification head;
-ghi tổng tham số, tham số được train và kích thước feature đầu vào head.
+## 3. Dữ liệu và EDA
 
-| Model | Weights pretrained ImageNet-1K | Feature extractor giữ lại | Head gốc được thay | Nhóm cuối mở khi fine-tune |
-|---|---|---|---|---|
-| VGG16 | `VGG16_Weights.IMAGENET1K_V1` | `features` | Toàn bộ `classifier` | Các conv của block 5 |
-| ResNet18 | `ResNet18_Weights.IMAGENET1K_V1` | Backbone trước `fc` | `fc` | `layer4` |
-| DenseNet121 | `DenseNet121_Weights.IMAGENET1K_V1` | `features` | `classifier` | `denseblock4` và `norm5` |
+- CIFAR-10: ảnh RGB 32×32, 10 lớp; 45.000 train / 5.000 validation / 10.000 test.
+- Một split phân tầng seed 42 cho cả sáu lượt; kiểm tra coverage, nhãn và ID không giao nhau.
+- EDA: ảnh mẫu từng lớp, phân bố lớp, shape/dtype/range, RGB mean/std/histogram, ảnh trùng và preprocessing.
+- Thống kê RGB tính từ train; không fit preprocessing hoặc chọn cấu hình bằng test.
+- Train: resize bilinear antialias 224×224 → random horizontal flip → tensor → normalize ImageNet.
+- Validation/test: resize → tensor → normalize; không augmentation ngẫu nhiên.
+- ImageNet mean (0.485,0.456,0.406), std (0.229,0.224,0.225); resize không tạo thêm chi tiết.
+- HTML giữ bộ duyệt đầy đủ dữ liệu; notebook dùng EDA report và ảnh mẫu để trình bày.
 
-- Nguồn weights: torchvision/PyTorch chính thức, không phải weights ImageNet-21K/22K.
-- Trong torchvision đang dùng, `DEFAULT` của cả ba model trỏ đến đúng `IMAGENET1K_V1` ở bảng.
-- **1K** là 1.000 lớp của tập pretraining; **V1** là phiên bản weights, không phải phiên bản kiến trúc.
-- Thay head ImageNet 1.000 lớp bằng head CIFAR-10 10 lớp; mỗi lượt khởi tạo từ cùng weights đã định.
-- Tài liệu nguồn: [VGG16](https://docs.pytorch.org/vision/stable/models/generated/torchvision.models.vgg16.html), [ResNet18](https://docs.pytorch.org/vision/stable/models/generated/torchvision.models.resnet18.html), [DenseNet121](https://docs.pytorch.org/vision/stable/models/generated/torchvision.models.densenet121.html).
+## 4. Ma trận thí nghiệm mới
 
-- Chuẩn hóa đầu ra backbone bằng adaptive average pooling 1×1 rồi flatten.
-- Head H1: `Linear(D, 10)`, với D là số kênh feature của từng backbone.
-- Head H2: `Linear(D, 256) → ReLU → Dropout(0.2) → Linear(256, 10)`.
-- Giữ nguyên cấu trúc và trọng số pretrained bên trong feature extractor.
+Mỗi hàng chạy đủ **VGG16 và DenseNet121**; tổng sáu lượt, tối đa 120 model-epoch.
 
-Giải thích lựa chọn và giới hạn so sánh H1/H2 tại [Model_QA.md](Model_QA.md).
+| Mã | Backbone | Head | LR | Batch | Câu hỏi đối chiếu |
+|---|---|---|---:|---:|---|
+| A | Freeze | H1 | 0.001 | 64 | Baseline transfer learning |
+| B | Mở nhóm cuối | H1 | 0.001 | 64 | A/B: fine-tune có cải thiện không? |
+| C | Mở nhóm cuối | H1 | 0.0001 | 64 | B/C: LR thấp hơn ảnh hưởng thế nào? |
 
-## 4. Freeze và unfreeze
+- CrossEntropyLoss, Adam, weight decay 0, 20 epoch/lượt; không scheduler/early stopping.
+- Mỗi model bắt đầu từ pretrained và seed 42 cho từng cấu hình, không nạp A để tạo B/C.
+- Resume chỉ tiếp tục đúng run bị ngắt, cùng model/cấu hình/split và ngân sách ban đầu.
+- Cùng LR phục vụ đối chứng; không khẳng định đó là LR tối ưu cho mọi model.
+- Nhóm cuối có số tham số khác nhau; không quy toàn bộ chênh lệch cho riêng kiểu kết nối.
+- Thứ tự: hoàn tất A của hai model, rồi B, rồi C; không chạy đồng thời trên GPU 4 GB.
+- Mã B/C mới khác B/C cũ. Dùng model_config thực trong checkpoint để phân loại kết quả lịch sử.
 
-- **Freeze:** mọi tham số backbone không nhận gradient; chỉ train head mới.
-- Đặt backbone ở `eval()` khi train để giữ hành vi Dropout/BatchNorm ổn định.
-- **Fine-tune:** chỉ mở nhóm cuối trong bảng; các nhóm trước vẫn đóng băng.
-- Khi fine-tune, BatchNorm giữ running statistics ở chế độ eval; affine parameters
-  chỉ được train nếu thuộc nhóm đã mở. Head luôn ở chế độ train trong bước train.
-- Các nhóm cuối có quy mô khác nhau: đây là so sánh theo cùng chính sách mở block,
-  không phải so sánh với số tham số được train bằng nhau.
+## 5. Log, checkpoint và trình bày kết quả
 
-## 5. Ma trận 18 lượt train
+- Ghi một lần môi trường, kiến trúc, pretrained identifier, split hash, transforms và optimizer thực tế.
+- Mỗi epoch ghi train/val loss, accuracy, LR, thời gian; TensorBoard cùng metrics, không theo dõi batch.
+- best.pt: val accuracy cao nhất; hòa chọn val loss thấp hơn; vẫn hòa giữ epoch sớm hơn.
+- last.pt: epoch hoàn tất gần nhất, model/Adam/random/DataLoader state để resume.
+- Dừng giữa epoch thì phần epoch chưa hoàn tất không được tính; chạy lại epoch đó khi resume.
+- Notebook đọc artifact thật, gắn model/cấu hình/split/epoch/nguồn; thiếu thì ghi chưa có, không tạo số minh họa.
+- Lượt gián đoạn chưa được tính là thí nghiệm hoàn tất và không so như lượt đủ 20 epoch.
 
-Mỗi hàng bên dưới phải chạy đủ **VGG16, ResNet18 và DenseNet121**.
+## 6. Đánh giá và so sánh
 
-| Mã | Backbone | Head | LR | Batch | Mục đích đối chiếu |
-|---|---|---|---|---|---|
-| A | Freeze | H1 | 0.001 | 64 | Baseline chung |
-| B | Freeze | H1 | 0.0001 | 64 | B so với A: chỉ đổi LR |
-| C | Freeze | H1 | 0.001 | 32 | C so với A: chỉ đổi batch |
-| D | Freeze | H2 | 0.001 | 64 | D so với A: chỉ đổi head |
-| E | Mở nhóm cuối | H1 | 0.001 | 64 | E so với A: chỉ đổi freeze policy |
-| F | Mở nhóm cuối | H1 | 0.0001 | 64 | F so với B: đổi freeze; F/E: đổi LR |
+- Dùng validation chọn một cấu hình/checkpoint cho mỗi model; khóa hai checkpoint trước test.
+- Chỉ sau xác nhận mới bật RUN_TEST; test không dùng chọn LR, epoch hoặc fine-tune policy.
+- Metrics: loss, accuracy, macro-F1, precision/recall/F1 theo lớp và confusion matrix.
+- Sau test: TP/TN/FP/FN, TPR/recall, FPR, specificity; ROC OvR từng lớp và macro/micro AUC. TPR/FPR argmax tách biệt với ROC quét ngưỡng.
+- Lưu xác suất đủ 10 lớp và thứ tự cột trong test report để notebook phân tích; so cùng split/ID/nhãn, không chọn ngưỡng hoặc cấu hình bằng test.
+- Phân tích ảnh sai theo ID thật, confidence và cặp lớp nhầm; so cùng ID/split.
+- Bổ sung PR/AP OvR theo lớp, macro/micro AP và đối chiếu bốn nhóm đúng/sai giữa hai checkpoint; không tự chọn cặp bằng điểm test.
+- Báo cáo thời gian, trainable parameters, GPU nếu đo được; một seed không chứng minh ưu thế thống kê.
+- Ghi kết quả kèm model/cấu hình, split/device, epoch và artifact nguồn.
 
-- Cả 18 lượt: CrossEntropyLoss, Adam, weight decay 0, không scheduler.
-- Cố định 20 epoch/lượt, không early stopping để cùng ngân sách epoch.
-- LR trong bảng áp dụng cho toàn bộ tham số đang được train, gồm cả head.
-- Mỗi lượt khởi tạo lại từ cùng pretrained weights và seed; không tiếp tục từ A.
-- Không đổi cấu hình riêng cho một model giữa chừng hoặc ghi đè lượt thất bại.
-- Nếu OOM/lỗi số học, ghi trạng thái thất bại; review điều chỉnh chung trước khi chạy lại.
-- Batch 32 tạo nhiều optimizer step hơn batch 64; ghi số step và thời gian thực tế.
-- Ma trận có kiểm soát từng thay đổi, chưa khảo sát đầy đủ mọi tương tác tham số.
+## 7. Đối chiếu checklist
 
-## 6. TensorBoard, lưu kết quả và đánh giá
-
-- Mỗi lượt có thư mục riêng `outputs/runs/lan_N/`; không ghi đè lượt cũ.
-- Lưu model/weights identifier, split, seed, preprocessing, head, freeze policy,
-  optimizer, LR, batch, epoch, tham số train, phiên bản thư viện và thiết bị.
-- TensorBoard ghi theo epoch: train/val loss, accuracy, LR và thời gian epoch.
-- Console/file log ghi một dòng mỗi epoch, không log từng batch hoặc mở rộng ngân sách chưa duyệt.
-- Lưu best checkpoint theo validation accuracy; hòa thì chọn validation loss thấp hơn,
-  nếu vẫn hòa giữ epoch sớm hơn. Lưu epoch và metrics tương ứng.
-- Báo cáo validation accuracy/loss, best epoch, thời gian train, tham số train và
-  bộ nhớ GPU đỉnh nếu đo được trên cùng thiết bị.
-- Chọn cấu hình tốt nhất của mỗi model bằng validation và khóa cả ba trước khi test.
-- Đánh giá test một lần cho mỗi checkpoint đã khóa: loss, accuracy, macro-F1,
-  precision/recall/F1 từng lớp, confusion matrix và ví dụ dự đoán sai.
-- Không dùng kết quả test để quay lại tuning; chưa công bố model cuối khi chưa review.
-- Một seed chỉ cho kết quả trong thiết lập này, chưa chứng minh ưu thế thống kê.
-- Cùng LR là đối chứng có kiểm soát, không đảm bảo LR tối ưu cho mọi kiến trúc.
-
-## 7. Đối chiếu checklist và tiêu chí hoàn thành
-
-| Checklist gốc | Kế hoạch đáp ứng / bằng chứng cần có |
+| Yêu cầu | Bằng chứng |
 |---|---|
-| 1. Dataset | CIFAR-10; split cố định, thống kê và kiểm tra dữ liệu |
-| 2. Models | VGG16, ResNet18, DenseNet121; bảng khám phá kiến trúc |
-| 3. Load pretrained | ImageNet-1K (1.000 lớp), IMAGENET1K_V1 theo bảng model; lưu định danh thực tế |
-| 4. Transfer learning | A–D: backbone freeze, head mới H1/H2 |
-| 5. Fine-tuning | E–F: mở nhóm cuối, kiểm tra gradient/tham số cập nhật |
-| 6. Hyperparameters | A/B và E/F đổi LR; A/C đổi batch, đồng bộ cả ba model |
-| 7. Training | Đủ 18 lượt hoàn thành; lỗi/gián đoạn phải được ghi rõ |
-| 8. TensorBoard | Có event logs và đường cong train/validation của từng lượt |
-| 9. Evaluation | Ba checkpoint khóa bằng validation rồi mới đánh giá test |
-| 10. Comparison | Bảng 18 lượt, đối chiếu từng yếu tố và phân tích lỗi |
+| Dataset/EDA | CIFAR-10, split cố định, EDA report và notebook |
+| VGG/DenseNet/pretrained | Hai model, ImageNet-1K V1, kiến trúc/tham số thực |
+| Transfer learning | A: thay head H1, freeze backbone |
+| Fine-tuning | B/C: mở nhóm cuối |
+| Hyperparameters | B/C chỉ thay learning rate; batch giữ cố định |
+| Train/TensorBoard | Sáu lượt đủ epoch, event logs, history và best/last |
+| Evaluation | Hai checkpoint khóa bằng validation rồi mới test |
+| Comparison | Bảng sáu lượt, đường cong, per-class/confusion/ảnh sai và giới hạn |
 
-Không đặt accuracy bắt buộc vì đề bài không quy định. Hoàn thành khi có đủ bằng chứng
-trong bảng, báo cáo đúng giới hạn thí nghiệm và không trộn validation với test.
+## 8. Flow thực hiện
 
-## 8. Tiến độ và bước tiếp theo
+1. Mở [Practice_2_Report.ipynb](Practice_2_Report.ipynb), chọn .venv, Run All để đọc EDA/artifact.
+2. Kiểm tra notebook và cấu hình; train hiện đang tạm dừng.
+3. Tiếp tục VGG16 A từ last.pt đã giữ; epoch đã hoàn tất không chạy lại.
+4. Chạy các lượt còn lại theo ma trận mới, cập nhật notebook từ artifact.
+5. Review/khóa checkpoint, evaluate test rồi hoàn thiện nhận xét.
 
-- Data/EDA thật đã kiểm tra; `model.py` có PretrainedCNN, `config.py` đủ A–F; xem progress để biết lượt hiện tại.
-- 12 tổ hợp weights ngẫu nhiên qua forward/gradient/update; frozen weights/BN không đổi, eval đúng.
-- H1 tổng tham số VGG16/ResNet18/DenseNet121: 14.719.818 / 11.181.642 / 6.964.106;
-  fine-tune trainable tương ứng: 7.084.554 / 8.398.858 / 2.170.378.
-- Train/evaluate đã smoke test riêng; các kiểm tra tạm không thuộc 18 lượt chính thức.
-- Logger/train đã triển khai, smoke test tạm A/E trên CIFAR-10 nhỏ đã qua; xem [Training.md](Training.md).
-- ResNet18 A đã hoàn tất 20 epoch trên GPU, best epoch 18 val 88,54%; kết quả test chưa đo.
-- Ghi từng giai đoạn ở [AI_Usage_Step.md](AI_Usage_Step.md), rồi tổng hợp vào [AI_Usage_Full.md](docs/AI_Usage_Full.md).
+Chi tiết vận hành: [Training.md](Training.md). Trạng thái hiện tại: [progress.md](progress.md).
+Nhật ký AI: [Step](AI_Usage_Step.md), [Full](docs/AI_Usage_Full.md).
