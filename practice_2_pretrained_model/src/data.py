@@ -60,7 +60,8 @@ def seed_worker(worker_id):
     np.random.seed(seed)
 
 
-def build_loaders(settings=None, download=False):
+def build_loaders(settings=None, download=False, training=True):
+    """Use augmentation/shuffling only when preparing a training run."""
     settings = DATA if settings is None else settings
     train, test = load_datasets(download=download)
     train_ids, val_ids = load_split(train.targets, settings)
@@ -72,6 +73,8 @@ def build_loaders(settings=None, download=False):
     train.transform = transforms.Compose([
         resize, transforms.RandomHorizontalFlip(), transforms.ToTensor(), normalize])
     evaluation_transform = transforms.Compose([resize, transforms.ToTensor(), normalize])
+    if not training:
+        train.transform = evaluation_transform
     validation.transform = evaluation_transform
     test.transform = evaluation_transform
 
@@ -80,7 +83,7 @@ def build_loaders(settings=None, download=False):
                    num_workers=settings['num_workers'],
                    pin_memory=settings['pin_memory'], worker_init_fn=seed_worker)
     train_loader = DataLoader(
-        Subset(train, train_ids), shuffle=True,
+        Subset(train, train_ids), shuffle=training,
         generator=torch.Generator().manual_seed(settings['seed']), **options)
     val_loader = DataLoader(Subset(validation, val_ids), shuffle=False, **options)
     test_loader = DataLoader(test, shuffle=False, **options)

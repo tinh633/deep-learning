@@ -1,4 +1,13 @@
 # AI Usage Full — Practice 2
+
+## 2026-10-29 — Làm gọn src
+- Người dùng yêu cầu push rồi train thử; trước push phát hiện outputs/runs trống, không còn checkpoint local để resume. Compile/diff check qua; cần xác định train mới hay smoke trước khi chạy.
+- Review riêng config/train: hằng số thay truy cập dictionary trong luồng chính; get_settings() tạo metadata giữ format cũ, model nhận keyword rõ tên; giữ vòng học trực tiếp, chưa đổi run thật.
+- Kiểm tra config khớp lan_2 và smoke CPU continuous/resume khớp weights, best/last/history qua; compile/diff check qua. Chưa commit và chờ review phần này.
+- Sau phản hồi về độ rối, viết lại train ngắn hơn: chuyển resume/save checkpoint vào logger, giữ vòng lặp học và validation trực tiếp. Smoke CPU fresh/best/last/ngắt-resume khớp weights, chặn cấu hình đổi; không train thật.
+- Theo yêu cầu người dùng: giữ 7 module, vòng lặp trực tiếp, gộp xử lý log/JSON/hash; bỏ registry không dùng, chia bước, tách vẽ ảnh sai khỏi evaluate.
+- Sửa evaluate đọc checkpoint chứa NumPy RNG và dùng data không augmentation/shuffle. SHA-256 vẫn xác minh split và định danh checkpoint.
+- CPU smoke tạm qua: train liên tục/ngắt-resume khớp weights, metrics sklearn/ID/PNG, test tắt và split sai bị chặn. Không đổi run chính thức, chưa commit/push.
 Nhật ký toàn bộ quá trình phối hợp AI của Practice 2, cập nhật từ
 [AI_Usage_Step.md](../AI_Usage_Step.md) sau mỗi giai đoạn hoặc khi bàn giao.
 Mỗi mục phản ánh trạng thái tại thời điểm đó; hiện trạng xem [progress.md](../progress.md).

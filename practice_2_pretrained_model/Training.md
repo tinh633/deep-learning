@@ -25,7 +25,7 @@ Từ gốc workspace, sau review có thể chạy:
 
 Lệnh này chạy một lượt thật theo config hiện tại, không phải smoke test.
 Chưa chạy lệnh nguyên cấu hình chính thức trong phiên triển khai này.
-Chạy lại tạo lượt mới, không resume hoặc ghi đè run cũ.
+`RESUME_RUN=None` tạo lượt mới; chọn tên run để tiếp tục từ checkpoint cuối epoch.
 
 ## Luồng code
 
@@ -50,7 +50,7 @@ Trong `outputs/runs/lan_N/`:
 | `tensorboard/` | Event files: config/architecture và metrics mỗi epoch |
 
 Best checkpoint được ghi qua file tạm rồi thay thế, tránh ghi đè trực tiếp checkpoint tốt nhất.
-Không lưu optimizer state/resume; checkpoint phục vụ đánh giá và tái dựng model.
+`last.pt` lưu optimizer và random state để resume; `best.pt` phục vụ đánh giá theo validation.
 Log cuối ghi tổng thời gian, số optimizer step, số epoch hoàn tất và GPU memory peak nếu có.
 Log flush trong quá trình chạy; TensorBoard writer và log handlers được đóng ở finally.
 
@@ -100,7 +100,7 @@ Mở địa chỉ localhost do TensorBoard in ra. Không có dashboard kết qu�
 - Loss/accuracy khớp checkpoint; sklearn metrics, TP/TN/FP/FN, zero-support, IDs và PNG sai: qua.
 - Test mặc định bị chặn bằng sentinel; nhánh RUN_TEST=True kiểm tra trên 5 ảnh giả, không dùng test thật.
 - Split hash sai bị từ chối, báo cáo cũ được giữ. Các artifact tạm đã xóa.
-- Chưa đánh giá checkpoint pretrained đã train chính thức; smoke evaluate trước đây dùng CPU.
+- ResNet18 A đã evaluate train/validation; không chạy test. Smoke bổ sung dùng CPU và dữ liệu tạm.
 
 ## Chuyển `.venv` sang GPU — 2026-10-27
 
@@ -120,10 +120,21 @@ Mở địa chỉ localhost do TensorBoard in ra. Không có dashboard kết qu�
   Worker 2, checkpoint/TensorBoard qua; peak CUDA allocated khoảng 488,8 MiB.
 - Chỉ kiểm tra luồng trên tập nhỏ; không dùng thời gian/accuracy này làm kết quả full epoch.
 - `pip check` không có dependency lỗi. Script và artifact smoke tạm đã xóa.
-- Chưa chạy lượt GPU 20 epoch; khởi chạy mới sẽ tạo lan_N mới, không resume lượt CPU cũ.
+- ResNet18 A đã hoàn tất 20 epoch trên GPU; VGG16 A hiện dừng sau epoch 1.
 - Trong VS Code chọn interpreter `D:\newtask\DL\.venv\Scripts\python.exe`.
 
 ## Resume after interruption
+
+Config/train review: edit MODEL_NAME, EXPERIMENT and RESUME_RUN at the top of config.py; EPOCHS/SEED/NUM_WORKERS are plain constants. HEAD/FINE_TUNE/LEARNING_RATE/BATCH_SIZE follow the selected experiment. get_settings() assembles checkpoint metadata; train reads config constants directly. Existing checkpoint settings remain compatible.
+
+Code cleanup (2026-10-29): keep the existing seven modules and direct train/evaluate loops. Group each script into visible steps, reuse JSON/log/file hashing helpers, and isolate only error-gallery drawing inside evaluate. Preserve old checkpoint/report formats and epoch-only logging; no new training run during refactoring.
+
+After user review, train was shortened further: logger owns `resume_training` and `save_epoch`; train keeps direct data/model/loss/optimizer, train/validation loops and epoch metrics. CPU continuous/resumed weights matched again; changed resume settings were rejected. No Trainer class or extra module was added.
+
+- `build_loaders(training=False)` prepares deterministic evaluation data without augmentation/shuffling.
+- SHA-256 identifies the saved split/checkpoint; `file_sha256` in logger reads files as a stream. No effect on prediction metrics.
+- Evaluate loads trusted local checkpoints with `weights_only=False` to support existing NumPy RNG state.
+- Verification: CPU continuous vs interrupted/resumed weights matched; sklearn metrics/IDs/error PNG and split mismatch checks passed on temporary data. Official runs were not changed.
 
 - Set RESUME_RUN='lan_2' in src/config.py to resume last.pt in the same run; None creates a new run.
 - Keep model, experiment, train/data settings and split unchanged; the script checks them before resuming.

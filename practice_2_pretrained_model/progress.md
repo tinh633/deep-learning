@@ -1,11 +1,12 @@
 # Tiến độ và bàn giao — Practice 2
 
-Cập nhật: 2026-10-28. **ResNet18 A hoàn tất tại lan_1; VGG16 A đang chạy tại lan_2 trên GPU.**
-Theo yêu cầu người dùng đã xóa lượt lỗi, đổi tên lượt ResNet18 thành công lan_2 → lan_1.
-Weights VGG16 tải xong và SHA-256 khớp; preflight GPU batch64 qua, peak khoảng 2.446 MiB.
-Pipeline cũ 66286 từng dừng do sandbox không đọc được cache; đã chạy lại với quyền đọc phù hợp.
-Session hiện tại 95990: VGG16 A bắt đầu 16:00:25, worker 0, batch 64, 20 epoch; chưa xác nhận epoch hoàn tất.
-Không khởi chạy thêm lượt trùng. Config/log lan_2 xác nhận CUDA và IMAGENET1K_V1.
+Cập nhật: 2026-10-29. **Train đang dừng; outputs/runs hiện trống, checkpoint cũ không còn trên máy.**
+Người dùng yêu cầu push rồi train thử. Config còn RESUME_RUN='lan_2' nhưng không thể resume khi thiếu checkpoint; đang chờ chọn lượt train mới hay smoke ngắn.
+Đang làm gọn src: chia bước rõ ràng, dùng chung ghi JSON/đóng log/hash; giữ nguyên dữ liệu và checkpoint cũ.
+Đã sửa evaluate đọc checkpoint chứa NumPy RNG; kiểm tra CPU resume và metrics qua.
+Sau phản hồi tiếp theo: rút gọn train bằng resume_training/save_epoch trong logger; giữ vòng lặp học trực tiếp. Smoke CPU mới qua, chưa train chính thức.
+Đang review riêng config/train: config dùng hằng số rõ tên; bảng A-F suy ra head/fine-tune/LR/batch. Metadata được tạo bởi get_settings(), train không tự ghép dictionary cấu hình. Không sửa run thật.
+Kiểm tra qua: config mới khớp checkpoint lan_2 hiện có; CPU train liên tục và ngắt/resume khớp weights, best/last và history; compile toàn src và diff check qua.
 
 ## 1. Tóm tắt việc đã làm
 
@@ -65,7 +66,7 @@ Không khởi chạy thêm lượt trùng. Config/log lan_2 xác nhận CUDA và
 - [x] ResNet18 A đủ 20 epoch; xác minh Finished, 20 history rows và best checkpoint đọc được.
 - [x] Evaluate ResNet18 A train/validation, test tắt; đã xuất metrics/confusion/per-class/ảnh sai.
 - [x] Người dùng yêu cầu tiếp tục lượt tiếp theo; thực hiện VGG16 A theo thứ tự ba model ở cấu hình A.
-- [ ] Chạy VGG16 A và DenseNet121 A với cùng điều kiện; weights pretrained hai model này chưa kiểm tra thực tế.
+- [ ] Tiếp tục VGG16 A từ epoch 2 khi được yêu cầu; sau đó DenseNet121 A. VGG16 weights đã kiểm tra.
 
 ### Bước 3 — Hoàn thành thí nghiệm có kiểm soát
 
@@ -112,3 +113,4 @@ Chưa hoàn thành bước nào thì giữ trạng thái chưa làm; chỉ cập
 - Earlier temporary legacy resume/reset-Adam trial was deleted when the user requested a fresh lan_2. See AI usage records for history.
 - Git excludes datasets, weights, TensorBoard events and dataset-derived error images; local files remain available.
 - User authorized commit and push to Thai branch on 2026-10-29. Check Git history for final commit identity.
+- Kiểm tra trước push lần tiếp theo: outputs/runs trống, Git ghi nhận xóa các báo cáo/log cũ. Không thể phục hồi weights từ Git vì checkpoint luôn được ignore. Lịch sử kết quả phía trên chỉ là kết quả từng ghi nhận.

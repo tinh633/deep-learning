@@ -5,8 +5,6 @@ os.environ.setdefault('OPENBLAS_NUM_THREADS', '1')
 os.environ.setdefault('OMP_NUM_THREADS', '1')
 os.environ.setdefault('MKL_NUM_THREADS', '1')
 
-import hashlib
-import json
 import math
 import time
 from datetime import datetime, timezone
@@ -16,16 +14,37 @@ import torch
 from PIL import Image, ImageDraw
 from sklearn.metrics import confusion_matrix, precision_recall_fscore_support
 from torch import nn
-from torch.utils.data import DataLoader
 
 from config import EVAL_RUN, OUTPUT_FOLDER, PROJECT_FOLDER, RUN_TEST, SPLIT_FILE
 from data import build_loaders
-from logger import get_environment, open_log
+from logger import close_log, file_sha256, get_environment, open_log, save_json
 from model import PretrainedCNN
+
+
+def save_error_gallery(dataset, examples, classes, split, target):
+    """Show up to 24 confident mistakes using original dataset images."""
+    if not examples:
+        return
+    target.parent.mkdir(parents=True, exist_ok=True)
+    canvas = Image.new('RGB', (900, math.ceil(len(examples) / 6) * 155), 'white')
+    draw = ImageDraw.Draw(canvas)
+    for position, example in enumerate(examples):
+        x, y = (position % 6) * 150, (position // 6) * 155
+        image = Image.fromarray(dataset.data[example['id']])
+        image = image.resize((96, 96), resample=Image.Resampling.NEAREST)
+        canvas.paste(image, (x + 25, y + 3))
+        lines = [f"{split} #{example['id']}",
+                 f"True: {classes[example['true']]}",
+                 f"Pred: {classes[example['predicted']]}",
+                 f"Confidence: {example['confidence']:.3f}"]
+        for line, text in enumerate(lines):
+            draw.text((x + 4, y + 101 + line * 13), text, fill='black')
+    canvas.save(target)
 
 
 # Windows DataLoader workers import this file in child processes.
 if __name__ == '__main__':
+    # 1. Select the trained checkpoint.
     folder = OUTPUT_FOLDER / 'runs' / EVAL_RUN
     checkpoint_path = folder / 'best.pt'
     if not checkpoint_path.is_file():
@@ -34,11 +53,13 @@ if __name__ == '__main__':
     started = time.perf_counter()
 
     try:
+        # 2. Restore model and verify the saved split.
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-        saved = torch.load(checkpoint_path, map_location='cpu', weights_only=True)
+        # Only load checkpoints created locally by this project: RNG includes NumPy state.
+        saved = torch.load(checkpoint_path, map_location='cpu', weights_only=False)
         settings = saved['settings']
-        checkpoint_hash = hashlib.sha256(checkpoint_path.read_bytes()).hexdigest()
-        split_hash = hashlib.sha256(SPLIT_FILE.read_bytes()).hexdigest()
+        checkpoint_hash = file_sha256(checkpoint_path)
+        split_hash = file_sha256(SPLIT_FILE)
         if split_hash != settings['split_sha256']:
             raise ValueError('Current split does not match checkpoint split SHA-256.')
         model_config = settings['model_config']
@@ -49,12 +70,8 @@ if __name__ == '__main__':
         model.eval()
         criterion = nn.CrossEntropyLoss()
 
-        train_loader, val_loader, test_loader = build_loaders(settings['data'], download=False)
-        # Train eval uses validation preprocessing: no random horizontal flip.
-        train_loader.dataset.dataset.transform = val_loader.dataset.dataset.transform
-        train_loader = DataLoader(train_loader.dataset, batch_size=settings['data']['batch_size'],
-                                  shuffle=False, num_workers=settings['data']['num_workers'],
-                                  pin_memory=settings['data']['pin_memory'])
+        # 3. Evaluation data has no augmentation or shuffling.
+        train_loader, val_loader, test_loader = build_loaders(settings['data'], training=False)
         classes = saved['classes']
         if classes != val_loader.dataset.dataset.classes:
             raise ValueError('Dataset class order differs from checkpoint.')
@@ -70,6 +87,7 @@ if __name__ == '__main__':
         logger.info('Splits: %s | test enabled=%s | train eval has no augmentation', list(loaders), RUN_TEST)
 
         image_folder = PROJECT_FOLDER / 'visualization' / 'runs' / EVAL_RUN
+        # 4. Predict, calculate metrics and save one report per split.
         for split, loader in loaders.items():
             split_started = time.perf_counter()
             targets, predictions, confidences = [], [], []
@@ -86,6 +104,7 @@ if __name__ == '__main__':
                     predictions.extend(predicted.cpu().tolist())
                     confidences.extend(confidence.cpu().tolist())
 
+            # Confusion matrix: rows are true classes; columns are predictions.
             targets = np.asarray(targets)
             predictions = np.asarray(predictions)
             matrix = confusion_matrix(targets, predictions, labels=range(len(classes)))
@@ -102,6 +121,13 @@ if __name__ == '__main__':
                             confidence=float(confidence))
                        for index, actual, predicted, confidence in zip(ids, targets, predictions, confidences)]
             wrong = [row for row in records if row['true'] != row['predicted']]
+            per_class = []
+            for i, name in enumerate(classes):
+                per_class.append(dict(
+                    label=i, name=name, precision=float(precision[i]), recall=float(recall[i]),
+                    f1=float(f1[i]), support=int(support[i]), tp=int(tp[i]), tn=int(tn[i]),
+                    fp=int(fp[i]), fn=int(fn[i])))
+
             result = dict(
                 checkpoint=str(checkpoint_path), checkpoint_sha256=checkpoint_hash,
                 epoch=saved['epoch'], settings=settings, pretrained_weights=saved['weights'],
@@ -110,10 +136,7 @@ if __name__ == '__main__':
                 accuracy=float((targets == predictions).mean()), macro_f1=float(f1.mean()),
                 classes=classes, confusion_axes='rows=true, columns=predicted',
                 confusion=matrix.tolist(), confusion_normalized=normalized.tolist(),
-                per_class=[dict(label=i, name=name, precision=float(precision[i]),
-                                recall=float(recall[i]), f1=float(f1[i]), support=int(support[i]),
-                                tp=int(tp[i]), tn=int(tn[i]), fp=int(fp[i]), fn=int(fn[i]))
-                           for i, name in enumerate(classes)],
+                per_class=per_class,
                 predictions=records, wrong_ids=[row['id'] for row in wrong],
                 error_selection='Up to 24 highest-confidence mistakes; tie: original image ID',
                 error_gallery=f'visualization/runs/{EVAL_RUN}/{split}_errors.png' if wrong else None,
@@ -122,28 +145,11 @@ if __name__ == '__main__':
                 raise ValueError('Prediction count does not match dataset size.')
             if not math.isfinite(result['loss']) or not np.isfinite(confidences).all():
                 raise ValueError('Non-finite evaluation result.')
-            target = folder / f'{split}_metrics.json'
-            temporary = target.with_suffix('.json.tmp')
-            temporary.write_text(json.dumps(result, indent=2, allow_nan=False), encoding='utf-8')
-            temporary.replace(target)
+            save_json(folder / f'{split}_metrics.json', result)
 
-            # Original RGB images, selected by highest wrong-prediction confidence.
             examples = sorted(wrong, key=lambda row: (-row['confidence'], row['id']))[:24]
-            if examples:
-                image_folder.mkdir(parents=True, exist_ok=True)
-                canvas = Image.new('RGB', (6 * 150, math.ceil(len(examples) / 6) * 155), 'white')
-                draw = ImageDraw.Draw(canvas)
-                original = loader.dataset if split == 'test' else loader.dataset.dataset
-                for position, example in enumerate(examples):
-                    x, y = (position % 6) * 150, (position // 6) * 155
-                    image = Image.fromarray(original.data[example['id']])
-                    image = image.resize((96, 96), resample=Image.Resampling.NEAREST)
-                    canvas.paste(image, (x + 25, y + 3))
-                    draw.text((x + 4, y + 101), f"{split} #{example['id']}", fill='black')
-                    draw.text((x + 4, y + 114), f"True: {classes[example['true']]}", fill='black')
-                    draw.text((x + 4, y + 127), f"Pred: {classes[example['predicted']]}", fill='black')
-                    draw.text((x + 4, y + 140), f"Confidence: {example['confidence']:.3f}", fill='black')
-                canvas.save(image_folder / f'{split}_errors.png')
+            original = loader.dataset if split == 'test' else loader.dataset.dataset
+            save_error_gallery(original, examples, classes, split, image_folder / f'{split}_errors.png')
             logger.info('%s | n=%d | loss=%.6f | accuracy=%.2f%% | macro_f1=%.6f | errors=%d',
                         split, result['count'], result['loss'], result['accuracy'] * 100,
                         result['macro_f1'], len(wrong))
@@ -157,6 +163,4 @@ if __name__ == '__main__':
         logger.exception('Evaluation failed')
         raise
     finally:
-        for handler in logger.handlers[:]:
-            handler.close()
-            logger.removeHandler(handler)
+        close_log(logger)

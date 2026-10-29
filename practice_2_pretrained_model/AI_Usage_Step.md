@@ -1,5 +1,21 @@
 # AI Usage Step — Practice 2
 
+## 2026-10-29 — Làm gọn src
+
+- Người dùng chấp nhận tạm và yêu cầu push rồi train thử. Kiểm tra phát hiện outputs/runs trống, không còn checkpoint để resume; hỏi lựa chọn train mới/smoke. Compile/diff check qua; commit/push được cho phép.
+
+- Sau yêu cầu dễ nắm khi vấn đáp: sửa riêng config/train, dùng hằng số có tên, tham số model truyền bằng keyword, config.get_settings() tạo metadata tương thích cũ; vòng train/validation giữ trực tiếp và chú thích tiếng Việt. Chờ review trước phần tiếp theo.
+- Đã kiểm tra config khớp checkpoint lan_2; smoke CPU train liên tục/ngắt-resume khớp trọng số, best/last/history qua; compile/diff check qua. Không train thật, chưa commit; đã tổng hợp Full.
+
+- Người dùng tiếp tục phản hồi code chưa dễ đọc: viết lại train, đưa restore/save checkpoint sang hai hàm trong logger, giữ train/validation trực tiếp; không thêm lớp/framework/file.
+- Smoke CPU lần mới qua: fresh run, best/last, ngắt/resume khớp trọng số liên tục, cấu hình resume đổi bị từ chối. Không khởi chạy run thật; đã tổng hợp Full.
+
+- Người dùng yêu cầu giải thích SHA-256 và chỉnh code gọn, rõ luồng. Giữ 7 module và checkpoint/report hiện có.
+- Gom JSON, đóng log, hash vào logger; bỏ registry không còn viewer sử dụng; chia bước train/EDA/config, tách vẽ ảnh sai trong evaluate.
+- Evaluate dùng DataLoader không augmentation/shuffle và đọc được checkpoint có NumPy RNG.
+- CPU smoke: train liên tục và ngắt/resume khớp trọng số; evaluate khớp sklearn/ID, PNG, test tắt, từ chối split sai. Không train lượt chính thức.
+- Đã tổng hợp giai đoạn này vào Full; thay đổi chưa commit/push.
+
 Ghi theo từng giai đoạn: yêu cầu, hành động, file thay đổi, kiểm tra/kết quả và việc còn lại.
 Cuối giai đoạn hoặc khi bàn giao, tổng hợp nội dung đã xác minh vào
 [AI_Usage_Full.md](docs/AI_Usage_Full.md) và đánh dấu đã chuyển; không xóa nội dung chưa tổng hợp.
