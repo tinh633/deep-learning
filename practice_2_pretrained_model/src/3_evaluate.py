@@ -1,7 +1,7 @@
 """What: Đánh giá checkpoint và phân tích lớp/ảnh dự đoán sai.
 Why: Kiểm tra chất lượng model ngoài loss/accuracy trong lúc train.
-Who: Người học chọn EVAL_RUN; chỉ bật test sau khi khóa checkpoint.
-When: Sau train hoặc khi review checkpoint, không tự chạy từ notebook.
+Who: Chạy script hoặc cell đánh giá notebook với run đã chọn.
+When: Sau train; test chỉ bật rõ ràng sau khi khóa checkpoint.
 Where: Đọc best.pt/split; ghi metrics/log và ảnh sai của đúng run.
 How: Khôi phục config thực, eval/no_grad, metrics sklearn và gallery lỗi.
 """

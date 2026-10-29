@@ -8,7 +8,8 @@ Python thực hiện train/evaluate; notebook tổng hợp phương pháp, kết
 1. Đọc [yêu cầu lab](Practice_2_Pretrained_CNN_Requirements.md) và [kế hoạch](Experiment_Plan.md).
 2. Mở [Practice_2_Report.ipynb](Practice_2_Report.ipynb) trong VS Code/Jupyter, chọn kernel .venv.
 3. Run All: đọc EDA/artifact và biểu đồ hiện có; không tự train, tải weights hoặc chạy test.
-4. Xem [progress.md](progress.md) trước khi tiếp tục; train đang tạm dừng.
+   Cell 7.0 hỗ trợ đánh giá checkpoint: chọn EVALUATION_RUNS, bật RUN_EVALUATION; EVALUATE_TEST bật riêng sau khi khóa model.
+4. Xem [progress.md](progress.md); kết quả lượt cũ đã dọn, cấu hình sẵn sàng train mới từ epoch1.
 
 ## Mục tiêu
 

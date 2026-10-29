@@ -33,7 +33,7 @@ IMAGENET_MEAN = (0.485, 0.456, 0.406)
 IMAGENET_STD = (0.229, 0.224, 0.225)
 
 # 3. Chọn lượt train/evaluate.
-RESUME_RUN = 'lan_1'  # Paused; resume only when training is requested.
+RESUME_RUN = None  # Start a new run from pretrained weights.
 EVAL_RUN = 'lan_1'
 RUN_TEST = False
 
