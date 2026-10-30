@@ -3,7 +3,6 @@
 `docs_for_agent/` lưu cách làm việc chung. Tiến độ, kết quả kiểm tra và bàn giao
 chi tiết được ghi trong `progress.md` của từng practice.
 
-- [Practice 1 — FashionMNIST](../practice_1_fashionmnist/progress.md).
 - [Practice 2 — Pretrained CNN](../practice_2_pretrained_model/progress.md).
 - [Lịch sử workspace](progress_old.md): ghi chép cũ, không phải trạng thái hiện tại.
 

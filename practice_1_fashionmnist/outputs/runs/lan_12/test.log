@@ -1,4 +1,0 @@
-2026-10-18 15:03:35,365 | Run=lan_12 | checkpoint=best.pt | eval mode | device=cuda
-2026-10-18 15:03:40,158 | Train | samples=54000 | loss=0.100915 | accuracy=96.19%
-2026-10-18 15:03:40,679 | Validation | samples=6000 | loss=0.299211 | accuracy=91.73%
-2026-10-18 15:03:41,545 | Test | samples=10000 | loss=0.357034 | accuracy=90.17%

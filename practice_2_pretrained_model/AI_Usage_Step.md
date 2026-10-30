@@ -25,3 +25,5 @@
 - Pending review/commit/push. Full history: [AI_Usage_Full.md](docs/AI_Usage_Full.md).
 
 - 2026-10-30: Final publication authorized on new branch practice2-pretrained-model. Git LFS tracks all12 best/last checkpoints, preserving binary SHA; actual TensorBoard events included. Dataset/derived pixel galleries remain ignored. Added clone/LFS pull instructions; no history rewrite or training.
+
+- 2026-10-30: Corrected branch scope: practice2-pretrained-model publishes Practice 2 only. Untrack Practice 1 on this branch while preserving all local files and other branches; root README/index updated. No model or result changes.
