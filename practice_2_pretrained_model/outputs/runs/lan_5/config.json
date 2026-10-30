@@ -1,0 +1,136 @@
+{
+  "settings": {
+    "model_name": "vgg16",
+    "experiment": "B",
+    "model_config": {
+      "head": "H1",
+      "fine_tune": true,
+      "lr": 0.001,
+      "batch_size": 64
+    },
+    "pretrained": true,
+    "train": {
+      "seed": 42,
+      "epochs": 20,
+      "weight_decay": 0.0
+    },
+    "data": {
+      "seed": 42,
+      "val_size": 5000,
+      "image_size": 224,
+      "batch_size": 64,
+      "num_workers": 0,
+      "pin_memory": false
+    },
+    "split_file": "/kaggle/working/practice_2_pretrained_model/outputs/cifar10_split.json",
+    "split_sha256": "fa5a9fcd6b5d9d717eb35b10c728300f1a01c666c4e524a6faa3de47fc7ce5c3",
+    "source": "torchvision.datasets.CIFAR10",
+    "input_shape": [
+      3,
+      224,
+      224
+    ]
+  },
+  "environment": {
+    "os": "Linux-6.18.55+-x86_64-with-glibc2.39",
+    "python": "3.13.15 (main, Aug  6 2026, 11:06:22) [GCC 13.3.0]",
+    "cpu": "x86_64",
+    "cpu_physical_cores": 2,
+    "cpu_logical_cores": 4,
+    "ram_bytes": 33658159104,
+    "torch": "2.11.0+cu128",
+    "torchvision": "0.26.0+cu128",
+    "cuda_build": "12.8",
+    "cudnn": 91900,
+    "device": "cuda",
+    "gpu": [
+      {
+        "index": 0,
+        "name": "Tesla T4",
+        "vram_bytes": 15636037632
+      },
+      {
+        "index": 1,
+        "name": "Tesla T4",
+        "vram_bytes": 15636037632
+      }
+    ],
+    "precision": "float32; AMP disabled",
+    "deterministic_algorithms": false,
+    "cudnn_benchmark": false,
+    "cudnn_deterministic": true,
+    "cublas_workspace_config": "unset",
+    "blas_threads": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1"
+    }
+  },
+  "parameters": {
+    "total": 14719818,
+    "trainable": 7084554,
+    "frozen": 7635264,
+    "trainable_names": [
+      "backbone.24.weight",
+      "backbone.24.bias",
+      "backbone.26.weight",
+      "backbone.26.bias",
+      "backbone.28.weight",
+      "backbone.28.bias",
+      "head.weight",
+      "head.bias"
+    ]
+  },
+  "data": {
+    "train": {
+      "size": 45000,
+      "batches": 704,
+      "batch_size": 64,
+      "num_workers": 0,
+      "pin_memory": false,
+      "sampler": "RandomSampler",
+      "transform": "Compose(\n    Resize(size=(224, 224), interpolation=bilinear, max_size=None, antialias=True)\n    RandomHorizontalFlip(p=0.5)\n    ToTensor()\n    Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225))\n)"
+    },
+    "validation": {
+      "size": 5000,
+      "batches": 79,
+      "batch_size": 64,
+      "num_workers": 0,
+      "pin_memory": false,
+      "sampler": "SequentialSampler",
+      "transform": "Compose(\n    Resize(size=(224, 224), interpolation=bilinear, max_size=None, antialias=True)\n    ToTensor()\n    Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225))\n)"
+    }
+  },
+  "weights": "VGG16_Weights.IMAGENET1K_V1",
+  "feature_size": 512,
+  "optimizer": {
+    "name": "Adam",
+    "groups": [
+      {
+        "lr": 0.001,
+        "betas": [
+          0.9,
+          0.999
+        ],
+        "eps": 1e-08,
+        "weight_decay": 0.0,
+        "amsgrad": false,
+        "maximize": false,
+        "foreach": null,
+        "capturable": false,
+        "differentiable": false,
+        "fused": null,
+        "decoupled_weight_decay": false,
+        "parameter_count": 7084554
+      }
+    ]
+  },
+  "loss": {
+    "name": "CrossEntropyLoss",
+    "reduction": "mean",
+    "ignore_index": -100,
+    "label_smoothing": 0.0
+  },
+  "scheduler": null,
+  "batchnorm": "running statistics frozen; affine trained only in opened blocks"
+}

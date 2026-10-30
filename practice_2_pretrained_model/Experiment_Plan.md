@@ -86,17 +86,18 @@ Mỗi hàng chạy đủ **VGG16 và DenseNet121**; tổng sáu lượt, tối �
 | Transfer learning | A: thay head H1, freeze backbone |
 | Fine-tuning | B/C: mở nhóm cuối |
 | Hyperparameters | B/C chỉ thay learning rate; batch giữ cố định |
-| Train/TensorBoard | Sáu lượt đủ epoch, event logs, history và best/last |
-| Evaluation | Hai checkpoint khóa bằng validation rồi mới test |
+| Train/TensorBoard | Sáu lượt đủ epoch/history/best/last; events local lan_2/lan_3 |
+| Evaluation | Sáu best theo validation đã được đánh giá test; công bố giới hạn test đã quan sát |
 | Comparison | Bảng sáu lượt, đường cong, per-class/confusion/ảnh sai và giới hạn |
 
-## 8. Flow thực hiện
+## 8. Trạng thái hoàn thiện
 
-1. Mở [Practice_2_Report.ipynb](Practice_2_Report.ipynb), chọn .venv, Run All để đọc EDA/artifact.
-2. Kiểm tra notebook và cấu hình; train hiện đang tạm dừng.
-3. Train mới VGG16 A từ pretrained, RESUME_RUN=None; tạo checkpoint từ lượt mới.
-4. Chạy các lượt còn lại theo ma trận mới, cập nhật notebook từ artifact.
-5. Review/khóa checkpoint, evaluate test rồi hoàn thiện nhận xét.
+Đã hoàn tất sáu lượt, 20 epoch/lượt, đủ best/last và báo cáo train/validation/test.
+DenseNet A/B/C là lan_1–3; VGG16 A/B/C là lan_4–6. Nội dung nguồn/kiểm tra xem progress.md.
+Notebook đọc kết quả đã lưu; không cần train hoặc test lại để trình bày.
+Phân tích cùng cấu hình A/B/C, không tự chọn cặp bằng test accuracy cao nhất.
+Test đã được quan sát cả sáu cấu hình; giới hạn này được công bố trong notebook.
+Batch giữ64; chưa thử nhiều batch, scheduler hoặc weight decay khác0. Không coi các hướng này đã thực nghiệm.
 
-Chi tiết vận hành: [Training.md](Training.md). Trạng thái hiện tại: [progress.md](progress.md).
+Chi tiết vận hành: [Training.md](Training.md). Trạng thái: [progress.md](progress.md).
 Nhật ký AI: [Step](AI_Usage_Step.md), [Full](docs/AI_Usage_Full.md).

@@ -397,34 +397,37 @@
     #training iframe { width: 100%; height: 780px; border: 1px solid var(--line); border-radius: 8px; margin-top: 18px; background: white; }
     #training pre { overflow-x: auto; padding: 14px; border-radius: 8px; background: var(--paper); font-size: 12px; }
     @media (max-width: 600px) { #training iframe { height: 650px; } }
+    #testErrors .gallery { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+    #testErrors .tile { text-align: left; padding: 14px; }
+    #testErrors .tile small { display: block; white-space: normal; }
+    #testErrors .photo { width: 100%; height: 150px; object-fit: contain; background: var(--paper); }
+    #errorCounts button { text-align: left; padding: 12px; background: #f4f7f5; color: #172c31; border-color: #b8cecb; }
+    #errorCounts button:hover { background: #e7f2ef; border-color: var(--teal); }
+    #errorCounts button[aria-pressed="true"] { background: #d7eeea; color: #123e3c; outline: 2px solid var(--teal); }
+    #errorCounts button:focus-visible { outline: 3px solid #172c31; outline-offset: 3px; }
+    #errorCounts strong { display: block; font-size: 22px; }
+    #deepCharts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+    #deepCharts svg { width: 100%; height: auto; }
+    #deepExamples .photo { width: 100%; height: 120px; object-fit: contain; }
+    #deepExamples small { display: block; }
+    @media (max-width: 700px) { #deepCharts { grid-template-columns: 1fr; } }
+    #datasetMap { width: 100%; height: auto; background: #f4f7f5; border-radius: 8px; cursor: crosshair; }
+    .map-preview { display: flex; align-items: center; gap: 16px; min-height: 110px; }
+    .map-preview canvas { width: 96px; height: 96px; image-rendering: pixelated; }
+    #mapLegend { display: flex; flex-wrap: wrap; gap: 8px 16px; margin: 12px 0; }
   </style>
   <header>
     <small>PRACTICE 02 · PRETRAINED CNN</small>
     <h1>CIFAR-10 · Data Explorer</h1>
     <p>
-      Khám phá toàn bộ 60.000 ảnh RGB trước khi huấn luyện VGG16, ResNet18 và
+      Khám phá toàn bộ 60.000 ảnh RGB và so sánh VGG16 với
       DenseNet121. Kiểm tra phân bố lớp, dữ liệu gốc và preprocessing trong cùng
       một trang.
     </p>
   </header>
   <main>
-    <nav aria-label="Các phần EDA">
-      <a href="#training">Theo dõi train</a>
-      <a href="#overview">Tổng quan</a>
-      <a href="#explorer">Duyệt toàn bộ ảnh</a>
-      <a href="#statistics">Thống kê RGB</a>
-      <a href="#preprocessing">Preprocessing</a>
-      <a href="#quality">Kiểm tra dữ liệu</a>
-    </nav>
-    <section id="training">
-      <div class="heading"><div><h2>Theo dõi huấn luyện · TensorBoard</h2><p class="muted">Loss, accuracy và learning rate từ log TensorBoard của các lượt train.</p></div></div>
-      <p>Khởi động TensorBoard trong terminal tại thư mục gốc dự án:</p>
-      <pre>.\.venv\Scripts\python.exe -m tensorboard.main --logdir practice_2_pretrained_model/outputs/runs --host 127.0.0.1 --port 6006 --reload_interval 2</pre>
-      <p class="muted">Chọn run ở thanh bên TensorBoard. Bật tự làm mới trong Settings để cập nhật biểu đồ. Có thể mở tab riêng để theo dõi độc lập với EDA.</p>
-      <button type="button" onclick="document.getElementById('tensorboardFrame').src = 'http://localhost:6006/#scalars'">Tải lại TensorBoard</button>
-      <a href="http://localhost:6006/#scalars" target="_blank" rel="noopener">Mở TensorBoard ở tab riêng</a>
-      <iframe id="tensorboardFrame" src="http://localhost:6006/#scalars" title="TensorBoard theo dõi huấn luyện"></iframe>
-    </section>
+    <nav aria-label="Các phần phân tích"><a href="#overview">EDA · tổng quan</a><a href="#deepEda">EDA sâu</a><a href="#featureSpace">Không gian ảnh</a><a href="#statistics">Thống kê RGB</a><a href="#explorer">Xem dataset</a><a href="#preprocessing">Tiền xử lý</a><a href="#quality">Kiểm tra dữ liệu</a><a href="#training">Theo dõi TensorBoard</a><a href="#testErrors">Đối chiếu lỗi test</a></nav>
+
     <div class="load">
       <label
         >Nạp báo cáo nếu mở HTML trực tiếp<input
@@ -436,7 +439,7 @@
     </div>
     <div id="content" hidden>
       <div id="cards" class="cards"></div>
-      <section id="overview">
+<section id="overview">
         <div class="heading">
           <div>
             <h2>Tổng quan & phân bố lớp</h2>
@@ -457,7 +460,59 @@
           </div>
         </div>
       </section>
-      <section id="explorer">
+<section id="deepEda">
+        <h2>EDA sâu · ánh sáng, màu sắc và cấu trúc ảnh</h2>
+        <p>Khảo sát trên pixel gốc 32×32 trước resize và augmentation. Bảng theo lớp, tương quan và ảnh cực trị chỉ dùng train. Các phân bố validation/test chỉ mô tả dữ liệu, không dùng để chọn cách xử lý.</p>
+        <p class="notice">Độ sáng = trung bình RGB; tương phản = độ lệch chuẩn ảnh xám trung bình ba kênh; bão hòa = trung bình HSV S; biến thiên pixel = trung bình chênh lệch tuyệt đối giữa các pixel kề nhau. Giá trị thấp không tự chứng minh ảnh mờ hoặc sai nhãn.</p>
+        <p id="deepStatus" role="status"></p>
+        <div id="deepInsights" class="notice"></div>
+        <h3>1. Phân bố đặc trưng theo split</h3>
+        <div id="deepCharts"></div>
+        <p class="muted">Trục dọc là tỷ lệ ảnh trong mỗi bin, không phải số ảnh, để so sánh các split có kích thước khác nhau.</p>
+        <h3>2. Phân vị và khác biệt phân bố</h3>
+        <div id="deepSummary" class="scroll"></div>
+        <p class="muted">Δ mean / std train mô tả chênh lệch trung bình so với train; không phải kiểm định thống kê và không phát hiện mọi dạng distribution shift. P1/P99 là phân vị 1%/99% trên train, không phải ngưỡng xóa ảnh.</p>
+        <h3>3. Đặc trưng từng lớp trên train</h3>
+        <div id="deepClasses" class="scroll"></div>
+        <p class="muted">Màu sắc và nền có thể tương quan với nhãn, nhưng thống kê này không chứng minh quan hệ nhân quả hoặc cho biết model đang dựa vào nền.</p>
+        <h3>4. Tương quan đặc trưng trên train</h3>
+        <div id="deepCorrelation" class="scroll"></div>
+        <h3>5. Kiểm tra ảnh ở các cực trị</h3>
+        <div class="controls"><label>Đặc trưng<select id="deepFeature"><option value="brightness">Độ sáng</option><option value="contrast">Tương phản</option><option value="saturation">Bão hòa</option><option value="edge">Biến thiên pixel</option></select></label></div>
+        <p class="muted">Bốn ảnh train có giá trị thấp nhất và bốn ảnh cao nhất. Đây là mẫu kiểm tra có quy tắc, không đại diện cho toàn lớp và không tự động bị loại bỏ.</p>
+        <div id="deepExamples" class="gallery"></div>
+      </section>
+<section id="featureSpace">
+        <h2>Không gian ảnh · phân bố toàn bộ CIFAR-10</h2>
+        <p>Một chấm là một ảnh gốc: cả <b>60.000 ảnh</b> cùng nằm trên một biểu đồ, tô màu theo 10 lớp. Không sử dụng model hoặc checkpoint.</p>
+        <p class="muted">Ảnh được lấy trung bình từng ô thành RGB 8×8 rồi chiếu PCA về hai chiều. PCA chỉ fit trên train, sau đó dùng cùng phép chiếu cho train/validation/test. Hình phản ánh màu sắc và hình dáng thô; hai chiều không thể giữ mọi chi tiết hoặc chứng minh lớp dễ phân loại.</p>
+        <div class="controls"><label>Lớp nổi bật<select id="mapClass"><option value="all">Tất cả lớp</option></select></label><label>Split<select id="mapSplit"><option value="all">Toàn bộ 60.000 ảnh</option><option value="train">Train</option><option value="validation">Validation</option><option value="test">Test</option></select></label></div>
+        <p id="mapStatus" role="status"></p>
+        <div id="mapLegend"></div>
+        <canvas id="datasetMap" width="1100" height="620" role="img" aria-label="Phân bố PCA của 60000 ảnh CIFAR-10, màu theo lớp"></canvas>
+        <div class="map-preview"><canvas id="mapImage" width="32" height="32"></canvas><span id="mapHover">Rê chuột gần một điểm để xem ảnh; nhấn để phóng lớn.</span></div>
+      </section>
+<section id="statistics">
+        <h2>Màu sắc & cường độ pixel</h2>
+        <p class="muted">
+          Chỉ tính trên train. Mean/std trên [0,1], population std; histogram
+          trên pixel gốc [0,255].
+        </p>
+        <div class="columns">
+          <div id="rgb"></div>
+          <svg
+            id="hist"
+            viewBox="0 0 1000 300"
+            role="img"
+            aria-label="Histogram RGB, pixel 0 đến 255, trục dọc số pixel"
+          ></svg>
+        </div>
+        <p class="muted">
+          Đây là thống kê mô tả; model vẫn dùng chuẩn hóa ImageNet theo kế
+          hoạch.
+        </p>
+      </section>
+<section id="explorer">
         <div class="heading">
           <div>
             <h2>Dataset Explorer</h2>
@@ -520,27 +575,7 @@
           </div>
         </div>
       </section>
-      <section id="statistics">
-        <h2>Màu sắc & cường độ pixel</h2>
-        <p class="muted">
-          Chỉ tính trên train. Mean/std trên [0,1], population std; histogram
-          trên pixel gốc [0,255].
-        </p>
-        <div class="columns">
-          <div id="rgb"></div>
-          <svg
-            id="hist"
-            viewBox="0 0 1000 300"
-            role="img"
-            aria-label="Histogram RGB, pixel 0 đến 255, trục dọc số pixel"
-          ></svg>
-        </div>
-        <p class="muted">
-          Đây là thống kê mô tả; model vẫn dùng chuẩn hóa ImageNet theo kế
-          hoạch.
-        </p>
-      </section>
-      <section id="preprocessing">
+<section id="preprocessing">
         <h2>Từ ảnh gốc đến đầu vào model</h2>
         <p id="prepInfo" class="muted"></p>
         <div id="prep" class="prep"></div>
@@ -551,7 +586,7 @@
           ảnh.
         </p>
       </section>
-      <section id="quality">
+<section id="quality">
         <h2>Kiểm tra toàn vẹn dữ liệu</h2>
         <p id="dupSummary"></p>
         <p class="muted">
@@ -564,6 +599,49 @@
         </details>
         <p id="metadata" class="muted"></p>
       </section>
+<section id="training">
+      <div class="heading"><div><h2>Theo dõi huấn luyện · TensorBoard</h2><p class="muted">Loss, accuracy và learning rate từ log TensorBoard của các lượt train.</p></div></div>
+      <p>Khởi động TensorBoard trong terminal tại thư mục gốc dự án:</p>
+      <pre>.\.venv\Scripts\python.exe -m tensorboard.main --logdir practice_2_pretrained_model/outputs/runs --host 127.0.0.1 --port 6006 --reload_interval 2</pre>
+      <p class="muted">Chọn run ở thanh bên TensorBoard. Bật tự làm mới trong Settings để cập nhật biểu đồ. Có thể mở tab riêng để theo dõi độc lập với EDA.</p>
+      <p class="notice">TensorBoard cần chạy bằng lệnh trên trước khi tải khung bên dưới. Live Server không tự khởi động TensorBoard. Chỉ các run có file events mới xuất hiện; các run chỉ có history.json xem biểu đồ trong notebook.</p>
+      <button type="button" onclick="document.getElementById('tensorboardFrame').src = 'http://127.0.0.1:6006/#scalars'">Tải lại TensorBoard</button>
+      <a href="http://127.0.0.1:6006/#scalars" target="_blank" rel="noopener">Mở TensorBoard ở tab riêng</a>
+      <iframe id="tensorboardFrame" src="http://127.0.0.1:6006/#scalars" title="TensorBoard theo dõi huấn luyện"></iframe>
+    </section>
+<section id="testErrors">
+        <div class="heading"><div><h2>Đối chiếu ảnh test · VGG16 và DenseNet121</h2>
+          <p class="muted">Cùng cấu hình A/B/C, cùng ID ảnh và nhãn thật. Nhấn ảnh để phóng lớn.</p></div></div>
+        <p class="notice">Kết quả của best checkpoint đã đánh giá; không dùng ảnh test để chọn lại siêu tham số. Confidence là softmax score, chưa được hiệu chuẩn.</p>
+        <div class="controls">
+          <label>Cấu hình<select id="errorExperiment"><option>A</option><option>B</option><option>C</option></select></label>
+          <label>Nhóm kết quả<select id="errorGroup"><option value="wrong">Ít nhất một model sai</option><option value="all">Tất cả ảnh</option><option value="dense">Chỉ DenseNet đúng</option><option value="vgg">Chỉ VGG đúng</option><option value="bothWrong">Cả hai sai</option><option value="bothCorrect">Cả hai đúng</option></select></label>
+          <label>Nhãn thật<select id="errorClass"></select></label>
+          <label>Model để lọc<select id="errorModel"><option value="vgg">VGG16</option><option value="dense">DenseNet121</option></select></label>
+          <label>Lớp dự đoán<select id="errorPrediction"></select></label>
+          <label>Confidence tối thiểu (%)<input id="errorConfidence" type="number" min="0" max="100" value="0" /></label>
+          <label>ID test<input id="errorId" type="search" placeholder="0–9999" /></label>
+          <label>Sắp xếp<select id="errorSort"><option value="id">ID tăng dần</option><option value="confidence">Confidence model đã chọn giảm dần</option></select></label>
+          <label>Ảnh / trang<select id="errorSize"><option>24</option><option>48</option><option>96</option></select></label>
+          <button id="errorReset" type="button">Đặt lại bộ lọc</button>
+        </div>
+        <p id="errorStatus" role="status" aria-live="polite">Đang chờ báo cáo EDA…</p>
+        <div id="errorCounts" class="cards"></div>
+        <p id="errorSources" class="muted"></p>
+        <div id="errorGallery" class="gallery"></div>
+        <div class="pager"><span id="errorRange"></span><div>
+          <button id="errorPrev" type="button">← Trước</button>
+          <span id="errorPage"></span>
+          <button id="errorNext" type="button">Sau →</button>
+        </div></div>
+      </section>
+
+
+
+
+
+
+
       <footer>
         Practice 2 · EDA và theo dõi huấn luyện. Test chỉ đánh giá sau khi khóa cấu hình.
       </footer>
@@ -949,6 +1027,9 @@
       el("metadata").textContent =
         `${data.source} · seed ${data.seed} · tạo lúc ${data.created}`;
       filter();
+      renderDeepEda();
+      renderDatasetMap();
+      initErrorExplorer();
     }
     function fail(error) {
       el("content").hidden = true;
@@ -997,9 +1078,300 @@
       for (const file of event.target.files) localPixels.set(file.name, file);
       if (report) {
         paint();
+        paintErrors();
+        paintDeepExamples();
         el('status').textContent = 'Đã chọn ' + localPixels.size + ' file pixel RGB.';
       }
     };
+    const mapColors = ['#0072b2', '#d55e00', '#009e73', '#cc79a7', '#8a6500', '#6358a5', '#c23942', '#087e80', '#665343', '#424c60'];
+    let mapPoints = [], mapVisible = [], mapHovered = null;
+    function renderDatasetMap() {
+      mapPoints = [];
+      const projection = report.dataset_projection;
+      if (!projection) { el('mapStatus').textContent = 'Chạy lại src/1_eda.py để tạo bản đồ toàn bộ ảnh.'; return; }
+      for (const [split, coordinates] of Object.entries(projection.coordinates)) {
+        const gallery = report.splits[split].gallery;
+        if (coordinates.length !== gallery.ids.length) throw Error('PCA không khớp số ảnh.');
+        coordinates.forEach((xy, i) => {
+          if (xy.length !== 2 || !xy.every(Number.isFinite)) throw Error('Tọa độ PCA không hợp lệ.');
+          mapPoints.push({split, id: gallery.ids[i], label: gallery.labels[i], x: xy[0], y: xy[1]});
+        });
+      }
+      el('mapClass').replaceChildren();
+      for (const [value, label] of [['all', 'Tất cả lớp'], ...report.classes.map((name, i) => [i, name])]) {
+        const option = document.createElement('option'); option.value = value; option.textContent = label; el('mapClass').append(option);
+      }
+      el('mapLegend').replaceChildren(...report.classes.map((name, i) => {
+        const text = document.createElement('span'); text.textContent = '● ' + name; text.style.color = mapColors[i]; return text;
+      }));
+      paintDatasetMap();
+    }
+    function paintDatasetMap() {
+      if (!mapPoints.length) return;
+      const canvas = el('datasetMap'), ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const xs = mapPoints.map(p => p.x), ys = mapPoints.map(p => p.y);
+      const minX = Math.min(...xs), maxX = Math.max(...xs), minY = Math.min(...ys), maxY = Math.max(...ys);
+      ctx.font = '12px system-ui'; ctx.textAlign = 'center';
+      for (let i = 0; i <= 5; i++) {
+        const x = 65 + i * 990 / 5, y = 555 - i * 510 / 5;
+        ctx.strokeStyle = '#dce5e4'; ctx.beginPath(); ctx.moveTo(x, 45); ctx.lineTo(x, 555); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(65, y); ctx.lineTo(1055, y); ctx.stroke();
+        ctx.fillStyle = '#172c31'; ctx.fillText((minX + i * (maxX - minX) / 5).toFixed(1), x, 580);
+        ctx.fillText((minY + i * (maxY - minY) / 5).toFixed(1), 32, y + 4);
+      }
+      ctx.fillText('PC 1', 560, 610); ctx.fillText('PC 2', 32, 25);
+      const split = el('mapSplit').value, selected = el('mapClass').value;
+      mapVisible = mapPoints.filter(p => split === 'all' || p.split === split);
+      mapHovered = null;
+      const highlighted = mapVisible.filter(p => selected === 'all' || p.label === Number(selected));
+      for (const active of [false, true]) {
+        for (const point of mapVisible) {
+          const match = selected === 'all' || point.label === Number(selected);
+          if (match !== active) continue;
+          point.px = 65 + 990 * (point.x - minX) / (maxX - minX || 1);
+          point.py = 555 - 510 * (point.y - minY) / (maxY - minY || 1);
+          ctx.globalAlpha = match ? (selected === 'all' ? 0.35 : 0.7) : 0.025;
+          ctx.fillStyle = mapColors[point.label]; ctx.beginPath(); ctx.arc(point.px, point.py, match ? 1.7 : 1.2, 0, 2 * Math.PI); ctx.fill();
+        }
+      }
+      ctx.globalAlpha = 1;
+      const variance = report.dataset_projection.explained_variance.reduce((a, b) => a + b, 0);
+      el('mapStatus').textContent = `${fmt(mapVisible.length)} ảnh trên cùng biểu đồ · ${fmt(highlighted.length)} ảnh nổi bật · PCA2 giữ ${(100 * variance).toFixed(1)}% phương sai của ảnh train RGB 8×8.`;
+      el('mapHover').textContent = 'Rê chuột gần một điểm để xem ảnh; nhấn để phóng lớn.';
+    }
+    el('mapClass').onchange = paintDatasetMap;
+    el('mapSplit').onchange = paintDatasetMap;
+    let mapFrame = null;
+    el('datasetMap').onmousemove = event => {
+      if (mapFrame !== null) cancelAnimationFrame(mapFrame);
+      const rect = el('datasetMap').getBoundingClientRect();
+      const x = (event.clientX - rect.left) * 1100 / rect.width, y = (event.clientY - rect.top) * 620 / rect.height;
+      mapFrame = requestAnimationFrame(() => {
+        mapFrame = null; let nearest = null, distance = 144;
+        const selected = el('mapClass').value;
+        for (const point of mapVisible) {
+          if (selected !== 'all' && point.label !== Number(selected)) continue;
+          const d = (point.px - x) ** 2 + (point.py - y) ** 2;
+          if (d < distance) { nearest = point; distance = d; }
+        }
+        if (!nearest) { mapHovered = null; return; }
+        if (mapHovered === nearest) return;
+        mapHovered = nearest; drawPhoto(el('mapImage'), nearest);
+        el('mapHover').textContent = `${nearest.split} #${nearest.id} · ${report.classes[nearest.label]} · PC1 ${nearest.x.toFixed(2)}, PC2 ${nearest.y.toFixed(2)}`;
+      });
+    };
+    el('datasetMap').onclick = () => { if (mapHovered) preview(mapHovered); };
+    const deepNames = {brightness: 'Độ sáng', contrast: 'Tương phản', saturation: 'Bão hòa', edge: 'Biến thiên pixel'};
+    function renderDeepEda() {
+      const deep = report.deep_eda;
+      for (const id of ['deepCharts', 'deepSummary', 'deepClasses', 'deepCorrelation', 'deepInsights', 'deepExamples']) el(id).replaceChildren();
+      if (!deep) { el('deepStatus').textContent = 'Chạy lại src/1_eda.py để bổ sung EDA sâu.'; return; }
+      el('deepStatus').textContent = 'Đã tính đủ đặc trưng cho 45.000 train, 5.000 validation và 10.000 test.';
+      const summaries = [];
+      for (const name of deep.feature_names) {
+        const feature = deep.features[name], frame = document.createElement('div'), title = document.createElement('h4');
+        title.textContent = deepNames[name]; frame.append(title);
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('viewBox', '0 0 600 245'); svg.setAttribute('role', 'img'); svg.setAttribute('aria-label', 'Phân bố ' + deepNames[name]);
+        const node = (tag, attributes, text) => {
+          const child = document.createElementNS(svg.namespaceURI, tag);
+          for (const [key, value] of Object.entries(attributes)) child.setAttribute(key, value);
+          if (text !== undefined) child.textContent = text;
+          svg.append(child); return child;
+        };
+        const maximum = Math.max(...Object.values(feature.splits).flatMap(split => split.histogram.map(count => count / split.count)), 0.01);
+        for (let i = 0; i <= 4; i++) {
+          const y = 190 - i * 35;
+          node('line', {x1: 55, x2: 580, y1: y, y2: y, stroke: '#dce5e4'});
+          node('text', {x: 48, y: y + 4, 'text-anchor': 'end', 'font-size': 11}, (100 * maximum * i / 4).toFixed(1) + '%');
+          const x = 55 + i * 525 / 4;
+          node('text', {x, y: 208, 'text-anchor': 'middle', 'font-size': 11}, (feature.bins[0] + i * (feature.bins.at(-1) - feature.bins[0]) / 4).toFixed(2));
+        }
+        for (const [i, [split, values]] of Object.entries(feature.splits).entries()) {
+          const color = ['#087e80', '#b66217', '#6854b8'][i];
+          const points = values.histogram.map((count, j) => {
+            const center = (feature.bins[j] + feature.bins[j + 1]) / 2;
+            return `${55 + 525 * (center - feature.bins[0]) / (feature.bins.at(-1) - feature.bins[0])},${190 - 140 * count / values.count / maximum}`;
+          }).join(' ');
+          node('polyline', {points, fill: 'none', stroke: color, 'stroke-width': 2, 'stroke-dasharray': i ? '5 3' : 'none'});
+          node('text', {x: 55 + i * 170, y: 25, fill: color, 'font-size': 12}, split);
+          const train = feature.splits.train;
+          summaries.push([deepNames[name], split, values.mean.toFixed(4), values.std.toFixed(4),
+            values.mean_shift_train_std === null ? '—' : values.mean_shift_train_std.toFixed(3),
+            split === 'train' ? train.quantiles[1].toFixed(4) : '—',
+            values.quantiles[3].toFixed(4), split === 'train' ? train.quantiles[5].toFixed(4) : '—']);
+        }
+        node('text', {x: 320, y: 237, 'text-anchor': 'middle', 'font-size': 12}, 'Giá trị đặc trưng');
+        frame.append(svg); el('deepCharts').append(frame);
+      }
+      el('deepSummary').replaceChildren(table(['Đặc trưng', 'Split', 'Mean', 'Std', 'Δ / std train', 'P1 train', 'Median', 'P99 train'], summaries));
+      el('deepClasses').replaceChildren(table(['Lớp', 'Số ảnh', 'RGB mean', ...deep.feature_names.map(name => deepNames[name] + ' mean ± std')],
+        deep.per_class.map(row => [report.classes[row.label], fmt(row.count), row.rgb_mean.map(x => x.toFixed(3)).join(' / '),
+          ...row.mean.map((value, i) => value.toFixed(3) + ' ± ' + row.std[i].toFixed(3))])));
+      el('deepCorrelation').replaceChildren(table(['Pearson r', ...deep.feature_names.map(name => deepNames[name])],
+        deep.correlation.map((row, i) => [deepNames[deep.feature_names[i]], ...row.map(value => value.toFixed(3))])));
+      const insights = deep.feature_names.map((name, column) => {
+        const ordered = [...deep.per_class].sort((a, b) => a.mean[column] - b.mean[column]);
+        const low = ordered[0], high = ordered.at(-1);
+        const shifts = Object.entries(deep.features[name].splits).filter(([split]) => split !== 'train');
+        const shiftText = shifts.map(([split, values]) => `${split}: ${values.mean_shift_train_std?.toFixed(3) ?? '—'} std train`).join('; ');
+        return `${deepNames[name]} trung bình thấp nhất ở ${report.classes[low.label]} (${low.mean[column].toFixed(3)}), cao nhất ở ${report.classes[high.label]} (${high.mean[column].toFixed(3)}). Chênh lệch mean: ${shiftText}.`;
+      });
+      el('deepInsights').replaceChildren(...insights.map(text => { const paragraph = document.createElement('p'); paragraph.textContent = text; return paragraph; }));
+      paintDeepExamples();
+    }
+    function paintDeepExamples() {
+      if (!report?.deep_eda) return;
+      const name = el('deepFeature').value, examples = report.deep_eda.extremes[name];
+      el('deepExamples').replaceChildren(...['low', 'high'].flatMap(side => examples[side].map(item => {
+        const button = document.createElement('button'), canvas = document.createElement('canvas'), caption = document.createElement('small');
+        button.type = 'button'; button.className = 'tile'; canvas.className = 'photo';
+        const image = {split: 'train', id: item.id, label: item.label};
+        drawPhoto(canvas, image); caption.textContent = `${side === 'low' ? 'Thấp' : 'Cao'} · ${item.value.toFixed(4)} · ${report.classes[item.label]} · train #${item.id}`;
+        button.append(canvas, caption); button.onclick = () => preview(image); return button;
+      })));
+    }
+    el('deepFeature').onchange = paintDeepExamples;
+
+    const errorRuns = { A: ['lan_4', 'lan_1'], B: ['lan_5', 'lan_2'], C: ['lan_6', 'lan_3'] };
+    const errorNames = { bothCorrect: 'Cả hai đúng', dense: 'Chỉ DenseNet đúng', vgg: 'Chỉ VGG đúng', bothWrong: 'Cả hai sai' };
+    const errorCache = new Map();
+    let errorPair = null, errorFiltered = [], errorPage = 1, errorRequest = 0;
+
+    function initErrorExplorer() {
+      for (const id of ['errorClass', 'errorPrediction']) {
+        el(id).replaceChildren();
+        for (const [value, label] of [['all', 'Tất cả lớp'], ...report.classes.map((name, i) => [i, name])]) {
+          const option = document.createElement('option');
+          option.value = value; option.textContent = label; el(id).append(option);
+        }
+      }
+      loadErrorPair();
+    }
+
+    function joinErrorReports(vgg, dense, experiment) {
+      const names = report.classes;
+      for (const [data, model] of [[vgg, 'vgg16'], [dense, 'densenet121']]) {
+        if (data.split !== 'test' || data.count !== 10000 || data.predictions.length !== 10000 ||
+            data.settings.model_name !== model || data.settings.experiment !== experiment ||
+            JSON.stringify(data.classes) !== JSON.stringify(names)) throw Error('Sai model, cấu hình hoặc lớp trong báo cáo test.');
+      }
+      if (vgg.settings.split_sha256 !== dense.settings.split_sha256) throw Error('Hai báo cáo không cùng split.');
+      const indexed = new Map(dense.predictions.map(row => [row.id, row]));
+      const gallery = report.splits.test.gallery;
+      const actualLabels = new Map(gallery.ids.map((id, i) => [id, gallery.labels[i]]));
+      const seen = new Set();
+      if (indexed.size !== 10000) throw Error('ID DenseNet bị trùng.');
+      const rows = vgg.predictions.map(v => {
+        const d = indexed.get(v.id);
+        if (!d || seen.has(v.id) || !Number.isInteger(v.id) || v.id < 0 || v.id >= 10000 || v.true !== d.true || v.true !== actualLabels.get(v.id)) throw Error('ID/nhãn test không khớp.');
+        seen.add(v.id);
+        for (const row of [v, d]) {
+          if (![row.true, row.predicted].every(x => Number.isInteger(x) && x >= 0 && x < names.length) ||
+              !Number.isFinite(row.confidence) || row.confidence < 0 || row.confidence > 1) throw Error('Nhãn hoặc confidence không hợp lệ.');
+        }
+        const vc = v.true === v.predicted, dc = d.true === d.predicted;
+        return { id: v.id, label: v.true, vgg: v, dense: d,
+                 group: vc ? (dc ? 'bothCorrect' : 'vgg') : (dc ? 'dense' : 'bothWrong') };
+      });
+      const counts = Object.fromEntries(Object.keys(errorNames).map(key => [key, rows.filter(row => row.group === key).length]));
+      if (Math.abs((counts.bothCorrect + counts.vgg) / 10000 - vgg.accuracy) > 1e-8 ||
+          Math.abs((counts.bothCorrect + counts.dense) / 10000 - dense.accuracy) > 1e-8) throw Error('Accuracy không khớp dự đoán.');
+      return { rows, counts, epochs: [vgg.epoch, dense.epoch], accuracy: [vgg.accuracy, dense.accuracy] };
+    }
+
+    async function loadErrorPair() {
+      const request = ++errorRequest, experiment = el('errorExperiment').value;
+      errorPair = null; errorFiltered = []; errorPage = 1;
+      el('errorCounts').replaceChildren(); el('errorSources').textContent = ''; paintErrors();
+      el('errorStatus').textContent = 'Đang đọc hai báo cáo test cho cấu hình ' + experiment + '…';
+      try {
+        if (!errorCache.has(experiment)) {
+          const pending = Promise.all(errorRuns[experiment].map(async run => {
+            const response = await fetch('../outputs/runs/' + run + '/test_metrics.json');
+            if (!response.ok) throw Error('Không đọc được ' + run + '/test_metrics.json (HTTP ' + response.status + ').');
+            return response.json();
+          })).then(([vgg, dense]) => joinErrorReports(vgg, dense, experiment));
+          errorCache.set(experiment, pending);
+          pending.catch(() => errorCache.delete(experiment));
+        }
+        const pair = await errorCache.get(experiment);
+        if (request !== errorRequest) return;
+        errorPair = pair;
+        el('errorStatus').textContent = 'Đã ghép đủ 10.000 ảnh test theo ID · cấu hình ' + experiment + '.';
+        const [vggRun, denseRun] = errorRuns[experiment];
+        el('errorSources').textContent = `VGG16 ${vggRun} · best epoch ${pair.epochs[0]} · accuracy ${(100 * pair.accuracy[0]).toFixed(2)}% | DenseNet121 ${denseRun} · best epoch ${pair.epochs[1]} · accuracy ${(100 * pair.accuracy[1]).toFixed(2)}%. Bộ đếm bên dưới tính trên toàn bộ test, bộ lọc áp dụng cho gallery.`;
+        el('errorCounts').replaceChildren(...Object.entries(errorNames).map(([key, name]) => {
+          const button = document.createElement('button'), count = document.createElement('strong'), caption = document.createElement('span');
+          button.type = 'button'; button.dataset.group = key;
+          count.textContent = fmt(pair.counts[key]); caption.textContent = name;
+          button.append(count, caption);
+          button.onclick = () => { el('errorGroup').value = key; filterErrors(); };
+          return button;
+        }));
+        filterErrors();
+      } catch (error) {
+        if (request !== errorRequest) return;
+        el('errorStatus').textContent = error.message + ' Mở HTML bằng Live Server; kiểm tra các báo cáo test trong outputs/runs.';
+      }
+    }
+
+    function filterErrors() {
+      errorPage = 1;
+      if (!errorPair) return;
+      const group = el('errorGroup').value, label = el('errorClass').value, prediction = el('errorPrediction').value;
+      const model = el('errorModel').value, id = el('errorId').value.trim();
+      const threshold = Math.max(0, Math.min(100, Number(el('errorConfidence').value) || 0)) / 100;
+      errorFiltered = errorPair.rows.filter(row =>
+        (group === 'all' || (group === 'wrong' ? row.group !== 'bothCorrect' : row.group === group)) &&
+        (label === 'all' || row.label === Number(label)) &&
+        (prediction === 'all' || row[model].predicted === Number(prediction)) &&
+        row[model].confidence >= threshold && (!id || (/^\d+$/.test(id) && row.id === Number(id))));
+      errorFiltered.sort(el('errorSort').value === 'confidence'
+        ? (a, b) => b[model].confidence - a[model].confidence || a.id - b.id
+        : (a, b) => a.id - b.id);
+      for (const button of el('errorCounts').children) button.setAttribute('aria-pressed', String(button.dataset.group === group));
+      paintErrors();
+    }
+
+    function paintErrors() {
+      const size = Number(el('errorSize').value), pages = Math.max(1, Math.ceil(errorFiltered.length / size));
+      errorPage = Math.max(1, Math.min(errorPage, pages));
+      const start = (errorPage - 1) * size;
+      el('errorGallery').replaceChildren(...errorFiltered.slice(start, start + size).map(row => {
+        const button = document.createElement('button'), canvas = document.createElement('canvas'), title = document.createElement('b');
+        button.type = 'button'; button.className = 'tile'; canvas.className = 'photo';
+        drawPhoto(canvas, { split: 'test', id: row.id });
+        title.textContent = `Test #${row.id} · Thật: ${report.classes[row.label]}`;
+        button.append(canvas, title);
+        const details = [errorNames[row.group], ...[['VGG16', row.vgg], ['DenseNet121', row.dense]].map(([name, prediction]) =>
+          `${name}: ${report.classes[prediction.predicted]} · ${(100 * prediction.confidence).toFixed(2)}% · ${prediction.predicted === row.label ? 'đúng' : 'sai'}`)];
+        for (const line of details) { const small = document.createElement('small'); small.textContent = line; button.append(small); }
+        button.onclick = () => {
+          preview({ split: 'test', id: row.id, label: row.label });
+          el('previewMeta').textContent = `Cấu hình ${el('errorExperiment').value} · test #${row.id} · ` + details.join(' | ');
+        };
+        return button;
+      }));
+      if (errorPair && !errorFiltered.length) {
+        const empty = document.createElement('p'); empty.className = 'empty'; empty.textContent = 'Không có ảnh khớp bộ lọc.'; el('errorGallery').append(empty);
+      }
+      el('errorRange').textContent = errorFiltered.length ? `${fmt(start + 1)}–${fmt(Math.min(start + size, errorFiltered.length))} / ${fmt(errorFiltered.length)} ảnh` : '0 ảnh';
+      el('errorPage').textContent = `Trang ${errorPage} / ${pages}`;
+      el('errorPrev').disabled = errorPage <= 1; el('errorNext').disabled = errorPage >= pages;
+    }
+
+    el('errorExperiment').onchange = loadErrorPair;
+    for (const id of ['errorGroup', 'errorClass', 'errorPrediction', 'errorModel', 'errorSort', 'errorSize']) el(id).onchange = filterErrors;
+    for (const id of ['errorId', 'errorConfidence']) el(id).oninput = filterErrors;
+    el('errorPrev').onclick = () => { errorPage--; paintErrors(); };
+    el('errorNext').onclick = () => { errorPage++; paintErrors(); };
+    el('errorReset').onclick = () => {
+      el('errorGroup').value = 'wrong'; el('errorClass').value = 'all'; el('errorPrediction').value = 'all';
+      el('errorModel').value = 'vgg'; el('errorConfidence').value = '0'; el('errorId').value = ''; el('errorSort').value = 'id'; filterErrors();
+    };
+
     fetch("../outputs/eda.json")
       .then((r) => {
         if (!r.ok) throw Error("Chưa đọc được báo cáo (HTTP " + r.status + ")");
