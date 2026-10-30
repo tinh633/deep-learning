@@ -57,3 +57,36 @@
 - Tiếp theo: hoàn thiện notebook, tiếp tục A của hai model, sau đó B/C; test chỉ sau khóa checkpoint bằng validation.
 - Các mục đã tổng hợp vào [AI_Usage_Full.md](docs/AI_Usage_Full.md).
 - Trạng thái chi tiết: [progress.md](progress.md). Thiết kế: [Experiment_Plan.md](Experiment_Plan.md).
+
+## 2026-10-30 ? Imported lan_1 (current status)
+
+- Six report/log files imported from feature/thuan commit af08050; source/config unchanged.
+- DenseNet121 A completed 20 epochs; best epoch 10: validation accuracy 90.52%, macro F1 0.905178; train evaluation accuracy 91.7822%.
+- Verified exact Git bytes, epochs 1?20, confusion totals/accuracy (45,000 train; 5,000 validation).
+- Split JSON contents/IDs identical locally; byte hashes differ. Original metadata preserved.
+- No best.pt/last.pt or test report available; no evaluation/resume, commit or push performed.
+- lan_1 now contains imported DenseNet reports; next local training uses the next run number.
+
+### 2026-10-30 ? Checkpoint download update
+
+- Refreshed feature/thuan to 59f62c9; downloaded best.pt and last.pt into outputs/runs/lan_1 (28,565,055 bytes each).
+- Both are valid ZIP checkpoint archives; best.pt SHA256 matches validation_metrics.json. No pickle deserialization or training executed.
+- Weights remain ignored locally; source/config/split unchanged. Split byte-hash mismatch still requires reconciliation before evaluation/resume.
+
+- 2026-10-30: Added .gitignore exceptions for lan_1/best.pt and lan_1/last.pt; both checkpoints can now be tracked. Other weights remain ignored. No commit/push.
+
+### 2026-10-30 ? Notebook execution with imported checkpoints
+
+- Executed all 17 code cells through the local Jupyter kernel; all passed. Saved text/table outputs, omitted image payloads from the shared notebook.
+- Loaded best/last metadata and rendered EDA, training curves and train/validation confusion plots. RUN_EVALUATION and EVALUATE_TEST remained False; predictions were not recomputed.
+- Existing plots scan all lan_* runs and label model/experiment; multi-run loss/accuracy and test ROC/PR comparison are supported. Test analysis awaits test reports with probabilities.
+
+### 2026-10-30 ? Official lan_1 test evaluation
+
+- Evaluated DenseNet121 A best epoch10 on RTX 3050; train/validation/test completed in 265.08s. Test: 10,000 images, accuracy 90.01%, macro F1 0.90013549, loss 0.29646943, 999 errors.
+- Saved test_metrics.json with Nx10 probabilities, per-class rates and predictions; refreshed train/validation reports and local error galleries. Source RUN_TEST remains False.
+- Normalized split file bytes to feature/thuan after asserting identical JSON/IDs; checkpoint split hash now matches. Weights unchanged.
+- Verified score shape/sums/argmax, prediction accuracy, confusion count and checkpoint SHA256. Test is now observed; use validation for further model selection.
+- Notebook rerun: all 17 code cells passed; saved metric plots/tables (no dataset pixel outputs). Macro ROC-AUC 0.994133, micro ROC-AUC 0.994730; macro AP 0.962098, micro AP 0.965299. No commit/push.
+
+- 2026-10-30: Prepared complete workspace update for branch Thai: synchronized Practice 1, CNN analysis/MLP baseline test, Practice 2 checkpoint/test notebook. Dataset pixel galleries excluded; split file uses LF for stable checkpoint SHA. Practice 1 remote publication: 01d1802 on lab-1-hoan-chinh.
