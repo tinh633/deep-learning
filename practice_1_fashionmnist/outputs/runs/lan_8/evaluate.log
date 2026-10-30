@@ -1,2 +1,0 @@
-2026-10-14 22:53:56,865 | run=lan_8 | checkpoint=best.pt | epoch=22 | train | loss=0.145072 | accuracy=94.4611% | test not evaluated
-2026-10-14 22:53:57,443 | run=lan_8 | checkpoint=best.pt | epoch=22 | validation | loss=0.278345 | accuracy=90.9667% | test not evaluated

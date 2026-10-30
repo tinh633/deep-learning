@@ -1,6 +1,9 @@
 # Downloaded datasets: recreate from each project's preparation script.
 **/data/
 
+# This delivery branch contains Practice 2; preserve Practice 1 only locally.
+/practice_1_fashionmnist/
+
 # Python caches and local virtual environments.
 __pycache__/
 *.py[cod]

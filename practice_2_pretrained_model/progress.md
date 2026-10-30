@@ -52,3 +52,5 @@ Chi tiết kiểm tra cuối được cập nhật bên dưới. Nhật ký đ�
 - Final map check: 60000 points; PCA2 retains 48.89% train RGB8x8 variance. Numeric and DOM/canvas tests passed; model-projection script/output removed.
 
 - Final notebook rerun passed all17 code cells after map correction; saved numeric/metric plot outputs, omitted dataset pixels. No training/download/inference rerun. Remaining work is visual review and explicitly authorized Git publication.
+
+- 2026-10-30: Corrected branch scope: practice2-pretrained-model publishes Practice 2 only. Untrack Practice 1 on this branch while preserving all local files and other branches; root README/index updated. No model or result changes.
