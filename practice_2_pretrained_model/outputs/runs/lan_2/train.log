@@ -1,0 +1,83 @@
+2026-10-30 01:24:20,853 | Starting | model=vgg16 | experiment=B | pretrained=True | device=cuda
+2026-10-30 01:24:27,324 | Environment: {'os': 'Linux-6.18.55+-x86_64-with-glibc2.39', 'python': '3.13.15 (main, Aug  6 2026, 11:06:22) [GCC 13.3.0]', 'cpu': 'x86_64', 'cpu_physical_cores': 2, 'cpu_logical_cores': 4, 'ram_bytes': 33658159104, 'torch': '2.11.0+cu128', 'torchvision': '0.26.0+cu128', 'cuda_build': '12.8', 'cudnn': 91900, 'device': 'cuda', 'gpu': [{'index': 0, 'name': 'Tesla T4', 'vram_bytes': 15636037632}, {'index': 1, 'name': 'Tesla T4', 'vram_bytes': 15636037632}], 'precision': 'float32; AMP disabled', 'deterministic_algorithms': False, 'cudnn_benchmark': False, 'cudnn_deterministic': True, 'cublas_workspace_config': 'unset', 'blas_threads': {'OPENBLAS_NUM_THREADS': '1', 'OMP_NUM_THREADS': '1', 'MKL_NUM_THREADS': '1'}}
+2026-10-30 01:24:27,324 | Configuration: {'model_name': 'vgg16', 'experiment': 'B', 'model_config': {'head': 'H1', 'fine_tune': True, 'lr': 0.001, 'batch_size': 64}, 'pretrained': True, 'train': {'seed': 42, 'epochs': 20, 'weight_decay': 0.0}, 'data': {'seed': 42, 'val_size': 5000, 'image_size': 224, 'batch_size': 64, 'num_workers': 0, 'pin_memory': False}, 'split_file': '/kaggle/working/practice_2_pretrained_model/outputs/cifar10_split.json', 'split_sha256': 'fa5a9fcd6b5d9d717eb35b10c728300f1a01c666c4e524a6faa3de47fc7ce5c3', 'source': 'torchvision.datasets.CIFAR10', 'input_shape': [3, 224, 224]}
+2026-10-30 01:24:27,324 | Data: {'train': {'size': 45000, 'batches': 704, 'batch_size': 64, 'num_workers': 0, 'pin_memory': False, 'sampler': 'RandomSampler', 'transform': 'Compose(\n    Resize(size=(224, 224), interpolation=bilinear, max_size=None, antialias=True)\n    RandomHorizontalFlip(p=0.5)\n    ToTensor()\n    Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225))\n)'}, 'validation': {'size': 5000, 'batches': 79, 'batch_size': 64, 'num_workers': 0, 'pin_memory': False, 'sampler': 'SequentialSampler', 'transform': 'Compose(\n    Resize(size=(224, 224), interpolation=bilinear, max_size=None, antialias=True)\n    ToTensor()\n    Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225))\n)'}}
+2026-10-30 01:24:27,324 | Model: vgg16
+PretrainedCNN(
+  (backbone): Sequential(
+    (0): Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): ReLU(inplace=True)
+    (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (3): ReLU(inplace=True)
+    (4): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (5): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (6): ReLU(inplace=True)
+    (7): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (8): ReLU(inplace=True)
+    (9): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (10): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (11): ReLU(inplace=True)
+    (12): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (13): ReLU(inplace=True)
+    (14): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (15): ReLU(inplace=True)
+    (16): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (17): Conv2d(256, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (18): ReLU(inplace=True)
+    (19): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (20): ReLU(inplace=True)
+    (21): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (22): ReLU(inplace=True)
+    (23): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (24): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (25): ReLU(inplace=True)
+    (26): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (27): ReLU(inplace=True)
+    (28): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (29): ReLU(inplace=True)
+    (30): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  )
+  (relu): ReLU()
+  (pool): AdaptiveAvgPool2d(output_size=(1, 1))
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (head): Linear(in_features=512, out_features=10, bias=True)
+)
+2026-10-30 01:24:27,325 | Weights: VGG16_Weights.IMAGENET1K_V1 | feature size: 512 | Parameters: {'total': 14719818, 'trainable': 7084554, 'frozen': 7635264, 'trainable_names': ['backbone.24.weight', 'backbone.24.bias', 'backbone.26.weight', 'backbone.26.bias', 'backbone.28.weight', 'backbone.28.bias', 'head.weight', 'head.bias']}
+2026-10-30 01:24:27,325 | Loss: CrossEntropyLoss() | Optimizer: Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    decoupled_weight_decay: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.001
+    maximize: False
+    weight_decay: 0.0
+) | Scheduler: none
+2026-10-30 01:24:27,325 | BatchNorm statistics frozen | best: val accuracy, then val loss, then earliest epoch
+2026-10-30 01:24:27,325 | Test not evaluated | Output: /kaggle/working/practice_2_pretrained_model/outputs/runs/lan_2
+2026-10-30 01:30:18,844 | Epoch 1/20 | train_loss=0.553736 | train_acc=80.98% | val_loss=0.406292 | val_acc=86.56% | lr=0.001 | seconds=351.32 | best_epoch=1
+2026-10-30 01:36:17,926 | Epoch 2/20 | train_loss=0.310375 | train_acc=89.46% | val_loss=0.325578 | val_acc=88.78% | lr=0.001 | seconds=358.82 | best_epoch=2
+2026-10-30 01:42:16,677 | Epoch 3/20 | train_loss=0.230940 | train_acc=92.27% | val_loss=0.355722 | val_acc=88.56% | lr=0.001 | seconds=358.63 | best_epoch=2
+2026-10-30 01:48:15,650 | Epoch 4/20 | train_loss=0.180116 | train_acc=93.80% | val_loss=0.310120 | val_acc=90.36% | lr=0.001 | seconds=358.72 | best_epoch=4
+2026-10-30 01:54:14,692 | Epoch 5/20 | train_loss=0.147542 | train_acc=94.93% | val_loss=0.338458 | val_acc=89.48% | lr=0.001 | seconds=358.92 | best_epoch=4
+2026-10-30 02:00:14,307 | Epoch 6/20 | train_loss=0.119482 | train_acc=96.07% | val_loss=0.342974 | val_acc=89.60% | lr=0.001 | seconds=359.49 | best_epoch=4
+2026-10-30 02:06:14,078 | Epoch 7/20 | train_loss=0.097672 | train_acc=96.64% | val_loss=0.318124 | val_acc=91.30% | lr=0.001 | seconds=359.52 | best_epoch=7
+2026-10-30 02:12:13,696 | Epoch 8/20 | train_loss=0.088291 | train_acc=97.08% | val_loss=0.391818 | val_acc=90.32% | lr=0.001 | seconds=359.49 | best_epoch=7
+2026-10-30 02:18:12,527 | Epoch 9/20 | train_loss=0.080086 | train_acc=97.35% | val_loss=0.385458 | val_acc=91.06% | lr=0.001 | seconds=358.70 | best_epoch=7
+2026-10-30 02:24:10,882 | Epoch 10/20 | train_loss=0.071740 | train_acc=97.66% | val_loss=0.400301 | val_acc=90.66% | lr=0.001 | seconds=358.23 | best_epoch=7
+2026-10-30 02:30:09,449 | Epoch 11/20 | train_loss=0.058428 | train_acc=98.16% | val_loss=0.454899 | val_acc=90.72% | lr=0.001 | seconds=358.45 | best_epoch=7
+2026-10-30 02:36:07,370 | Epoch 12/20 | train_loss=0.058862 | train_acc=98.12% | val_loss=0.410025 | val_acc=91.54% | lr=0.001 | seconds=357.66 | best_epoch=12
+2026-10-30 02:42:05,834 | Epoch 13/20 | train_loss=0.055546 | train_acc=98.22% | val_loss=0.455427 | val_acc=90.58% | lr=0.001 | seconds=358.33 | best_epoch=12
+2026-10-30 02:48:04,253 | Epoch 14/20 | train_loss=0.054365 | train_acc=98.41% | val_loss=0.495551 | val_acc=90.20% | lr=0.001 | seconds=358.29 | best_epoch=12
+2026-10-30 02:54:03,289 | Epoch 15/20 | train_loss=0.046773 | train_acc=98.55% | val_loss=0.444875 | val_acc=90.66% | lr=0.001 | seconds=358.91 | best_epoch=12
+2026-10-30 03:00:02,927 | Epoch 16/20 | train_loss=0.052188 | train_acc=98.39% | val_loss=0.433347 | val_acc=91.10% | lr=0.001 | seconds=359.51 | best_epoch=12
+2026-10-30 03:06:01,379 | Epoch 17/20 | train_loss=0.048380 | train_acc=98.45% | val_loss=0.549325 | val_acc=90.80% | lr=0.001 | seconds=358.33 | best_epoch=12
+2026-10-30 03:12:00,852 | Epoch 18/20 | train_loss=0.043316 | train_acc=98.68% | val_loss=0.495596 | val_acc=90.68% | lr=0.001 | seconds=359.35 | best_epoch=12
+2026-10-30 03:18:00,079 | Epoch 19/20 | train_loss=0.038727 | train_acc=98.90% | val_loss=0.542313 | val_acc=90.52% | lr=0.001 | seconds=359.10 | best_epoch=12
+2026-10-30 03:23:57,599 | Epoch 20/20 | train_loss=0.046734 | train_acc=98.65% | val_loss=0.467543 | val_acc=91.96% | lr=0.001 | seconds=357.26 | best_epoch=20
+2026-10-30 03:23:57,600 | Finished | epochs=20 | checkpoint=/kaggle/working/practice_2_pretrained_model/outputs/runs/lan_2/best.pt
+2026-10-30 03:23:57,600 | Summary | seconds=7176.75 | completed_epochs=20 | GPU_peak_bytes=5545770496
