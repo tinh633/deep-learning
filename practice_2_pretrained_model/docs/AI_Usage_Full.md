@@ -1,21 +1,16 @@
 # AI Usage Full — Nhật ký kỹ thuật Practice 2
-
 Lịch sử triển khai, kiểm tra và kết quả các hạng mục có hỗ trợ AI.
 Công cụ sử dụng: Python/PyTorch, Git, kiểm tra tiến trình/GPU, Node và Edge headless.
 Trạng thái hiện tại nằm trong [progress.md](../progress.md); ghi chú giai đoạn tại [Step](../AI_Usage_Step.md).
 Các lượt thử, lượt lỗi và kết quả lịch sử không thay thế kết quả của ma trận thí nghiệm hiện hành.
-
 ## 2026-10-26 — Thiết kế và cấu trúc ban đầu
-
 - Chọn CIFAR-10, VGG16/ResNet18/DenseNet121; thiết kế 18 lượt = 3 model × 6 cấu hình, điều kiện so sánh đồng bộ.
 - Tạo Experiment_Plan.md và README.md; mô tả EDA, head H1/H2, freeze/fine-tune, LR/batch và giới hạn so sánh.
 - Tổ chức src/data/outputs/visualization; pipeline 7 Python, model/config/logger riêng, train/evaluate trực tiếp.
 - Khởi tạo config/data và mô tả các bước còn lại; import module không tự tải dữ liệu hoặc chạy tác vụ.
 - Kiểm tra cú pháp, split lặp lại/coverage/không giao ID/phân bố lớp, từ chối cấu hình không tương thích: qua.
 - Kiểm tra liên kết Markdown, whitespace và giới hạn 150 dòng/file; chưa có kết quả model ở giai đoạn thiết kế.
-
 ## 2026-10-26 — Dataset và EDA
-
 - Tải CIFAR-10 bằng torchvision; một lần tải dừng vì DNS ở 119.767.040 byte, sau đó curl resume/retry hoàn tất.
 - Archive được kiểm tra và giải nén; đọc đủ 50.000 train và 10.000 test. Phiên tải khôi phục kết thúc exit 0.
 - Tạo outputs/cifar10_split.json: 45.000 train/5.000 validation, phân tầng seed 42, không giao ID.
@@ -24,9 +19,7 @@ Các lượt thử, lượt lỗi và kết quả lịch sử không thay thế 
 - DataLoader cả ba split cho batch 64×3×224×224 hữu hạn, nhãn đúng phạm vi; không dùng smoke làm kết quả model.
 - Viewer HTML ban đầu có lọc split/lớp, biểu đồ, HTTP fetch và file picker; fixture giả/missing-report, Node syntax và Edge DOM qua.
 - Kiểm tra Edge ngoài sandbox sau lỗi GPU/access trong sandbox; HTTP với report thật render bảng/gallery/histogram qua.
-
 ## 2026-10-26–27 — Hoàn thiện viewer
-
 - Mở rộng gallery đủ 60.000 ảnh thành 236 atlas PNG lossless; JSON giữ ID/nhãn theo split.
 - Bổ sung filter tất cả split/lớp, ID/khoảng ID, sắp xếp, 50/100/200 ảnh mỗi trang và preview pixel/mượt.
 - Đối chiếu toàn bộ pixel/nhãn với CIFAR-10; Edge kiểm tra filter, query không hợp lệ, trang cuối, preview, desktop/mobile qua.
@@ -34,9 +27,7 @@ Các lượt thử, lượt lỗi và kết quả lịch sử không thay thế 
 - Sau đó thay atlas bằng 6 RGB gzip HWC uint8 và canvas; giữ archive/Python batches, xóa 236 atlas đã xác minh đúng đường dẫn.
 - Kiểm tra lại đủ 60.000 pixel/nhãn/hashes, chunk boundaries, local-file offline, phân trang và mobile width 390: qua.
 - Không còn cần xuất hàng chục nghìn PNG riêng; dữ liệu viewer được tái tạo local bằng 1_eda.py.
-
 ## 2026-10-26–27 — Model, logging và evaluate
-
 - PretrainedCNN có backbone/head rõ ràng, H1 Linear hoặc H2 MLP; freeze trước, mở nhóm cuối nếu fine-tune.
 - Override train() giữ BatchNorm running statistics; kiểm tra 12 tổ hợp model/head/freeze bằng weights ngẫu nhiên qua.
 - Logits, gradient hữu hạn đúng nhóm, optimizer update, frozen weights/BN và eval mode được kiểm tra; SGD một step chỉ là kiểm tra cơ chế.
@@ -48,9 +39,7 @@ Các lượt thử, lượt lỗi và kết quả lịch sử không thay thế 
 - Báo cáo loss/accuracy/macro-F1, per-class/TP/TN/FP/FN, confusion, prediction ID/confidence và tối đa 24 ảnh sai tự tin nhất.
 - Evaluate smoke khớp checkpoint/sklearn/zero-support/ID/PNG; test tắt không iterate, test giả 5 ảnh qua khi bật.
 - Split hash sai bị từ chối, giữ báo cáo cũ; chưa có test chính thức từ các smoke này.
-
 ## 2026-10-27 — Môi trường CUDA và bàn giao
-
 - Giữ .venv chính, thay torch CPU bằng torch 2.11.0+cu126 và torchvision 0.26.0+cu126; pip check qua.
 - Dừng lượt CPU trước khi đổi DLL, giữ trạng thái gián đoạn; thêm main guard train/evaluate cho Windows worker 2.
 - Smoke worker ban đầu lỗi OpenBLAS thiếu RAM; giới hạn BLAS/OMP/MKL threads rồi kiểm tra lại.
@@ -58,9 +47,7 @@ Các lượt thử, lượt lỗi và kết quả lịch sử không thay thế 
 - Chưa kiểm tra GPU cho mọi tổ hợp tại thời điểm này; kết quả smoke không phải lượt train đầy đủ.
 - Dọn .venv-gpu tạo dở; giữ .venv CUDA. Tạo progress.md riêng, shared progress chuyển thành chỉ mục.
 - Bàn giao source/tài liệu trên nhánh Thái; lượt CPU dở không được ghi nhận như kết quả GPU chính thức.
-
 ## 2026-10-28 — ResNet18 A và lỗi worker
-
 - Lượt ResNet18 A đầu: H1/freeze, Adam .001, batch64/worker2/20 epoch, 45k train/5k validation, CUDA.
 - Log xác nhận 5.130 tham số trainable; quan sát sau khởi động GPU 58%, 786 MiB; chưa phải GPU peak của cả run.
 - Hoàn tất 6 epoch rồi lỗi shared mapping Windows 1455 giữa epoch 7; exit 1, best epoch5 val88,20%, loss .339812.
@@ -68,9 +55,7 @@ Các lượt thử, lượt lỗi và kết quả lịch sử không thay thế 
 - Lượt mới đủ 20 epoch, best epoch18 val88,54%, loss .337606; xóa lượt lỗi và đổi tên lượt thành công lan_2 → lan_1.
 - Giữ log lịch sử kèm ghi nhận đổi tên. Evaluate train89,6533%, val88,54%, val macro-F1 .885577; counts/IDs/lỗi khớp, test tắt.
 - Kết quả ResNet này là lịch sử; artifact đã không còn trong workspace trước lượt VGG16 mới ngày 29/10.
-
 ## 2026-10-28 — Weights, quản lý dữ liệu và nhật ký
-
 - Tải VGG16 chính thức bằng HTTP ranges/CDN download-r2.pytorch.org do đường tải đơn chậm; dừng các phép tải trùng.
 - Hoàn tất cache và kiểm tra SHA-256; pipeline cũ lỗi quyền đọc cache, chạy lại với quyền đọc phù hợp.
 - GPU VGG16 preflight batch64 qua, peak 2445,9 MiB; lan_2 bắt đầu 16:00:25, pretrained ImageNet-1K V1/CUDA/worker0.
@@ -78,18 +63,14 @@ Các lượt thử, lượt lỗi và kết quả lịch sử không thay thế 
 - Chuẩn hóa tên nhật ký: AI_Usage_Step.md theo giai đoạn, docs/AI_Usage_Full.md giữ lịch sử; đồng bộ liên kết.
 - Gỡ 6 RGB gzip đã theo dõi bằng Git --cached, giữ local; bỏ ngoại lệ data ignore và không rewrite lịch sử.
 - Commit 4bdb86b đã push Thái; data, weights, events và ảnh lỗi dẫn xuất được giữ local.
-
 ## 2026-10-28 — Resume và theo dõi train
-
 - VGG16 lan_2 cũ dừng sau epoch2; best cũng epoch2 nhưng thiếu Adam/RNG. Tiếp tục thử từ epoch3 với Adam/random reset có cảnh báo.
 - Bổ sung best/last full-state và resume cùng run; smoke CPU save/restore/legacy qua. Không tái tạo last epoch20 của ResNet từ best epoch18.
 - Từng bổ sung scalar/snapshot theo batch; sau đó trở lại log/TensorBoard cuối epoch, bỏ live.jsonl/progress.json.
 - Dừng/xóa lượt VGG16 đang dở và train lại từ đầu; giữ ResNet tại giai đoạn đó. Lượt VGG16 mới dừng sau epoch1, best/last có Adam/RNG.
 - HTML nhúng TensorBoard, bỏ dashboard/JS train riêng. Sửa ký tự tiếng Việt và thêm Live Server ignore outputs/data/events.
 - TensorBoard HTTP/API scalars từng kiểm tra 200 và nhận hai run; iframe/Live Server reload chưa kiểm tra trực tiếp trong IDE.
-
 ## 2026-10-29 — Làm gọn source và chạy mới
-
 - Làm rõ config bằng hằng số, tham số model theo keyword, get_settings() giữ format checkpoint; vòng train/validation trực tiếp.
 - Gom JSON/hash/đóng log; bỏ registry không dùng; chuyển resume/save epoch sang helper, tách vẽ ảnh sai khỏi evaluate.
 - Evaluate đọc full-state checkpoint chứa NumPy RNG; DataLoader training=False không augmentation/shuffle.
@@ -100,9 +81,7 @@ Các lượt thử, lượt lỗi và kết quả lịch sử không thay thế 
 - Khởi chạy mới VGG16 A tại lan_1 lúc 19:53:28, pretrained/H1/freeze, Adam .001, batch64/worker0, ngân sách20 epoch.
 - Log/config xác nhận CUDA; quan sát GPU3336 MiB/100%. Epoch1: train73,6333%, loss .988279; val79,62%, loss .671030, 420,84 giây.
 - Dừng PID2728/18928 giữa lượt train; best/last đều epoch1, có Adam/RNG. GPU về 0 MiB/0%; resume tiếp từ epoch2.
-
 ## 2026-10-29 — Phạm vi sáu lượt và notebook báo cáo
-
 - Thu gọn 18 → 6 lượt: VGG16/DenseNet121 × A freeze .001, B fine-tune .001, C fine-tune .0001; H1/batch64/20 epoch.
 - B/C mới khác mã cũ; phân loại artifact bằng model_config thực. Giữ nhánh ResNet/H2 lịch sử, không đổi state_dict VGG16 A.
 - Tạo Practice_2_Report.ipynb: mục tiêu, EDA/ảnh train, preprocessing, kiến trúc CPU, thiết kế, history/curves, metrics và giới hạn.
@@ -112,34 +91,56 @@ Các lượt thử, lượt lỗi và kết quả lịch sử không thay thế 
 - 5W1H chỉ ở docstring đầu 7 file src; Markdown/notebook trình bày theo nội dung, không áp template.
 - Chuẩn hóa Markdown thành ghi chú kỹ thuật và nhật ký công việc; giữ kết quả/lỗi/giới hạn, bỏ phần kể hội thoại.
 - Trạng thái giai đoạn: train dừng, config resume lan_1; các thay đổi sau 0a4eb77 được gom vào đợt bàn giao notebook/source/tài liệu tiếp theo, mã commit theo Git history.
-
 ## 2026-10-29 — Loại nhánh source không còn sử dụng
-
 - Bỏ ResNet18/H2 và tham số head; chỉ VGG16/DenseNet121 với Linear 10 lớp, weights ImageNet-1K V1 khai báo rõ.
 - Bỏ head_name/HEAD/TRAIN dư thừa; metadata H1 giữ format checkpoint. Train/evaluate/notebook đồng bộ lời gọi.
 - Resume bắt buộc last.pt với Adam/RNG, bỏ fallback best/reset optimizer. Không xóa checkpoint hoặc dữ liệu.
 - CPU: shape/gradient/BatchNorm hai model × freeze/fine-tune qua; logits khớp H1 trước dọn; bản sao checkpoint thật resume/lưu epoch tiếp theo qua.
 - Smoke tạm train/save/resume/evaluate API mới qua; validation ID/confusion khớp và test tắt. Không khởi chạy run chính thức.
-
 ## 2026-10-29 — Chỉ số sau test và ROC-AUC
-
 - Đối chiếu LAB2 metrics và scikit-learn; notebook bổ sung TP/TN/FP/FN, TPR/FPR/specificity, per-class OvR ROC và macro/micro AUC.
 - Phân biệt tỷ lệ argmax với ROC quét ngưỡng; so sánh yêu cầu cùng split/ID/nhãn/lớp, không tuning bằng test. Thiếu score hoặc lớp vắng không tạo AUC giả.
 - Evaluate thêm per-class rates và probabilities Nx10/thứ tự cột riêng test; không đổi RUN_TEST=False hoặc chạy test thật.
 - Kiểm tra giả perfect/chance AUC, rates, missing/invalid score, lớp vắng, plots và split mismatch qua; smoke export score/rates qua. Artifact tạm, notebook output-free.
-
 ## 2026-10-29 — PR/AP và đối chiếu lỗi cùng ID
-
 - Notebook có PR OvR, per-class/macro/micro AP, bảng bốn nhóm đúng/sai giữa hai checkpoint, thống kê theo lớp và gallery ảnh test local.
 - Ghép theo ID/nhãn/split/lớp; không tự chọn checkpoint theo test, trường hợp nhiều report cần PAIR_LABELS. AP dùng average_precision_score, không nhầm diện tích hình thang.
 - Kiểm tra giả perfect/chance AP, ID alignment, nhãn sai/ID trùng, gallery và thiếu report qua; chưa chạy test chính thức, không lưu outputs ảnh.
-
 ## 2026-10-29 — Cell thực thi đánh giá checkpoint
-
 - Notebook 7.0 chọn danh sách run, bật evaluate và test riêng (mặc định False), thực thi 3_evaluate.py; cấu hình chỉ thay tạm và được khôi phục.
 - Checkpoint đầy đủ model_state/settings/classes/weights/epoch cùng dataset/split local đủ để đánh giá; reader không cần history/config.json để đọc report mới.
 - Smoke tạm no-op/train-val/test Nx10/config restore/checkpoint unchanged qua; không đánh giá test thật hoặc train lại model.
-
 ## 2026-10-29 — Bản bàn giao train mới
 - Xóa outputs/runs/lan_1 sau khi xác minh không có tiến trình train; bỏ cả weights/events và log/config/history cũ, giữ dataset/split/EDA.
 - Đặt RESUME_RUN=None cho VGG16 A từ epoch1; notebook cell đánh giá giữ hai cờ mặc định False. Chuẩn bị commit bản bàn giao, không khởi chạy train.
+## 2026-10-30 ? Imported lan_1 (current status)
+- Six report/log files imported from feature/thuan commit af08050; source/config unchanged.
+- DenseNet121 A completed 20 epochs; best epoch 10: validation accuracy 90.52%, macro F1 0.905178; train evaluation accuracy 91.7822%.
+- Verified exact Git bytes, epochs 1?20, confusion totals/accuracy (45,000 train; 5,000 validation).
+- Split JSON contents/IDs identical locally; byte hashes differ. Original metadata preserved.
+- No best.pt/last.pt or test report available; no evaluation/resume, commit or push performed.
+- lan_1 now contains imported DenseNet reports; next local training uses the next run number.
+
+### 2026-10-30 ? Checkpoint download update
+
+- Refreshed feature/thuan to 59f62c9; downloaded best.pt and last.pt into outputs/runs/lan_1 (28,565,055 bytes each).
+- Both are valid ZIP checkpoint archives; best.pt SHA256 matches validation_metrics.json. No pickle deserialization or training executed.
+- Weights remain ignored locally; source/config/split unchanged. Split byte-hash mismatch still requires reconciliation before evaluation/resume.
+
+- 2026-10-30: Added .gitignore exceptions for lan_1/best.pt and lan_1/last.pt; both checkpoints can now be tracked. Other weights remain ignored. No commit/push.
+
+### 2026-10-30 ? Notebook execution with imported checkpoints
+
+- Executed all 17 code cells through the local Jupyter kernel; all passed. Saved text/table outputs, omitted image payloads from the shared notebook.
+- Loaded best/last metadata and rendered EDA, training curves and train/validation confusion plots. RUN_EVALUATION and EVALUATE_TEST remained False; predictions were not recomputed.
+- Existing plots scan all lan_* runs and label model/experiment; multi-run loss/accuracy and test ROC/PR comparison are supported. Test analysis awaits test reports with probabilities.
+
+### 2026-10-30 ? Official lan_1 test evaluation
+
+- Evaluated DenseNet121 A best epoch10 on RTX 3050; train/validation/test completed in 265.08s. Test: 10,000 images, accuracy 90.01%, macro F1 0.90013549, loss 0.29646943, 999 errors.
+- Saved test_metrics.json with Nx10 probabilities, per-class rates and predictions; refreshed train/validation reports and local error galleries. Source RUN_TEST remains False.
+- Normalized split file bytes to feature/thuan after asserting identical JSON/IDs; checkpoint split hash now matches. Weights unchanged.
+- Verified score shape/sums/argmax, prediction accuracy, confusion count and checkpoint SHA256. Test is now observed; use validation for further model selection.
+- Notebook rerun: all 17 code cells passed; saved metric plots/tables (no dataset pixel outputs). Macro ROC-AUC 0.994133, micro ROC-AUC 0.994730; macro AP 0.962098, micro AP 0.965299. No commit/push.
+
+- 2026-10-30: Prepared complete workspace update for branch Thai: synchronized Practice 1, CNN analysis/MLP baseline test, Practice 2 checkpoint/test notebook. Dataset pixel galleries excluded; split file uses LF for stable checkpoint SHA. Practice 1 remote publication: 01d1802 on lab-1-hoan-chinh.

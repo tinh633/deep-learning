@@ -19,5 +19,17 @@ venv/
 # Local training weights, TensorBoard events and dataset-derived error images.
 *.pt
 *.pth
+!practice_2_pretrained_model/outputs/runs/lan_1/best.pt
+!practice_2_pretrained_model/outputs/runs/lan_1/last.pt
 **/events.out.tfevents.*
 practice_2_pretrained_model/visualization/runs/
+
+# Dataset image galleries and feature previews are regenerated locally.
+practice_1_fashionmnist/outputs/cnn_runs/*/mistakes.png
+practice_1_fashionmnist/outputs/cnn_runs/*/feature_maps.png
+practice_1_fashionmnist/outputs/cnn_runs/*/backbone_features.png
+practice_1_fashionmnist/outputs/mlp_error_analysis/*_class_confusions.png
+practice_1_fashionmnist/outputs/mlp_error_analysis/*_high_confidence.png
+practice_1_fashionmnist/outputs/mlp_error_analysis/*_fixed.png
+practice_1_fashionmnist/outputs/mlp_error_analysis/*_new_errors.png
+practice_1_fashionmnist/outputs/runs/*/plots/predictions.png

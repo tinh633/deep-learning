@@ -51,3 +51,7 @@ Notebook có bảng so sánh MLP, loss/accuracy, confusion, ảnh sai và featur
 Test mặc định tắt (RUN_TEST=False); chỉ bật sau khi xem validation và quyết định đánh giá checkpoint.
 Đã kiểm tra toàn bộ code cell với 1 epoch trên 16 ảnh tổng hợp và dữ liệu thật tải đúng split;
 chưa train CNN đầy đủ, chưa có kết luận cải thiện so với MLP.
+
+## CNN new analysis
+
+[cnn_new.ipynb](cnn_new.ipynb), sections 6-11: historical test interpretation, class metrics, ROC/PR and error analysis. Run the analysis cells separately to avoid retraining. Place the original cnn_new_best.pt in the Practice 1 folder; predictions are cached without image pixels in outputs/cnn_new_test.npz. Current checkout lacks that checkpoint, so real per-class results are not yet available. MLP remains presented on the existing HTML.
