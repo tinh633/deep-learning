@@ -82,7 +82,7 @@ Chọn EVAL_RUN, đọc best.pt và cấu hình đã lưu; không dùng config m
 - Báo cáo loss, accuracy, macro-F1, precision/recall/F1/support/TP/TN/FP/FN, confusion, ID và confidence.
 - Per-class có thêm TPR/FPR/specificity; mẫu số 0 lưu null. Test report lưu probabilities N×10 và probability_class_order, cùng thứ tự predictions; train/validation không lưu ma trận score.
 - Notebook phân tích ROC OvR từng lớp, macro/micro AUC và bảng/đường cong so sánh sau test. Báo cáo cũ thiếu score chỉ tính được tỷ lệ confusion, không suy ra AUC.
-- PR/AP dùng cùng xác suất test; AP không phải tích phân hình thang. Đối chiếu lỗi ghép theo ID/nhãn, có bảng bốn nhóm, theo lớp và tối đa bốn ảnh mỗi nhóm sai; cặp nhiều checkpoint chọn bằng PAIR_LABELS, không xếp hạng test tự động.
+- PR/AP dùng cùng xác suất test; AP không phải tích phân hình thang. Đối chiếu lỗi ghép theo ID/nhãn, có bảng bốn nhóm, theo lớp và tối đa bốn ảnh mỗi nhóm sai; ghép riêng VGG/DenseNet cùng A/B/C từ metadata, không xếp hạng test tự động.
 - Khóa một checkpoint/model bằng validation, xác nhận rồi mới bật RUN_TEST và test hai checkpoint.
 - Không tự dùng test để chọn epoch/LR, không xem run dở như kết quả hoàn tất.
 - Evaluate đọc trusted local checkpoint với weights_only=False vì checkpoint hiện có NumPy RNG.

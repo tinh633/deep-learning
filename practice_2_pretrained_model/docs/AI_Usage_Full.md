@@ -4,37 +4,13 @@ Công cụ sử dụng: Python/PyTorch, Git, kiểm tra tiến trình/GPU, Node 
 Trạng thái hiện tại nằm trong [progress.md](../progress.md); ghi chú giai đoạn tại [Step](../AI_Usage_Step.md).
 Các lượt thử, lượt lỗi và kết quả lịch sử không thay thế kết quả của ma trận thí nghiệm hiện hành.
 ## 2026-10-26 — Thiết kế và cấu trúc ban đầu
-- Chọn CIFAR-10, VGG16/ResNet18/DenseNet121; thiết kế 18 lượt = 3 model × 6 cấu hình, điều kiện so sánh đồng bộ.
-- Tạo Experiment_Plan.md và README.md; mô tả EDA, head H1/H2, freeze/fine-tune, LR/batch và giới hạn so sánh.
-- Tổ chức src/data/outputs/visualization; pipeline 7 Python, model/config/logger riêng, train/evaluate trực tiếp.
-- Khởi tạo config/data và mô tả các bước còn lại; import module không tự tải dữ liệu hoặc chạy tác vụ.
-- Kiểm tra cú pháp, split lặp lại/coverage/không giao ID/phân bố lớp, từ chối cấu hình không tương thích: qua.
-- Kiểm tra liên kết Markdown, whitespace và giới hạn 150 dòng/file; chưa có kết quả model ở giai đoạn thiết kế.
+- Chọn CIFAR-10, VGG16/ResNet18/DenseNet121; thiết kế 18 lượt = 3 model × 6 cấu hình, điều kiện so sánh đồng bộ. Tạo Experiment_Plan.md và README.md; mô tả EDA, head H1/H2, freeze/fine-tune, LR/batch và giới hạn so sánh. Tổ chức src/data/outputs/visualization; pipeline 7 Python, model/config/logger riêng, train/evaluate trực tiếp. Khởi tạo config/data và mô tả các bước còn lại; import module không tự tải dữ liệu hoặc chạy tác vụ. Kiểm tra cú pháp, split lặp lại/coverage/không giao ID/phân bố lớp, từ chối cấu hình không tương thích: qua. Kiểm tra liên kết Markdown, whitespace và giới hạn 150 dòng/file; chưa có kết quả model ở giai đoạn thiết kế.
 ## 2026-10-26 — Dataset và EDA
-- Tải CIFAR-10 bằng torchvision; một lần tải dừng vì DNS ở 119.767.040 byte, sau đó curl resume/retry hoàn tất.
-- Archive được kiểm tra và giải nén; đọc đủ 50.000 train và 10.000 test. Phiên tải khôi phục kết thúc exit 0.
-- Tạo outputs/cifar10_split.json: 45.000 train/5.000 validation, phân tầng seed 42, không giao ID.
-- Triển khai 1_eda.py: counts, shape/dtype/pixel range, RGB train mean/std/histogram, preprocessing và duplicates SHA-256.
-- EDA thật: lớp cân bằng, 0 nhóm trùng pixel chính xác; đối chiếu 360 thumbnail/nhãn, histogram và RGB độc lập qua.
-- DataLoader cả ba split cho batch 64×3×224×224 hữu hạn, nhãn đúng phạm vi; không dùng smoke làm kết quả model.
-- Viewer HTML ban đầu có lọc split/lớp, biểu đồ, HTTP fetch và file picker; fixture giả/missing-report, Node syntax và Edge DOM qua.
-- Kiểm tra Edge ngoài sandbox sau lỗi GPU/access trong sandbox; HTTP với report thật render bảng/gallery/histogram qua.
+- Tải CIFAR-10 bằng torchvision; một lần tải dừng vì DNS ở 119.767.040 byte, sau đó curl resume/retry hoàn tất. Archive được kiểm tra và giải nén; đọc đủ 50.000 train và 10.000 test. Phiên tải khôi phục kết thúc exit 0. Tạo outputs/cifar10_split.json: 45.000 train/5.000 validation, phân tầng seed 42, không giao ID. Triển khai 1_eda.py: counts, shape/dtype/pixel range, RGB train mean/std/histogram, preprocessing và duplicates SHA-256. EDA thật: lớp cân bằng, 0 nhóm trùng pixel chính xác; đối chiếu 360 thumbnail/nhãn, histogram và RGB độc lập qua. DataLoader cả ba split cho batch 64×3×224×224 hữu hạn, nhãn đúng phạm vi; không dùng smoke làm kết quả model. Viewer HTML ban đầu có lọc split/lớp, biểu đồ, HTTP fetch và file picker; fixture giả/missing-report, Node syntax và Edge DOM qua. Kiểm tra Edge ngoài sandbox sau lỗi GPU/access trong sandbox; HTTP với report thật render bảng/gallery/histogram qua.
 ## 2026-10-26–27 — Hoàn thiện viewer
-- Mở rộng gallery đủ 60.000 ảnh thành 236 atlas PNG lossless; JSON giữ ID/nhãn theo split.
-- Bổ sung filter tất cả split/lớp, ID/khoảng ID, sắp xếp, 50/100/200 ảnh mỗi trang và preview pixel/mượt.
-- Đối chiếu toàn bộ pixel/nhãn với CIFAR-10; Edge kiểm tra filter, query không hợp lệ, trang cuối, preview, desktop/mobile qua.
-- Đồng bộ bảng màu teal, header/menu ngang, chiều rộng và thẻ/bảng với viewer Practice 1; bỏ sidebar.
-- Sau đó thay atlas bằng 6 RGB gzip HWC uint8 và canvas; giữ archive/Python batches, xóa 236 atlas đã xác minh đúng đường dẫn.
-- Kiểm tra lại đủ 60.000 pixel/nhãn/hashes, chunk boundaries, local-file offline, phân trang và mobile width 390: qua.
-- Không còn cần xuất hàng chục nghìn PNG riêng; dữ liệu viewer được tái tạo local bằng 1_eda.py.
+- Mở rộng gallery đủ 60.000 ảnh thành 236 atlas PNG lossless; JSON giữ ID/nhãn theo split. Bổ sung filter tất cả split/lớp, ID/khoảng ID, sắp xếp, 50/100/200 ảnh mỗi trang và preview pixel/mượt. Đối chiếu toàn bộ pixel/nhãn với CIFAR-10; Edge kiểm tra filter, query không hợp lệ, trang cuối, preview, desktop/mobile qua. Đồng bộ bảng màu teal, header/menu ngang, chiều rộng và thẻ/bảng với viewer Practice 1; bỏ sidebar. Sau đó thay atlas bằng 6 RGB gzip HWC uint8 và canvas; giữ archive/Python batches, xóa 236 atlas đã xác minh đúng đường dẫn. Kiểm tra lại đủ 60.000 pixel/nhãn/hashes, chunk boundaries, local-file offline, phân trang và mobile width 390: qua. Không còn cần xuất hàng chục nghìn PNG riêng; dữ liệu viewer được tái tạo local bằng 1_eda.py.
 ## 2026-10-26–27 — Model, logging và evaluate
-- PretrainedCNN có backbone/head rõ ràng, H1 Linear hoặc H2 MLP; freeze trước, mở nhóm cuối nếu fine-tune.
-- Override train() giữ BatchNorm running statistics; kiểm tra 12 tổ hợp model/head/freeze bằng weights ngẫu nhiên qua.
-- Logits, gradient hữu hạn đúng nhóm, optimizer update, frozen weights/BN và eval mode được kiểm tra; SGD một step chỉ là kiểm tra cơ chế.
-- Tách ghi chú H1/H2, số tham số, hidden 256/Dropout .2 và giới hạn so sánh vào Model_QA.md.
-- Triển khai logger/train: môi trường, kiến trúc/config/loss/optimizer, validation, best checkpoint và TensorBoard 2.21.0.
-- A/E và H2 smoke CPU trên 8 train/4 validation CIFAR thật, 2 epoch; checkpoint reload/event scalars qua.
-- Kiểm tra lỗi/interrupt khi setup và giữa epoch 2: không báo Finished giả, giữ epoch 1; artifact tạm được dọn.
+- PretrainedCNN có backbone/head rõ ràng, H1 Linear hoặc H2 MLP; freeze trước, mở nhóm cuối nếu fine-tune. Override train() giữ BatchNorm running statistics; kiểm tra 12 tổ hợp model/head/freeze bằng weights ngẫu nhiên qua. Logits, gradient hữu hạn đúng nhóm, optimizer update, frozen weights/BN và eval mode được kiểm tra; SGD một step chỉ là kiểm tra cơ chế. Tách ghi chú H1/H2, số tham số, hidden 256/Dropout .2 và giới hạn so sánh vào Model_QA.md. Triển khai logger/train: môi trường, kiến trúc/config/loss/optimizer, validation, best checkpoint và TensorBoard 2.21.0. A/E và H2 smoke CPU trên 8 train/4 validation CIFAR thật, 2 epoch; checkpoint reload/event scalars qua. Kiểm tra lỗi/interrupt khi setup và giữa epoch 2: không báo Finished giả, giữ epoch 1; artifact tạm được dọn.
 - Triển khai evaluate theo config checkpoint, strict state load, split SHA-256; train evaluation bỏ augmentation.
 - Báo cáo loss/accuracy/macro-F1, per-class/TP/TN/FP/FN, confusion, prediction ID/confidence và tối đa 24 ảnh sai tự tin nhất.
 - Evaluate smoke khớp checkpoint/sklearn/zero-support/ID/PNG; test tắt không iterate, test giả 5 ảnh qua khi bật.
@@ -120,27 +96,55 @@ Các lượt thử, lượt lỗi và kết quả lịch sử không thay thế 
 - Split JSON contents/IDs identical locally; byte hashes differ. Original metadata preserved.
 - No best.pt/last.pt or test report available; no evaluation/resume, commit or push performed.
 - lan_1 now contains imported DenseNet reports; next local training uses the next run number.
-
 ### 2026-10-30 ? Checkpoint download update
-
 - Refreshed feature/thuan to 59f62c9; downloaded best.pt and last.pt into outputs/runs/lan_1 (28,565,055 bytes each).
 - Both are valid ZIP checkpoint archives; best.pt SHA256 matches validation_metrics.json. No pickle deserialization or training executed.
 - Weights remain ignored locally; source/config/split unchanged. Split byte-hash mismatch still requires reconciliation before evaluation/resume.
-
 - 2026-10-30: Added .gitignore exceptions for lan_1/best.pt and lan_1/last.pt; both checkpoints can now be tracked. Other weights remain ignored. No commit/push.
-
 ### 2026-10-30 ? Notebook execution with imported checkpoints
-
 - Executed all 17 code cells through the local Jupyter kernel; all passed. Saved text/table outputs, omitted image payloads from the shared notebook.
 - Loaded best/last metadata and rendered EDA, training curves and train/validation confusion plots. RUN_EVALUATION and EVALUATE_TEST remained False; predictions were not recomputed.
 - Existing plots scan all lan_* runs and label model/experiment; multi-run loss/accuracy and test ROC/PR comparison are supported. Test analysis awaits test reports with probabilities.
-
 ### 2026-10-30 ? Official lan_1 test evaluation
-
 - Evaluated DenseNet121 A best epoch10 on RTX 3050; train/validation/test completed in 265.08s. Test: 10,000 images, accuracy 90.01%, macro F1 0.90013549, loss 0.29646943, 999 errors.
 - Saved test_metrics.json with Nx10 probabilities, per-class rates and predictions; refreshed train/validation reports and local error galleries. Source RUN_TEST remains False.
 - Normalized split file bytes to feature/thuan after asserting identical JSON/IDs; checkpoint split hash now matches. Weights unchanged.
 - Verified score shape/sums/argmax, prediction accuracy, confusion count and checkpoint SHA256. Test is now observed; use validation for further model selection.
 - Notebook rerun: all 17 code cells passed; saved metric plots/tables (no dataset pixel outputs). Macro ROC-AUC 0.994133, micro ROC-AUC 0.994730; macro AP 0.962098, micro AP 0.965299. No commit/push.
-
 - 2026-10-30: Prepared complete workspace update for branch Thai: synchronized Practice 1, CNN analysis/MLP baseline test, Practice 2 checkpoint/test notebook. Dataset pixel galleries excluded; split file uses LF for stable checkpoint SHA. Practice 1 remote publication: 01d1802 on lab-1-hoan-chinh.
+## 2026-10-30 - Imported lan_2 from feature/thuan
+- Copied six files from commit 72261b5: best.pt, last.pt, config/history, train log and TensorBoard events; no source changes.
+- DenseNet121 B (fine-tune last group, LR .001, batch64), 20/20 epochs. Best epoch7 validation accuracy 92.86%, loss 0.24817469; last epoch20 validation accuracy 92.12%.
+- Verified imported bytes, sequential history, checkpoint metadata/epochs (best7/last20), ZIP archives and local split SHA match. No evaluation reports on source branch; no train/test executed.
+- Weights/events remain local under current ignore rules; no commit/push.
+## 2026-10-30 - Imported DenseNet C lan_3
+- Downloaded eight files from feature/thuan commit 98ef5e5: best/last, config/history/log, two TensorBoard events and existing test_metrics.json. No source changes or local evaluation.
+- DenseNet121 C, fine-tune LR .0001/batch64, 20/20 epochs. Best epoch16 validation accuracy 93.90%; imported test accuracy 93.49%, macro F1 0.93507275, loss 0.32829289.
+- Verified source bytes, best16/last20 metadata, split SHA, test checkpoint SHA, confusion totals/accuracy and Nx10 scores/argmax. DenseNet A/B/C runs now present.
+- Test result was produced on source branch, not rerun locally. Weights/events remain ignored for lan_3 under current rules. No commit/push.
+- 2026-10-30: Checked lan_3 existing test report against best epoch16 (accuracy 93.49%); no rerun. Evaluated lan_2 best epoch7 on CUDA; test accuracy 93.06%, macro F1 0.93016224, loss 0.25015005. Train/validation/test completed in 258.02s; source RUN_TEST remains False.
+- Verified both test reports: checkpoint SHA, 10000 predictions/confusion count, probability shape/sums/argmax. No training, commit or push.
+- 2026-10-30: Re-evaluated lan_3 best epoch16 on CUDA; created evaluate.log plus train/validation metrics and refreshed test. SHA256 confirms all 7 training artifacts unchanged (best/last/config/history/train log/two event files). No training or deletion.
+- Local test: accuracy 93.48%, macro F1 0.93497202, loss 0.32832849; validation 93.88%. Test differs from imported result by one image; exact cause not established. Counts, probabilities, checkpoint SHA and Finished evaluation log verified. No commit/push.
+## 2026-10-30 - Imported VGG16 A/B/C results
+- Source vgg16-results-2026-10-30 commit c6ccefc: copied source lan_1/2/3 into local lan_4/5/6 respectively, 18 files total. DenseNet lan_1-3 unchanged (all 30 files verified by SHA256).
+- VGG A lan_4: best epoch20, val85.62%, test84.48%; VGG B lan_5: best epoch20, val91.96%, test91.91%; VGG C lan_6: best epoch19, val93.24%, test93.10%. All completed 20 epochs.
+- Imported reports preserve original Kaggle checkpoint/gallery paths as provenance; local directory mapping above is authoritative. No best.pt/last.pt on source branch: results are readable but checkpoint inference/resume unavailable.
+- Verified source bytes, A/B/C configs, history, report epochs/checkpoint-hash consistency, split SHA, confusion totals/accuracy and test score shape/sums/argmax. No local train/test, commit or push.
+- 2026-10-30: Notebook charts separated into train/validation epoch curves and test checkpoint bars (loss/accuracy). Confusion plots now one run per row, train/validation/test columns with shared 0-1 color scale and missing-report handling.
+- Clarified saved-report mode versus repeated checkpoint inference; removed external LAB2 Git reference. All 17 cells executed successfully with six runs, no training/evaluation; saved numeric/plot outputs without dataset pixel images. No commit/push.
+- 2026-10-30: Section 7.5 now pairs VGG16/DenseNet121 separately for A/B/C from report metadata, with matched training settings and split/classes/ID/label checks. Added pair summary, four error groups, per-class recall and three galleries selected by smallest IDs.
+- Executed setup/report analysis and both changed cells on all six real reports; three pairs passed, each 10000 images. DenseNet minus VGG accuracy: A +5.53pp, B +1.15pp, C +0.38pp; corrected/regressed counts match each delta. Saved tables; dataset pixel outputs omitted. No inference, training, commit or push.
+- 2026-10-30: Extended visualization/eda.html with same-configuration VGG/DenseNet test gallery, group/class/prediction/confidence/ID filters, sorting, pagination and paired prediction preview. Reads existing test JSON and local RGB gzip; no image export or extra viewer. Removed stale ResNet header text.
+- Node DOM harness with all six real reports passed ID/class/split checks, group counts A1972/B1198/C1057 (at least one wrong), filters, pagination, duplicate-ID/split rejection and rapid switch handling. Actual gzip/canvas decoding verified all 1024 RGB pixels for test ID42. Syntax/unique HTML IDs passed; browser layout not tested. Temporary checks removed; no commit/push.
+- 2026-10-30: Fixed test group cards inheriting white button text: explicit dark text, pale background, teal selected state and keyboard focus outline.
+- 2026-10-30: TensorBoard iframe failed because no server listened on port6006. Started local TensorBoard PID19572 on 127.0.0.1:6006; verified root/runs/scalar-tags HTTP200. Current event runs are lan_2 and lan_3; others have history but no local events. HTML uses explicit loopback address and explains service/event requirements. No training or dependency installation.
+- 2026-10-30: Expanded 1_eda.py/eda.json with per-image brightness, gray contrast, HSV saturation and adjacent-pixel variation; split histograms/quantiles/standardized mean shifts, train per-class RGB/features, correlation and train-only extreme IDs. Recomputed on all 60000 original images, no training or split changes.
+- Reordered single HTML: overview/deep EDA/RGB, dataset, preprocessing, quality, TensorBoard, test errors. Added four split-distribution plots, summary/class/correlation tables, measured insights and extreme-image selector; preserved dataset/error viewers.
+- Validation passed histogram totals, quantiles/correlation, train-only IDs, RGB class aggregate and independent source-image brightness/label. Node DOM checks passed chart/table counts, four selectors, legacy missing-data state, unique IDs and section order; browser layout remains untested. No commit/push.
+- 2026-10-30: Added src/4_feature_space.py and HTML feature-space section: 100 train images/class (1000 shared IDs), GAP descriptors before FC from configuration C, sample-only StandardScaler, PCA2 and PCA50+t-SNE (perplexity30/1000 iterations/seed42). Saved coordinates/metadata only in outputs/feature_space.json.
+- Extracted real DenseNet121 lan_3 best epoch16 features on CUDA; VGG lan_6 checkpoint missing, explicitly unavailable. PCA2 explains 15.33% standardized sample variance. No random-weight substitution, test sampling, training or downloads.
+- Verified balanced train-only IDs/labels, finite coordinates, checkpoint SHA. Node DOM checks passed 1000 points, hover/click preview, 100-point class highlight, method switch and missing-VGG panel; browser layout untested. Independent model projections are descriptive, not proof of accuracy or comparable global geometry. No commit/push.
+- 2026-10-30: Corrected spatial visualization to requested dataset-only map: all 60000 images in one canvas, class colors, split/class highlight, hover/click image preview. PCA uses RGB8x8 block means, fits train only and transforms every split; retains 48.89% train variance. Integrated into 1_eda.py/eda.json; deleted 4_feature_space.py and feature_space.json. No checkpoint inference needed.
+- Verified 60k finite coordinates aligned with gallery IDs/labels, class balance and train-centered PCA. Node DOM/canvas checks passed 60k draws, split/class filtering and hover/click. All twelve model files still named best.pt/last.pt; six best match existing three-split report SHA and strict model load. No retraining/test rerun or commit/push.
+- 2026-10-30: Final publication authorized on new branch practice2-pretrained-model. Git LFS tracks all12 best/last checkpoints, preserving binary SHA; actual TensorBoard events included. Dataset/derived pixel galleries remain ignored. Added clone/LFS pull instructions; no history rewrite or training.

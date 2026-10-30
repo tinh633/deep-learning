@@ -19,9 +19,10 @@ venv/
 # Local training weights, TensorBoard events and dataset-derived error images.
 *.pt
 *.pth
-!practice_2_pretrained_model/outputs/runs/lan_1/best.pt
-!practice_2_pretrained_model/outputs/runs/lan_1/last.pt
+!practice_2_pretrained_model/outputs/runs/lan_*/best.pt
+!practice_2_pretrained_model/outputs/runs/lan_*/last.pt
 **/events.out.tfevents.*
+!practice_2_pretrained_model/outputs/runs/lan_*/tensorboard/events.out.tfevents.*
 practice_2_pretrained_model/visualization/runs/
 
 # Dataset image galleries and feature previews are regenerated locally.
