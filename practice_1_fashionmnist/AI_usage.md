@@ -56,3 +56,23 @@ The user repeatedly requested short direct code, explicit forward operations and
 Current requirements and running instructions are in README.md and the five docs files.
 
 - Source upload result: c5dc80b successfully pushed to origin/Thai. Only src included; source status clean and local/remote commit hashes match. Other working changes remain uncommitted locally.
+
+## 2026-10-30 ? Branch synchronization
+
+- Synced all 152 tracked Practice 1 files from lab-1-hoan-chinh commit 080a41e; 102 files added/updated including byte-format differences. Local data and Practice 2 changes preserved.
+- Imported CNN runs 2/3, cnn_new.ipynb and MLP error analysis. Verified every imported file against source Git bytes before adding this journal entry; JSON parsing and notebook Python compilation passed.
+- No train/evaluate/notebook execution, commit or push. Next task: presentation report notebook using synchronized artifacts; existing training notebooks remain separate.
+
+## 2026-10-30 - CNN new post-test analysis
+
+- Scope: cnn_new.ipynb only; MLP stays on existing HTML. Added historical-result interpretation, standalone test inference/cache, per-class TP/TN/FP/FN/TPR/FPR, confusion, ROC/AUC, PR/AP and rule-based error/confidence analysis.
+- Historical output: best epoch35, val92.20%, test91.47%, 853/10000 errors. Checkpoint cnn_new_best.pt absent locally and from imported branch; CNN runs 1-3 have different architectures and were not substituted.
+- New cells compile and missing-checkpoint path passes. Synthetic perfect/chance ROC/AP, rates/confusion/gallery and invalid probabilities checks passed; synthetic outputs not saved. Real per-class inference awaits checkpoint. No train, commit or push.
+
+## 2026-10-30 - MLP lan_10 test
+
+- Evaluated original best.pt epoch39 on CUDA, no training. Test n=10000: accuracy 89.65%, loss 0.32805356, macro F1 0.89640104, 1035 mistakes. Train/validation remain 95.15%/91.3333%.
+- Existing evaluate/report scripts produced test.log, model_report.json, class CSV and plots. Updated run_review JSON/CSV for HTML; verified checkpoint SHA, confusion totals and error count.
+- Corrected config DATA_FOLDER to existing data/FashionMNIST_raw after imported branch path failed dataset lookup. No data download, commit or push.
+
+- 2026-10-30: Publishing Practice 1 CNN analysis and lan_10 test reports to lab-1-hoan-chinh; Practice 2 excluded. Local cnn_basic.ipynb deletion is excluded to preserve the existing remote notebook.
