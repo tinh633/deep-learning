@@ -1,0 +1,9 @@
+# Runtime artifacts are local by default (datasets and pretrained weights can be large).
+outputs/data/
+outputs/runs/
+outputs/exercise1/
+visualization/lan_*/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.DS_Store
