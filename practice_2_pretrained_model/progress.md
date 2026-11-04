@@ -1,6 +1,6 @@
 # Tiến độ và bàn giao — Practice 2
 
-Cập nhật 2026-10-30: đủ sáu lượt train, 12 checkpoint và báo cáo train/validation/test.
+Cập nhật2026-11-04: rà soát trước Git; đủ sáu lượt train,12 checkpoint và báo cáo ba split.
 Đợt hoàn thiện: chuẩn hóa tên weights, đối chiếu artifact, bổ sung trực quan hóa và báo cáo.
 Nhánh chốt: `practice2-pretrained-model`; đã được duyệt commit/push kèm đủ 12 checkpoint qua Git LFS.
 
@@ -41,11 +41,11 @@ Nhánh chốt: `practice2-pretrained-model`; đã được duyệt commit/push k
 - Notebook mặc định không train/evaluate/download. RUN_EVALUATION/EVALUATE_TEST giữ False.
 - Chưa kiểm tra trực tiếp bố cục HTML trong trình duyệt hoặc UI notebook trong IDE.
 
-## Việc còn lại để bàn giao
+## Trạng thái bàn giao hiện tại
 
-1. Kiểm tra bản đồ60.000 ảnh và chạy notebook sau các chỉnh sửa trình bày cuối.
-2. Mở notebook/HTML để review bố cục; không chạy lại train hoặc chọn lại cấu hình theo test.
-3. Review thay đổi Git và quyết định commit/push riêng khi có yêu cầu.
+Code/tài liệu/artifact đã qua rà soát2026-11-04; chưa commit/push thay đổi mới.
+Chỉ đưa Practice2 và .gitignore liên quan; không git add toàn workspace vì có benchmark riêng.
+UI HTML/notebook trong IDE chưa kiểm tra trực tiếp; đã có kiểm tra DOM và thực thi notebook.
 
 Chi tiết kiểm tra cuối được cập nhật bên dưới. Nhật ký đầy đủ: docs/AI_Usage_Full.md.
 
@@ -54,3 +54,34 @@ Chi tiết kiểm tra cuối được cập nhật bên dưới. Nhật ký đ�
 - Final notebook rerun passed all17 code cells after map correction; saved numeric/metric plot outputs, omitted dataset pixels. No training/download/inference rerun. Remaining work is visual review and explicitly authorized Git publication.
 
 - 2026-10-30: Corrected branch scope: practice2-pretrained-model publishes Practice 2 only. Untrack Practice 1 on this branch while preserving all local files and other branches; root README/index updated. No model or result changes.
+
+## 2026-11-01 — Tài liệu source
+
+- Đối chiếu bảy file Python và viết bảy hướng dẫn tại docs/src/: config, data, model, logger, EDA, train, evaluate.
+- Mô tả tham số, luồng xử lý, artifact, freeze/BatchNorm, resume cuối epoch và điều kiện kiểm tra dữ liệu/checkpoint.
+- Thêm liên kết từ README; chỉ sửa tài liệu, không train/evaluate hoặc thay weights/code.
+
+## 2026-11-02 — Không gian ảnh và TensorBoard
+
+- Thử t-SNE không nhãn trên60.000 ảnh,500 iteration, KL4,1496; quan sát vẫn trộn lớp.
+  Giữ PCA hiện có, không đưa t-SNE vào pipeline; thêm độ đậm/chỉ hiện một lớp, không đổi tọa độ.
+- Bỏ iframe TensorBoard tự tải trong HTML, giữ link; thêm TensorBoard.ipynb riêng.
+- Notebook đọc events thật, vẽ loss/accuracy không cần server, khởi động server có health check,
+  link tab riêng và dashboard. Tránh metadata server cũ; hiện có events lan_2/lan_3.
+- Node DOM kiểm tra60.000 điểm, lọc lớp6.000/train4.500, hover/click qua.
+- Bốn cell notebook đã chạy qua; HTTP200 và scalar tags đúng2 run. Chưa kiểm tra UI trong IDE/browser.
+- Không train/evaluate model hoặc đổi weights/split. Không commit/push.
+
+## 2026-11-04 — Rà soát trước Git
+
+- Sửa Training.md về12 weights GitLFS, resume và TensorBoard riêng; bổ sung dependencies notebook.
+- Loại pixel/base64 khỏi eda.json và EDA generator. Preview HTML/notebook dựng từ dataset local;
+  source report chỉ giữ ID/cấu hình/thống kê. Chỉ xóa outputs ảnh ở cell5/7/31 trước lưu Git.
+- Ignore tensorboard_server.log; giữ dataset/RGB local. Không sửa checkpoint hoặc kết quả train/test.
+- Kiểm tra12 checkpoint khớp LFS SHA/size, best/last epoch, sáu strict model loads và18 reports;
+  confusion/counts/accuracy/per-class/probabilities khớp. Split SHA khớp toàn bộ checkpoint.
+- Chạy17 cell report +4 cell TensorBoard thành công; flags evaluate/test giữFalse.
+- DOM/JS kiểm tra60k điểm/lọc/hover, preprocessing4 canvas và thiếu pixel qua.
+- Giới hạn đã ghi: batch64 cố định, events chỉ2/3, một seed/nhiều máy và test đã quan sát.
+
+- 2026-11-04: Publication authorized: Practice2 and its .gitignore change to practice2-pretrained-model; ImageNet benchmark excluded.

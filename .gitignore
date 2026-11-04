@@ -38,3 +38,6 @@ practice_1_fashionmnist/outputs/mlp_error_analysis/*_high_confidence.png
 practice_1_fashionmnist/outputs/mlp_error_analysis/*_fixed.png
 practice_1_fashionmnist/outputs/mlp_error_analysis/*_new_errors.png
 practice_1_fashionmnist/outputs/runs/*/plots/predictions.png
+
+# Local TensorBoard server diagnostics are not experiment artifacts.
+practice_2_pretrained_model/outputs/tensorboard_server.log

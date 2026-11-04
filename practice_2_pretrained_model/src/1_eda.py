@@ -12,10 +12,8 @@ os.environ.setdefault('OPENBLAS_NUM_THREADS', '1')
 os.environ.setdefault('OMP_NUM_THREADS', '1')
 os.environ.setdefault('MKL_NUM_THREADS', '1')
 
-import base64
 import gzip
 import hashlib
-import io
 import json
 from collections import defaultdict
 from datetime import datetime, timezone
@@ -27,12 +25,6 @@ from torchvision import transforms
 
 from config import DATA, DATA_FOLDER, IMAGENET_MEAN, IMAGENET_STD, OUTPUT_FOLDER
 from data import load_datasets, load_split
-
-
-def image_url(image):
-    buffer = io.BytesIO()
-    image.save(buffer, format='PNG')
-    return 'data:image/png;base64,' + base64.b64encode(buffer.getvalue()).decode('ascii')
 
 
 # 1. Load original data and the fixed split.
@@ -189,10 +181,10 @@ for channel, mean_value, std_value in zip(restored, IMAGENET_MEAN, IMAGENET_STD)
     channel.mul_(std_value).add_(mean_value)
 report['preprocessing'] = dict(
     split='train', id=index, label=int(original.targets[index]),
-    original=image_url(image), resized=image_url(resized), flipped=image_url(flipped),
+    image_size=DATA['image_size'], mean=IMAGENET_MEAN, std=IMAGENET_STD,
     normalized_min=float(normalized.min()), normalized_max=float(normalized.max()),
     normalized_channel_mean=normalized.mean(dim=(1, 2)).tolist(),
-    restored=image_url(transforms.ToPILImage()(restored.clamp(0, 1))))
+    restoration_max_abs_error=float((restored - tensor).abs().max()))
 # 5. Validate counts and save the EDA report.
 assert len(train_ids) == 45000 and len(val_ids) == 5000 and len(test) == 10000
 assert not set(train_ids) & set(val_ids)
