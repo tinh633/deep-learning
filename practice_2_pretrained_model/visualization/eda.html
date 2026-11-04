@@ -394,9 +394,7 @@
     }
   </style>
   <style>
-    #training iframe { width: 100%; height: 780px; border: 1px solid var(--line); border-radius: 8px; margin-top: 18px; background: white; }
     #training pre { overflow-x: auto; padding: 14px; border-radius: 8px; background: var(--paper); font-size: 12px; }
-    @media (max-width: 600px) { #training iframe { height: 650px; } }
     #testErrors .gallery { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
     #testErrors .tile { text-align: left; padding: 14px; }
     #testErrors .tile small { display: block; white-space: normal; }
@@ -485,11 +483,12 @@
 <section id="featureSpace">
         <h2>Không gian ảnh · phân bố toàn bộ CIFAR-10</h2>
         <p>Một chấm là một ảnh gốc: cả <b>60.000 ảnh</b> cùng nằm trên một biểu đồ, tô màu theo 10 lớp. Không sử dụng model hoặc checkpoint.</p>
-        <p class="muted">Ảnh được lấy trung bình từng ô thành RGB 8×8 rồi chiếu PCA về hai chiều. PCA chỉ fit trên train, sau đó dùng cùng phép chiếu cho train/validation/test. Hình phản ánh màu sắc và hình dáng thô; hai chiều không thể giữ mọi chi tiết hoặc chứng minh lớp dễ phân loại.</p>
+        <p class="muted">PCA dùng RGB 8×8, chỉ fit trên train rồi chiếu cả ba split. Màu sắc và hình dáng thô không đủ để các lớp tự tách rời. Bật “Chỉ hiện lớp đang chọn” hoặc giảm độ đậm điểm để xem rõ hơn; phép lọc không di chuyển tọa độ. Không dùng nhãn để ép tạo cụm.</p>
         <div class="controls"><label>Lớp nổi bật<select id="mapClass"><option value="all">Tất cả lớp</option></select></label><label>Split<select id="mapSplit"><option value="all">Toàn bộ 60.000 ảnh</option><option value="train">Train</option><option value="validation">Validation</option><option value="test">Test</option></select></label></div>
+        <div class="controls"><label><input id="mapOnlyClass" type="checkbox"> Chỉ hiện lớp đang chọn</label><label>Độ đậm điểm<input id="mapOpacity" type="range" min="0.03" max="0.7" step="0.01" value="0.15"></label></div>
         <p id="mapStatus" role="status"></p>
         <div id="mapLegend"></div>
-        <canvas id="datasetMap" width="1100" height="620" role="img" aria-label="Phân bố PCA của 60000 ảnh CIFAR-10, màu theo lớp"></canvas>
+        <canvas id="datasetMap" width="1100" height="620" role="img" aria-label="Phân bố 60000 ảnh CIFAR-10, màu theo lớp"></canvas>
         <div class="map-preview"><canvas id="mapImage" width="32" height="32"></canvas><span id="mapHover">Rê chuột gần một điểm để xem ảnh; nhấn để phóng lớn.</span></div>
       </section>
 <section id="statistics">
@@ -604,10 +603,9 @@
       <p>Khởi động TensorBoard trong terminal tại thư mục gốc dự án:</p>
       <pre>.\.venv\Scripts\python.exe -m tensorboard.main --logdir practice_2_pretrained_model/outputs/runs --host 127.0.0.1 --port 6006 --reload_interval 2</pre>
       <p class="muted">Chọn run ở thanh bên TensorBoard. Bật tự làm mới trong Settings để cập nhật biểu đồ. Có thể mở tab riêng để theo dõi độc lập với EDA.</p>
-      <p class="notice">TensorBoard cần chạy bằng lệnh trên trước khi tải khung bên dưới. Live Server không tự khởi động TensorBoard. Chỉ các run có file events mới xuất hiện; các run chỉ có history.json xem biểu đồ trong notebook.</p>
-      <button type="button" onclick="document.getElementById('tensorboardFrame').src = 'http://127.0.0.1:6006/#scalars'">Tải lại TensorBoard</button>
-      <a href="http://127.0.0.1:6006/#scalars" target="_blank" rel="noopener">Mở TensorBoard ở tab riêng</a>
-      <iframe id="tensorboardFrame" src="http://127.0.0.1:6006/#scalars" title="TensorBoard theo dõi huấn luyện"></iframe>
+      <p class="notice">TensorBoard cần chạy bằng lệnh trên trước khi mở tab theo dõi. Live Server không tự khởi động TensorBoard. Chỉ các run có file events mới xuất hiện; các run chỉ có history.json xem biểu đồ trong notebook.</p>
+      <p><a href="../TensorBoard.ipynb">Mở TensorBoard.ipynb trong VS Code/Jupyter</a> để tự khởi động TensorBoard. Không cần chạy train lại.</p>
+      <a href="http://127.0.0.1:6006/#scalars" target="_blank" rel="noopener">Mở TensorBoard ở tab riêng sau khi server chạy</a>
     </section>
 <section id="testErrors">
         <div class="heading"><div><h2>Đối chiếu ảnh test · VGG16 và DenseNet121</h2>
@@ -684,15 +682,40 @@
       });
       return t;
     }
-    function picture(url, title) {
-      const f = document.createElement("figure"),
-        i = document.createElement("img"),
-        c = document.createElement("figcaption");
-      i.src = url;
-      i.alt = title;
-      c.textContent = title;
-      f.append(i, c);
-      return f;
+    let preprocessingVersion = 0;
+    async function renderPreprocessing() {
+      const version = ++preprocessingVersion, p = report.preprocessing;
+      el('prep').replaceChildren();
+      el('prepInfo').textContent = `Train ID ${p.id} · ${report.classes[p.label]}`;
+      const original = document.createElement('canvas');
+      await drawPhoto(original, {split: 'train', id: p.id});
+      if (version !== preprocessingVersion) return;
+      if (!original.dataset.loaded) {
+        el('prepInfo').textContent += ' · Cần pixel RGB local để xem ảnh minh họa.';
+        return;
+      }
+      const size = p.image_size || 224, mean = p.mean || [0.485, 0.456, 0.406], std = p.std || [0.229, 0.224, 0.225];
+      for (const [key, title] of [['original', '01 · Gốc 32 × 32'], ['resized', `02 · Resize ${size} × ${size}`],
+                                 ['flipped', '03 · Horizontal flip'], ['restored', '04 · Đảo normalization']]) {
+        const figure = document.createElement('figure'), canvas = document.createElement('canvas'), caption = document.createElement('figcaption');
+        canvas.width = canvas.height = key === 'original' ? 32 : size;
+        const context = canvas.getContext('2d');
+        if (key === 'flipped' || key === 'restored') { context.translate(size, 0); context.scale(-1, 1); }
+        context.drawImage(original, 0, 0, canvas.width, canvas.height);
+        context.setTransform(1, 0, 0, 1, 0, 0);
+        if (key === 'restored') {
+          const pixels = context.getImageData(0, 0, size, size);
+          for (let i = 0; i < pixels.data.length; i += 4) {
+            for (let c = 0; c < 3; c++) {
+              const normalized = (pixels.data[i + c] / 255 - mean[c]) / std[c];
+              pixels.data[i + c] = Math.round(255 * (normalized * std[c] + mean[c]));
+            }
+          }
+          context.putImageData(pixels, 0, 0);
+        }
+        canvas.style.width = '100%'; canvas.style.height = 'auto';
+        caption.textContent = title; figure.append(canvas, caption); el('prep').append(figure);
+      }
     }
     const pixelCache = new Map(), localPixels = new Map();
     async function readPixels(chunk) {
@@ -999,16 +1022,7 @@
       );
       histogram();
       const p = data.preprocessing;
-      el("prepInfo").textContent =
-        `Train ID ${p.id} · ${data.classes[p.label]}`;
-      el("prep").replaceChildren(
-        ...[
-          ["original", "01 · Gốc 32 × 32"],
-          ["resized", "02 · Resize 224 × 224"],
-          ["flipped", "03 · Horizontal flip"],
-          ["restored", "04 · Đảo normalization"],
-        ].map(([key, name]) => picture(p[key], name)),
-      );
+      renderPreprocessing();
       el("normalized").textContent =
         `Tensor normalized: min ${p.normalized_min.toFixed(3)}, max ${p.normalized_max.toFixed(3)} · mean R/G/B: ${p.normalized_channel_mean.map((x) => x.toFixed(3)).join(" / ")}`;
       el("dupSummary").textContent =
@@ -1080,6 +1094,7 @@
         paint();
         paintErrors();
         paintDeepExamples();
+        renderPreprocessing();
         el('status').textContent = 'Đã chọn ' + localPixels.size + ' file pixel RGB.';
       }
     };
@@ -1097,10 +1112,12 @@
           mapPoints.push({split, id: gallery.ids[i], label: gallery.labels[i], x: xy[0], y: xy[1]});
         });
       }
+      const previousClass = el('mapClass').value;
       el('mapClass').replaceChildren();
       for (const [value, label] of [['all', 'Tất cả lớp'], ...report.classes.map((name, i) => [i, name])]) {
         const option = document.createElement('option'); option.value = value; option.textContent = label; el('mapClass').append(option);
       }
+      el('mapClass').value = previousClass || 'all';
       el('mapLegend').replaceChildren(...report.classes.map((name, i) => {
         const text = document.createElement('span'); text.textContent = '● ' + name; text.style.color = mapColors[i]; return text;
       }));
@@ -1122,7 +1139,8 @@
       }
       ctx.fillText('PC 1', 560, 610); ctx.fillText('PC 2', 32, 25);
       const split = el('mapSplit').value, selected = el('mapClass').value;
-      mapVisible = mapPoints.filter(p => split === 'all' || p.split === split);
+      mapVisible = mapPoints.filter(p => (split === 'all' || p.split === split) &&
+        (!el('mapOnlyClass').checked || selected === 'all' || p.label === Number(selected)));
       mapHovered = null;
       const highlighted = mapVisible.filter(p => selected === 'all' || p.label === Number(selected));
       for (const active of [false, true]) {
@@ -1131,15 +1149,17 @@
           if (match !== active) continue;
           point.px = 65 + 990 * (point.x - minX) / (maxX - minX || 1);
           point.py = 555 - 510 * (point.y - minY) / (maxY - minY || 1);
-          ctx.globalAlpha = match ? (selected === 'all' ? 0.35 : 0.7) : 0.025;
+          ctx.globalAlpha = match ? (selected === 'all' ? Number(el('mapOpacity').value) : 0.7) : 0.015;
           ctx.fillStyle = mapColors[point.label]; ctx.beginPath(); ctx.arc(point.px, point.py, match ? 1.7 : 1.2, 0, 2 * Math.PI); ctx.fill();
         }
       }
       ctx.globalAlpha = 1;
       const variance = report.dataset_projection.explained_variance.reduce((a, b) => a + b, 0);
-      el('mapStatus').textContent = `${fmt(mapVisible.length)} ảnh trên cùng biểu đồ · ${fmt(highlighted.length)} ảnh nổi bật · PCA2 giữ ${(100 * variance).toFixed(1)}% phương sai của ảnh train RGB 8×8.`;
+      el('mapStatus').textContent = `${fmt(mapVisible.length)} ảnh trên cùng biểu đồ · ${fmt(highlighted.length)} ảnh nổi bật · PCA2 giữ ${(100 * variance).toFixed(1)}% phương sai train RGB 8×8.`;
       el('mapHover').textContent = 'Rê chuột gần một điểm để xem ảnh; nhấn để phóng lớn.';
     }
+    el('mapOnlyClass').onchange = paintDatasetMap;
+    el('mapOpacity').oninput = paintDatasetMap;
     el('mapClass').onchange = paintDatasetMap;
     el('mapSplit').onchange = paintDatasetMap;
     let mapFrame = null;

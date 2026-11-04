@@ -40,6 +40,13 @@ Nguồn: [CIFAR-10](https://www.cs.toronto.edu/~kriz/cifar.html).
 ## Source và cách chạy
 
 Chạy từ gốc workspace bằng `.venv`.
+Sau khi clone, cài dependencies và tải dataset rõ ràng trước khi tái tạo EDA:
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install -r practice_2_pretrained_model/requirements.txt
+.\.venv\Scripts\python.exe -c "import sys; sys.path.insert(0, 'practice_2_pretrained_model/src'); from data import load_datasets; load_datasets(download=True)"
+```
+
 
 | File trong src/ | Vai trò |
 |---|---|
@@ -65,7 +72,8 @@ Chi tiết train/resume: [Training.md](Training.md).
 .\.venv\Scripts\python.exe -m tensorboard.main --logdir practice_2_pretrained_model/outputs/runs --host 127.0.0.1 --port 6006 --reload_interval 2
 ```
 
-Mở 127.0.0.1:6006 hoặc iframe HTML. Events local hiện có ở lan_2/lan_3; history đủ sáu lượt.
+Mở [TensorBoard.ipynb](TensorBoard.ipynb) bằng kernel .venv và Run All; có biểu đồ đọc trực tiếp events, dashboard live và link tab riêng.
+HTML không còn tự nhúng iframe TensorBoard. Mở 127.0.0.1:6006 sau khi server chạy. Events local hiện có ở lan_2/lan_3; history đủ sáu lượt.
 Live Server không khởi động TensorBoard. Không dựng event giả cho các run thiếu file gốc.
 
 ## Phạm vi và giới hạn
@@ -80,3 +88,16 @@ Dataset và ảnh pixel phát sinh vẫn giữ local; tái tạo bằng `1_eda.p
 
 Thiết kế: [Experiment_Plan.md](Experiment_Plan.md). Giải thích: [Model_QA.md](Model_QA.md).
 Trạng thái/kiểm tra: [progress.md](progress.md). Nhật ký AI: [Step](AI_Usage_Step.md), [Full](docs/AI_Usage_Full.md).
+
+## Tài liệu từng file src
+
+[config](docs/src/config.md) | [data](docs/src/data.md) | [model](docs/src/model.md) | [logger](docs/src/logger.md) | [1_eda](docs/src/1_eda.md) | [2_train](docs/src/2_train.md) | [3_evaluate](docs/src/3_evaluate.md)
+
+## Không gian ảnh và TensorBoard riêng
+
+HTML giữ PCA60.000 ảnh; bổ sung độ đậm điểm và chế độ chỉ hiện một lớp để giảm che lấp.
+Đã thử t-SNE không dùng nhãn trên60.000 ảnh; các lớp vẫn trộn nhiều,
+nên không giữ phần tính t-SNE trong pipeline hoặc làm thay đổi tọa độ theo nhãn.
+TensorBoard.ipynb không train lại; đọc trực tiếp events để vẽ loss/accuracy,
+khởi động server live có kiểm tra HTTP và link mở tab riêng khi khung nhúng không hiển thị.
+Hiện chỉ lan_2/lan_3 có events; run khác xem history qua notebook báo cáo.

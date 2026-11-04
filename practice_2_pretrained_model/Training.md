@@ -28,7 +28,8 @@ Không import runnable script để dùng lại code; không tạo pipeline trai
 - Cell 7.0 có EVALUATION_RUNS, RUN_EVALUATION và EVALUATE_TEST. Hai cờ mặc định False; bật thực thi để gọi lại 3_evaluate.py, bật test riêng sau khóa checkpoint. Cell đọc báo cáo sau đó nạp kết quả mới.
 - Có thể cung cấp outputs/runs/lan_N/best.pt đầy đủ model_state/settings/classes/weights/epoch mà không có history/config.json; cần CIFAR-10 local và split JSON trùng SHA-256. State_dict riêng lẻ chưa đủ.
 - Cell kiến trúc chỉ tạo model weights ngẫu nhiên trên CPU, không phải kết quả học.
-- Giữ notebook không có outputs ảnh/pixel để Git không chứa dataset dẫn xuất; chạy local để xem.
+- Trước đưa notebook lên Git, xóa outputs ảnh mẫu/preprocessing/gallery (cell5/7/31);
+  giữ bảng và metric plots. Chạy local để xem ảnh từ dataset, không nhúng pixel vào eda.json.
 - Dataset thiếu: tải rõ ràng qua data.load_datasets(download=True) trước, không tự tải khi import.
 
 Chạy EDA từ gốc workspace:
@@ -52,7 +53,8 @@ Chạy EDA từ gốc workspace:
 
 - num_workers=0 tránh lỗi Windows shared mapping 1455; GPU vẫn dùng bình thường.
 - Giữ main guard để an toàn khi đổi worker; không cần Trainer/callback framework.
-- Cấu hình bàn giao: VGG16 A, RESUME_RUN=None, bắt đầu từ epoch1 với pretrained weights; chưa có checkpoint local để resume.
+- Cấu hình mặc định: VGG16 A, RESUME_RUN=None; chạy train sẽ tạo run mới.
+  Đã có đủ12 best/last của6 run; resume chỉ dành cho run chưa hết ngân sách epoch.
 - PretrainedCNN nhận name/fine_tune/pretrained; head cố định Linear 10 lớp, không có lựa chọn head.
 - Không chạy B/C cũ theo tên mã: B/C mới khác kế hoạch 18 lượt, kiểm tra model_config thực.
 
@@ -66,7 +68,8 @@ Chạy EDA từ gốc workspace:
 - Ghi checkpoint/JSON bằng file tạm rồi replace; không ghi đè trực tiếp file tốt đang có.
 - Ngắt giữa epoch: phần epoch đang dở không được lưu làm epoch hoàn tất; resume chạy lại epoch đó.
 - Resume bắt buộc last.pt có đầy đủ Adam/RNG; không fallback best hoặc reset optimizer.
-- Checkpoint local cần giữ; clone Git không có weights để resume vì weights bị ignore.
+- Checkpoint6 run được theo dõi qua Git LFS; sau clone chạy git lfs pull.
+  Chỉ resume khi last.pt và history/config/split khớp, không bỏ qua kiểm tra cấu hình.
 - SHA-256 chỉ xác minh split/định danh checkpoint, không tham gia tính loss/accuracy.
 
 ## 6. Đánh giá
@@ -93,7 +96,8 @@ Chọn EVAL_RUN, đọc best.pt và cấu hình đã lưu; không dùng config m
 .\.venv\Scripts\python.exe -m tensorboard.main --logdir practice_2_pretrained_model/outputs/runs --host 127.0.0.1 --port 6006 --reload_interval 2
 ```
 
-Mở localhost:6006 hoặc iframe trong visualization/eda.html. Server không cần để notebook đọc history.
+Mở TensorBoard.ipynb để đọc events/vẽ biểu đồ và khởi động server, hoặc tab127.0.0.1:6006.
+HTML chỉ có link, không tự tải iframe. Notebook báo cáo đọc history không cần server.
 Live Server ignore outputs/data/events để giảm reload theo thay đổi artifact; nguyên nhân reload chưa tái hiện bằng browser.
 
 ## 8. Bằng chứng kiểm tra và giới hạn
