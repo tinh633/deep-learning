@@ -1,0 +1,4 @@
+resnet50: loading pretrained ResNet50_Weights.IMAGENET1K_V1
+resnet50: accuracy pass 16/16
+resnet50: measuring batch-1 latency
+resnet50: measuring batch-16 throughput

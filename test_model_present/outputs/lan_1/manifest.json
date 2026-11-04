@@ -1,0 +1,3502 @@
+[
+  {
+    "id": "imagenet1k/validation/16763",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_16763.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "860a4848f5fb960dc19a551128f0eda1894e4e26b8dda2e1b53cbc0e689a404e"
+  },
+  {
+    "id": "imagenet1k/validation/38033",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_38033.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "da68d0ddca958d80f7eb0f6cf621ec2fe5bef974d9ada494734d84f975ae957b"
+  },
+  {
+    "id": "imagenet1k/validation/4856",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_04856.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "8b31671f452fc24abc0e62e272731adf66f83d23e5d6430ab3489009857d459d"
+  },
+  {
+    "id": "imagenet1k/validation/16065",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_16065.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "7c57ce21e956742f11967746ba87a3e7cdda0d8ddff5247bb96d28236b3338c9"
+  },
+  {
+    "id": "imagenet1k/validation/5842",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_05842.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "5f9a5c950d7f7fda6335f805514099b1a876b6b884e36526551d73182226426e"
+  },
+  {
+    "id": "imagenet1k/validation/8058",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_08058.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "63eb198670f91a19a7763c13454ab011e23c367e167262673d2f9b91a7ecd85b"
+  },
+  {
+    "id": "imagenet1k/validation/32147",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_32147.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "9c03d2309b843046cd121d550073425d2586791cb5d7ada2c05cc7c2798323e2"
+  },
+  {
+    "id": "imagenet1k/validation/22181",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_22181.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "aec2e8b6c2156becf8126ac2d248085fe59fb8eace85ee2c883feba11d4f4f2b"
+  },
+  {
+    "id": "imagenet1k/validation/8162",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_08162.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "0ed933f9ca55c44181e34e636a3076f73fe4de67e9b20d05c9b194022a59a810"
+  },
+  {
+    "id": "imagenet1k/validation/33850",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_33850.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "dcf87c0ea0bfba74d8a77d0985a3f9bbd62d8095f84ae9aac16ed1d9ad241478"
+  },
+  {
+    "id": "imagenet1k/validation/40463",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_40463.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "2e66a2435fba81f6c6903def2ba46497497c1cf197fcbb3ee6d98ca445e3d62b"
+  },
+  {
+    "id": "imagenet1k/validation/41387",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_41387.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "fb4bed05ed42a84c24affbf3428fa7a2565319e7207f27a6d3d3722d7e03cd51"
+  },
+  {
+    "id": "imagenet1k/validation/9574",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_09574.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "50cc5a3305fedc982bb6086fc366948fe48265e8fb9fcd8a291b4a8784c5ca8d"
+  },
+  {
+    "id": "imagenet1k/validation/22921",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_22921.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "b7646fd8492c1ffa53f221d2fae2fb5495425748ce0aa8a5d2e1af6ee30c121f"
+  },
+  {
+    "id": "imagenet1k/validation/47992",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_47992.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "c7a0e39464006eba2f8345888231cbcb1afed4226aa9fbb3ba6e4b03c6beedaa"
+  },
+  {
+    "id": "imagenet1k/validation/6222",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_06222.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "7fcf73ac386bb709d8488bec75f91639319bf7c9367158157476b514a6363511"
+  },
+  {
+    "id": "imagenet1k/validation/36805",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_36805.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "5e0b63e8d4d14944ba51d453d5d65b9f6fef9444b40d5cf01cfb0c0dcbc0f797"
+  },
+  {
+    "id": "imagenet1k/validation/16690",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_16690.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "0c424e009257b59d98fe4d148e953065f010eb0da1b66299f3aa2eef92564bf0"
+  },
+  {
+    "id": "imagenet1k/validation/22357",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_22357.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "423ab039ae21cb05981ea1047cc16e4f0bf550785fbbc8d25b1d471b6c960859"
+  },
+  {
+    "id": "imagenet1k/validation/26548",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_26548.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "e6796325092169f93744ac2150666a464a207ed900dbf6535da1072d13d5f6a5"
+  },
+  {
+    "id": "imagenet1k/validation/44337",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_44337.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "12b57d065bd238f09abef4cb89549d9c6975c331b86ce844bfeee213a6c04db8"
+  },
+  {
+    "id": "imagenet1k/validation/32462",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_32462.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "71d65e0933f2aa1fe1d4554951811f4ea831f37c81e067a3b3cf34776ed4f503"
+  },
+  {
+    "id": "imagenet1k/validation/30225",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_30225.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "ca7834280249db1e8de6a5a8a6ce3b23257940ba724d97b283bbaabc613a7ede"
+  },
+  {
+    "id": "imagenet1k/validation/38595",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_38595.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "6c6a4339f87e245a4fc40454de5e3bd4d0a85097e18e01e700d094ee9228628e"
+  },
+  {
+    "id": "imagenet1k/validation/886",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_00886.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "959874cf94e41f5921b502c3bc8381c4e3346b52efec79b7492a9159c94a0b53"
+  },
+  {
+    "id": "imagenet1k/validation/46402",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_46402.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "c5702f3b0223a421a1b046f110abc8dfdca4be1810a97468850ffbe68eb5534c"
+  },
+  {
+    "id": "imagenet1k/validation/26405",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_26405.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "0e260c20facc83b6a65aaafdb86422bf1834d3115ce866cf94bc6338732c94a0"
+  },
+  {
+    "id": "imagenet1k/validation/23976",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_23976.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "f10a6eb51d1d4d90c5088a8ba16dd57a6614a2874967a89b2df215206ae34d66"
+  },
+  {
+    "id": "imagenet1k/validation/25855",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_25855.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "ecc929043fe8892b3a568d4881aa24948ecfbc4930ec6c4bceef4e5085f0bea0"
+  },
+  {
+    "id": "imagenet1k/validation/22362",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_22362.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "925b27f84e3491b04d3941b812b18f7d6a5e67c0ee40c5a35c75f6b0d6279bab"
+  },
+  {
+    "id": "imagenet1k/validation/13292",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_13292.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "9b1c620c35105107053a00f0e91afc6a07c4b1efed3b43114fcb25501762d606"
+  },
+  {
+    "id": "imagenet1k/validation/16449",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_16449.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "d5e4cfbd602b84bf31124223b011271fc607e3c90ea3ae5a61b267a42867e844"
+  },
+  {
+    "id": "imagenet1k/validation/23557",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_23557.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "7e601ef07745967ede9252b0bdb16b85190d0fa7c00c5e34112fff4c1785b6f6"
+  },
+  {
+    "id": "imagenet1k/validation/4236",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_04236.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "3662a58f30d148780520310d890107dd512c39d6b6ed80ef5e7b4d2c68aa7a3a"
+  },
+  {
+    "id": "imagenet1k/validation/29157",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_29157.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "7ae3259c3f1b5539f89689f69fea5bea895cccf7d94fac260d357ec5cb7ec68c"
+  },
+  {
+    "id": "imagenet1k/validation/2323",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_02323.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "0d50a791ce992aeb3c25f880aedaebde569f848ba7c70d3a28ee985afde33026"
+  },
+  {
+    "id": "imagenet1k/validation/43467",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_43467.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "875d90c29ab41f48e7af0ca7781436f686ee9b1cce5db5dfa2dec8e8ce236f77"
+  },
+  {
+    "id": "imagenet1k/validation/7496",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_07496.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "73017ffd3ff569e8a26c4de3e6b68e78a5595de0590c3f3d2958e659d21f2606"
+  },
+  {
+    "id": "imagenet1k/validation/23973",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_23973.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "b3fafdfc14b73fcde8d83bd2d936cc750706f3f46398515fc9fe0df9af3ce5e2"
+  },
+  {
+    "id": "imagenet1k/validation/15005",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_15005.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "638ca2330d25b375013f30c14493909470b58a56941f6ebec738a536e862b419"
+  },
+  {
+    "id": "imagenet1k/validation/36838",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_36838.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "7ffffdf16728652d8a630569589244607cb6ffd084e5e9fdb9897091cb7c601c"
+  },
+  {
+    "id": "imagenet1k/validation/23290",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_23290.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "8815f4f1c7cb72d3436ff290254f480dd06ce93e10e65dd17d3c57e93a712484"
+  },
+  {
+    "id": "imagenet1k/validation/15492",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_15492.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "baf0165497100daf560fccffe3d037c6c2fe07ac888234144a222277dfc71bfe"
+  },
+  {
+    "id": "imagenet1k/validation/18722",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_18722.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "7c63251dbed8fc0d0a0fbb992db13ee61a58882f60bdf71f5a3cb1ce1ef4e3c1"
+  },
+  {
+    "id": "imagenet1k/validation/40158",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_40158.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "0e9eba598c4930d34cf58aec106a3e4e33b23b58e2fb2fd093cd9059716156d7"
+  },
+  {
+    "id": "imagenet1k/validation/14001",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_14001.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "ecac76a301a628752e1a7b3834d791893c173987eaf48778dacf341ec08a68b1"
+  },
+  {
+    "id": "imagenet1k/validation/14248",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_14248.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "9096577c1716835007306298e14b240969d34b560854ad17a0d6c8dd60672474"
+  },
+  {
+    "id": "imagenet1k/validation/32965",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_32965.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "6476c4cde8b7a782c55fb8d7fcbd4a4ef56ca9e96339d77d191b7450f1c1d0c6"
+  },
+  {
+    "id": "imagenet1k/validation/18319",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_18319.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "eaeb3ff98d42ac0ea585bc8f9cc3e35e7f49794075f9f46ee0e521a4f544334c"
+  },
+  {
+    "id": "imagenet1k/validation/17666",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_17666.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "066c95ae4c34b39a036af56d8bccacae64d488ece2f42e40959745696ec9542b"
+  },
+  {
+    "id": "imagenet1k/validation/9219",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_09219.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "7740d8db3ea78d14107b966cb25e4c85e17f73496a9cc41915e97b6f6584f69d"
+  },
+  {
+    "id": "imagenet1k/validation/10066",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_10066.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "2d0209dc80c1cc2fcf3185e12275661cca1dd0296b3f0a781c13b4b7e273ab98"
+  },
+  {
+    "id": "imagenet1k/validation/43955",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_43955.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "93ca65aa7d630613520bbefb570d605f9021bcf1e8e3ee0942f1c212f29f78bd"
+  },
+  {
+    "id": "imagenet1k/validation/31508",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_31508.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "08cafeb9baa56f758ee205b273fa2e846599811b5ff939bf0874e7f3e52d4a3b"
+  },
+  {
+    "id": "imagenet1k/validation/5604",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_05604.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "dc719c543cc0d24507c276c4b2910596c3ee6913545bfd8648d85aa324c578b0"
+  },
+  {
+    "id": "imagenet1k/validation/21077",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_21077.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "47416ef78a1385d3c03c70f8b39cbfbcbba1ccc09a5ce24bb56dd3b8bfdde88b"
+  },
+  {
+    "id": "imagenet1k/validation/30848",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_30848.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "6ea31963056689c2a2077a9d33cf17ee2ee648de6de39f227ee8cd2423e07212"
+  },
+  {
+    "id": "imagenet1k/validation/13366",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_13366.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "ff574ef27f16910066793491676b78d4af53a54ec9975d53e7d0c8774911115b"
+  },
+  {
+    "id": "imagenet1k/validation/12612",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_12612.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "32144848d63f205eb1b3afa4ab437ebc10cb40fd1272e0474ed5153228a46daa"
+  },
+  {
+    "id": "imagenet1k/validation/35999",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_35999.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "3a652a9353cd01ff74c282b7303f0a12077077f71854b262b3fa09732b87942a"
+  },
+  {
+    "id": "imagenet1k/validation/19162",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_19162.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "19c12b8cf6ef8c9a509adde10cb720a62c0f2eec886a237bf3e3db66f6ba00ec"
+  },
+  {
+    "id": "imagenet1k/validation/36904",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_36904.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "b08b0fe70134b2dcba6ddeda958690257353c340c33af0c784a6474b628df59e"
+  },
+  {
+    "id": "imagenet1k/validation/3783",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_03783.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "606d0058e5d03899097cd84bf8eb24aa359a179219f4db4f0b16f921096ea30e"
+  },
+  {
+    "id": "imagenet1k/validation/16429",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_16429.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "27ad47c1233f4bc337df181756a79356ca9cd77a79897bbc67aa9e5464e5195b"
+  },
+  {
+    "id": "imagenet1k/validation/507",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_00507.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "99383a0a779ed5be4ced6366a30ceb5bc6dcf5204ddb342c8cccb79d7bd4a480"
+  },
+  {
+    "id": "imagenet1k/validation/9575",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_09575.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "4f702ac2aa4b9ebd36fb2ad6c333210b184691b271dd4836cace236bc99d1b9c"
+  },
+  {
+    "id": "imagenet1k/validation/31539",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_31539.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "aee79ff9cf9efdf4a1fb1fc9a88250a030da8b36df7e152c9c28f0cc621deb64"
+  },
+  {
+    "id": "imagenet1k/validation/19583",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_19583.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "b7cda74d0aa808d7370c7dc59df679018bc00849639ca5843644326f45504941"
+  },
+  {
+    "id": "imagenet1k/validation/37238",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_37238.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "7cb9e62f09f456512ca34ccb11a7aca6541f6bd9f85b979486381370357d7935"
+  },
+  {
+    "id": "imagenet1k/validation/44971",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_44971.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "57f593298b48ddc5197c162799dce9363a0a1cdc30a41dca2ca4e2206bbc1909"
+  },
+  {
+    "id": "imagenet1k/validation/9794",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_09794.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "da693ebd3d5a25f127802ae250fb333fec241fa14cac11ac073a5719ab6fdee9"
+  },
+  {
+    "id": "imagenet1k/validation/46773",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_46773.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "00306486c04a6aa0e0062c7ace8115379f02012fd8dc5aa3bf64033e630e4be5"
+  },
+  {
+    "id": "imagenet1k/validation/30514",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_30514.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "f59aeaa68f1ef7d823e3605ea94ee5a263744b24da2da3ab4b6cfdb472451257"
+  },
+  {
+    "id": "imagenet1k/validation/34656",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_34656.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "8525f8ab501389a75f593c39ba48a60c1e9340e3dde7312e582f295385994054"
+  },
+  {
+    "id": "imagenet1k/validation/40889",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_40889.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "59d9a8b6373f5f0914694b265a99810a0b57e37a09c63e53ef547b1a8a29d306"
+  },
+  {
+    "id": "imagenet1k/validation/40912",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_40912.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "6578b61ee74a0f6d582d79edbdc41b552bbe18c1473ff2a1302812f9e772bc31"
+  },
+  {
+    "id": "imagenet1k/validation/19466",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_19466.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "0cbf6b2a5c1c99d0de315069815d150baf9f28d9f7e3e29026f11f3c198a4fc6"
+  },
+  {
+    "id": "imagenet1k/validation/33930",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_33930.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "0e04889cb809fc7cb4fca24d3197bf8f1d3e5f34bb8189e6845bc34d24c17d25"
+  },
+  {
+    "id": "imagenet1k/validation/22487",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_22487.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "18bf1b2be60c301541536251ddbc8ff037998f3b9b520f2de6ab89120a121236"
+  },
+  {
+    "id": "imagenet1k/validation/13043",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_13043.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "c7d02c1df9de14d4441415cde324ffbebb8c2088ff4e81ac67ff9f52c000dedd"
+  },
+  {
+    "id": "imagenet1k/validation/1276",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_01276.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "d916bfca3f79abddfbded6339926f46672b2a52a4838dce99ab1e8bb58a81ee9"
+  },
+  {
+    "id": "imagenet1k/validation/863",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_00863.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "cc08c355038fee34b142e6f3d4a868db01d85aadabcf2fda2d4ddacf57898e26"
+  },
+  {
+    "id": "imagenet1k/validation/44303",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_44303.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "723521294e8b3cfe239eacbf5fd5228b4ce8e3b2b6429f3d566525b932060d50"
+  },
+  {
+    "id": "imagenet1k/validation/25926",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_25926.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "07daf1eb195b926556f606cfde9260edafcfc75633c494e9588a451db824322e"
+  },
+  {
+    "id": "imagenet1k/validation/39982",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_39982.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "0bdd669d8f29496a9bdabd53ff0641689632542d47c9fa32616c7440cc56f2f0"
+  },
+  {
+    "id": "imagenet1k/validation/42142",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_42142.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "0613cb8b52593ceb48b2f3bf6048e18507fbb0dce8c52eb6be05eccb852ff10d"
+  },
+  {
+    "id": "imagenet1k/validation/34756",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_34756.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "13559d8e52e1a3131e7cd9284067a31e5a0bf21fa44de523d891b093768124b7"
+  },
+  {
+    "id": "imagenet1k/validation/9325",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_09325.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "49097c864567b8331ab54d0ac506adf47692a24cfeabaf0a97cb555d466903ef"
+  },
+  {
+    "id": "imagenet1k/validation/42404",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_42404.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "171a9c0bccb313238555387f36f3b5453a70c2f5b698a7cbd5a155216d5927df"
+  },
+  {
+    "id": "imagenet1k/validation/2781",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_02781.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "9c93e01ec82f7f08940192805685da1b2edb47bd7d0ec6a987456062f5955e51"
+  },
+  {
+    "id": "imagenet1k/validation/8325",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_08325.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "c8045fc1e90766854489999cd4616d6d0e7f73eb96f3d491effd1c6ed6463628"
+  },
+  {
+    "id": "imagenet1k/validation/19255",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_19255.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "ff191fd4f872734df5bab18cc8feef77d12d14ad163c85781cc685ad752e3614"
+  },
+  {
+    "id": "imagenet1k/validation/27266",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_27266.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "d59a8c75c1db04d1b252dd3a6516a1b01ceb062e89e97e455d53f37d51047f28"
+  },
+  {
+    "id": "imagenet1k/validation/21900",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_21900.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "49ac92baab4bc69e80063ef544d01d4f2c47f30d1e3afe5fd02f30a47a7e4f95"
+  },
+  {
+    "id": "imagenet1k/validation/19173",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_19173.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "b632c26b3404319904da18259d45fa7814a35148f023def4be5b8fcb69c3dbe4"
+  },
+  {
+    "id": "imagenet1k/validation/9871",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_09871.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "6ad19852a7ae80f457e12baafd39374f564fc32b9958357acec73c064bfd2f0f"
+  },
+  {
+    "id": "imagenet1k/validation/10415",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_10415.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "15f3605bc5aa35240325632479d80f595fa35b70bec35f2eaea194cd1b6d38a5"
+  },
+  {
+    "id": "imagenet1k/validation/41728",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_41728.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "55d1fa4a6cc121cc0bf1e78ea30e7b8a29571aff689ad4330d5195ae988c79cb"
+  },
+  {
+    "id": "imagenet1k/validation/39755",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_39755.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "eb9c6bfd5b75f40ae2dad26dd6e2548b53c988b4704edcdba239d1642d89c49e"
+  },
+  {
+    "id": "imagenet1k/validation/15836",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_15836.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "ac168072edfe5dd5297616426e2706538bbb66f0e6b45ab2782ca274d286b672"
+  },
+  {
+    "id": "imagenet1k/validation/24149",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_24149.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "c5d950dd90f9e79ef2004294a048992f0498c8c5e2e5a869614e0258e9538994"
+  },
+  {
+    "id": "imagenet1k/validation/36259",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_36259.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "5747a5b10b455b221cbe09cdadb22fe6a7f8ddd94ae0477ba75ecff4cba7719f"
+  },
+  {
+    "id": "imagenet1k/validation/25124",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_25124.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "7452e7cf44ae56bc2fed8fe1ca0a4ef519d8be93e5a0bd99ecdc76c2a3280699"
+  },
+  {
+    "id": "imagenet1k/validation/35597",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_35597.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "3311668c8976b8dc66fd8fbf9293771c1c5caeb1c887e86c346ea9bc528e575c"
+  },
+  {
+    "id": "imagenet1k/validation/8977",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_08977.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "61d174d1aea0dc0957b5e52a24a52514828aaca1fe65a3f0dd37154cfc14c0de"
+  },
+  {
+    "id": "imagenet1k/validation/32659",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_32659.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "9b36aea42bd41ebacec369079a628567aea925916989d768d491fcfb000baf9d"
+  },
+  {
+    "id": "imagenet1k/validation/17813",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_17813.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "92266b4650905e21da4b848924388994a51c488a67591c7540ea2fc709159436"
+  },
+  {
+    "id": "imagenet1k/validation/39663",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_39663.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "a76745169930e0a09c7ddb4a8ec2d8bd933b05ca8b0928e0ed6222141ed02148"
+  },
+  {
+    "id": "imagenet1k/validation/15426",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_15426.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "fe417fdeda73efc24f7bed0512a294032153412f68ab3c7cdcb79c4932e44e7c"
+  },
+  {
+    "id": "imagenet1k/validation/32070",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_32070.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "ea1ce2f4d983763c9487036ee0cfb9621e16be639c889d16cb3b7dbd485e9236"
+  },
+  {
+    "id": "imagenet1k/validation/3836",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_03836.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "2376de9c0c6ba18d64402dcc57f17a5183aff45150bae046a64bce6c5861f7c7"
+  },
+  {
+    "id": "imagenet1k/validation/39400",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_39400.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "53f5bcfba5b2d973045be20a3a6ba0a5c221f077ef3a4e87fab5bf534b51b2c1"
+  },
+  {
+    "id": "imagenet1k/validation/7550",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_07550.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "be46cee8b36ae1407edc01c3cbcfb9913b3035194792487f411276ff3978afce"
+  },
+  {
+    "id": "imagenet1k/validation/10828",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_10828.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "cf2662aa25ea94045f0d551d8263b260f866976e3463ff9a2eba607462f3612d"
+  },
+  {
+    "id": "imagenet1k/validation/35484",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_35484.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "7f9e8a9f0dfa77fd361dc24bbe7b9749a9930266142f48fcb0374c73faf3c94b"
+  },
+  {
+    "id": "imagenet1k/validation/49079",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_49079.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "f0078ebb8d9e008f29f9f46aff671c04d29fbb3174e168f6a20461cc77b846f0"
+  },
+  {
+    "id": "imagenet1k/validation/42957",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_42957.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "5555cc9357afce20c423fe699f0c7fa5ba873ba9f336faf27d171cf6447e75e2"
+  },
+  {
+    "id": "imagenet1k/validation/16229",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_16229.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "c6d3c3b36f1d7719eba80a55d56b0694941d51f76233c51a9e099a14d609e550"
+  },
+  {
+    "id": "imagenet1k/validation/3294",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_03294.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "a06086c3e09a04c16b5e634370c530d7b449c41e8f86c04a4e1f2b4784e60f0a"
+  },
+  {
+    "id": "imagenet1k/validation/25754",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_25754.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "b02f16fa257f5cefe4ee4d20abeb8b93199deca37f48c0db1cb1d9ecee489aef"
+  },
+  {
+    "id": "imagenet1k/validation/919",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_00919.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "704bd4e41e3b16a90c33531864e2b58cad34f3f8f571b5de2814c876ca0160c1"
+  },
+  {
+    "id": "imagenet1k/validation/28275",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_28275.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "f604f012220a2ae3f587950be84a6a84929d6dd925a414c182b32586037c81de"
+  },
+  {
+    "id": "imagenet1k/validation/48859",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_48859.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "b7d054715d7b3fa2e85e46977147d7af94e44843eb4d79637e537904b246c17d"
+  },
+  {
+    "id": "imagenet1k/validation/24492",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_24492.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "ba4f47f9b80c0ba4c17b7c00d95ae5906d79124218d505d241df73cd00b099ab"
+  },
+  {
+    "id": "imagenet1k/validation/27263",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_27263.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "f7152f263589117b5d62fe96c71a6cfb0e790fb3ec72ae52a13623426dbeff39"
+  },
+  {
+    "id": "imagenet1k/validation/40377",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_40377.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "37b7fdae5d287936193bbf28f13f6f4a36f0bfbe775436b2845c7bef7351801d"
+  },
+  {
+    "id": "imagenet1k/validation/30497",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_30497.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "6bf41fa485298afd4f63dde96cf63baaccdde9b816e6a3f2ad4e67d1bb566f80"
+  },
+  {
+    "id": "imagenet1k/validation/20903",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_20903.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "941c095dcd2bcac03b313a9f817a9506de466a8913791181c2894f1158507bdb"
+  },
+  {
+    "id": "imagenet1k/validation/13415",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_13415.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "2ebf1d9c5c4d02fea04be4e06821027843efe3cbcde6a9b1b7a89814b5a1f921"
+  },
+  {
+    "id": "imagenet1k/validation/32695",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_32695.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "64238f025b29fbb1ad0cf032d75cf9ddff295c60149c4a86b69f041a4a440d94"
+  },
+  {
+    "id": "imagenet1k/validation/32635",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_32635.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "4ed17ab27eac73dff22ca623722b7ab8c6f59ef4612ba00548049e56c504e5a3"
+  },
+  {
+    "id": "imagenet1k/validation/138",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_00138.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "768f399e2f49477174df7f312755d30e2c4ae1805fbe8defcd0d20477e939399"
+  },
+  {
+    "id": "imagenet1k/validation/2013",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_02013.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "d34e64df216bd305455611cc672c2092163256a850cee173a55446fcffc94309"
+  },
+  {
+    "id": "imagenet1k/validation/49014",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_49014.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "1228754b05b30dfa602454a27b1135020606155fe8b3542caf6a59afeb00b1d9"
+  },
+  {
+    "id": "imagenet1k/validation/27267",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_27267.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "d591f852f972e641e30a9b80faf3085283e2003a2799d18fdba950fb53e52908"
+  },
+  {
+    "id": "imagenet1k/validation/8304",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_08304.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "d37db61089051026b35fc8bd0867ffa7e526114cd50c45f27d5c38b7eeb69001"
+  },
+  {
+    "id": "imagenet1k/validation/26665",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_26665.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "622d265c4f138dce567acfce265b0d6c828d11a627af1ef51636fd169a66635b"
+  },
+  {
+    "id": "imagenet1k/validation/32110",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_32110.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "0d61c569bb1bc9165b9d0b42c6ea117183a2e73a8d6d7961777a7bc0ce93ac9b"
+  },
+  {
+    "id": "imagenet1k/validation/35557",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_35557.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "afdaab9cf332ce90ab5926f3f44b83dcf76384bb50008d382231fdcde49a3201"
+  },
+  {
+    "id": "imagenet1k/validation/47061",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_47061.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "9c22794940521c3fc73783977609e0ba8b3eb6592668c23c3cb9565160f49f9b"
+  },
+  {
+    "id": "imagenet1k/validation/14341",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_14341.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "9458b593a7dfe37ef600f99caa9e9df81c7ff12a831a43da4a1c3666a6c75634"
+  },
+  {
+    "id": "imagenet1k/validation/44730",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_44730.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "bed7f922546146e4ca34a8c6ea2201e5ba94e3ae4b3fc752cf0eacb167dccaa2"
+  },
+  {
+    "id": "imagenet1k/validation/7387",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_07387.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "6f42bc22d9bd2d9838f3071f2e673d31c8b7f8b34e69f63c6c7c16fc4d0f0e6f"
+  },
+  {
+    "id": "imagenet1k/validation/18949",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_18949.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "f84b4eeaca6b99cec287a93c092f414c2f3e90430a6d3ef1c30fc2e7b846a87b"
+  },
+  {
+    "id": "imagenet1k/validation/13549",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_13549.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "e70c8aa8c5bbec6eb1575ef6f34bfce945b835366d2cf74dc1777faca228ab65"
+  },
+  {
+    "id": "imagenet1k/validation/14378",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_14378.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "bd738effd5085b4830fd32bb1e76d475762bb4841e855f7d281bb163509caf4d"
+  },
+  {
+    "id": "imagenet1k/validation/40825",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_40825.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "4cfddf22714f193371b7eca632567c0940d887cecbe6bf1725516c5ce95aea72"
+  },
+  {
+    "id": "imagenet1k/validation/29446",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_29446.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "81889ad903ad6b7bf9f2663bad4837f09219d987c1689effd378dc09d7b6a501"
+  },
+  {
+    "id": "imagenet1k/validation/28444",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_28444.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "3d6c37371115aef94c6c9e4f6cb3ffc073c1d1ee5f26e72a23d79e265cb7be6a"
+  },
+  {
+    "id": "imagenet1k/validation/46668",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_46668.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "1f6dac93f4598d9d922b034a187f2b5f8ad44a63d676977c233f49ec698be57b"
+  },
+  {
+    "id": "imagenet1k/validation/22088",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_22088.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "4f79d3c3d31fe4d6377571374c03549cf84d4b7bb44ecb602d43a4d748e36d35"
+  },
+  {
+    "id": "imagenet1k/validation/14392",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_14392.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "f865d8b712a0f9fa24b1efcf0c6798f0def03ccbd6506605a462e1b93a3bdd21"
+  },
+  {
+    "id": "imagenet1k/validation/43271",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_43271.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "072e6ad4d7bbbaa8968093f7233976f91ce7d2d7f29e065ee7ddf93e6db57bd5"
+  },
+  {
+    "id": "imagenet1k/validation/29114",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_29114.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "0a8a1622e26830a9677d0979ca7daf2dca13e411bddd81ee9a07950c951b00e5"
+  },
+  {
+    "id": "imagenet1k/validation/34671",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_34671.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "0aca7750e299664ce673014c3a65f06a086476f82a71f4ddcff20e16bb27a412"
+  },
+  {
+    "id": "imagenet1k/validation/46553",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_46553.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "e61e619c9e7ff73172b38b001fe4dd49ed729841738e8d42f0af79d9dc411170"
+  },
+  {
+    "id": "imagenet1k/validation/32211",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_32211.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "4078b5630a020a9e7d2c51b26373d7a8df85cc8c589c7995a83e512e8b1adb96"
+  },
+  {
+    "id": "imagenet1k/validation/1813",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_01813.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "a16f6aed6830e412379e993a3811f293b011a6aa401244d255efba9cf5228bdc"
+  },
+  {
+    "id": "imagenet1k/validation/44715",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_44715.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "d8c965a417a4890c58b250ac3832ac3a767660e07700ee12511ad82870b265d5"
+  },
+  {
+    "id": "imagenet1k/validation/2312",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_02312.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "71d420a3645ba9390305d9c8380b3c1145dfaa10c5531d7f8dcf2bbaa70e7a15"
+  },
+  {
+    "id": "imagenet1k/validation/13310",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_13310.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "d352d1a18cfa864874c95adf2434d31aa51dced961d1f25badd9623026120d64"
+  },
+  {
+    "id": "imagenet1k/validation/25342",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_25342.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "1753549fb1cd41ad59b1cfa82d67f9654ae2e052e948f3c9ba2a81f6e9634703"
+  },
+  {
+    "id": "imagenet1k/validation/30769",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_30769.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "c0210c4860e973028c340ffcadced56e9f2744b5f62349969e31e0a7ee88ce53"
+  },
+  {
+    "id": "imagenet1k/validation/29815",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_29815.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "9acdd5e36e130c57c15548ada199dbaf146d76bcf9763435052c7a96dafd7ce6"
+  },
+  {
+    "id": "imagenet1k/validation/34233",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_34233.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "4c04fe8a5cfe3bcc0a3e60d6915e4dc3ff28bec0613bde7370b544c10ce7f467"
+  },
+  {
+    "id": "imagenet1k/validation/31189",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_31189.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "796736f59a9e103f4e80ae5fd52c6bd00700d1b43be49a393ab5939550906a72"
+  },
+  {
+    "id": "imagenet1k/validation/14790",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_14790.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "2f18ce4e0f102908203551619fe4399628287dab9575e0c33aedf7252b064daa"
+  },
+  {
+    "id": "imagenet1k/validation/21282",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_21282.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "c50675908f544087c939d0e72ca57c1234a15042ab69c3e6fc96397480a0c329"
+  },
+  {
+    "id": "imagenet1k/validation/38479",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_38479.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "240cfa9e239b91dbb6bf1e6eebbb332bc451435c35744bfefc7673099c259fdf"
+  },
+  {
+    "id": "imagenet1k/validation/40215",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_40215.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "8e93becdd68862e3c614d2bc5d7942a545a76f61bb0cc59e6a473b4e592d9c50"
+  },
+  {
+    "id": "imagenet1k/validation/19945",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_19945.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "940f9a8f6b872b89a681ad4573822c3e99a8eb1b857c09ad790144d87ca69e02"
+  },
+  {
+    "id": "imagenet1k/validation/21176",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_21176.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "c5c858e6988fc68ae86990f875e4442044671107f88548b26ece1b6576e11eed"
+  },
+  {
+    "id": "imagenet1k/validation/41680",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_41680.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "0d86de566c3ba1677506c49799071334c9d33b9d8a7b8edd83e036b4f7f5d431"
+  },
+  {
+    "id": "imagenet1k/validation/1422",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_01422.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "18675a8927ac82f9008ae5b36fba8e4af576f2cb79f9ac97cf16f85f2e94bfa9"
+  },
+  {
+    "id": "imagenet1k/validation/5923",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_05923.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "5aa6ab908172ee21c81ddb07d27b30e493e25d3859bc0bce91b8fc9372d086ab"
+  },
+  {
+    "id": "imagenet1k/validation/8232",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_08232.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "873c4acdec9423a60d7b13eb4f0244b331b73560aeb8e75880520f8011f543c0"
+  },
+  {
+    "id": "imagenet1k/validation/29783",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_29783.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "395e762c10a8cb5d153b2bc981b0b6dadf045ffb012b37c29ab421e525a398b7"
+  },
+  {
+    "id": "imagenet1k/validation/3907",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_03907.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "ce89c652506a338194b0e3c7e7fdef47be820b022c156c76c2f5aaed27567127"
+  },
+  {
+    "id": "imagenet1k/validation/39395",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_39395.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "24f4090474e195f2b83469394bbf74db8bf0b5bfad4538641d57bceb46644ff1"
+  },
+  {
+    "id": "imagenet1k/validation/45964",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_45964.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "d9deab83b02e71cbb047e2e285212e886c1a9d60d95e14331baf00101d77542e"
+  },
+  {
+    "id": "imagenet1k/validation/26903",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_26903.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "f5c97df5297055388127e006759ab2b754f645f8f3bdd81c36faeda4e09fc880"
+  },
+  {
+    "id": "imagenet1k/validation/18866",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_18866.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "1e6f73f2299bd49ebd8a964275afd01558452699ef481c143f8efd0ace390fd6"
+  },
+  {
+    "id": "imagenet1k/validation/22425",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_22425.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "2246c0dde2b4cac370c480d88a509d368a58c31734b26813f132a1a36c7a383d"
+  },
+  {
+    "id": "imagenet1k/validation/47103",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_47103.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "abe72975c73bbd0a76b0e4eb755ff47afee885f6ac80664b90701ae84982a297"
+  },
+  {
+    "id": "imagenet1k/validation/41738",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_41738.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "f9a625a13856c53d042efd6c441064802b6ce34f007cc81d63d8cbed103a9ede"
+  },
+  {
+    "id": "imagenet1k/validation/7389",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_07389.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "3b83ad49ca89860950ce707151d873f08526364bd96dd7a29f5d6dc855fce3dc"
+  },
+  {
+    "id": "imagenet1k/validation/10321",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_10321.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "955b9b3758aa8497568f2215dd66cc81e6c16805c61279fd9319d0caeab272e0"
+  },
+  {
+    "id": "imagenet1k/validation/47748",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_47748.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "a9dcb4fb5be6f67cc38d1c672c891bb698c2e4d23e73ea3e1f9237d53fc787bc"
+  },
+  {
+    "id": "imagenet1k/validation/10182",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_10182.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "5ca5141f67a5606594e6f9995ea0219b8de970e35dfdcbf146e174f40d75fd17"
+  },
+  {
+    "id": "imagenet1k/validation/20405",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_20405.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "c2b284754eebae93dc44f2563f95ca7c1f39a8dcf3fc67bb69fb08b015bdbec1"
+  },
+  {
+    "id": "imagenet1k/validation/34617",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_34617.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "cc37d2c487f270ee6e0ccb3231acc679a06e32ba9051f4901d1884c8303c04cf"
+  },
+  {
+    "id": "imagenet1k/validation/29940",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_29940.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "d2156b625f66f2c228a8e88b4030505df193c7ecf9613436d57d3f717102c4ac"
+  },
+  {
+    "id": "imagenet1k/validation/32240",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_32240.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "f189747098a36ff6a9bd6d473a999f923a43daccc7769e445aa9d45bc2d4d45d"
+  },
+  {
+    "id": "imagenet1k/validation/45768",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_45768.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "d3917f5206b7c29b3686b275aa2561784a3b83fd4bd9ff81439437c77603bb1f"
+  },
+  {
+    "id": "imagenet1k/validation/12810",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_12810.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "648a589d3ae38c71ac5f8b984db049d431a57fe3d8fccf40a3425dd4de9f2439"
+  },
+  {
+    "id": "imagenet1k/validation/25530",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_25530.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "ac514aacc5a94092ce047a1f656688fd49a9576339fcca9a76dcefc170c8baea"
+  },
+  {
+    "id": "imagenet1k/validation/4331",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_04331.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "9c71acdfe2c489c2009347e3981f96d1d7238373c9fc41f2e26e43d46b008f51"
+  },
+  {
+    "id": "imagenet1k/validation/6526",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_06526.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "9b976c6248e6b7a5704e7754fc84551352911d63d7aa86abf141fe500cc27ac5"
+  },
+  {
+    "id": "imagenet1k/validation/20000",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_20000.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "4f4f8f9ce2ec25f1489a851fa6c510cf856c0ff9aa25e838aedc15826f17faa5"
+  },
+  {
+    "id": "imagenet1k/validation/42082",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_42082.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "7fb6dec99249dfe9c66c47e3750d656a6b433528a37c82860a449888a4eef2e9"
+  },
+  {
+    "id": "imagenet1k/validation/27998",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_27998.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "5108392f18c4c5a1518f441dc7a095ce5ad4e0fa757be04266547a56f3c24bb6"
+  },
+  {
+    "id": "imagenet1k/validation/26679",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_26679.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "cba7baf30051e2e7c12afc4994892b1cdb37e43fbb2a51111b92a534024ff511"
+  },
+  {
+    "id": "imagenet1k/validation/38112",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_38112.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "c2174a8346e443a6544899cb8aae49a298fa53dbe95b585368541715fe1539bd"
+  },
+  {
+    "id": "imagenet1k/validation/49641",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_49641.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "2b3714a9d6502632725684225c16278b9838677257fcbe90ff838f2711cd82c3"
+  },
+  {
+    "id": "imagenet1k/validation/23920",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_23920.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "45e1430d7772df285de710ddac78fb9ae3061903ce8a4f8ee018eba3ced58560"
+  },
+  {
+    "id": "imagenet1k/validation/49470",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_49470.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "3e9f26fd335f96492489ac0ff7c1263420d2d3dd60f96126074607a21ba64b34"
+  },
+  {
+    "id": "imagenet1k/validation/11884",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_11884.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "d789993305363f0bf604e2f8402fbb9b10d944b47ad8ce8d618687994004be27"
+  },
+  {
+    "id": "imagenet1k/validation/2069",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_02069.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "6ce7f072512db8669f923b5a173e6238997344ca2e4ff874b9144c251299563c"
+  },
+  {
+    "id": "imagenet1k/validation/23304",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_23304.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "b93727d2fdeb34e9188ded4d125b763e8b2fe180d5b1004d957a79b72b3dd095"
+  },
+  {
+    "id": "imagenet1k/validation/12440",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_12440.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "4676f2b57596560909567e050127ec1897622ada545d86e587be7322e830da33"
+  },
+  {
+    "id": "imagenet1k/validation/36541",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_36541.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "3b2b55ca7d1f6d73bfd83a06030bb9298010a7964e5027a9c56ca7549a0d1d33"
+  },
+  {
+    "id": "imagenet1k/validation/38124",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_38124.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "bc7abfd828ea86e393f1c344fd32fa6b892a8820cd7fd7ec3a531d4e5dd3ac7f"
+  },
+  {
+    "id": "imagenet1k/validation/43665",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_43665.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "e04b4b13e5a7348e4b22465b3ccc58edf305f363f1c4a598c16618ca91f096d9"
+  },
+  {
+    "id": "imagenet1k/validation/30638",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_30638.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "7dc8e65450d5fc8a4e08595a5364a6be9031022089e7c3770e9c513090d45ab5"
+  },
+  {
+    "id": "imagenet1k/validation/49239",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_49239.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "c916350747896b2af89ff31e8a23d1eca58de8e8f91d58c37c5f5b7908611f2f"
+  },
+  {
+    "id": "imagenet1k/validation/37714",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_37714.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "98155295ff322ec28b17835202df808b03080502e4b44559ec02749db6e36cb7"
+  },
+  {
+    "id": "imagenet1k/validation/25514",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_25514.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "ffa6209fee4f510ff767af00cbf25399c66fc4a545bad61a845c0a8e6781bdfa"
+  },
+  {
+    "id": "imagenet1k/validation/44674",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_44674.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "b85f0fa67919d8118820b5481d55696de0abda155b3a4b53dcb31fc787a1e7a4"
+  },
+  {
+    "id": "imagenet1k/validation/43549",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_43549.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "4c73d41a98223411670f8abd529a3c55249063fe415b39c904c8908790e7003c"
+  },
+  {
+    "id": "imagenet1k/validation/2891",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_02891.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "e676aad68985d1f09a08b09a09ee010979ed90bd47eefd703e3dac25486d275f"
+  },
+  {
+    "id": "imagenet1k/validation/23451",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_23451.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "4c04993a2a8981f139ce6fd8c27daf6a176172296d3fe1dc81233fbffd36b74a"
+  },
+  {
+    "id": "imagenet1k/validation/46792",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_46792.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "2322f00a7a57fd43eb9a0ada0b2f05faa56e79dc0c0e5570317b270efc2cb9a8"
+  },
+  {
+    "id": "imagenet1k/validation/9105",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_09105.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "b4ee744e2dbe968f138a2a9bc9ffbb818bfcf70af77fdfe44ed1e4d4f7ce3133"
+  },
+  {
+    "id": "imagenet1k/validation/36216",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_36216.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "4d60abe5fd81c687b7a7958fc2580504aa0feb130d6566bb234be45adbf77977"
+  },
+  {
+    "id": "imagenet1k/validation/10616",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_10616.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "406ed52302b3668bb68bfeabac76326f891a96b0de0d81f30da3442205bc49e5"
+  },
+  {
+    "id": "imagenet1k/validation/48046",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_48046.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "d65a4827871e78878e57606608802d27ec24c64d06a75ae097fba1ed22c990f7"
+  },
+  {
+    "id": "imagenet1k/validation/2522",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_02522.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "328e65e714419b6b870a5ef2e34c029e8579c4e6296379215774c724f4cf9b41"
+  },
+  {
+    "id": "imagenet1k/validation/31663",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_31663.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "b3daef524da976917eb1a56df25cde0f29acd9c48b7d95fc61459650dec0c87a"
+  },
+  {
+    "id": "imagenet1k/validation/17388",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_17388.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "a6167f8a3a0f2d4d9961690c2e2f2824ef9457d5a30e8509dfb13379da1b483e"
+  },
+  {
+    "id": "imagenet1k/validation/44748",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_44748.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "6564393935dbc81490f34e42d3129f3672724aad5e044493abcacafcac683a63"
+  },
+  {
+    "id": "imagenet1k/validation/47476",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_47476.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "f30e713a962a242daba8c2b8a27be7b1791a3619b87e319714571976da1068a7"
+  },
+  {
+    "id": "imagenet1k/validation/41023",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_41023.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "459da2e695ac18c20019a088ea21254b1b120cd558def9a68e3103c072f9228d"
+  },
+  {
+    "id": "imagenet1k/validation/23460",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_23460.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "f60beb3a703587af21960b9c3e73bd5e85e0ede5e484846972f6c67b9a27da2a"
+  },
+  {
+    "id": "imagenet1k/validation/41528",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_41528.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "05c45594e8327c514ed1affc06ae4fd9fd85a69f6abf35502c4b874de7c526ed"
+  },
+  {
+    "id": "imagenet1k/validation/10811",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_10811.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "46defaa8dbd32633296dc2da6a3a6ea78226dd899bcd663d72d3ea7afec6e763"
+  },
+  {
+    "id": "imagenet1k/validation/37096",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_37096.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "54aa8e094c15da5b94dae0bd14df7dc626f82792e54bc225147b915a6b0e8544"
+  },
+  {
+    "id": "imagenet1k/validation/9469",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_09469.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "8a03e5354f0accad94ff363de0f281bb59deb0f455b2f6455aa720f014f59720"
+  },
+  {
+    "id": "imagenet1k/validation/44889",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_44889.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "7bd18286bb8f18c368d3c3fbc3bc5e73d781a7372c052c34b982a88f3689c182"
+  },
+  {
+    "id": "imagenet1k/validation/17452",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_17452.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "2884f51245d3082187412e9a5e11d795494e10fbb90e706e3f354a6276d98e8f"
+  },
+  {
+    "id": "imagenet1k/validation/25463",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_25463.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "54fab3059559894e334c93627d12ced71e9f3e96782c721042ffd8cfe835b25e"
+  },
+  {
+    "id": "imagenet1k/validation/40436",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_40436.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "a43b68eee198405b7b2d9df0588a936953ded90109f85d3f872fbe3dfff53665"
+  },
+  {
+    "id": "imagenet1k/validation/5317",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_05317.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "4412a569d1afc867170e4216af1917c62140f44b874faf77e34e064dcb7f287b"
+  },
+  {
+    "id": "imagenet1k/validation/10773",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_10773.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "b97e5d043564aff34ce054da7ebb867006b0e077ed74249c39adc69be7121621"
+  },
+  {
+    "id": "imagenet1k/validation/21653",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_21653.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "da282fd32cd2003dcaf251f2bb2f6e9c2c720afc415ea62bd45564e6c5f88716"
+  },
+  {
+    "id": "imagenet1k/validation/25988",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_25988.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "f19cd212464bcfd48f9bece48d364061ef0568da6d7f8b6d28c46907e48dfbd3"
+  },
+  {
+    "id": "imagenet1k/validation/21141",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_21141.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "21520c7d7fd0e5a4a06699b4f43b5a4e20db7db9a8eadbab2dca32fd3bf6cb2d"
+  },
+  {
+    "id": "imagenet1k/validation/6728",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_06728.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "e61f5cbbcb6b818d1e9d4f2ecad1a5c4093ecc27675fc9d7f8a5e24938de53b1"
+  },
+  {
+    "id": "imagenet1k/validation/47875",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_47875.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "ee00be577484663a73abd8be272fa68072ee10b4795edae8bafe221c510390cf"
+  },
+  {
+    "id": "imagenet1k/validation/14758",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_14758.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "09beb9d773c28d263a985b92bba244e9d0a2357e92515dd9e35b1aad39151ef4"
+  },
+  {
+    "id": "imagenet1k/validation/14426",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_14426.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "4d601310ae3750d1cf11621e6d211c1b4f953edaae18abf37d020c663e6a9600"
+  },
+  {
+    "id": "imagenet1k/validation/23918",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_23918.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "d3329aa14a19e2bc531c0b8fd096f2094e0b5e967dbec2aa1f3180511bccdf39"
+  },
+  {
+    "id": "imagenet1k/validation/41838",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_41838.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "22c548159ef08d7442f1af7b73018ff0333c557c51f37ebffa78175f0c4c4806"
+  },
+  {
+    "id": "imagenet1k/validation/48542",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_48542.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "d5ebdf2b091239fb00ca8d6332400d8828f213531a936719eb063c9b6633af97"
+  },
+  {
+    "id": "imagenet1k/validation/49107",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_49107.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "7c3d2e498f2c91e0027f80ee9a84a5176374b76ed0da1ef0892199e0a271118d"
+  },
+  {
+    "id": "imagenet1k/validation/44792",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_44792.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "ca40fb1c97e84e9848c492ec3073c5604bfca5f0aa089e403dc76ff85732f4dc"
+  },
+  {
+    "id": "imagenet1k/validation/11312",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_11312.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "1f4b08b074c773f93341651bd92e425b5549e97c901e05abf825728e305f8fc9"
+  },
+  {
+    "id": "imagenet1k/validation/30709",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_30709.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "2bb66a229e4e4a4bea5a627293bca0d364319b8c7c6fb54ac881d890b6acae40"
+  },
+  {
+    "id": "imagenet1k/validation/44119",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_44119.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "8c3543792c18a7cad5c4bbb88959142b8b62194143687f5c9d13ea8d8e95734e"
+  },
+  {
+    "id": "imagenet1k/validation/12682",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_12682.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "fe0b127790fded5c6b613ce953b5a063fa7a459814fb5181c3a6bdfa6f206df4"
+  },
+  {
+    "id": "imagenet1k/validation/27794",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_27794.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "644a94fd86e2b6d97e741d8e47842b26b8d4478950b3a1e941c21ffca89eae14"
+  },
+  {
+    "id": "imagenet1k/validation/17588",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_17588.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "8ebe4fe1d080753b5f37e499056234a492d0913f05f3224ffc5f7a3207f66b47"
+  },
+  {
+    "id": "imagenet1k/validation/37946",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_37946.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "a76b05c426d0e383f38be63f2bb9d3959e25597cf91a4d938bbb06c38f7d45bc"
+  },
+  {
+    "id": "imagenet1k/validation/3584",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_03584.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "74549b226b13d3e382fd5b4fde4ae66ca256ef863b537cdfe4f558b5369fe8fb"
+  },
+  {
+    "id": "imagenet1k/validation/28351",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_28351.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "153b4659cbec6e179bcd892c5358e88e57adc71915b6e675c193cb9c5f848ea1"
+  },
+  {
+    "id": "imagenet1k/validation/3261",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_03261.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "f9542fe7c3af8f00629fb8f01a9691cb8de6e1881680c5a90235c9ad06a306f7"
+  },
+  {
+    "id": "imagenet1k/validation/40338",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_40338.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "7f3ced9f045fbfb62988a912040a3d3a1c1f97fb1229fdd76db428ab3e8c1a64"
+  },
+  {
+    "id": "imagenet1k/validation/46235",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_46235.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "53fc0651d5d7df6c7a092a48e54bc33c7889ed165358272546230aa7d6607526"
+  },
+  {
+    "id": "imagenet1k/validation/35628",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_35628.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "da2bacf36f39a976a7822ebdd550f84800470eab839081542f357680b7bf6a40"
+  },
+  {
+    "id": "imagenet1k/validation/37974",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_37974.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "420968ff7456a8edc2b3e980ef6397a5f19dc3c38f853ac6c90c1996963c7a10"
+  },
+  {
+    "id": "imagenet1k/validation/1265",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_01265.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "976a4235f3cd515916625e8b60a52ad593ddc69f06c53aeaada5ab825143bf04"
+  },
+  {
+    "id": "imagenet1k/validation/17971",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_17971.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "fb2c71f0edf5eacef6afbdcf23fc9957f7a5b064a56f764dc7bb71c417e44289"
+  },
+  {
+    "id": "imagenet1k/validation/34716",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_34716.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "1bb0e041bd0def89262d3019aff5114dd616323769a9567a0b4801dc57141a47"
+  },
+  {
+    "id": "imagenet1k/validation/12094",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_12094.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "d4e57e5ea4bb3c87882b99d48ed96af46bb20c94fdbfc68845dd3a5dbac442ad"
+  },
+  {
+    "id": "imagenet1k/validation/36395",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_36395.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "de6a6aa164de425a0c358ad95478af482f479cbd3ce063e4c33da12819a9d9e6"
+  },
+  {
+    "id": "imagenet1k/validation/6673",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_06673.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "6246e6a4494eadf2444f229039b9afe730b1f8fd6c3915e4fa2d5344eeede9d9"
+  },
+  {
+    "id": "imagenet1k/validation/24227",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_24227.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "0b4b4e603daed7b522ef07884c0fc92164ace8dd273fc8f3941fc2e776d85f05"
+  },
+  {
+    "id": "imagenet1k/validation/27631",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_27631.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "1e3565af34291185a34029c972a931b9c57fea7abef26f07bb35d7e1e6a1b3e5"
+  },
+  {
+    "id": "imagenet1k/validation/23883",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_23883.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "714ce93ed90bff5c0f3666a8b8aba6bf0223a3d73a35c85d037e7de99cdf04e3"
+  },
+  {
+    "id": "imagenet1k/validation/32045",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_32045.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "6eb5ebc813858fc160cfece7d5412b2fc3379310a05f6822d49bc62fc9f495f3"
+  },
+  {
+    "id": "imagenet1k/validation/35812",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_35812.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "75770479e5076e68ab611dee4b26ffc02de18057452e0132c0ca30e257a36575"
+  },
+  {
+    "id": "imagenet1k/validation/16374",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_16374.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "a91831b5993873755fe3d0fd29243c33cfb5e561d9dafbbf0b6b2990a7f91725"
+  },
+  {
+    "id": "imagenet1k/validation/10484",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_10484.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "c12d0209897bc8bfc8eb136fc19deb7fae35d547299d0dcdf1ee6185b289a18a"
+  },
+  {
+    "id": "imagenet1k/validation/32029",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_32029.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "53c5de8bf166d27043f443a373a22a5088984f08eafb2fdf4c188331ffc663f5"
+  },
+  {
+    "id": "imagenet1k/validation/37162",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_37162.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "b245ce5aa8a0eca0d33b54c48df43673cb4e3c07f23ade6548dc5e5f337c64ee"
+  },
+  {
+    "id": "imagenet1k/validation/34751",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_34751.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "82458df6eaae36a5df75318bf4d7bef6140f109bab9b5e456363835a8953d565"
+  },
+  {
+    "id": "imagenet1k/validation/34274",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_34274.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "bcb00b8073df6588fa46122db21220455be9ee2966f0fdf1ad86383537dd5b3b"
+  },
+  {
+    "id": "imagenet1k/validation/36581",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_36581.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "7edab0cba0273b2544859923660bd584c4dd13157a11a6f80f14e427d2727417"
+  },
+  {
+    "id": "imagenet1k/validation/8966",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_08966.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "c73e245320364009cb427dbb238c83a3ee893d62e3472b46212a396290ab012d"
+  },
+  {
+    "id": "imagenet1k/validation/29700",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_29700.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "e0106730371e9af143a9f7e861626b4681b4a5309a4a43859143f4b0244028b5"
+  },
+  {
+    "id": "imagenet1k/validation/25749",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_25749.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "23a6c15f9189cbdb6dd731d14a2df87f3778c95c3f31148d0754ba69175bd0f1"
+  },
+  {
+    "id": "imagenet1k/validation/7180",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_07180.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "6bcfd1bd95550591ce82ecfff21bba2c1527c063dbd53e7733fc1dc7d2b3b399"
+  },
+  {
+    "id": "imagenet1k/validation/7023",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_07023.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "6b1d60d4b373bf25c6950aa27df3046237c9e49816c56e37a1f3cd8996614f6b"
+  },
+  {
+    "id": "imagenet1k/validation/28569",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_28569.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "ed2f819aae8057878580f569da51d656a5d35dfe008ef32c121878d32efcf9e1"
+  },
+  {
+    "id": "imagenet1k/validation/42107",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_42107.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "f5df805365e3069b23d31cc57b0e6d2d98bbf61b75ed57f9f2c7d224a8df76da"
+  },
+  {
+    "id": "imagenet1k/validation/26227",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_26227.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "66281bdc587ed7b46d6c1f29fe0bff65591b50b112bc691e4fa657a0e80bb14a"
+  },
+  {
+    "id": "imagenet1k/validation/4354",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_04354.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "7e50a37bd486e759ea214efaa353c99e11dfa1a27b0b86757289e70652478053"
+  },
+  {
+    "id": "imagenet1k/validation/41581",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_41581.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "1562e82c28db3c893bed3ad49640eacccac4833318213f43141d008eb8cbe1ea"
+  },
+  {
+    "id": "imagenet1k/validation/37370",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_37370.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "f547df6d17be7aeb08c2b64d20f9c5becfeaf1a9e6b1a49cec127d7387a2313b"
+  },
+  {
+    "id": "imagenet1k/validation/12769",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_12769.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "e3db2eb2a753bc01fe8805712ec2629f3ab7626afe944823cf2d7ce27b21bfcf"
+  },
+  {
+    "id": "imagenet1k/validation/3146",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_03146.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "a4ec56dbc982fbe6d6375cd8365fac4b35bb1d7d3ef72b535a2a1353d7009116"
+  },
+  {
+    "id": "imagenet1k/validation/12764",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_12764.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "7a7f835be0280a089bfef68ab0e31218b3f76a2d717df00d3169940d9bd561f1"
+  },
+  {
+    "id": "imagenet1k/validation/16170",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_16170.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "d0347c973682d15729c9393b7723fddae8155cbcb57062520a9e16076bb90452"
+  },
+  {
+    "id": "imagenet1k/validation/35664",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_35664.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "c46dc516161b9aac69cc8b1f7e5004cf2fd768985c0d0e7b282ec0bd4b95b982"
+  },
+  {
+    "id": "imagenet1k/validation/33532",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_33532.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "2977314daf3942ac801dbd85c314df2bfe60a36ac69060aa9a0c005c1cac5fd5"
+  },
+  {
+    "id": "imagenet1k/validation/1091",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_01091.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "81a3daf9597e7115c9b26d3c9014c490c394a4f866f3d6b1f82f96b0a189acbf"
+  },
+  {
+    "id": "imagenet1k/validation/26425",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_26425.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "d21eb21c461fd56e1c82ad2951cf8a83bd57ee159bc3658ce9fa169e92279821"
+  },
+  {
+    "id": "imagenet1k/validation/17194",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_17194.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "58f7b0d133067783e2222e406be73e2189e4e8b556c5cd142bd5df397733264f"
+  },
+  {
+    "id": "imagenet1k/validation/31627",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_31627.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "3e6f66b2e1e6b695260e796ce81fc22f8a9847725dd44bd9b810ecee3597d1c8"
+  },
+  {
+    "id": "imagenet1k/validation/2",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_00002.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "5c3b275c1d51513bd0a80d09f3275786c18fe1aa1892274b646e98dfc2cddb3f"
+  },
+  {
+    "id": "imagenet1k/validation/28542",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_28542.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "10fc4d360e90be88852e6a479c6369184f333d65fee6404b86b1664c61564937"
+  },
+  {
+    "id": "imagenet1k/validation/29078",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_29078.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "c9a4b54f389557f1a53814ffae844ef5e2d4d781697f6dae99b3c5ac117b0db9"
+  },
+  {
+    "id": "imagenet1k/validation/8524",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_08524.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "f86de4331251f63535bf900532b0b5d355209a845a62cc2bb58e929071405faf"
+  },
+  {
+    "id": "imagenet1k/validation/19983",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_19983.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "7ae62ac07b4127935c009cdd042ea920c96561844619765ab73d26b778bb8660"
+  },
+  {
+    "id": "imagenet1k/validation/35456",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_35456.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "4ba887943f0d69d8cf0aed17e30d44ff9cc449584a4b6f1b189952d3a1b9f5f5"
+  },
+  {
+    "id": "imagenet1k/validation/47292",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_47292.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "f57811f101dd9b0639a27c89f09d8a5b4bf73010b9ac1e1fc74ec4448c188c40"
+  },
+  {
+    "id": "imagenet1k/validation/40240",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_40240.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "202202a144ef98015a20b722a4e59f2fd62057280cfdf72960033ee58ac26ac4"
+  },
+  {
+    "id": "imagenet1k/validation/32253",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_32253.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "d215ad0ddeb2029f3e448a53b504d7bffb85fba4649a1a527d42567ec0971af0"
+  },
+  {
+    "id": "imagenet1k/validation/15425",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_15425.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "03e3805499d5f55c7391558379fc6082022185fc35a1b1197bdc9e0d36fd9b6d"
+  },
+  {
+    "id": "imagenet1k/validation/5879",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_05879.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "bffbd902e2025744f1c3ccb356dbdf8107d1b717f4dc3987c5a6024a4b46e44f"
+  },
+  {
+    "id": "imagenet1k/validation/27139",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_27139.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "29bb3f4993166e890ce318905e5759bef2c9ea3c56976c76ac245240a94ef310"
+  },
+  {
+    "id": "imagenet1k/validation/9573",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_09573.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "07b6ab2f3c30011b79ee5b4217450f0f3118b706f35ac8d6ea12d044ece848fd"
+  },
+  {
+    "id": "imagenet1k/validation/26777",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_26777.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "b383ea9227217b5e73f7e47563980e9035c2a83f43410c10c17bf36c536e990c"
+  },
+  {
+    "id": "imagenet1k/validation/43223",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_43223.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "b2f767eb0b1e8a5113edbe980678aecc9f22169494c6ad98a772200ea71630a4"
+  },
+  {
+    "id": "imagenet1k/validation/83",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_00083.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "28320a3da8dfa3386504e0940ebe3f14eca166292205970c6693a40ded61b4ac"
+  },
+  {
+    "id": "imagenet1k/validation/45925",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_45925.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "441cef0569b1e1a684f93f538683dd93747be6482770ada9b4c8edf947a1eaf2"
+  },
+  {
+    "id": "imagenet1k/validation/8451",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_08451.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "64cbd0490016aa1487b601afa9e8fd4c32d27c39a3a476ffa482a62806403195"
+  },
+  {
+    "id": "imagenet1k/validation/23471",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_23471.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "ff57e1aef6eb26b9b0d333c71952538bd8e4d81b2e61240bfccc7beceba2e045"
+  },
+  {
+    "id": "imagenet1k/validation/43234",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_43234.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "c0e6259002c082c381dc676e5c56f5d16441e04196a1ceaa9162e8632c923ceb"
+  },
+  {
+    "id": "imagenet1k/validation/49692",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_49692.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "71b9ed0092d40c9793863af176dc318d4b89092343ddccfa42cc2146ad9161e0"
+  },
+  {
+    "id": "imagenet1k/validation/45177",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_45177.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "18423acd72f47efec3dd7b98bc6f147f8a27b23c7bf3f4bd0b880c9e25b920a9"
+  },
+  {
+    "id": "imagenet1k/validation/33250",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_33250.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "65d847ceb76f51a83f598afc02f124df6fa373cf342daba4de12476e690e8634"
+  },
+  {
+    "id": "imagenet1k/validation/40475",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_40475.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "74ea5b9a02847e69a6e799b04a603ec1a72a2d53cfb05d3a24a7891070bcf68f"
+  },
+  {
+    "id": "imagenet1k/validation/43655",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_43655.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "9f3a74115baa01971d370023b44524264e6ec1fcb63f66a5228742d26d8d3107"
+  },
+  {
+    "id": "imagenet1k/validation/6126",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_06126.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "54dc59f5559bf9829d5ced79a169eb54f4391be7ddb6c774c6bbf7f8ec37baef"
+  },
+  {
+    "id": "imagenet1k/validation/722",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_00722.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "0c3af8e05bf69000e531e4727dd537c0dbb19b6fb25b232acb57b6061561f621"
+  },
+  {
+    "id": "imagenet1k/validation/29766",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_29766.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "08edcc51459441e2f5d1280dbda889241d6d36dfebce3190a735008a3baa02ee"
+  },
+  {
+    "id": "imagenet1k/validation/13070",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_13070.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "90c7ec136ce1e3f4234b1e7306fb96cc31bed2cb81db49105576491ad5b44b46"
+  },
+  {
+    "id": "imagenet1k/validation/28462",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_28462.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "ad158267032af5dea40553cefe87d674e84d82567d179a9b70e8979b7db577f0"
+  },
+  {
+    "id": "imagenet1k/validation/25400",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_25400.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "f9eff291cb32069324c68159ddeb329c8492d238dd751781b3468f9631fbcdfa"
+  },
+  {
+    "id": "imagenet1k/validation/40551",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_40551.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "8a93b05b4ac3abea449be177e2134a93d0f283058eac4d870c56d9358df693f1"
+  },
+  {
+    "id": "imagenet1k/validation/20174",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_20174.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "ecbc9307777a258ccb0fd3a991e287ffa83da3dc7423c214597653e34fbafb2d"
+  },
+  {
+    "id": "imagenet1k/validation/20824",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_20824.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "33f2865c08adc017ac3657e181487bbce77b581394a228484f8a1ca86068748d"
+  },
+  {
+    "id": "imagenet1k/validation/3455",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_03455.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "4d74cdbdd498ce5b54c5b7f0ac46357b637657adcba0e5845cbb800b966f05cb"
+  },
+  {
+    "id": "imagenet1k/validation/31622",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_31622.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "05f3dc2bd8a6bb7b83d1f26734e8db92b4191caac1362de6d29ebe88579b9318"
+  },
+  {
+    "id": "imagenet1k/validation/48919",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_48919.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "857a83a11b172feb9c7d310e1c89874b70b9034fc1bd47235339fd4efcca1565"
+  },
+  {
+    "id": "imagenet1k/validation/45834",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_45834.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "21471a03ff972b83c5cf2c7e22c339fa82d45462ba6f485a96ef4c8bc3cddcec"
+  },
+  {
+    "id": "imagenet1k/validation/43184",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_43184.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "7e5a6262b514703880830e1bcf242189a73dcc169260d6270320ac26e6e507c2"
+  },
+  {
+    "id": "imagenet1k/validation/8383",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_08383.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "e1cdf27620f0f14ee6f3dcf6c76ffc2850b9c4685f41aaae1d0a2924cbc4bd59"
+  },
+  {
+    "id": "imagenet1k/validation/6048",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_06048.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "3864eac90ec66aabdb8d396a271f906a4005f091ab4642f6d8ce2034b35843b7"
+  },
+  {
+    "id": "imagenet1k/validation/2509",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_02509.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "ff7b25c3e90fcb4755582d7dac2ca7e1d563521eb3e8ced9754429cf2e323a27"
+  },
+  {
+    "id": "imagenet1k/validation/4991",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_04991.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "92910a7e01754d431c8a2e6fb7ba3a823305a00127f85f94f40192fb3d9c7cb9"
+  },
+  {
+    "id": "imagenet1k/validation/26563",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_26563.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "38038f3736c2858db170c96485c36fbbae4bf6b8cd8e75eb44d790bf1413ba9c"
+  },
+  {
+    "id": "imagenet1k/validation/27234",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_27234.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "7dc14a7087aee4f04be2515820ff43cc4caa8d29cdacbf4ec11bf5592af6ab3c"
+  },
+  {
+    "id": "imagenet1k/validation/7651",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_07651.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "f881c15ee9fac62141cb32b25a1aa66cf694e8e9164aa58b48aaee931608e91f"
+  },
+  {
+    "id": "imagenet1k/validation/38219",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_38219.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "80432c25f3ee310253a9e52dc6bfa303becc306b734a97b63f184dcbcdcf5665"
+  },
+  {
+    "id": "imagenet1k/validation/42908",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_42908.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "1beeb1ea4d0d57da0174a75a4aa37e976db64f70881a8258043d0d38349d4784"
+  },
+  {
+    "id": "imagenet1k/validation/21419",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_21419.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "fe1fa73d182aef4922ab213127ac547c4de78d247e2fb56467ee3729bec09486"
+  },
+  {
+    "id": "imagenet1k/validation/30989",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_30989.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "bc36b033626ed46c9d9be83872ff5ccf7be85a73123aa97e63cf8f8f7e5fdf64"
+  },
+  {
+    "id": "imagenet1k/validation/23421",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_23421.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "891dc965484f0e4f2d6166fd529d79fb67bb89f1adc7de5f6a3d6bfc7e2c934a"
+  },
+  {
+    "id": "imagenet1k/validation/31146",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_31146.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "8f3d72c15c942d2064f117359b50c4613e4ed109ce84583efc2b05d56dea6514"
+  },
+  {
+    "id": "imagenet1k/validation/13576",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_13576.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "14258aee8e38ebfa2848ea676d623fa4778d4022014b4cfae0968f7acd85178b"
+  },
+  {
+    "id": "imagenet1k/validation/29062",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_29062.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "705fa1ea98015d8cba5bc56d629d27552f72d1c9a9c3c5167f727ddf1d8a0880"
+  },
+  {
+    "id": "imagenet1k/validation/47459",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_47459.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "d9a6c459444635318e9c373efba5aee320d2eb005af1898931d6ba9fa663e7e6"
+  },
+  {
+    "id": "imagenet1k/validation/13038",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_13038.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "668e1e341702569d298149e57035a4afa724547b2317e6f048708ff6d35826f9"
+  },
+  {
+    "id": "imagenet1k/validation/49197",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_49197.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "6e6478e4eb3ed2aad79102f2fbe8dc81199e584ef8c86c781866f73744c3d185"
+  },
+  {
+    "id": "imagenet1k/validation/44121",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_44121.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "ae44a9528c06d4850932007a36072f354bc893a0f62620db4acddb838486fc7f"
+  },
+  {
+    "id": "imagenet1k/validation/8148",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_08148.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "0a38bdb9c16805d0ccacc20617e5d403e921f8db6aa7b248127a563640dfa80c"
+  },
+  {
+    "id": "imagenet1k/validation/24864",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_24864.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "be4a53cd239c9b11d1603347092d5d915a6748da37d7875857e26c95a51df9df"
+  },
+  {
+    "id": "imagenet1k/validation/33351",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_33351.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "6f2638b38d9c116940bd20e9a2ac4e3037b6fc167b1991d55a5f35c9da9ec384"
+  },
+  {
+    "id": "imagenet1k/validation/21178",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_21178.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "4f702b6f7c3496acd38c894a76376c55c0eb23f9ad90bea3c668b7352ac7fbe8"
+  },
+  {
+    "id": "imagenet1k/validation/26731",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_26731.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "ed3ed688300dbde877a51641318760dc2272ab07fe250610d52b17dbb9a7894a"
+  },
+  {
+    "id": "imagenet1k/validation/33987",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_33987.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "05366bd2a5e7ff6dbe333b7df4745eb208f174daf1d9d5a747dee8139b353817"
+  },
+  {
+    "id": "imagenet1k/validation/37413",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_37413.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "46093dd7627bd62f3334949093a193320171e07abe4f0defdf69e72e45e0d4a7"
+  },
+  {
+    "id": "imagenet1k/validation/37788",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_37788.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "a9b098705c0a29d55ba21e2218c9e3949024c9cd5c1732d3e3728e445464579f"
+  },
+  {
+    "id": "imagenet1k/validation/36672",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_36672.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "764d958096c68cadc0695aadeeb7cda8cb18a78ef36f3143cd94c05b020cf9e0"
+  },
+  {
+    "id": "imagenet1k/validation/30361",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_30361.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "774ac7bad98b3dc967d02a7681017b5ba541cda520f6a12128aaf8335670eba8"
+  },
+  {
+    "id": "imagenet1k/validation/11066",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_11066.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "ae21430f0ea504545eaae276e1789975966b0a673be2d7a4644761f7d59792f4"
+  },
+  {
+    "id": "imagenet1k/validation/3563",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_03563.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "8bc9f1a89784cbfd813c59f96e1686ddb04fa2524d62f0bad5022bf9c3c352e7"
+  },
+  {
+    "id": "imagenet1k/validation/13980",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_13980.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "945f02fbb80e5c4aaa3867cd069d7a50cbea514af86a0dbec0250e7bc608bc99"
+  },
+  {
+    "id": "imagenet1k/validation/21602",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_21602.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "5584cec3a4c5d85c2340de81b99dd208791dafb6a278dce2c666c0064d14741b"
+  },
+  {
+    "id": "imagenet1k/validation/16436",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_16436.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "d86df14198a13bdd77fa20749bc8b05577111f7d8b81460dccf32042cfe017a4"
+  },
+  {
+    "id": "imagenet1k/validation/48068",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_48068.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "e22bd9a2211107cd7e0f02989ee3a69490293592cbfeff0be90606f2dec75fbd"
+  },
+  {
+    "id": "imagenet1k/validation/12219",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_12219.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "789d43514bc9281874ea5d84fd2f4e4559d353748b03fda84a06237e02563e51"
+  },
+  {
+    "id": "imagenet1k/validation/2949",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_02949.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "fcb18c82f3356261fc6eb31626440c7dbbd77f6e2c295f4fb3d8f125b22f6a53"
+  },
+  {
+    "id": "imagenet1k/validation/17353",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_17353.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "a87bf9e1710cd5a683e63498a2a75c47d910d9b2f38e1602ca3d8025588f9f8f"
+  },
+  {
+    "id": "imagenet1k/validation/35529",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_35529.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "32b165d1014156f2c7bf88bd56ae5d3501655c05b01d8e5bb838f2fc7cca68fd"
+  },
+  {
+    "id": "imagenet1k/validation/46716",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_46716.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "aafd694eba2183bdf2a5a7e5aa943b46c1dee9f64907a4616a59536664c96ad2"
+  },
+  {
+    "id": "imagenet1k/validation/29801",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_29801.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "5ae00780f5470db4ac96810c3309e3d6a9529a4a8386ab870ebe0a670e44e539"
+  },
+  {
+    "id": "imagenet1k/validation/35571",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_35571.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "7bbf03310799d34d12608c6ce8c2b8b766425a435ffe3daef35e726d8eece4ba"
+  },
+  {
+    "id": "imagenet1k/validation/49947",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_49947.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "cd0fb1720b2e6579a01443f9af3e5eb3ed6444a47bf0d1533abe311d0a2368f2"
+  },
+  {
+    "id": "imagenet1k/validation/13993",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_13993.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "939d3ce9f7a43b0bf75075a2e9f94f2fd43ba5cefa7b6441cec3ccb13a740274"
+  },
+  {
+    "id": "imagenet1k/validation/46455",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_46455.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "aa3f7b66f4a15f3fecf6cfbcd8f8f2d3c1148f0d08b7ecfb1e5df9182c0cd858"
+  },
+  {
+    "id": "imagenet1k/validation/25116",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_25116.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "a79c8c779eaff10f4429fc1edd7fbab0af63e2a430b71f6022a5161275c38c83"
+  },
+  {
+    "id": "imagenet1k/validation/40993",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_40993.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "d9e3db414a408e4422a5ee789a7c68ddae68ab77a14c6ab1ebdb016acc82536d"
+  },
+  {
+    "id": "imagenet1k/validation/49323",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_49323.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "7c76511b8b2ae9cf69b5aa76967411e2d99196d49b24facc757ed3d3d30fa4b3"
+  },
+  {
+    "id": "imagenet1k/validation/43908",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_43908.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "4a3612a54ed405a3b1ac4457e3eff35bd6291dac36c14bd85aafe689c1dff5fa"
+  },
+  {
+    "id": "imagenet1k/validation/28951",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_28951.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "56dad3358b293158a3a1e3ce5fcb250c624ce7f4848de41e701a724e28e44980"
+  },
+  {
+    "id": "imagenet1k/validation/9135",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_09135.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "f78c67d561e9dd8cd2d4dd1cccb778e0dc773102f1a2ef8420fadf54e806590a"
+  },
+  {
+    "id": "imagenet1k/validation/41059",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_41059.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "c13be45ac04a1814b5509c414bd79eaac5cd9427f2f7b36d451b2ce4ecca0a7a"
+  },
+  {
+    "id": "imagenet1k/validation/32032",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_32032.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "524a258aa93c53396713988b46f166fda3fce9572aa8d606cc7c1a5258688bab"
+  },
+  {
+    "id": "imagenet1k/validation/3753",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_03753.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "ae635cc8b2fbb07b27cae1ffa9756bb0361540181c4680454cb2e373550c5f5c"
+  },
+  {
+    "id": "imagenet1k/validation/33544",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_33544.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "4a2019437470e0f53be3e9b3d7d81ee7c67212c7dab54222acb4e21324ca33eb"
+  },
+  {
+    "id": "imagenet1k/validation/35521",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_35521.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "73dcc252da80fe8f9b1b2fc7396987ce317407e06d1d2ae70747ef403c6d8bdb"
+  },
+  {
+    "id": "imagenet1k/validation/46962",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_46962.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "99bf21876afede85c1758f24e59fc85ef649c8def4ce1ebf24932823f91c9e61"
+  },
+  {
+    "id": "imagenet1k/validation/13922",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_13922.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "b0bb3a948e64c84d2d5d00710e405586829a3c8e37c6b99af60f3fdbb6af2e32"
+  },
+  {
+    "id": "imagenet1k/validation/34732",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_34732.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "17e684bdff2e9742bbdb9ff2a697ae30b8e1a8cf9f1a0dbdbfe22ba48a32c5f6"
+  },
+  {
+    "id": "imagenet1k/validation/10913",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_10913.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "e9bfac0bd31ada69620c6f48261ab8779812f63b3a306420311338ad70c0fa1c"
+  },
+  {
+    "id": "imagenet1k/validation/19169",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_19169.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "be6f9b87645af047e959325325347c93bd0c488ba041bfcaef2001b912c3caa2"
+  },
+  {
+    "id": "imagenet1k/validation/19844",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_19844.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "8de2d4f0f7a97406cf91330d2d8081ba713d66ab3de49589e62b6d8abb569a0a"
+  },
+  {
+    "id": "imagenet1k/validation/8930",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_08930.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "b3441302fd75450658a8b4cfc404e226512f9fc37ac7fe5477274ee0fe8a4fc6"
+  },
+  {
+    "id": "imagenet1k/validation/19437",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_19437.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "193954e0c52fce64b1be3e07dcfb97cbf3600c2512cdcfedd2a59456439f8f06"
+  },
+  {
+    "id": "imagenet1k/validation/32708",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_32708.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "25550cd1efeff47c58f2e4e22f9551a2796faa62d8aeb57bd37ed8609b9b6fc5"
+  },
+  {
+    "id": "imagenet1k/validation/24300",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_24300.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "ddc9625f5028b3281d4904ce8215bcfbbdd65f46ce044f31c8cf6852a0669ae0"
+  },
+  {
+    "id": "imagenet1k/validation/45175",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_45175.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "fe40f987242372cf216aad3d6bca629c9e2fb549f27454c160972ca56ab069ae"
+  },
+  {
+    "id": "imagenet1k/validation/44677",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_44677.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "24e23026ec9e9f23402ed923e27612ff56cd00b406abe3586e5e9c7dd9c930ed"
+  },
+  {
+    "id": "imagenet1k/validation/5795",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_05795.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "f6ae60e9ceb60c2441f5df59341a0b2f462cdf93506b2c79db79c8c339e92cb7"
+  },
+  {
+    "id": "imagenet1k/validation/47945",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_47945.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "488acbb0650e7916fdab43271e5810ab03fed48e79b935175bca321a7afe342a"
+  },
+  {
+    "id": "imagenet1k/validation/44375",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_44375.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "0a194a6d3f678db125b810609035b7d67b2feb1241f02f9b59e7b0ca1c435cad"
+  },
+  {
+    "id": "imagenet1k/validation/14761",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_14761.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "7e4a5807b9f564d10a8f8dfb7a95ba2cccab2aad57c6ff98c42cb65c36e30ee9"
+  },
+  {
+    "id": "imagenet1k/validation/39952",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_39952.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "26d2a10dd6eda4cac0cadca4115d6227d5b8be41a16400c91c4ca95bc7f5bc51"
+  },
+  {
+    "id": "imagenet1k/validation/12215",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_12215.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "a262b38c776e58aa5dbcac187742ecf1fa1d1b2b67dbae372940baea44bb1bf6"
+  },
+  {
+    "id": "imagenet1k/validation/34315",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_34315.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "93de9278c7985e1540aa7f5857de460e9631c0b2588c7840665893f7418d43e3"
+  },
+  {
+    "id": "imagenet1k/validation/2508",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_02508.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "2a92ee7e3791ccbd1637cc139c0a9acd03cc363a8ff9c44ca849d5d0a276a55f"
+  },
+  {
+    "id": "imagenet1k/validation/3614",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_03614.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "b5295359cb7978446c924e192077d93fc14efbe3d8b48e0bdbace925b6d54334"
+  },
+  {
+    "id": "imagenet1k/validation/36088",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_36088.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "9d1d8c1295b3fdbf6f74f5527b01aa814208516149cbb24daea268de8eba6ceb"
+  },
+  {
+    "id": "imagenet1k/validation/10209",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_10209.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "9593cac329bee7e8e77e2bf81c3e77da4d05d7f7fa9a978c1400f6bfaa5d8ad7"
+  },
+  {
+    "id": "imagenet1k/validation/30714",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_30714.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "a4f74e6e36e16190d7204f6f8e63bc783e8ae860613764102ea3a25c7548fd0f"
+  },
+  {
+    "id": "imagenet1k/validation/19339",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_19339.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "fded9f78382e4a5cebc1ce419908dba8b5f938ff2f32c1f9997e9b151dadfa8e"
+  },
+  {
+    "id": "imagenet1k/validation/32204",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_32204.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "bd1b9491eebe7e3265e214f53295095d418eeb95279d38ad5b9fc0ae05b3fc2a"
+  },
+  {
+    "id": "imagenet1k/validation/32607",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_32607.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "32f34a5471c6eeba3453bd8e6bb85bd7b12fbfd135a2278ded30b78e2de69ca0"
+  },
+  {
+    "id": "imagenet1k/validation/42125",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_42125.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "b0a2ecd7dc1d04f2f67238cc0f90d11fb8a962ff86b2a72901b7bfb08c09779f"
+  },
+  {
+    "id": "imagenet1k/validation/14812",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_14812.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "81d0baf29f1b0ffa57b7235b0de4c85e216151c3fc448571375279a99058d268"
+  },
+  {
+    "id": "imagenet1k/validation/29702",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_29702.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "6c3ff845a624ca5c067d7613c343926bc6f68807da5bcefe1d717e896a3c0817"
+  },
+  {
+    "id": "imagenet1k/validation/3953",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_03953.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "898e921d4be6df0a3d37dd32362c3d9143987fc2ae109d0af14d21849f9bde54"
+  },
+  {
+    "id": "imagenet1k/validation/20134",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_20134.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "b7584ce2617f0df805ac00fcec770ed484a98b52144b1117c0f6a45def74a856"
+  },
+  {
+    "id": "imagenet1k/validation/6973",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_06973.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "49ff393bbcccaa8a7d03da7905401c3266c47c62bc7cda3fd050a6790e4a6da3"
+  },
+  {
+    "id": "imagenet1k/validation/28996",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_28996.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "365dd85aa578529340b74dd022458b47c1c39d5ec742d74900c020d23d6eb54d"
+  },
+  {
+    "id": "imagenet1k/validation/25094",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_25094.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "ffa0436b8a2bf3a33ea625cf13eca034c37f97a2c68f84bd2d921dcba2948c1a"
+  },
+  {
+    "id": "imagenet1k/validation/37218",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_37218.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "c5f07fec0de25afe78752e8b0b0c95b10f31062d9e990855cd60cbbdd6a56d4d"
+  },
+  {
+    "id": "imagenet1k/validation/2490",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_02490.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "14a51c0d1f1d6fd59b09bc4032739380e406e8b002420210f1b64fe270489e5c"
+  },
+  {
+    "id": "imagenet1k/validation/41177",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_41177.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "af248b07d625aceaee4b64c29f32af8e000764a20625ce0b2d0cad11010e15e2"
+  },
+  {
+    "id": "imagenet1k/validation/13847",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_13847.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "f71ef28751076c6cb304683fa23f79c1115e4ee65e9d77f3618393eec38b1f07"
+  },
+  {
+    "id": "imagenet1k/validation/31943",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_31943.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "849b316632cecede606c9a649ef3cc1b8532ca844cb43f28c28f6ea039a2f1a9"
+  },
+  {
+    "id": "imagenet1k/validation/18692",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_18692.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "0df9459bc9712bce819fe08f084046091067fcafaae1503b2462d913c94d9580"
+  },
+  {
+    "id": "imagenet1k/validation/43315",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_43315.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "50ac49e3ba29fc1b6f5b76ec6b6500f1f7eb4501df4475eaa547d63fe627a5f0"
+  },
+  {
+    "id": "imagenet1k/validation/19174",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_19174.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "c231b8d37be2d962f1b9ef6b803eddf24eb9af28a5f9f17b6dd270670a38d439"
+  },
+  {
+    "id": "imagenet1k/validation/5405",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_05405.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "3b13b744f902bd3bc5f86e3aa564a89e6436440fe8377846cab9cb88d58da532"
+  },
+  {
+    "id": "imagenet1k/validation/20135",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_20135.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "35d8eb99ed75d458df822663954b4bed6f153c2bcd284035fee9ff503253259c"
+  },
+  {
+    "id": "imagenet1k/validation/48021",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_48021.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "3910ad02a85d6aabf236234e66c60afc091430f4a8e12b3d036194d45296a867"
+  },
+  {
+    "id": "imagenet1k/validation/49098",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_49098.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "2cc50295cdd66329426e1c7e4e56dde5f1ae07928dc5b08e9e485a433241ec9a"
+  },
+  {
+    "id": "imagenet1k/validation/17840",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_17840.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "b3c5240a831616808ecc5b3f0e81b6783558693c189d72a53488606cf68aa1f3"
+  },
+  {
+    "id": "imagenet1k/validation/38756",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_38756.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "d86c7b97755b2163c6e57f6b01755c4bc9806393b1dc2aaceb744cd16d21db79"
+  },
+  {
+    "id": "imagenet1k/validation/11322",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_11322.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "190feb048e6fe3b69a53b4eef8f72c2be7c8cb0f208dbb21caf309fcd5432f4d"
+  },
+  {
+    "id": "imagenet1k/validation/8435",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_08435.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "080841fd989db2f836acb49ca37309d99200cca5f1cb6809189f46ca4aa87f45"
+  },
+  {
+    "id": "imagenet1k/validation/46494",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_46494.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "8cc8919256766b80d1980e4bbd1314949e4767da13a1d95f5804a0dd81616c10"
+  },
+  {
+    "id": "imagenet1k/validation/18222",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_18222.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "e8e1e843393f7f331980bb7f531b40d77ec5874382078737e1f3967a07a624dd"
+  },
+  {
+    "id": "imagenet1k/validation/48415",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_48415.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "3e08176ffd19a97561d4c8ecebe40126c5908aa379fe07b3b568d6688768863e"
+  },
+  {
+    "id": "imagenet1k/validation/35824",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_35824.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "d67cb00022a2f8443de1d4864dce68e66fd36b9a76c6eae9a255c2d89417d5e7"
+  },
+  {
+    "id": "imagenet1k/validation/8458",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_08458.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "4a8bf626542288d5f8a84d8146ef4f56adace8d576cd4ce1e89bcb5b440aa055"
+  },
+  {
+    "id": "imagenet1k/validation/41154",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_41154.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "4e7f68b0ca129de33ac4ab77cbca81579b0caf295fd9f460a793192d6a8a4c07"
+  },
+  {
+    "id": "imagenet1k/validation/38572",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_38572.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "76dd4527dfff7ae5c3d97145a2f31231622826ad48645b1c78fb855f42d0a7da"
+  },
+  {
+    "id": "imagenet1k/validation/209",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_00209.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "dbbe2d19e2429c33639c6a46fd3015ccd131a01bf23d1063c07fde3969fd51e6"
+  },
+  {
+    "id": "imagenet1k/validation/44578",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_44578.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "da2588ac0cc350f8e5b1b25bb16829cd0e165e0d2e2d6ff4d268e394fb985af0"
+  },
+  {
+    "id": "imagenet1k/validation/41296",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_41296.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "1605efe9072426d4b7def8d2d8c735a2b0369ddbfda2a56a652e0a486dc9c0ff"
+  },
+  {
+    "id": "imagenet1k/validation/14336",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_14336.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "929246e707688b0624210c6bc878f99bfc7e76166b42f19b9e7b09c93b745472"
+  },
+  {
+    "id": "imagenet1k/validation/31246",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_31246.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "f14fadd14c165bf3dee04bdc3045c5dfe654b621dc6721624d6c5b1abc6919f1"
+  },
+  {
+    "id": "imagenet1k/validation/24020",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_24020.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "fb12d37befc174bdc5ed41331a482e0e1caffe0f5ade085e7bd1245e0c884013"
+  },
+  {
+    "id": "imagenet1k/validation/11631",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_11631.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "cec12b8763b0415bd2f8f9513744d9fff7b2300a077885f8f9b4e7f079fb280e"
+  },
+  {
+    "id": "imagenet1k/validation/22780",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_22780.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "78a0f573687675da455d90b2f7fa270f0c758271cb1701658749828cee5ba8fd"
+  },
+  {
+    "id": "imagenet1k/validation/48862",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_48862.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "5e85d1b57b75665495ed9b57d7ed532ab7d38afb80cb7548b63c29cbbc646827"
+  },
+  {
+    "id": "imagenet1k/validation/36062",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_36062.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "3f98c7f201bb1a05b4d6295d8ed13aafe2f7976d887302122bd919ce60afd2ff"
+  },
+  {
+    "id": "imagenet1k/validation/33636",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_33636.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "f3e3b31feb91d459602f75e93a9bc171ab991c2f69483300d12c85ce3d49f10a"
+  },
+  {
+    "id": "imagenet1k/validation/36630",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_36630.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "039770e6d11dc392ce38d1266f8bfe2e3236a97d921c70ff0cdd4cb4e6af0696"
+  },
+  {
+    "id": "imagenet1k/validation/10471",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_10471.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "b6582569652f9f290b3ca5c42d4c64cc20ed8807fe64b0de8202d20cdeeba003"
+  },
+  {
+    "id": "imagenet1k/validation/29824",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_29824.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "b439875d3c81c207517d2d1c0dd87320d2176437e88f71e84117621ccb82e55f"
+  },
+  {
+    "id": "imagenet1k/validation/1383",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_01383.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "caa397784fd936ee8e02f3445bd86fb75d2405ce092e73abc8ff8e6e69286aee"
+  },
+  {
+    "id": "imagenet1k/validation/31719",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_31719.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "fb872b35baf688f78900bc6504935d28ec2bdb9476e28c3f354e35f58d5ea3a7"
+  },
+  {
+    "id": "imagenet1k/validation/27066",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_27066.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "2fa2107b410ed9cb86af0aed960bd099dccb955ce30d8bf8b0347979a7693bd4"
+  },
+  {
+    "id": "imagenet1k/validation/12606",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_12606.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "62c006a26cbea637d6281a11990365641958d6c8fb62d7765f1e95f434d886ca"
+  },
+  {
+    "id": "imagenet1k/validation/11622",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_11622.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "2b7ac31baf137b5a9d045e8fa0d6e344316995d8a2aef8f3837a7b1ffed584ca"
+  },
+  {
+    "id": "imagenet1k/validation/5039",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_05039.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "6952af096422e67afe09f1574bc5f427ce53a73942332d1b43310cc9a38fc5b3"
+  },
+  {
+    "id": "imagenet1k/validation/1657",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_01657.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "bd0b8dbb8590b9690795a293d10d8c5d145debf0bf2dd08b5da1417b7773cdaf"
+  },
+  {
+    "id": "imagenet1k/validation/1664",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_01664.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "09a4e3da03e1264c930bf3e931c2610317d2369f263f24fa03ac511444d241b8"
+  },
+  {
+    "id": "imagenet1k/validation/23103",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_23103.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "41c7f1385c5d61fabcfdc1651b469f1b19b8c6befcf481a1e08de52489a9d674"
+  },
+  {
+    "id": "imagenet1k/validation/31504",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_31504.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "7890d48f56b907c253337e4c7f798ec499b4d4bdde25b6db429b71acfedd7930"
+  },
+  {
+    "id": "imagenet1k/validation/4587",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_04587.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "c22a28e6df798688b1b1ad83d8c270844de99f66f3998b8e7fa7d585ef2d9632"
+  },
+  {
+    "id": "imagenet1k/validation/29387",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_29387.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "b73e902b8a0dc3a8f108e038a9e5cc61e91b1046b345e3aca9c1f066a061c271"
+  },
+  {
+    "id": "imagenet1k/validation/45659",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_45659.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "92b63e94d8fc04232c3610a17f40397d42fa5995245b5fd73b1c0095c098ec66"
+  },
+  {
+    "id": "imagenet1k/validation/49533",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_49533.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "96133c8e2f3868badabb44b24a96b0f9fe6d2c7d5a612288b2ab470eacbf0955"
+  },
+  {
+    "id": "imagenet1k/validation/35267",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_35267.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "8131fa35a66ab880758b482d9ee2760f490f2738d7018b03a1d7339b7589db11"
+  },
+  {
+    "id": "imagenet1k/validation/5830",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_05830.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "72b1fb5f130471637da6ccb91c7180c399b884b545682637b2da4f549f356084"
+  },
+  {
+    "id": "imagenet1k/validation/37564",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_37564.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "98945e1adf3916ed184dbf330b51e574ae09697796e82c75faecf6e9e75c8b13"
+  },
+  {
+    "id": "imagenet1k/validation/7711",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_07711.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "1d4dab7624a1e42ad24ac7c0753d4400ac12bd5e33ec410ea70f7f586213ac08"
+  },
+  {
+    "id": "imagenet1k/validation/11906",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_11906.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "2ff070b6a626403be912e16611ef81245938ea9544b0f4abc2fd8e2ab85548f5"
+  },
+  {
+    "id": "imagenet1k/validation/12876",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_12876.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "8af5ab3f25c2a823ca4126f3cf89ce4e6cc478981d0ff9c8a35b8ee609dafcb2"
+  },
+  {
+    "id": "imagenet1k/validation/14167",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_14167.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "e1856dfc5fd0b48b954db9699311f36c36acdb8b2ec84f58498fd54128f090aa"
+  },
+  {
+    "id": "imagenet1k/validation/37744",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_37744.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "4e97e475ca0e6bdcafd15392d83e5d26f8720d869e9018e9b77960cd4e25dcfd"
+  },
+  {
+    "id": "imagenet1k/validation/1350",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_01350.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "4b6dbffbacc7c936f2a47dd010a80b5e8c13fb343cd4b9dceb8a0c791b90b833"
+  },
+  {
+    "id": "imagenet1k/validation/6055",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_06055.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "a30a547b207aedcf474a7b4fb259e6c1356cc202be6198a323163cc2a0c9168c"
+  },
+  {
+    "id": "imagenet1k/validation/33111",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_33111.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "be6aab79c1fef8c538c2986251d682c5a697907574ec8095bcb0fa19945dcbe2"
+  }
+]

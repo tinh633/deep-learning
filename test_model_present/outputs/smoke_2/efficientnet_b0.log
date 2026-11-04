@@ -1,0 +1,4 @@
+efficientnet_b0: loading pretrained EfficientNet_B0_Weights.IMAGENET1K_V1
+efficientnet_b0: accuracy pass 16/16
+efficientnet_b0: measuring batch-1 latency
+efficientnet_b0: measuring batch-16 throughput

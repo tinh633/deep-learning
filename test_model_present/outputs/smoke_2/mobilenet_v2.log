@@ -1,0 +1,4 @@
+mobilenet_v2: loading pretrained MobileNet_V2_Weights.IMAGENET1K_V1
+mobilenet_v2: accuracy pass 16/16
+mobilenet_v2: measuring batch-1 latency
+mobilenet_v2: measuring batch-16 throughput

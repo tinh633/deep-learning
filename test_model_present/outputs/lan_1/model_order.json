@@ -1,0 +1,8 @@
+[
+  "densenet121",
+  "googlenet",
+  "resnet50",
+  "efficientnet_b0",
+  "vgg16",
+  "mobilenet_v2"
+]

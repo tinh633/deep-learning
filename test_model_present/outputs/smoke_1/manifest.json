@@ -1,0 +1,114 @@
+[
+  {
+    "id": "imagenetv2/626/506c868fe73916a46bd5c2ff02ec88a0cd1d414d.jpeg",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\subset\\626\\506c868fe73916a46bd5c2ff02ec88a0cd1d414d.jpeg",
+    "label": 626,
+    "split": "test",
+    "image_sha256": "0bddde1f3819bf3c424fd9c941ad4f6aeba3590bb6b49dd4af94ff0ba71445de"
+  },
+  {
+    "id": "imagenetv2/753/c44677289b397b71a75f51e34dbfa6648066a7cd.jpeg",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\subset\\753\\c44677289b397b71a75f51e34dbfa6648066a7cd.jpeg",
+    "label": 753,
+    "split": "test",
+    "image_sha256": "c84cc6a7b5689a81453224220a58e5870fbbe62b0260cb35d08298b85b1fb9ce"
+  },
+  {
+    "id": "imagenetv2/214/fafaafa7dc8080815108a7a7acb9740e3baf9173.jpeg",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\subset\\214\\fafaafa7dc8080815108a7a7acb9740e3baf9173.jpeg",
+    "label": 214,
+    "split": "test",
+    "image_sha256": "312ca2065ca042fbff1aa56b29dab9285df06148b8184ab2a690278f1e3ff466"
+  },
+  {
+    "id": "imagenetv2/571/2c2d3cee9fbf4f8c9d72c5b86bed983a281692ad.jpeg",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\subset\\571\\2c2d3cee9fbf4f8c9d72c5b86bed983a281692ad.jpeg",
+    "label": 571,
+    "split": "test",
+    "image_sha256": "99fa70f4cf29e5c3ef622c778efacc79c916ab34775f0daffc23d44a5b28288f"
+  },
+  {
+    "id": "imagenetv2/934/b6de3a824030110c01c7a109adc24445730ca77c.jpeg",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\subset\\934\\b6de3a824030110c01c7a109adc24445730ca77c.jpeg",
+    "label": 934,
+    "split": "test",
+    "image_sha256": "dbecd142ca97e8cd3ab66de3391f4afc619520ca0bb075f390d3b9d63768c71c"
+  },
+  {
+    "id": "imagenetv2/789/002931eb640f8c3841107ada8402758fee6a05ce.jpeg",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\subset\\789\\002931eb640f8c3841107ada8402758fee6a05ce.jpeg",
+    "label": 789,
+    "split": "test",
+    "image_sha256": "3797a217b56133d2b9996b5b06e0953749c1b128a0557e89f9352ffa2663c319"
+  },
+  {
+    "id": "imagenetv2/503/ca43887e0a42cae574c4507de5a77f96ab378baa.jpeg",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\subset\\503\\ca43887e0a42cae574c4507de5a77f96ab378baa.jpeg",
+    "label": 503,
+    "split": "test",
+    "image_sha256": "80951660fe9d8a9e19ac2b4829b80787ea32b69a05b2fb3c573bfe57a4fa5222"
+  },
+  {
+    "id": "imagenetv2/478/b93fa70205319107180b6b88acc26c9b20f79dc7.jpeg",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\subset\\478\\b93fa70205319107180b6b88acc26c9b20f79dc7.jpeg",
+    "label": 478,
+    "split": "test",
+    "image_sha256": "e3a2feea3c5d4729c3c5a08d6ccf7448b5f0a14686191bbbc4f3ca7959686a1f"
+  },
+  {
+    "id": "imagenetv2/228/0eb28cfa70ae53bcebd9b6689516b0c7598cbffc.jpeg",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\subset\\228\\0eb28cfa70ae53bcebd9b6689516b0c7598cbffc.jpeg",
+    "label": 228,
+    "split": "test",
+    "image_sha256": "4088d3e660bedb72f1a6e1569a36fc0ed22d53ee749801129ce5e42fffd6a3d4"
+  },
+  {
+    "id": "imagenetv2/589/f7c50dfeb65172165450f58c1534a8cecf570c36.jpeg",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\subset\\589\\f7c50dfeb65172165450f58c1534a8cecf570c36.jpeg",
+    "label": 589,
+    "split": "test",
+    "image_sha256": "9a63aba84e00ec639a65bf609b5b9ff6d3837d07b5651d2b2cde58178a7c7bc0"
+  },
+  {
+    "id": "imagenetv2/990/f58a11583ab68e3cd5480673c55632b5968f4c40.jpeg",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\subset\\990\\f58a11583ab68e3cd5480673c55632b5968f4c40.jpeg",
+    "label": 990,
+    "split": "test",
+    "image_sha256": "cfa09e2824e57e7b018d5222d8821ed1728a44160f81b260be1f560e860961c9"
+  },
+  {
+    "id": "imagenetv2/791/4f260bd4f39fe32f9320b0688ea79dafc40f57ed.jpeg",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\subset\\791\\4f260bd4f39fe32f9320b0688ea79dafc40f57ed.jpeg",
+    "label": 791,
+    "split": "test",
+    "image_sha256": "deb5bfedfc5c8c47e5e2ca2aba0c0efa07e5d372f851b422e019a3ae05e623b7"
+  },
+  {
+    "id": "imagenetv2/838/57da9ac07e41412ba8bd4e17c947a82d3a9afb99.jpeg",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\subset\\838\\57da9ac07e41412ba8bd4e17c947a82d3a9afb99.jpeg",
+    "label": 838,
+    "split": "test",
+    "image_sha256": "58931b605794083dbac2f6bf1c6e2785fcf3de062bb739f56e4c2f7d3b73b557"
+  },
+  {
+    "id": "imagenetv2/350/be207ea7829068520aa2cb71e963379e31775b60.jpeg",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\subset\\350\\be207ea7829068520aa2cb71e963379e31775b60.jpeg",
+    "label": 350,
+    "split": "test",
+    "image_sha256": "9aef1069fb2379e1d8edcfcbfb28500f8fd4dde62e8886848f27f443c2e9d17c"
+  },
+  {
+    "id": "imagenetv2/751/3da2420629c2174e5686f33afe35da7c862c0e26.jpeg",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\subset\\751\\3da2420629c2174e5686f33afe35da7c862c0e26.jpeg",
+    "label": 751,
+    "split": "test",
+    "image_sha256": "e20e36404a24b1e89a16c9cb8ff5b89742a91eaca374cfc1d54343d52cbe0a99"
+  },
+  {
+    "id": "imagenetv2/909/0c1c6d7c4259d19c46e257d9b098cfc4231f9f24.jpeg",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\subset\\909\\0c1c6d7c4259d19c46e257d9b098cfc4231f9f24.jpeg",
+    "label": 909,
+    "split": "test",
+    "image_sha256": "8b695ee00589eb3e55a231189d2f7d576ff38e287c09fb33801f84c2606be95a"
+  }
+]

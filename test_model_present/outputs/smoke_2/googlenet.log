@@ -1,0 +1,4 @@
+googlenet: loading pretrained GoogLeNet_Weights.IMAGENET1K_V1
+googlenet: accuracy pass 16/16
+googlenet: measuring batch-1 latency
+googlenet: measuring batch-16 throughput

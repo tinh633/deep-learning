@@ -1,0 +1,9 @@
+torch
+torchvision
+numpy
+Pillow
+pandas
+matplotlib
+ipykernel
+datasets
+huggingface_hub

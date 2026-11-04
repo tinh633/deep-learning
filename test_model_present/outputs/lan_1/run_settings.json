@@ -1,0 +1,16 @@
+{
+  "WARMUP": 20,
+  "REPEATS": 3,
+  "TIMING_REQUESTS": 100,
+  "BATCH_SIZE": 16,
+  "profile": "benchmark",
+  "seed": 42,
+  "models": {
+    "vgg16": "VGG16_Weights.IMAGENET1K_V1",
+    "googlenet": "GoogLeNet_Weights.IMAGENET1K_V1",
+    "resnet50": "ResNet50_Weights.IMAGENET1K_V1",
+    "densenet121": "DenseNet121_Weights.IMAGENET1K_V1",
+    "efficientnet_b0": "EfficientNet_B0_Weights.IMAGENET1K_V1",
+    "mobilenet_v2": "MobileNet_V2_Weights.IMAGENET1K_V1"
+  }
+}

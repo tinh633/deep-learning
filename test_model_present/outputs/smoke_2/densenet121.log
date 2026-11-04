@@ -1,0 +1,4 @@
+densenet121: loading pretrained DenseNet121_Weights.IMAGENET1K_V1
+densenet121: accuracy pass 16/16
+densenet121: measuring batch-1 latency
+densenet121: measuring batch-16 throughput

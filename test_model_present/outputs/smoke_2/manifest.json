@@ -1,0 +1,114 @@
+[
+  {
+    "id": "imagenet1k/validation/16763",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_16763.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "860a4848f5fb960dc19a551128f0eda1894e4e26b8dda2e1b53cbc0e689a404e"
+  },
+  {
+    "id": "imagenet1k/validation/38033",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\980\\validation_38033.JPEG",
+    "label": 980,
+    "split": "validation",
+    "image_sha256": "da68d0ddca958d80f7eb0f6cf621ec2fe5bef974d9ada494734d84f975ae957b"
+  },
+  {
+    "id": "imagenet1k/validation/4856",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_04856.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "8b31671f452fc24abc0e62e272731adf66f83d23e5d6430ab3489009857d459d"
+  },
+  {
+    "id": "imagenet1k/validation/16065",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\504\\validation_16065.JPEG",
+    "label": 504,
+    "split": "validation",
+    "image_sha256": "7c57ce21e956742f11967746ba87a3e7cdda0d8ddff5247bb96d28236b3338c9"
+  },
+  {
+    "id": "imagenet1k/validation/5842",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\779\\validation_05842.JPEG",
+    "label": 779,
+    "split": "validation",
+    "image_sha256": "5f9a5c950d7f7fda6335f805514099b1a876b6b884e36526551d73182226426e"
+  },
+  {
+    "id": "imagenet1k/validation/8058",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_08058.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "63eb198670f91a19a7763c13454ab011e23c367e167262673d2f9b91a7ecd85b"
+  },
+  {
+    "id": "imagenet1k/validation/32147",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\207\\validation_32147.JPEG",
+    "label": 207,
+    "split": "validation",
+    "image_sha256": "9c03d2309b843046cd121d550073425d2586791cb5d7ada2c05cc7c2798323e2"
+  },
+  {
+    "id": "imagenet1k/validation/22181",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\671\\validation_22181.JPEG",
+    "label": 671,
+    "split": "validation",
+    "image_sha256": "aec2e8b6c2156becf8126ac2d248085fe59fb8eace85ee2c883feba11d4f4f2b"
+  },
+  {
+    "id": "imagenet1k/validation/8162",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\340\\validation_08162.JPEG",
+    "label": 340,
+    "split": "validation",
+    "image_sha256": "0ed933f9ca55c44181e34e636a3076f73fe4de67e9b20d05c9b194022a59a810"
+  },
+  {
+    "id": "imagenet1k/validation/33850",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_33850.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "dcf87c0ea0bfba74d8a77d0985a3f9bbd62d8095f84ae9aac16ed1d9ad241478"
+  },
+  {
+    "id": "imagenet1k/validation/40463",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\949\\validation_40463.JPEG",
+    "label": 949,
+    "split": "validation",
+    "image_sha256": "2e66a2435fba81f6c6903def2ba46497497c1cf197fcbb3ee6d98ca445e3d62b"
+  },
+  {
+    "id": "imagenet1k/validation/41387",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_41387.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "fb4bed05ed42a84c24affbf3428fa7a2565319e7207f27a6d3d3722d7e03cd51"
+  },
+  {
+    "id": "imagenet1k/validation/9574",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_09574.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "50cc5a3305fedc982bb6086fc366948fe48265e8fb9fcd8a291b4a8784c5ca8d"
+  },
+  {
+    "id": "imagenet1k/validation/22921",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\620\\validation_22921.JPEG",
+    "label": 620,
+    "split": "validation",
+    "image_sha256": "b7646fd8492c1ffa53f221d2fae2fb5495425748ce0aa8a5d2e1af6ee30c121f"
+  },
+  {
+    "id": "imagenet1k/validation/47992",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\404\\validation_47992.JPEG",
+    "label": 404,
+    "split": "validation",
+    "image_sha256": "c7a0e39464006eba2f8345888231cbcb1afed4226aa9fbb3ba6e4b03c6beedaa"
+  },
+  {
+    "id": "imagenet1k/validation/6222",
+    "path": "D:\\newtask\\DL\\test_model_present\\data\\imagenet1k\\images\\281\\validation_06222.JPEG",
+    "label": 281,
+    "split": "validation",
+    "image_sha256": "7fcf73ac386bb709d8488bec75f91639319bf7c9367158157476b514a6363511"
+  }
+]

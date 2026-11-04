@@ -1,0 +1,4 @@
+vgg16: loading pretrained VGG16_Weights.IMAGENET1K_V1
+vgg16: accuracy pass 16/16
+vgg16: measuring batch-1 latency
+vgg16: measuring batch-16 throughput

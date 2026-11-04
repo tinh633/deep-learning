@@ -1,0 +1,26 @@
+{
+  "densenet121": {
+    "returncode": 0,
+    "status": "completed"
+  },
+  "googlenet": {
+    "returncode": 0,
+    "status": "completed"
+  },
+  "resnet50": {
+    "returncode": 0,
+    "status": "completed"
+  },
+  "efficientnet_b0": {
+    "returncode": 0,
+    "status": "completed"
+  },
+  "vgg16": {
+    "returncode": 0,
+    "status": "completed"
+  },
+  "mobilenet_v2": {
+    "returncode": 0,
+    "status": "completed"
+  }
+}

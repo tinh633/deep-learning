@@ -13,3 +13,5 @@ chi tiết được ghi trong `progress.md` của từng practice.
 - Đối chiếu file, artifact và Git thực tế trước khi dựa vào tiến độ đã ghi.
 - Cập nhật tiến độ riêng sau mốc quan trọng và trước khi kết thúc phiên.
 - Giữ chỉ mục này ngắn; không ghi lịch sử train hoặc triển khai chi tiết tại đây.
+
+- [Benchmark ImageNet](../test_model_present/progress.md): ImageNet1K validation10×50; smoke và benchmark6/6 hoàn tất, notebook đã chạy.
