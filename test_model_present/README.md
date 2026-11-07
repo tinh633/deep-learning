@@ -1,5 +1,12 @@
 # CNN pretrained — ImageNet-1K validation
 
+## Tài liệu source
+
+- [Các model — kiến trúc, pretrained weights và vai trò so sánh](docs/Models.md).
+- [config.py — Cấu hình dữ liệu, model và timing](docs/src/config.md).
+- [0_preparedata.py — Chuẩn bị ảnh và manifest](docs/src/0_preparedata.md).
+- [1_benchmark.py — Inference, chỉ số và tài nguyên](docs/src/1_benchmark.md).
+
 So sánh6 model có weights ImageNet1K hoàn chỉnh trên **10 lớp ×50 ảnh =500 ảnh**.
 Không train/fine-tune; giữ nguyên classifier1.000 lớp. Dự đoán ra990 lớp khác vẫn tính sai.
 

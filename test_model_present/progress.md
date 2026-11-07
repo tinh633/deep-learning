@@ -44,3 +44,14 @@ Không commit/push. Còn lại review giao diện notebook trong IDE nếu cần
 - README: added benchmark motivation after architecture presentation, practical evaluation questions and accuracy/latency/throughput/VRAM trade-offs. Documentation only; no benchmark rerun.
 
 - 2026-11-04: Publication authorized: test_model_present source/notebook/results to Thai branch; dataset and weights cache excluded.
+
+## 07/11/2026 — Tài liệu source
+
+- Thêm docs/src/config.md, 0_preparedata.md và 1_benchmark.md; liên kết từ README.
+- Đối chiếu trực tiếp ba file Python: config, streaming/mapping/manifest, subprocess và protocol đo.
+- Giải thích bảng chỉ số, hash, cache weights, chế độ smoke và giới hạn VRAM/timing.
+- Ghi rõ smoke_1 là ImageNetV2, smoke_2/lan_1 là ImageNet-1K.
+- Kiểm tra UTF-8, giới hạn 150 dòng và liên kết nội bộ; không chạy benchmark hoặc đổi kết quả.
+- Chưa commit/push phần tài liệu mới.
+- Thêm docs/Models.md: sáu kiến trúc, đặc trưng, head/pretrained, số tham số và cách diễn giải kết quả.
+- 07/11/2026: chuẩn bị commit/push riêng test_model_present lên Thái; không kèm thay đổi coursework.

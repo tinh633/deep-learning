@@ -24,3 +24,12 @@
 - README: added benchmark motivation after architecture presentation, practical evaluation questions and accuracy/latency/throughput/VRAM trade-offs. Documentation only; no benchmark rerun.
 
 - 2026-11-04: Publication authorized: test_model_present source/notebook/results to Thai branch; dataset and weights cache excluded.
+
+## 07/11/2026 — Mô tả source
+
+- Đọc config.py, 0_preparedata.py và 1_benchmark.py để viết ba tài liệu tương ứng trong docs/src/.
+- Mô tả luồng xử lý, input/output, cấu hình, chỉ số, provenance và giới hạn theo mã hiện tại.
+- Đồng bộ liên kết README và progress; kiểm tra UTF-8, số dòng và liên kết.
+- Chỉ thay đổi tài liệu; không tải ảnh, train, chạy inference hoặc sửa số liệu lịch sử.
+- Bổ sung docs/Models.md, đối chiếu config/results.csv và liên kết tài liệu torchvision từng kiến trúc.
+- Phạm vi xuất Git 07/11/2026: riêng test_model_present trên Thái; kiểm tra loại dataset/cache và giữ nguyên các project khác.
