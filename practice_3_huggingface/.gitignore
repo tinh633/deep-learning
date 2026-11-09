@@ -1,0 +1,17 @@
+
+# Python cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Jupyter temporary files
+.ipynb_checkpoints/
+
+# macOS temporary files
+.DS_Store
+
+# Local environment and secrets
+.venv/
+venv/
+.env
+.env.*
