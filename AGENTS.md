@@ -22,7 +22,7 @@
 
 ## Session Continuity
 
-- At session start, read this file, the shared progress index and `<practice>/progress.md` for the active practice. Keep detailed handoff/status in that practice; docs_for_agent holds shared rules.
+- At session start, read this file, the shared progress index and the active project's progress file at the linked location (coursework uses docs/progress.md). Keep detailed handoff/status in that project; docs_for_agent holds shared rules.
 - Inspect repository state and task-specific documentation before editing.
 - Update progress at meaningful milestones and before ending a session.
 - If interrupted, reconcile the recorded state with actual files and Git status.

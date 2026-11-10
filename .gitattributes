@@ -1,3 +1,2 @@
 # Keep checkpoint split fingerprints stable across Windows/Linux checkouts.
-practice_2_pretrained_model/outputs/cifar10_split.json text eol=lf
-practice_2_pretrained_model/outputs/runs/lan_*/*.pt filter=lfs diff=lfs merge=lfs -text
+coursework_vit_classification/outputs/cifar100_split.json text eol=lf
