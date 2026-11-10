@@ -3,8 +3,10 @@
 `docs_for_agent/` lưu cách làm việc chung. Tiến độ, kết quả kiểm tra và bàn giao
 chi tiết được ghi trong `progress.md` của từng practice.
 
-- [Practice 2 — Pretrained CNN](../practice_2_pretrained_model/progress.md).
 - [Lịch sử workspace](progress_old.md): ghi chép cũ, không phải trạng thái hiện tại.
+- [Coursework ViT](../coursework_vit_classification/docs/progress.md): đã có data/EDA; chờ giảng viên xác nhận phạm vi ViT/Anti Face Deepfake, chưa train.
+
+Nhánh cousework chỉ xuất bản coursework và quy tắc chung; lab/benchmark thuộc nhánh riêng.
 
 ## Quy tắc sử dụng
 

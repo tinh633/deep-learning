@@ -125,7 +125,7 @@ Record only actions and contributions that actually occurred. If long, archive d
 
 ## Progress and session handoff
 
-- Each practice owns `<practice>/progress.md` for its phase, task states, blockers, changed files, test evidence, Git status and next steps.
+- Each practice owns its progress file for phase, task states, blockers, checks, Git status and next steps; follow the location linked in README/shared index, including a project-chosen docs/ location.
 - `docs_for_agent/` holds shared working rules; its progress.md is only a short index linking to practice progress files.
 - Read the active practice's progress at session start; update it after milestones and before ending the session.
 - Distinguish implemented, validated, user-approved and committed states; verify actual files/Git before repeating old status.

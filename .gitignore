@@ -1,8 +1,10 @@
 # Downloaded datasets: recreate from each project's preparation script.
 **/data/
 
-# This delivery branch contains Practice 2; preserve Practice 1 only locally.
+# This branch publishes coursework; keep other projects only in the local workspace.
 /practice_1_fashionmnist/
+/practice_2_pretrained_model/
+/test_model_present/
 /src.ipynb
 
 # Python caches and local virtual environments.
@@ -23,10 +25,7 @@ venv/
 # Local training weights, TensorBoard events and dataset-derived error images.
 *.pt
 *.pth
-!practice_2_pretrained_model/outputs/runs/lan_*/best.pt
-!practice_2_pretrained_model/outputs/runs/lan_*/last.pt
 **/events.out.tfevents.*
-!practice_2_pretrained_model/outputs/runs/lan_*/tensorboard/events.out.tfevents.*
 practice_2_pretrained_model/visualization/runs/
 
 # Dataset image galleries and feature previews are regenerated locally.

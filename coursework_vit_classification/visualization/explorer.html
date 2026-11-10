@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CIFAR-100 · Data Explorer</title>
+<style>
+:root{--ink:#18333c;--muted:#607680;--teal:#087f80;--line:#dbe6e7}*{box-sizing:border-box}body{margin:0;background:#f1f5f4;color:var(--ink);font:16px/1.6 system-ui,sans-serif}header{background:#153c43;color:white;padding:42px max(5vw,20px)}header p{color:#c3dbdc;max-width:800px}h1{font-size:36px;margin:8px 0}h2{margin:0 0 18px;font-size:24px}nav{display:flex;gap:22px;flex-wrap:wrap}nav a{color:#b5eece}main{max-width:1320px;margin:auto;padding:24px}section{background:white;border:1px solid var(--line);border-radius:16px;padding:26px;margin-bottom:24px;scroll-margin-top:20px}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}.card{background:#edf7f5;padding:20px;border-radius:12px}.card b{display:block;font-size:30px;color:var(--teal)}.muted{color:var(--muted)}.controls{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:16px 0}select,input,button{font:inherit;padding:8px 12px;border:1px solid #b4c9cc;border-radius:8px;background:white;color:var(--ink)}button{cursor:pointer}button.primary{background:var(--teal);color:white}button:disabled{opacity:.4;cursor:default}label{font-size:14px}canvas.chart{width:100%;height:250px;display:block}.scroll{overflow:auto}.scroll canvas{min-width:1800px}table{border-collapse:collapse;width:100%;font-size:14px}td,th{text-align:left;padding:9px;border-bottom:1px solid var(--line)}.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(135px,1fr));gap:14px}.photo{border:1px solid var(--line);border-radius:10px;overflow:hidden;padding:10px}.photo canvas{width:100%;aspect-ratio:1;image-rendering:pixelated;background:#edf1f2}.photo small{display:block;color:var(--muted)}#status{padding:15px;background:#fff3d3;border-radius:10px;margin:0 0 20px;white-space:pre-wrap}.two{display:grid;grid-template-columns:1fr 1fr;gap:25px}@media(max-width:700px){.two{grid-template-columns:1fr}main{padding:12px}section{padding:16px}h1{font-size:27px}}code{background:#edf2f2;padding:2px 5px}a{color:var(--teal)}
+</style>
+<style>
+.map-layout{display:grid;grid-template-columns:minmax(0,1fr) 190px;gap:20px}.map-wrap{min-width:0}#space{width:100%;height:auto;aspect-ratio:1100/650;border:1px solid var(--line);border-radius:10px;cursor:crosshair;touch-action:none}#mapClasses{min-width:200px}#mapPreview{width:160px;height:160px;image-rendering:pixelated;border-radius:10px;background:#edf2f2}#mapLegend{display:flex;gap:8px;flex-wrap:wrap;max-height:160px;overflow:auto;margin:12px 0}.legend-item{font-size:12px;display:flex;align-items:center;gap:5px}.swatch{display:inline-block;width:10px;height:10px;border-radius:50%}#mapDetails{font-size:14px;overflow-wrap:anywhere}@media(max-width:700px){.map-layout{grid-template-columns:1fr}#mapPreview{width:100px;height:100px}}
+</style>
+</head>
+<body>
+<header><small>COURSEWORK · VISION TRANSFORMER</small><h1>CIFAR-100 — Khám phá dữ liệu</h1><p>Hiểu dữ liệu trước huấn luyện: phân bố lớp, thống kê màu, chất lượng ảnh và duyệt đầy đủ dataset theo split.</p><nav><a href="#overview">Tổng quan</a><a href="#eda">Phân tích dữ liệu</a><a href="#projection">Không gian ảnh</a><a href="#quality">Chất lượng</a><a href="#dataset">Xem dataset</a></nav></header>
+<main><div id="status" role="status">Đang đọc outputs/eda.json…</div>
+<section id="overview"><h2>01 · Tổng quan</h2><div id="cards" class="cards"></div><p class="muted">Ảnh RGB 32 × 32 · 100 lớp chi tiết · train/validation tách phân tầng, seed 42. Test giữ riêng cho đánh giá cuối.</p><p id="provenance" class="muted"></p></section>
+<section id="eda"><h2>02 · Phân tích dữ liệu</h2><p>100 lớp được hiển thị theo thứ tự nhãn. Chọn lớp trong gallery để xem ảnh tương ứng.</p><label>Phân bố của split <select id="chartSplit"><option>train</option><option>validation</option><option>test</option></select></label><div class="scroll"><canvas id="counts" class="chart" width="2000" height="280"></canvas></div><p id="balance" class="muted"></p><div class="two"><div><h3>Phân bố cường độ RGB — train</h3><canvas id="rgb" class="chart" width="650" height="260"></canvas><p class="muted">Trục X: cường độ 0–255; trục Y: số pixel. Không dùng test để ước lượng normalization.</p></div><div><h3>Mean và standard deviation — train</h3><div id="rgbTable"></div><p class="muted">Thống kê trên pixel chia 255. Đây là mô tả dữ liệu, không tự thay normalization được quy định bởi pretrained weights.</p></div></div><h3>Độ sáng và độ tương phản theo split</h3><div id="qualityTable" class="scroll"></div><p class="muted">Độ sáng: trung bình RGB/255 của ảnh. Độ tương phản: độ lệch chuẩn RGB/255 của ảnh. Các đại lượng này hỗ trợ khảo sát, không phải nhãn chất lượng ảnh.</p></section>
+<section id="projection">
+<h2>03 · Không gian ảnh — mức độ tách lớp</h2>
+<p>Mỗi điểm là một ảnh, màu thể hiện nhãn lớp. Chọn vài lớp để đối chiếu, rê chuột xem ảnh; cuộn để zoom và kéo để di chuyển biểu đồ.</p>
+<div class="controls">
+<label>Phép chiếu <select id="mapMethod"><option value="tsne">t-SNE · 5.000 ảnh train</option><option value="pca">PCA · toàn bộ 60.000 ảnh</option></select></label>
+<label>Split PCA <select id="mapSplit"><option value="all">Tất cả</option><option>train</option><option>validation</option><option>test</option></select></label>
+<label>Lọc lớp (Ctrl/Cmd chọn nhiều)<br><select id="mapClasses" multiple size="4" aria-label="Chọn lớp trên biểu đồ"></select></label>
+<label><input id="mapBackground" type="checkbox"> Giữ các lớp khác màu xám</label>
+<label>Độ đậm <input id="mapOpacity" type="range" min="0.1" max="1" step="0.05" value="0.5"></label>
+<button id="mapClear">Hiện đủ lớp</button><button id="mapReset">Đặt lại góc nhìn</button>
+</div>
+<p id="mapStatus" class="muted" role="status">Đang đọc tọa độ…</p>
+<div class="map-layout"><div class="map-wrap"><canvas id="space" width="1100" height="650" aria-label="Biểu đồ phân bố ảnh 2D"></canvas></div><aside><canvas id="mapPreview" width="32" height="32"></canvas><p id="mapDetails">Rê chuột lên một điểm để xem lớp, split và ảnh gốc.</p></aside></div>
+<details><summary>Chú giải màu 100 lớp</summary><div id="mapLegend"></div></details>
+<p id="mapNote" class="muted"></p>
+<p class="muted">Đặc trưng ở đây là bố cục màu RGB 8 × 8, chưa phải embedding CNN/ViT. Các lớp có thể chồng lấn do đặc trưng chưa biểu diễn ngữ nghĩa. Không dịch chuyển điểm theo nhãn để tạo cụm giả. Khoảng cách t-SNE chủ yếu phục vụ quan sát lân cận, không dùng khoảng cách giữa cụm để kết luận chất lượng model.</p>
+</section>
+<section id="quality"><h2>04 · Kiểm tra chất lượng và giới hạn</h2><p id="duplicates"></p><ul><li>Chỉ kiểm tra ảnh trùng pixel chính xác bằng SHA-256; không phát hiện ảnh gần giống hoặc sai nhãn tự động.</li><li>Ảnh nhỏ có thể thiếu chi tiết; resize lên 224 × 224 không tạo thêm thông tin.</li><li>Cân bằng số lượng lớp không đồng nghĩa mọi lớp có độ khó ngang nhau.</li><li>Quan sát và quyết định preprocessing từ train; không lựa chọn cấu hình theo ảnh test.</li></ul><p>Trong gallery có thể sắp xếp theo độ sáng/độ tương phản để xem các ảnh cực trị trên train.</p></section>
+<section id="dataset"><h2>05 · Xem toàn bộ dataset</h2><p>Phân trang tất cả 60.000 ảnh; pixel đọc từ các chunk RGB gzip local, không dùng atlas hoặc tải từng PNG.</p><div class="controls"><label>Split <select id="split"><option>train</option><option>validation</option><option>test</option></select></label><label>Lớp <select id="classFilter"><option value="">Tất cả 100 lớp</option></select></label><label>Tìm nhãn <input id="search" placeholder="Ví dụ: rose, shark" size="18"></label><label>Sắp xếp <select id="sort"><option value="id">ID tăng dần</option><option value="dark">Tối nhất</option><option value="bright">Sáng nhất</option><option value="low">Tương phản thấp</option><option value="high">Tương phản cao</option></select></label><label>Ảnh/trang <select id="pageSize"><option>48</option><option>96</option><option>192</option></select></label></div><div class="controls"><button id="prev">← Trước</button><span id="pageInfo"></span><button id="next" class="primary">Sau →</button><span id="loading" class="muted" role="status"></span></div><div id="gallery" class="gallery"></div><p class="muted">ID là chỉ số ảnh trong official train hoặc test, không phải thứ tự trang. Validation dùng ID của official train.</p></section>
+<footer class="muted">Nguồn: <a href="https://www.cs.toronto.edu/~kriz/cifar.html">CIFAR chính thức</a> · Chạy từ workspace: <code>python -m http.server 8000</code>, sau đó mở <code>/coursework_vit_classification/visualization/explorer.html</code>.</footer>
+</main>
+<script>
+'use strict';
+let report, page=0, version=0;
+const $=id=>document.getElementById(id), cache=new Map();
+function table(headers,rows){const t=document.createElement('table');for(const [i,row] of [headers,...rows].entries()){const tr=t.insertRow();for(const text of row){const cell=document.createElement(i?'td':'th');cell.textContent=text;tr.append(cell)}}return t}
+function drawCounts(){const name=$('chartSplit').value,values=report.splits[name].class_counts,c=$('counts'),ctx=c.getContext('2d');ctx.clearRect(0,0,c.width,c.height);const max=Math.max(...values),base=185;ctx.fillStyle='#087f80';values.forEach((n,i)=>{const x=40+i*19;ctx.fillRect(x,base-n/max*145,12,n/max*145);ctx.save();ctx.translate(x+8,base+10);ctx.rotate(-Math.PI/3);ctx.font='10px system-ui';ctx.fillText(report.classes[i],0,0);ctx.restore()});$('balance').textContent=`${name}: ${values.reduce((a,b)=>a+b,0).toLocaleString('vi-VN')} ảnh; mỗi lớp ${Math.min(...values)}–${max} ảnh. Trục Y: số ảnh (đỉnh ${max}); X: tên lớp.`}
+function drawRGB(){const c=$('rgb'),ctx=c.getContext('2d'),hist=report.train_rgb.histogram,max=Math.max(...hist.flat());ctx.clearRect(0,0,c.width,c.height);hist.forEach((values,i)=>{ctx.strokeStyle=['#da5555','#319474','#4b7ad0'][i];ctx.lineWidth=2;ctx.beginPath();values.forEach((n,x)=>{const a=35+x/255*590,b=225-n/max*200;x?ctx.lineTo(a,b):ctx.moveTo(a,b)});ctx.stroke()});ctx.fillStyle='#607680';ctx.fillText('0',30,248);ctx.fillText('255',605,248);ctx.fillText(max.toLocaleString('vi-VN'),0,15)}
+async function chunk(source,id){const meta=report.pixel_sources[source].find(c=>id>=c.start&&id<c.start+c.count);if(!meta)throw Error('Không tìm thấy pixel chunk.');if(!cache.has(meta.file)){const task=(async()=>{if(!('DecompressionStream'in window))throw Error('Trình duyệt cần hỗ trợ gzip DecompressionStream (Chrome/Edge mới).');const response=await fetch(meta.file);if(!response.ok)throw Error(`Không đọc được ${meta.file}. Chạy lại 1_eda.py.`);const raw=new Uint8Array(await new Response(response.body.pipeThrough(new DecompressionStream('gzip'))).arrayBuffer());if(raw.length!==meta.count*3072)throw Error('Pixel chunk sai kích thước.');return raw})();cache.set(meta.file,task);task.catch(()=>cache.delete(meta.file))}return{raw:await cache.get(meta.file),start:meta.start}}
+function selectedRows(){const s=report.splits[$('split').value],filter=$('classFilter').value,query=$('search').value.trim().toLowerCase();const rows=s.ids.map((id,i)=>({id,label:s.labels[i],brightness:s.brightness[i],contrast:s.contrast[i],source:s.source})).filter(r=>(filter===''||r.label===Number(filter))&&report.classes[r.label].toLowerCase().includes(query));const order=$('sort').value;rows.sort((a,b)=>order==='dark'?a.brightness-b.brightness:order==='bright'?b.brightness-a.brightness:order==='low'?a.contrast-b.contrast:order==='high'?b.contrast-a.contrast:a.id-b.id);return rows}
+async function renderGallery(){const current=++version,rows=selectedRows(),size=Number($('pageSize').value),pages=Math.max(1,Math.ceil(rows.length/size));page=Math.max(0,Math.min(page,pages-1));$('pageInfo').textContent=`${rows.length.toLocaleString('vi-VN')} ảnh · Trang ${page+1}/${pages}`;$('prev').disabled=page===0;$('next').disabled=page>=pages-1;$('gallery').replaceChildren();$('loading').textContent='Đang đọc ảnh…';try{const cards=await Promise.all(rows.slice(page*size,(page+1)*size).map(async r=>{const{raw,start}=await chunk(r.source,r.id);const card=document.createElement('article');card.className='photo';const canvas=document.createElement('canvas');canvas.width=32;canvas.height=32;const ctx=canvas.getContext('2d'),pixels=ctx.createImageData(32,32),offset=(r.id-start)*3072;for(let p=0;p<1024;p++){pixels.data[p*4]=raw[offset+p*3];pixels.data[p*4+1]=raw[offset+p*3+1];pixels.data[p*4+2]=raw[offset+p*3+2];pixels.data[p*4+3]=255}ctx.putImageData(pixels,0,0);const label=document.createElement('strong');label.textContent=report.classes[r.label];const detail=document.createElement('small');detail.textContent=`${r.source} #${r.id} · sáng ${r.brightness.toFixed(2)} · TP ${r.contrast.toFixed(2)}`;card.append(canvas,label,detail);return card}));if(current!==version)return;$('gallery').replaceChildren(...cards);$('loading').textContent=rows.length?'':'Không có ảnh khớp bộ lọc.'}catch(error){if(current===version)$('loading').textContent=error.message}}
+async function init(){try{const response=await fetch('../outputs/eda.json');if(!response.ok)throw Error('Chưa có outputs/eda.json.');report=await response.json();for(const [label,value]of[['Tổng ảnh',60000],['Số lớp',report.classes.length],['Train',report.splits.train.count],['Validation',report.splits.validation.count],['Test',report.splits.test.count]]){const div=document.createElement('div');div.className='card';const b=document.createElement('b');b.textContent=value.toLocaleString('vi-VN');div.append(b,document.createTextNode(label));$('cards').append(div)}report.classes.forEach((name,i)=>{const o=document.createElement('option');o.value=i;o.textContent=`${i} · ${name}`;$('classFilter').append(o)});$('rgbTable').append(table(['Kênh','Mean','Std'],['R','G','B'].map((name,i)=>[name,report.train_rgb.mean[i].toFixed(4),report.train_rgb.std[i].toFixed(4)])));$('qualityTable').append(table(['Split','Đại lượng','Min','Q1','Median','Q3','Max'],Object.entries(report.splits).flatMap(([name,s])=>[['Độ sáng',s.brightness_quantiles],['Tương phản',s.contrast_quantiles]].map(([label,q])=>[name,label,...q.map(v=>v.toFixed(4))]))));$('duplicates').textContent=`${report.exact_duplicates.length} nhóm ảnh trùng pixel; ${report.cross_split_duplicate_groups} nhóm xuất hiện ở nhiều split. ${report.cross_split_duplicate_groups?'Cần rà soát trước khi train; chưa tự xóa hoặc đổi split.':'Không phát hiện trùng chính xác giữa các split.'}`;$('provenance').textContent=`Report: ${report.created} · Split SHA-256: ${report.split_sha256}`;drawCounts();drawRGB();$('chartSplit').onchange=drawCounts;for(const id of ['split','classFilter','search','sort','pageSize'])$(id).addEventListener(id==='search'?'input':'change',()=>{page=0;renderGallery()});$('prev').onclick=()=>{page--;renderGallery()};$('next').onclick=()=>{page++;renderGallery()};$('status').textContent='Đã đọc report. Pixel ảnh chỉ tải theo trang đang xem; thay bộ lọc để duyệt toàn bộ dữ liệu.';await renderGallery()}catch(error){$('status').textContent=`${error.message}\nChạy .venv/Scripts/python.exe coursework_vit_classification/src/1_eda.py trước.\nMở trang qua Live Server hoặc python -m http.server 8000; không mở bằng file://.`}}
+let projectionData, mapPoints=[], mapScreen=[], mapBounds;
+let mapView={zoom:1,x:0,y:0}, mapDrag=null, previewVersion=0;
+const classColor=label=>`hsl(${(label*137.508)%360} 66% 43%)`;
+
+function chooseMapPoints(){
+  previewVersion++;
+  $('mapPreview').getContext('2d').clearRect(0,0,32,32);
+  $('mapDetails').textContent='Rê chuột lên một điểm để xem lớp, split và ảnh gốc.';
+  const method=$('mapMethod').value;
+  $('mapSplit').disabled=method==='tsne';
+  if(method==='tsne'){
+    const data=projectionData.tsne;
+    mapPoints=data.ids.map((id,i)=>({id,label:data.labels[i],xy:data.xy[i],source:'train',split:'train'}));
+    $('mapNote').textContent=`t-SNE: 50 ảnh/lớp, seed ${projectionData.seed}, perplexity ${data.perplexity}, ${data.max_iter} iterations; đầu vào PCA ${data.pca_dimensions} chiều. KL divergence ${data.kl_divergence.toFixed(3)}. Nhãn chỉ dùng lấy mẫu cân bằng và tô màu, không dùng để tính tọa độ.`;
+  }else{
+    mapPoints=[];
+    for(const [split,info]of Object.entries(report.splits)){
+      if($('mapSplit').value!=='all'&&$('mapSplit').value!==split)continue;
+      info.ids.forEach((id,i)=>mapPoints.push({id,label:info.labels[i],xy:projectionData.pca[split][i],source:info.source,split}));
+    }
+    $('mapNote').textContent=`PCA fit trên ${projectionData.pca_fit_count.toLocaleString('vi-VN')} ảnh train, transform các split trên cùng hệ trục. Hai chiều giữ ${(100*projectionData.pca_explained_variance_2d).toFixed(2)}% phương sai train. Nhãn không tham gia PCA.`;
+  }
+  const xs=mapPoints.map(p=>p.xy[0]),ys=mapPoints.map(p=>p.xy[1]);
+  mapBounds={xmin:Math.min(...xs),xmax:Math.max(...xs),ymin:Math.min(...ys),ymax:Math.max(...ys)};
+  mapView={zoom:1,x:0,y:0};
+  drawMap();
+}
+
+function drawMap(){
+  const canvas=$('space'),ctx=canvas.getContext('2d'),w=canvas.width,h=canvas.height;
+  ctx.clearRect(0,0,w,h);
+  ctx.fillStyle='#f6f9f9';ctx.fillRect(0,0,w,h);
+  const selected=new Set([...$('mapClasses').selectedOptions].map(o=>Number(o.value)));
+  const rows=mapPoints.filter(p=>!selected.size||selected.has(p.label)||$('mapBackground').checked);
+  const spanX=Math.max(1e-6,mapBounds.xmax-mapBounds.xmin),spanY=Math.max(1e-6,mapBounds.ymax-mapBounds.ymin);
+  const scale=Math.min((w-90)/spanX,(h-90)/spanY);
+  const cx=(mapBounds.xmin+mapBounds.xmax)/2,cy=(mapBounds.ymin+mapBounds.ymax)/2;
+  mapScreen=rows.map(p=>({...p,
+    sx:w/2+(p.xy[0]-cx)*scale*mapView.zoom+mapView.x,
+    sy:h/2-(p.xy[1]-cy)*scale*mapView.zoom+mapView.y,
+    active:!selected.size||selected.has(p.label)}));
+  for(const active of [false,true]){
+    for(const p of mapScreen){
+      if(p.active!==active||p.sx<0||p.sy<0||p.sx>w||p.sy>h)continue;
+      ctx.globalAlpha=active?Number($('mapOpacity').value):0.08;
+      ctx.fillStyle=active?classColor(p.label):'#65747b';
+      ctx.beginPath();ctx.arc(p.sx,p.sy,selected.size&&active?3:1.8,0,Math.PI*2);ctx.fill();
+    }
+  }
+  ctx.globalAlpha=1;ctx.fillStyle='#607680';ctx.font='13px system-ui';
+  const method=$('mapMethod').value;
+  ctx.fillText(method==='pca'?'PC1 →':'t-SNE 1 →',w-110,h-12);
+  ctx.fillText(method==='pca'?'↑ PC2':'↑ t-SNE 2',12,22);
+  const count=mapScreen.filter(p=>p.active).length;
+  $('mapStatus').textContent=`${count.toLocaleString('vi-VN')} ảnh được chọn / ${mapPoints.length.toLocaleString('vi-VN')} ảnh của phép chiếu · ${selected.size||100} lớp · zoom ${mapView.zoom.toFixed(1)}×`;
+}
+
+async function previewPoint(point){
+  const current=++previewVersion;
+  $('mapDetails').textContent=`${report.classes[point.label]} · ${point.split} · ${point.source} #${point.id}`;
+  try{
+    const {raw,start}=await chunk(point.source,point.id);
+    if(current!==previewVersion)return;
+    const ctx=$('mapPreview').getContext('2d'),image=ctx.createImageData(32,32);
+    const offset=(point.id-start)*3072;
+    for(let p=0;p<1024;p++){
+      image.data[p*4]=raw[offset+p*3];image.data[p*4+1]=raw[offset+p*3+1];
+      image.data[p*4+2]=raw[offset+p*3+2];image.data[p*4+3]=255;
+    }
+    ctx.putImageData(image,0,0);
+  }catch(error){if(current===previewVersion)$('mapDetails').textContent=error.message;}
+}
+
+async function initProjection(){
+  try{
+    const response=await fetch('../outputs/projection.json');
+    if(!response.ok)throw Error('Chưa có projection.json; chạy lại 1_eda.py.');
+    projectionData=await response.json();
+    report.classes.forEach((name,i)=>{
+      const option=document.createElement('option');option.value=i;option.textContent=name;$('mapClasses').append(option);
+      const label=document.createElement('span');label.className='legend-item';
+      const swatch=document.createElement('i');swatch.className='swatch';swatch.style.background=classColor(i);
+      label.append(swatch,document.createTextNode(name));$('mapLegend').append(label);
+    });
+    for(const name of ['mapMethod','mapSplit'])$(name).onchange=chooseMapPoints;
+    for(const name of ['mapClasses','mapBackground'])$(name).onchange=drawMap;
+    $('mapOpacity').oninput=drawMap;
+    $('mapClear').onclick=()=>{for(const o of $('mapClasses').options)o.selected=false;drawMap();};
+    $('mapReset').onclick=()=>{mapView={zoom:1,x:0,y:0};drawMap();};
+    const canvas=$('space');
+    const position=e=>{const r=canvas.getBoundingClientRect();return{x:(e.clientX-r.left)*canvas.width/r.width,y:(e.clientY-r.top)*canvas.height/r.height};};
+    canvas.onwheel=e=>{
+      e.preventDefault();const p=position(e),old=mapView.zoom;
+      mapView.zoom=Math.max(1,Math.min(10,old*Math.exp(-e.deltaY*.001)));
+      const ratio=mapView.zoom/old;
+      mapView.x=p.x-canvas.width/2-(p.x-canvas.width/2-mapView.x)*ratio;
+      mapView.y=p.y-canvas.height/2-(p.y-canvas.height/2-mapView.y)*ratio;drawMap();
+    };
+    canvas.onpointerdown=e=>{mapDrag=position(e);canvas.setPointerCapture(e.pointerId);};
+    canvas.onpointerup=()=>{mapDrag=null;};canvas.onpointercancel=()=>{mapDrag=null;};
+    canvas.onpointermove=e=>{
+      const p=position(e);
+      if(mapDrag){mapView.x+=p.x-mapDrag.x;mapView.y+=p.y-mapDrag.y;mapDrag=p;drawMap();return;}
+      let nearest=null,distance=144;
+      for(const point of mapScreen){if(!point.active)continue;const d=(point.sx-p.x)**2+(point.sy-p.y)**2;if(d<distance){nearest=point;distance=d;}}
+      if(nearest)previewPoint(nearest);
+    };
+    chooseMapPoints();
+  }catch(error){$('mapStatus').textContent=error.message;}
+}
+
+init().then(()=>{if(report)initProjection();});
+</script>
+</body></html>
