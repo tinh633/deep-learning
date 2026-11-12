@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ViT vs CNN trên CIFAR-100 — Báo cáo đồ án Deep Learning</title>
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--tx:#1b1f2a;--mu:#5b6478;--ac:#4f46e5;--ac2:#0ea5a4;--wa:#d97706;--bd:#e2e5ee;--ok:#16a34a;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10131c;--card:#181c28;--tx:#eceff7;--mu:#98a2b8;--ac:#8b86ff;--ac2:#2dd4bf;--wa:#fbbf24;--bd:#2a3042;--ok:#4ade80;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#10131c;--card:#181c28;--tx:#eceff7;--mu:#98a2b8;--ac:#8b86ff;--ac2:#2dd4bf;--wa:#fbbf24;--bd:#2a3042;--ok:#4ade80;color-scheme:dark}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overflow:hidden}
+#bar{position:fixed;top:env(safe-area-inset-top,0px);left:0;height:4px;background:linear-gradient(90deg,var(--ac),var(--ac2));transition:width .3s;z-index:5}
+.slide{display:none;height:100%;padding:clamp(18px,4vw,56px) clamp(16px,6vw,88px) 70px;overflow-y:auto;animation:in .35s}
+.slide.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1}}
+h1{font-size:clamp(28px,5vw,52px);line-height:1.15;margin:.2em 0}
+h2{font-size:clamp(22px,3.2vw,34px);margin:0 0 .6em;display:flex;gap:.6em;align-items:center}
+h2 i{font-style:normal;font-size:.55em;background:var(--ac);color:#fff;border-radius:8px;padding:.2em .6em}
+h3{margin:.2em 0 .4em;font-size:1.05rem;color:var(--ac)}
+p,li{line-height:1.6;font-size:clamp(14px,1.6vw,18px)}
+.mu{color:var(--mu)}
+.g{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.c{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px 18px}
+.c p,.c ul{margin:.3em 0}
+ul{padding-left:1.2em;margin:.4em 0}
+.k{font-size:clamp(26px,3.4vw,40px);font-weight:700;color:var(--ac)}
+.tag{display:inline-block;padding:.15em .7em;border-radius:99px;font-size:.8rem;border:1px solid var(--bd);color:var(--mu);margin:2px}
+.warn{border-left:4px solid var(--wa);background:var(--card);padding:10px 16px;border-radius:8px;margin-top:14px}
+.ok{color:var(--ok)}
+.w{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:clamp(13px,1.4vw,16px);background:var(--card)}
+th,td{border:1px solid var(--bd);padding:8px 12px;text-align:left}
+th{background:color-mix(in srgb,var(--ac) 14%,var(--card))}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:.85rem}
+.flow b{background:color-mix(in srgb,var(--ac) 14%,var(--card));border:1px solid var(--bd);padding:5px 10px;border-radius:8px;font-weight:600}
+.flow span{color:var(--mu)}
+.bars{display:grid;gap:8px}
+.bar{display:grid;grid-template-columns:90px 1fr 60px;gap:10px;align-items:center;font-size:.9rem}
+.bar div{height:16px;border-radius:8px;background:linear-gradient(90deg,var(--ac),var(--ac2))}
+.t td:first-child{white-space:nowrap}.t code{font-size:.92em}.t .gr td{background:color-mix(in srgb,var(--ac) 12%,var(--card));font-weight:700;color:var(--ac)}.b{display:inline-block;padding:1px 9px;border-radius:99px;font-size:.75rem;font-weight:600;border:1px solid var(--bd);white-space:nowrap}.b.d{color:var(--ok);border-color:var(--ok)}.b.e{color:var(--wa);border-color:var(--wa)}.b.g{color:var(--ac2);border-color:var(--ac2)}.b.l{color:var(--mu)}
+.tg{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:14px;align-items:start}
+@media(max-width:760px){.tg{grid-template-columns:1fr}}
+.tw{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:10px 12px;max-height:calc(100vh - 250px);overflow:auto}
+.tw ul{list-style:none;margin:0;padding:0}
+.tw ul ul{margin-left:13px;padding-left:12px;border-left:1.5px dashed var(--bd)}
+.dir.closed>ul{display:none}
+.dir>ul{overflow:hidden}
+.dir.op>ul>li{animation:pop .45s cubic-bezier(.2,.9,.3,1.25) both;animation-delay:calc(var(--i,0)*45ms)}
+@keyframes pop{from{opacity:0;transform:translateX(-14px) scale(.94)}to{opacity:1;transform:none}}
+@keyframes ip{0%{transform:scale(1)}40%{transform:scale(1.55) rotate(-10deg)}100%{transform:scale(1)}}
+@keyframes sw{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--wa) 60%,transparent)}100%{box-shadow:0 0 0 9px transparent}}
+.row{display:flex;gap:6px;align-items:center;padding:4px 8px;border-radius:8px;cursor:pointer;font-size:clamp(13px,1.5vw,16px);user-select:none}
+.row:hover{background:color-mix(in srgb,var(--ac) 9%,transparent)}
+.row{transition:background .2s,transform .2s,box-shadow .2s}
+.row:hover{transform:translateX(4px)}
+.row.sel{background:linear-gradient(90deg,color-mix(in srgb,var(--ac) 22%,transparent),transparent);box-shadow:inset 3px 0 0 var(--ac)}
+.row.sel .nm{color:var(--ac)}
+.ar{transition:transform .4s cubic-bezier(.3,1.7,.5,1)}
+.row>span:nth-child(2){display:inline-block}
+.ipop{animation:ip .5s}
+.dt.pu{animation:pulse 1.8s infinite}
+.sw>*{animation:sw .4s both}.sw>*:nth-child(2){animation-delay:.05s}.sw>*:nth-child(3){animation-delay:.1s}.sw>*:nth-child(4){animation-delay:.15s}.sw>*:nth-child(5){animation-delay:.2s}
+.tw{transition:box-shadow .3s}.tw:hover{box-shadow:0 8px 30px color-mix(in srgb,var(--ac) 14%,transparent)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.ar{width:14px;color:var(--mu);font-size:.8em;transition:transform .2s;display:inline-block}
+.dir:not(.closed)>.row>.ar{transform:rotate(90deg)}
+.nm{font-family:ui-monospace,Menlo,Consolas,monospace;overflow-wrap:anywhere}
+.dir>.row>.nm{font-weight:700}
+.dt{width:8px;height:8px;border-radius:50%;margin-left:auto;flex:none}
+.pn{position:sticky;top:0}
+.pn code{font-size:.9em;overflow-wrap:anywhere}
+.tb{display:flex;gap:8px;margin-bottom:8px}.tb button{padding:5px 12px;font-size:13px;background:var(--card);color:var(--tx);border:1px solid var(--bd)}
+.gw{position:relative;height:calc(100vh - 190px);min-height:340px;border-radius:16px;overflow:hidden;border:1px solid var(--bd);background:radial-gradient(ellipse at 25% 15%,#2a1f5c 0%,#0f1230 45%,#070816 100%)}
+.gw canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:grab}
+.gt{position:absolute;top:10px;left:10px;margin:0}
+.gt button{background:rgba(20,24,48,.75);color:#e8ecff;border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(6px)}
+.gl{position:absolute;top:10px;right:12px;font-size:12px;color:#c5cbe8;text-align:right;line-height:1.7;max-width:48%}
+.gi{position:absolute;left:10px;bottom:10px;max-width:min(390px,calc(100% - 20px));padding:10px 14px;border-radius:12px;background:rgba(14,17,40,.84);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.15);color:#eef1ff;font-size:13px;line-height:1.5;animation:sw .35s}
+.gi code{color:#a5b4fc;overflow-wrap:anywhere}
+.gi p{margin:.3em 0;font-size:13px;line-height:1.5}
+.mmw{overflow:auto;padding:4px}
+.mm{position:relative;display:flex;align-items:center;gap:clamp(28px,6vw,80px);min-width:640px;padding:6px}
+.mm svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:0}
+.mm path{fill:none;stroke-width:2.2;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;animation:dr .9s ease forwards}
+@keyframes dr{to{stroke-dashoffset:0}}
+@keyframes pp{from{opacity:0;transform:scale(.85) translateX(-10px)}to{opacity:1;transform:none}}
+.mrt{position:relative;z-index:1;flex:none;max-width:210px;text-align:center;font-weight:700;font-size:clamp(15px,2vw,22px);padding:20px 22px;border-radius:24px;color:#fff;background:linear-gradient(135deg,var(--ac),var(--ac2));box-shadow:0 8px 28px color-mix(in srgb,var(--ac) 35%,transparent);animation:pp .6s both}
+.mrs{display:flex;flex-direction:column;gap:16px;flex:1}
+.mrw{display:flex;align-items:center;gap:clamp(22px,4vw,56px)}
+.mbr{position:relative;z-index:1;flex:none;width:clamp(110px,16vw,170px);text-align:center;font-weight:700;font-size:clamp(13px,1.5vw,17px);color:#fff;padding:10px 12px;border-radius:14px;animation:pp .5s both}
+.mls{display:flex;flex-direction:column;gap:6px;flex:1}
+.mlf{position:relative;z-index:1;background:var(--card);border:1px solid var(--bd);border-left:4px solid var(--lc);border-radius:10px;padding:6px 12px;font-size:clamp(12px,1.35vw,15px);line-height:1.4;animation:pp .5s both}
+.mlf b{color:var(--lc);margin-right:.4em}
+nav{position:fixed;bottom:0;left:0;right:0;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));display:flex;justify-content:space-between;align-items:center;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-top:1px solid var(--bd);z-index:5}
+button{background:var(--ac);color:#fff;border:0;border-radius:10px;padding:9px 18px;font-size:15px;cursor:pointer}
+button:disabled{opacity:.35;cursor:default}
+#n{color:var(--mu);font-size:14px}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+
+<section class="slide" id="s1">
+ <p class="mu">Đồ án Deep Learning · Coursework</p>
+ <h1>Phân loại ảnh CIFAR-100 bằng Vision Transformer, đối chiếu CNN trong học chuyển giao</h1>
+ <p class="mu">Model chính <b>ViT-B/16</b> · Baseline <b>ResNet-50</b> · Pretrained ImageNet-1K</p>
+ <p><span class="tag">PyTorch / torchvision</span><span class="tag">Nhóm 6 thành viên</span><span class="tag">Thời lượng 4 tuần</span><span class="tag">Cập nhật 10/11/2026</span></p>
+ <div class="warn"><b>Trạng thái trung thực:</b> đã xong Define, Design, dữ liệu và EDA. Phần train, evaluate, demo chưa triển khai nên bài trình bày này <b>không có số accuracy</b>; mọi kết quả thực nghiệm là kế hoạch.</div>
+</section>
+
+<section class="slide" id="s2">
+ <h2><i>01</i>Bài toán và câu hỏi nghiên cứu</h2>
+ <div class="mmw"><div class="mm" data-k="s2"></div></div>
+</section>
+
+<section class="slide" id="s3">
+ <h2><i>02</i>Thiết kế thực nghiệm: ma trận A–D</h2>
+ <div class="w"><table>
+  <tr><th>Mã</th><th>Model</th><th>Backbone</th><th>Head mới</th><th>Trainable (tính từ kiến trúc)</th></tr>
+  <tr><td><b>A</b></td><td>ResNet-50</td><td>Freeze</td><td>Linear(2048, 100)</td><td>204.900</td></tr>
+  <tr><td><b>B</b></td><td>ResNet-50</td><td>Fine-tune toàn bộ</td><td>Linear(2048, 100)</td><td>23.712.932</td></tr>
+  <tr><td><b>C</b></td><td>ViT-B/16</td><td>Freeze</td><td>Linear(768, 100)</td><td>76.900</td></tr>
+  <tr><td><b>D</b></td><td>ViT-B/16</td><td>Fine-tune toàn bộ</td><td>Linear(768, 100)</td><td>85.875.556</td></tr>
+ </table></div>
+ <div class="g" style="margin-top:14px">
+  <div class="c"><h3>Quy tắc</h3><ul><li>Bốn run độc lập, cùng khởi tạo từ pretrained, không nối B sau A hay D sau C.</li><li>Seed 42, một seed/cấu hình.</li></ul></div>
+  <div class="c"><h3>Các cặp so sánh</h3><ul><li>A↔C, B↔D: CNN vs ViT</li><li>A↔B, C↔D: lợi ích fine-tune</li></ul></div>
+ </div>
+</section>
+
+<section class="slide" id="s4">
+ <h2><i>03</i>Kiến trúc hai model</h2>
+ <div class="g">
+  <div class="c"><h3>ResNet-50 (CNN baseline)</h3>
+   <p class="mu">torchvision · IMAGENET1K_V1 (không dùng DEFAULT vì trỏ V2) · biến thể v1.5</p>
+   <div class="flow"><b>3×224×224</b><span>→</span><b>Conv7×7 → 64×112²</b><span>→</span><b>layer1 256×56²</b><span>→</span><b>layer2 512×28²</b><span>→</span><b>layer3 1024×14²</b><span>→</span><b>layer4 2048×7²</b><span>→</span><b>GAP 2048</b><span>→</span><b>fc 100</b></div>
+   <p>Bottleneck 1×1 → 3×3 → 1×1 + residual. BatchNorm có running stats nên freeze phải giữ backbone ở eval.</p></div>
+  <div class="c"><h3>ViT-B/16 (model chính)</h3>
+   <p class="mu">torchvision · IMAGENET1K_V1 · recipe tham khảo DeiT, không phải DeiT distilled</p>
+   <div class="flow"><b>3×224×224</b><span>→</span><b>Patch 16×16 → 196×768</b><span>→</span><b>+CLS +pos 197×768</b><span>→</span><b>12 encoder block</b><span>→</span><b>CLS 768</b><span>→</span><b>heads.head 100</b></div>
+   <p>Mỗi block: LayerNorm → multi-head self-attention → residual → LayerNorm → MLP GELU → residual. 12 head, hidden 768, MLP 3072.</p></div>
+ </div>
+ <p class="mu">Tổng tham số sau thay head: ResNet-50 ≈ 23,7 triệu, ViT-B/16 ≈ 85,9 triệu (gấp khoảng 3,6 lần). Số liệu tính từ cấu hình, chưa đo trên run thật.</p>
+</section>
+
+<section class="slide" id="s5">
+ <h2><i>04</i>Dữ liệu và cách chia</h2>
+ <div class="g">
+  <div class="c"><div class="k">60.000</div><p>ảnh RGB 32×32, 100 fine labels (không dùng 20 coarse labels)</p></div>
+  <div class="c"><div class="k">45.000</div><p>train · 450 ảnh/lớp</p></div>
+  <div class="c"><div class="k">5.000</div><p>validation · 50 ảnh/lớp, tách phân tầng từ train gốc, seed 42</p></div>
+  <div class="c"><div class="k">10.000</div><p>official test · 100 ảnh/lớp, chỉ dùng sau khi khóa protocol</p></div>
+ </div>
+ <div class="g" style="margin-top:14px">
+  <div class="c"><h3>Toàn vẹn dữ liệu</h3><ul><li>torchvision kiểm MD5 archive.</li><li>Nguồn chính thức chậm nên tải từ mirror Hugging Face, đã khớp MD5 chính thức.</li><li>SHA-256 của file split được ghi vào eda.json.</li></ul></div>
+  <div class="c"><h3>Kỷ luật đánh giá</h3><ul><li>Không dùng test để chọn LR, epoch, checkpoint.</li><li>Thống kê preprocessing chỉ fit trên train; augmentation chỉ ở train.</li><li>Resize 32→224 không phục hồi chi tiết đã mất.</li></ul></div>
+ </div>
+</section>
+
+<section class="slide" id="s6">
+ <h2><i>05</i>Kết quả EDA (số đo thực)</h2>
+ <div class="g">
+  <div class="c"><h3>Mean RGB (train)</h3>
+   <div class="bars">
+    <div class="bar">R<div style="width:50.7%"></div>0,507</div>
+    <div class="bar">G<div style="width:48.6%"></div>0,486</div>
+    <div class="bar">B<div style="width:44.1%"></div>0,441</div>
+   </div><p class="mu">Std: R 0,267 · G 0,256 · B 0,276</p></div>
+  <div class="c"><h3>Brightness (min / Q1 / median / Q3 / max)</h3>
+   <p><b>Train:</b> 0,028 / 0,382 / 0,464 / 0,558 / 0,967<br><b>Val:</b> 0,044 / 0,381 / 0,465 / 0,562 / 0,966<br><b>Test:</b> 0,042 / 0,382 / 0,464 / 0,558 / 0,955</p>
+   <p class="mu">Ba split có phân bố độ sáng gần như trùng nhau.</p></div>
+  <div class="c"><h3>Contrast (median)</h3>
+   <p>Train 0,214 · Val 0,214 · Test 0,216</p>
+   <p class="mu">Quartile ba split cũng sát nhau, nên split không bị lệch thống kê rõ rệt.</p></div>
+ </div>
+ <p class="mu">Thống kê này chỉ mô tả dữ liệu, không tự động thay ImageNet normalization. Công cụ <b>explorer.html</b> cho duyệt đủ 60.000 ảnh, lọc theo split/lớp/tên, sắp xếp ảnh cực trị.</p>
+</section>
+
+<section class="slide" id="s7">
+ <h2><i>06</i>Ảnh trùng và không gian ảnh</h2>
+ <div class="g">
+  <div class="c"><div class="k">26</div><p>nhóm trùng pixel chính xác (SHA-256), mỗi nhóm 2 ảnh</p></div>
+  <div class="c"><div class="k">12</div><p>nhóm trùng xuyên split, có nguy cơ rò rỉ train/val/test</p></div>
+  <div class="c"><div class="k">17</div><p>nhóm có nhãn khác nhau giữa hai ảnh, gợi ý nhiễu nhãn của dataset</p></div>
+ </div>
+ <div class="warn">Đã giữ nguyên split, không tự xóa. Cần chốt chính sách (giữ và công bố, hoặc lọc train/val và tạo phiên bản split mới) trước khi train chính thức.</div>
+ <div class="g" style="margin-top:14px">
+  <div class="c"><h3>PCA</h3><p>Đặc trưng RGB pooled 8×8 (192 chiều) → PCA 32 chiều fit trên train; 2 PC đầu giữ <b>50,45%</b> phương sai, hiển thị cả 60.000 ảnh.</p></div>
+  <div class="c"><h3>t-SNE</h3><p>5.000 ảnh train (50 ảnh/lớp), perplexity 30, 750 iterations, KL divergence 2,281. Các lớp chồng lấn mạnh vì đặc trưng chỉ là màu thô.</p></div>
+ </div>
+ <p class="mu">Đây chưa phải embedding của CNN/ViT; nhãn chỉ dùng để lấy mẫu và tô màu, không tham gia tính tọa độ.</p>
+</section>
+
+<section class="slide" id="s8">
+ <h2><i>07</i>Chiến lược huấn luyện và tuning</h2>
+ <div class="flow" style="margin-bottom:14px"><b>Chốt data/protocol</b><span>→</span><b>Smoke A–D</b><span>→</span><b>8 pilot LR ngắn (T epoch)</b><span>→</span><b>Chọn LR bằng val</b><span>→</span><b>4 final (E epoch)</b><span>→</span><b>Test best checkpoint</b></div>
+ <div class="g">
+  <div class="c"><h3>Chỉ tuning learning rate</h3><ul><li>Mỗi chiến lược thử 2 LR, cùng ngân sách T.</li><li>Chọn theo best val accuracy; hòa thì val loss thấp hơn.</li><li>Tổng: 8 pilot ngắn + 4 final.</li></ul></div>
+  <div class="c"><h3>Giữ cố định</h3><ul><li>Split, seed 42, input 224, CrossEntropyLoss trên logits.</li><li>Đề xuất AdamW, một weight decay chung, scheduler ưu tiên LR cố định.</li><li>Batch/AMP/BN khóa sau smoke.</li></ul></div>
+  <div class="c"><h3>Tái lập</h3><ul><li>Mỗi run có thư mục riêng: config, log, history, best.pt, last.pt.</li><li>Best theo max val acc, hòa thì min val loss.</li><li>Resume theo epoch hoàn tất.</li></ul></div>
+ </div>
+ <p class="mu">Smoke kiểm tra shape, loss hữu hạn, gradient đúng chiến lược, optimizer params, save/load, resume, VRAM. Hiện toàn bộ checklist trong Audit_Log đang ở <b>NOT_RUN</b>.</p>
+</section>
+
+<section class="slide" id="s9">
+ <h2><i>08</i>Tiêu chí đánh giá và demo</h2>
+ <div class="mmw"><div class="mm" data-k="s9"></div></div>
+</section>
+
+<section class="slide" id="s9b">
+ <h2><i>09</i>Cấu trúc dự án (1/2): mã nguồn và pipeline</h2>
+ <div class="flow" style="margin-bottom:12px"><b>📦 data/ (local)</b><span>→</span><b>data.py + 1_eda.py</b><span>→</span><b>📊 outputs/*.json</b><span>→</span><b>🖥️ explorer.html</b><span>&nbsp;·&nbsp;</span><b>🧠 model.py</b><span>→</span><b>2_train.py</b><span>→</span><b>💾 outputs/runs/</b><span>→</span><b>3_evaluate.py</b><span>→</span><b>📓 Notebook + 4_demo.py</b></div>
+ <p class="mu" style="margin:0 0 8px"><span class="b d">Đã xong</span> <span class="b e">Rỗng, chờ triển khai</span> <span class="b g">Chỉ sinh khi chạy</span> <span class="b l">Không commit</span></p>
+ <div class="w"><table class="t">
+  <tr><th>Đường dẫn</th><th>Trạng thái</th><th>Tác dụng và nhiệm vụ</th></tr>
+  <tr class="gr"><td colspan="3">📁 Gốc workspace</td></tr>
+  <tr><td><code>README.md</code></td><td><span class="b d">Đã xong</span></td><td>Cổng vào: mô tả đề tài, liên kết tài liệu chính, trạng thái nhánh coursework</td></tr>
+  <tr><td><code>AGENTS.md</code></td><td><span class="b d">Đã xong</span></td><td>Hướng dẫn làm việc cho AI agent: vai trò, quy trình bắt buộc (phân tích → thiết kế → code → kiểm thử → cập nhật tài liệu), chỉ commit khi được duyệt</td></tr>
+  <tr><td><code>docs_for_agent/</code></td><td><span class="b d">Đã xong</span></td><td>Quy tắc dùng chung: <code>coding_rules</code>, <code>documentation_rules</code>, <code>workflow</code>, chỉ mục tiến độ và <code>progress_old</code> (lịch sử cũ, không phải trạng thái hiện tại)</td></tr>
+  <tr><td><code>.gitignore</code>, <code>.gitattributes</code></td><td><span class="b d">Đã xong</span></td><td>Loại data, cache, lab/benchmark khỏi Git; chuẩn hóa thuộc tính file</td></tr>
+  <tr><td><code>.vscode/settings.json</code></td><td><span class="b d">Đã xong</span></td><td>Cấu hình Live Server bỏ qua <code>outputs/</code>, <code>data/</code>, <code>.git</code>, <code>.venv</code> để không tự reload khi sinh dữ liệu</td></tr>
+  <tr class="gr"><td colspan="3">📁 coursework_vit_classification/</td></tr>
+  <tr><td><code>README.md</code>, <code>requirements.txt</code></td><td><span class="b d">Đã xong</span></td><td>Hướng dẫn chạy EDA và viewer; phụ thuộc: torch, torchvision, numpy, scikit-learn, Pillow</td></tr>
+  <tr><td><code>Coursework_Report.ipynb</code></td><td><span class="b e">Chưa có cell</span></td><td>Notebook báo cáo cuối, chỉ đọc artifact, Run All không train hay chạm test</td></tr>
+  <tr class="gr"><td colspan="3">📁 src/ — mã nguồn pipeline</td></tr>
+  <tr><td><code>config.py</code></td><td><span class="b d">Đã xong</span></td><td>Đường dẫn, seed 42, kích thước validation 5.000; không tự tải hay chạy khi import</td></tr>
+  <tr><td><code>data.py</code></td><td><span class="b d">Đã xong</span></td><td>Nạp CIFAR-100 qua torchvision, tạo/đọc split phân tầng, kiểm tra IDs và cân bằng</td></tr>
+  <tr><td><code>1_eda.py</code></td><td><span class="b d">Đã xong</span></td><td>Kiểm integrity, thống kê RGB, trùng pixel, PCA/t-SNE; xuất JSON và RGB gzip cho viewer</td></tr>
+  <tr><td><code>model.py</code></td><td><span class="b e">Rỗng</span></td><td>Nạp pretrained, thay head 100 lớp, freeze/fine-tune cho A–D</td></tr>
+  <tr><td><code>logger.py</code></td><td><span class="b e">Rỗng</span></td><td>Ghi config/máy, một dòng log mỗi epoch, history, lưu best/last checkpoint</td></tr>
+  <tr><td><code>2_train.py</code></td><td><span class="b e">Rỗng</span></td><td>Vòng train/val trực tiếp, chọn best theo val, resume theo epoch</td></tr>
+  <tr><td><code>3_evaluate.py</code></td><td><span class="b e">Rỗng</span></td><td>Nạp checkpoint, suy luận, tính Top-1/macro-F1, confusion, lưu predictions</td></tr>
+  <tr><td><code>4_demo.py</code></td><td><span class="b e">Rỗng</span></td><td>Dự đoán một ảnh, trả Top-5 kèm confidence</td></tr>
+ </table></div>
+</section>
+
+<section class="slide" id="s9c">
+ <h2><i>10</i>Cấu trúc dự án (2/2): tài liệu, kết quả và viewer</h2>
+ <p class="mu" style="margin:0 0 8px"><span class="b d">Đã xong</span> <span class="b e">Rỗng, chờ triển khai</span> <span class="b g">Chỉ sinh khi chạy</span> <span class="b l">Không commit</span></p>
+ <div class="w"><table class="t">
+  <tr><th>Đường dẫn</th><th>Trạng thái</th><th>Tác dụng và nhiệm vụ</th></tr>
+  <tr class="gr"><td colspan="3">📁 docs/ — tài liệu</td></tr>
+  <tr><td><code>define/Requirements_Analysis.md</code></td><td><span class="b d">Đã xong</span></td><td>Tên đề tài, bài toán, người dùng, input/output, tính năng, ràng buộc, tiêu chí nghiệm thu</td></tr>
+  <tr><td><code>design/Implementation_Plan.md</code></td><td><span class="b d">Đã xong</span></td><td>Kiến trúc, module, data flow, giao diện nội bộ, mốc M1–M5, rủi ro</td></tr>
+  <tr><td><code>design/Training_Strategy.md</code></td><td><span class="b d">Đã xong</span></td><td>Smoke → 8 pilot LR → 4 final → test; biến cố định, luật chọn LR</td></tr>
+  <tr><td><code>design/ResNet50.md</code>, <code>ViT_B16.md</code></td><td><span class="b d">Đã xong</span></td><td>Kiến trúc, tensor, weights, số tham số, freeze/fine-tune từng model</td></tr>
+  <tr><td><code>design/Data_EDA.md</code></td><td><span class="b d">Đã xong</span></td><td>Nguồn dữ liệu, MD5, split, nội dung EDA, giới hạn của viewer</td></tr>
+  <tr><td><code>progress.md</code>, <code>CHANGELOG.md</code></td><td><span class="b d">Đã xong</span></td><td>Tiến độ thực tế theo ngày; thay đổi đáng kể về code/pipeline</td></tr>
+  <tr><td><code>Audit_Log.md</code>, <code>AI_usage.md</code></td><td><span class="b d">Đã xong</span></td><td>Checklist smoke (đang NOT_RUN); ghi nhận phạm vi hỗ trợ AI</td></tr>
+  <tr class="gr"><td colspan="3">📁 outputs/, visualization/, data/</td></tr>
+  <tr><td><code>outputs/cifar100_split.json</code></td><td><span class="b d">Đã xong</span></td><td>Split cố định 45.000 / 5.000, tham chiếu bằng ID, có SHA-256</td></tr>
+  <tr><td><code>outputs/eda.json</code>, <code>projection.json</code></td><td><span class="b d">Đã xong</span></td><td>Thống kê EDA, nhóm trùng; tọa độ PCA (60.000 ảnh) và t-SNE (5.000 ảnh)</td></tr>
+  <tr><td><code>outputs/runs/lan_N/</code></td><td><span class="b g">Khi train</span></td><td>Mỗi lượt: config.json, train.log, history.json, best.pt, last.pt, evaluation/</td></tr>
+  <tr><td><code>visualization/explorer.html</code></td><td><span class="b d">Đã xong</span></td><td>Viewer không dùng CDN: gallery 60.000 ảnh, lọc, sắp xếp, PCA/t-SNE, hover ảnh; cần chạy qua HTTP server</td></tr>
+  <tr><td><code>data/</code></td><td><span class="b l">Không commit</span></td><td>Dataset, RGB gzip, cache; tái sinh bằng <code>1_eda.py</code></td></tr>
+ </table></div>
+</section>
+
+<section class="slide" id="s9t">
+ <h2><i>11</i>Cây thư mục tương tác</h2>
+ <p class="mu" style="margin:0 0 8px">Bấm vào thư mục để mở hoặc đóng nhánh, bấm vào file để xem nhiệm vụ. Chấm màu: <span class="ok">●</span> đã xong · <span style="color:var(--wa)">●</span> rỗng · <span style="color:var(--ac2)">●</span> chỉ sinh khi chạy · <span class="mu">●</span> không commit</p>
+ <div class="tb"><button id="to">Mở tất cả</button><button id="tc">Thu gọn</button></div>
+ <div class="tg"><div class="tw"><ul id="tr"></ul></div><div class="c pn" id="pn"></div></div>
+</section>
+
+<section class="slide" id="s9g">
+ <h2><i>12</i>Đồ thị cấu trúc dự án trong không gian 2D</h2>
+ <div class="gw" id="gw"><canvas id="gc"></canvas>
+  <div class="tb gt"><button id="g1">Mở tất cả</button><button id="g2">Thu gọn</button><button id="g3">Căn giữa</button></div>
+  <div class="gl"><span style="color:#fcd34d">★</span> gốc &nbsp;<span style="color:#a78bfa">●</span> thư mục &nbsp;<span style="color:#4ade80">●</span> xong &nbsp;<span style="color:#fbbf24">●</span> rỗng &nbsp;<span style="color:#2dd4bf">●</span> sinh khi chạy &nbsp;<span style="color:#98a2b8">●</span> không commit<br><span style="color:#fcd34d">━</span> đường vàng: từ gốc tới node đang chọn<br>Kéo nền · cuộn để zoom · kéo node · bấm thư mục để mở</div>
+  <div class="gi" id="gi">Bấm vào một node để xem nhiệm vụ của nó.</div>
+ </div>
+</section>
+
+<section class="slide" id="s10">
+ <h2><i>13</i>Tiến độ và mốc kế hoạch</h2>
+ <div class="w"><table>
+  <tr><th>Mốc</th><th>Công việc</th><th>Trạng thái</th></tr>
+  <tr><td>M1 · tuần 1</td><td>Define/Design, data/EDA, chính sách duplicate</td><td class="ok">Phần lớn xong, còn chốt duplicate</td></tr>
+  <tr><td>M2 · tuần 1</td><td>Model + smoke A–D</td><td>Chưa thực hiện</td></tr>
+  <tr><td>M3 · tuần 2</td><td>8 pilot LR, 4 final</td><td>Chưa thực hiện</td></tr>
+  <tr><td>M4 · tuần 3</td><td>Evaluate, phân tích lỗi</td><td>Chưa thực hiện</td></tr>
+  <tr><td>M5 · tuần 4</td><td>Report, demo, tái lập</td><td>Chưa thực hiện</td></tr>
+ </table></div>
+ <p class="mu">Đã hoàn thành: phân tích yêu cầu, thiết kế, tài liệu ResNet-50/ViT-B/16, Training_Strategy, split + EDA 60.000 ảnh, explorer.html với PCA/t-SNE, tách phạm vi nhánh coursework.</p>
+</section>
+
+<section class="slide" id="s11">
+ <h2><i>14</i>Rủi ro, giới hạn và việc cần chốt</h2>
+ <div class="mmw"><div class="mm" data-k="s11"></div></div>
+ <p style="margin-top:16px"><b>Cảm ơn thầy/cô và các bạn đã lắng nghe.</b></p>
+</section>
+
+<nav><button id="p">← Trước</button><span id="n"></span><button id="x">Tiếp →</button></nav>
+
+<script>
+(function(){
+var S=[].slice.call(document.querySelectorAll('.slide')),i=0;
+function show(k,u){
+ i=Math.max(0,Math.min(S.length-1,k));
+ S.forEach(function(s,j){s.classList.toggle('on',j===i)});
+ document.getElementById('bar').style.width=((i+1)/S.length*100)+'%';
+ document.getElementById('n').textContent=(i+1)+' / '+S.length;
+ document.getElementById('p').disabled=i===0;
+ document.getElementById('x').disabled=i===S.length-1;
+ if(u!==false){try{history.replaceState(null,'','#s'+(i+1))}catch(e){}}
+}
+document.getElementById('p').onclick=function(){show(i-1)};
+document.getElementById('x').onclick=function(){show(i+1)};
+document.addEventListener('keydown',function(e){
+ if(['ArrowRight','PageDown',' '].indexOf(e.key)>-1){e.preventDefault();show(i+1)}
+ else if(['ArrowLeft','PageUp'].indexOf(e.key)>-1){e.preventDefault();show(i-1)}
+ else if(e.key==='Home')show(0);else if(e.key==='End')show(S.length-1);
+});
+var tx=0;
+document.addEventListener('touchstart',function(e){tx=e.touches[0].clientX},{passive:true});
+document.addEventListener('touchend',function(e){var d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>60)show(i+(d<0?1:-1))},{passive:true});
+function fromHash(){var m=/^#s(\d+)$/.exec(location.hash);show(m?+m[1]-1:0,false)}
+window.addEventListener('hashchange',fromHash);fromHash();
+})();
+</script>
+<script>
+(function(){
+function f(n,d,s){return{n:n,d:d,s:s||'d'}}
+function k(n,d,c,o,s){return{n:n,d:d,c:c,o:o,s:s}}
+var D=[k('deep-learning-cousework/','Gốc workspace: chứa quy tắc làm việc chung và nhánh đồ án coursework.',[
+ f('README.md','Cổng vào: mô tả đề tài, liên kết tài liệu chính, trạng thái nhánh coursework.'),
+ f('AGENTS.md','Hướng dẫn cho AI agent: vai trò, quy trình bắt buộc (phân tích, thiết kế, code, kiểm thử, cập nhật tài liệu), chỉ commit khi được duyệt.'),
+ f('.gitignore','Loại data, cache, lab/benchmark khỏi Git.'),
+ f('.gitattributes','Chuẩn hóa thuộc tính file trong Git.'),
+ k('.vscode/','Cấu hình editor.',[f('settings.json','Live Server bỏ qua outputs/, data/, .git, .venv để không tự reload khi sinh dữ liệu.')]),
+ k('docs_for_agent/','Quy tắc làm việc dùng chung cho mọi practice.',[
+  f('coding_rules.md','Quy tắc code và kiểm chứng: khối train dễ đọc, logger tách riêng.'),
+  f('documentation_rules.md','Quy tắc tài liệu và bố cục dự án, cách ghi kết quả chạy.'),
+  f('workflow.md','Quy trình phát triển: phân tích trước khi code, tiêu chí nghiệm thu.'),
+  f('progress.md','Chỉ mục tiến độ các practice, trỏ tới progress.md từng dự án.'),
+  f('progress_old.md','Lịch sử cũ của workspace, không phải trạng thái hiện tại.')]),
+ k('coursework_vit_classification/','Nhánh đồ án: ViT-B/16 và ResNet-50 trên CIFAR-100.',[
+  f('README.md','Hướng dẫn chạy EDA và mở viewer.'),
+  f('requirements.txt','Phụ thuộc: torch, torchvision, numpy, scikit-learn, Pillow.'),
+  f('Coursework_Report.ipynb','Notebook báo cáo cuối, chỉ đọc artifact, chưa có cell.','e'),
+  k('src/','Mã nguồn pipeline: dữ liệu, EDA, mô hình, train, evaluate, demo.',[
+   f('config.py','Đường dẫn, seed 42, kích thước validation 5.000; không tự tải hay chạy khi import.'),
+   f('data.py','Nạp CIFAR-100 qua torchvision, tạo/đọc split phân tầng, kiểm tra ID và cân bằng.'),
+   f('1_eda.py','Kiểm integrity, thống kê RGB, trùng pixel, PCA/t-SNE; xuất JSON và RGB gzip cho viewer.'),
+   f('logger.py','Ghi config/máy, log một dòng mỗi epoch, history, lưu best/last checkpoint.','e'),
+   f('model.py','Nạp pretrained, thay head 100 lớp, freeze hoặc fine-tune cho thí nghiệm A-D.','e'),
+   f('2_train.py','Vòng train/val trực tiếp, chọn best theo val, resume theo epoch.','e'),
+   f('3_evaluate.py','Nạp checkpoint, tính Top-1/macro-F1, confusion, lưu predictions.','e'),
+   f('4_demo.py','Dự đoán một ảnh, trả Top-5 kèm confidence.','e')]),
+  k('docs/','Tài liệu định nghĩa, thiết kế và theo dõi dự án.',[
+   k('define/','Giai đoạn Define.',[f('Requirements_Analysis.md','Tên đề tài, bài toán, người dùng, input/output, ràng buộc, tiêu chí nghiệm thu.')]),
+   k('design/','Giai đoạn Design.',[
+    f('Implementation_Plan.md','Kiến trúc, module, data flow, mốc M1-M5, rủi ro.'),
+    f('Training_Strategy.md','Smoke, 8 pilot LR, 4 final, test; biến cố định, luật chọn LR.'),
+    f('ResNet50.md','Kiến trúc, tensor, weights, tham số, freeze/fine-tune của ResNet-50.'),
+    f('ViT_B16.md','Kiến trúc, tensor, weights, tham số, freeze/fine-tune của ViT-B/16.'),
+    f('Data_EDA.md','Nguồn dữ liệu, MD5, split, nội dung EDA, giới hạn viewer.')]),
+   f('progress.md','Tiến độ thực tế theo ngày.'),
+   f('CHANGELOG.md','Thay đổi đáng kể về code và pipeline.'),
+   f('Audit_Log.md','Checklist smoke, hiện đang NOT_RUN.'),
+   f('AI_usage.md','Ghi nhận phạm vi hỗ trợ của AI.')]),
+  k('outputs/','Kết quả sinh ra từ pipeline.',[
+   f('cifar100_split.json','Split cố định 45.000/5.000, tham chiếu bằng ID, có SHA-256.'),
+   f('eda.json','Thống kê EDA và nhóm ảnh trùng.'),
+   f('projection.json','Tọa độ PCA (60.000 ảnh) và t-SNE (5.000 ảnh).'),
+   k('runs/','Mỗi lượt train một thư mục riêng.',[k('lan_N/','Một lượt chạy cụ thể.',[
+    f('config.json','Cấu hình đầy đủ của run.','g'),f('train.log','Log mỗi epoch.','g'),f('history.json','Loss/accuracy theo epoch.','g'),
+    f('best.pt','Checkpoint tốt nhất theo val.','g'),f('last.pt','Checkpoint cuối để resume.','g'),
+    k('evaluation/','Kết quả đánh giá trên test.',[],false,'g')],false,'g')],false,'g')]),
+  k('visualization/','Công cụ xem dữ liệu.',[f('explorer.html','Viewer không dùng CDN: gallery 60.000 ảnh, lọc, sắp xếp, PCA/t-SNE; cần chạy qua HTTP server.')]),
+  k('data/','Dataset, RGB gzip, cache. Tái sinh bằng 1_eda.py.',[],false,'l')
+ ],false)
+],true)];
+var ST={d:['Đã xong','d','var(--ok)'],e:['Rỗng, chờ triển khai','e','var(--wa)'],g:['Chỉ sinh khi chạy','g','var(--ac2)'],l:['Không commit','l','var(--mu)']};
+var IC={py:'🐍',md:'📝',json:'🧾',ipynb:'📓',html:'🌐',pt:'💾',log:'📃',txt:'📄'};
+var T=document.getElementById('tr'),P=document.getElementById('pn'),cur=null;
+function icon(x,open){return x.c?(open?'📂':'📁'):(IC[x.n.split('.').pop()]||'📄')}
+function show(x,path){
+ var s=ST[x.s||'d'];
+ P.innerHTML='';P.classList.remove('sw');void P.offsetWidth;P.classList.add('sw');
+ var h=document.createElement('h3');h.textContent=icon(x,true)+' '+x.n;P.appendChild(h);
+ var c=document.createElement('p');var code=document.createElement('code');code.textContent=path;c.appendChild(code);P.appendChild(c);
+ var b=document.createElement('span');b.className='b '+s[1];b.textContent=s[0];P.appendChild(b);
+ var d=document.createElement('p');d.textContent=x.d;P.appendChild(d);
+ if(x.c){var m=document.createElement('p');m.className='mu';m.textContent='Chứa '+x.c.length+' mục trực tiếp.';P.appendChild(m)}
+}
+function build(list,path,ul){
+ list.forEach(function(x,ix){
+  var li=document.createElement('li'),p=path+x.n,r=document.createElement('div'),s=ST[x.s||'d'];
+  r.className='row';li.style.setProperty('--i',ix);
+  var ar=document.createElement('span');ar.className='ar';ar.textContent=x.c?'▸':'';
+  var ic=document.createElement('span');ic.textContent=icon(x,!!x.o);
+  var nm=document.createElement('span');nm.className='nm';nm.textContent=x.n;
+  var dt=document.createElement('span');dt.className='dt';dt.style.background=s[2];if((x.s||'d')==='e')dt.classList.add('pu');
+  r.appendChild(ar);r.appendChild(ic);r.appendChild(nm);r.appendChild(dt);li.appendChild(r);
+  if(x.c){
+   li.className='dir'+(x.o?' op':' closed');
+   var u=document.createElement('ul');li.appendChild(u);build(x.c,p,u);
+   r.addEventListener('click',function(){tog(li,ic,x);pick(r);show(x,p)});
+   li._ic=ic;li._x=x;
+  }else{r.addEventListener('click',function(){pick(r);show(x,p)})}
+  ul.appendChild(li);
+ });
+}
+function pop(e){e.classList.remove('ipop');void e.offsetWidth;e.classList.add('ipop')}
+function tog(li,ic,x,force,q){
+ var u=li.lastChild,cl=li.classList.contains('closed'),op=force===undefined?cl:force;
+ if(op!==cl)return;
+ if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)q=true;
+ ic.textContent=icon(x,op);pop(ic);
+ if(u._a){u._a.cancel();u._a=null}
+ if(q){if(op){li.classList.remove('closed','op');void li.offsetWidth;li.classList.add('op')}else li.classList.add('closed');return}
+ if(op){li.classList.remove('closed','op');void li.offsetWidth;li.classList.add('op');
+  u._a=u.animate([{height:'0px',opacity:0},{height:u.scrollHeight+'px',opacity:1}],{duration:420,easing:'cubic-bezier(.2,.8,.2,1)'});
+  u._a.onfinish=function(){u._a=null}}
+ else{u._a=u.animate([{height:u.offsetHeight+'px',opacity:1},{height:'0px',opacity:0}],{duration:280,easing:'ease-in'});
+  u._a.onfinish=function(){li.classList.add('closed');u._a=null}}
+}
+function pick(r){if(cur)cur.classList.remove('sel');cur=r;r.classList.add('sel')}
+function all(open){[].slice.call(T.querySelectorAll('li.dir')).forEach(function(li,i){tog(li,li._ic,li._x,open||i===0,true)})}
+window.PD=D;build(D,'',T);
+show(D[0],D[0].n);
+document.getElementById('to').onclick=function(){all(true)};
+document.getElementById('tc').onclick=function(){all(false)};
+})();
+</script>
+<script>
+(function(){
+var PD=window.PD;if(!PD)return;
+var W=document.getElementById('gw'),cv=document.getElementById('gc'),ctx=cv.getContext('2d'),gi=document.getElementById('gi');
+var ST={d:'#4ade80',e:'#fbbf24',g:'#2dd4bf',l:'#98a2b8'},PAL=['#f472b6','#a78bfa','#60a5fa','#22d3ee','#34d399'];
+var ST2={d:'Đã xong',e:'Rỗng, chờ triển khai',g:'Chỉ sinh khi chạy',l:'Không commit'};
+var IC={py:'🐍',md:'📝',json:'🧾',ipynb:'📓',html:'🌐',pt:'💾',log:'📃'};
+var N=[],L=[],uid=0,w=0,h=0,dpr=1,cam={x:0,y:0,k:1},hov=null,sel=null,drag=null,pan=null,down=null,moved=0,fit=false,S=[];
+for(var i=0;i<110;i++)S.push({x:Math.random(),y:Math.random(),r:Math.random()*1.3+.3,p:Math.random()*6.28});
+function mk(x,par,path,dep){
+ var s=x.s||'d',n={id:uid++,par:par,dir:!!x.c,s:s,full:x.n,lab:x.c?x.n.slice(0,-1):x.n,path:path+x.n,d:x.d,dep:dep,open:!!x.o,ch:[],px:0,py:0,rx:0,ry:0,vx:0,vy:0,fx:false,vis:false,a:0,r:0,ph:Math.random()*6.28};
+ n.col=dep===0?'#fcd34d':((x.c&&x.s===undefined)?PAL[Math.min(dep,4)]:ST[s]);
+ N.push(n);
+ if(x.c)x.c.forEach(function(c){n.ch.push(mk(c,n,n.path,dep+1))});
+ return n;
+}
+var R=mk(PD[0],null,'',0);
+N.forEach(function(n){if(n.lab==='coursework_vit_classification')n.open=true});
+function vis(n){return !n.par||(n.par.open&&vis(n.par))}
+function refresh(){L=[];N.forEach(function(n){var v=vis(n);if(v&&!n.vis){var a=Math.random()*6.283;n.px=(n.par?n.par.px:0)+Math.cos(a)*24;n.py=(n.par?n.par.py:0)+Math.sin(a)*24;n.vx=n.vy=0;n.a=0;n.r=0}n.vis=v;if(v)L.push(n)})}
+refresh();
+function near(a,b){return !!b&&(a===b||a.par===b||a===b.par||(!!a.par&&a.par===b.par))}
+function step(){
+ var i,j,a,b,dx,dy,d2,d,f,len;
+ for(i=0;i<L.length;i++){a=L[i];for(j=i+1;j<L.length;j++){b=L[j];dx=a.px-b.px;dy=a.py-b.py;d2=dx*dx+dy*dy+.5;if(d2<70000){d=Math.sqrt(d2);f=3600/d2;if(f>4)f=4;dx=dx/d*f;dy=dy/d*f;a.vx+=dx;a.vy+=dy;b.vx-=dx;b.vy-=dy}}}
+ for(i=0;i<L.length;i++){a=L[i];if(a.par){b=a.par;dx=a.px-b.px;dy=a.py-b.py;d=Math.sqrt(dx*dx+dy*dy)+.01;len=a.dir?(a.dep<2?130:105):62;f=(d-len)*.03;dx=dx/d*f;dy=dy/d*f;a.vx-=dx;a.vy-=dy;b.vx+=dx;b.vy+=dy}a.vx-=a.px*.0025;a.vy-=a.py*.0025}
+ for(i=0;i<L.length;i++){a=L[i];if(a.fx){a.vx=a.vy=0;continue}a.vx*=.84;a.vy*=.84;if(a.vx>9)a.vx=9;if(a.vx<-9)a.vx=-9;if(a.vy>9)a.vy=9;if(a.vy<-9)a.vy=-9;a.px+=a.vx;a.py+=a.vy}
+}
+function rs(){var r=W.getBoundingClientRect();dpr=Math.min(2,window.devicePixelRatio||1);w=r.width;h=r.height;cv.width=Math.round(w*dpr);cv.height=Math.round(h*dpr);if(w>2&&!fit){cam.k=Math.min(1,w/720);fit=true}}
+if(window.ResizeObserver)new ResizeObserver(rs).observe(W);else window.addEventListener('resize',rs);
+function draw(t){
+ requestAnimationFrame(draw);
+ if(w<2||h<2)return;
+ step();
+ ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);ctx.shadowBlur=0;
+ S.forEach(function(s){ctx.globalAlpha=.2+.6*(.5+.5*Math.sin(t*.0015+s.p));ctx.fillStyle='#dfe4ff';ctx.beginPath();ctx.arc(((s.x*w+cam.x*.08)%w+w)%w,((s.y*h+cam.y*.08)%h+h)%h,s.r,0,6.283);ctx.fill()});
+ ctx.save();ctx.translate(w/2+cam.x,h/2+cam.y);ctx.scale(cam.k,cam.k);var PS={};for(var a=sel;a;a=a.par)PS[a.id]=1;
+ L.forEach(function(n){n.rx=n.px+Math.sin(t*.0012+n.ph)*1.8;n.ry=n.py+Math.cos(t*.001+n.ph)*1.8;n.a+=(1-n.a)*.07;var b=n.par?(n.dir?10.5:5.5):21,tg=b*(n===hov?1.35:1)*(n===sel?1.15:1);n.r+=(tg-n.r)*.2});
+ L.forEach(function(n){
+  var p=n.par;if(!p)return;
+  var x0=p.rx,y0=p.ry,x1=n.rx,y1=n.ry,dx=x1-x0,dy=y1-y0,dl=Math.sqrt(dx*dx+dy*dy)+.01,k=(n.id%2?.14:-.14)*dl,cx=(x0+x1)/2-dy/dl*k,cy=(y0+y1)/2+dx/dl*k;
+  var hl=(hov&&(n===hov||p===hov))||(sel&&(n===sel||p===sel)),pp=!!PS[n.id],al=Math.min(n.a,p.a);
+  var g=ctx.createLinearGradient(x0,y0,x1,y1);g.addColorStop(0,pp?'#fcd34d':p.col);g.addColorStop(1,pp?'#fff7c2':n.col);
+  ctx.globalAlpha=al*((hl||pp)?.95:.4);ctx.strokeStyle=g;ctx.lineWidth=pp?3.4:(hl?2.2:1.2);ctx.beginPath();ctx.moveTo(x0,y0);ctx.quadraticCurveTo(cx,cy,x1,y1);ctx.stroke();
+  var u=(t*.00035*(.7+(n.id%5)*.15)+n.ph/6.283)%1,v=1-u;
+  ctx.globalAlpha=al*.95;ctx.fillStyle='#fff';ctx.shadowColor=n.col;ctx.shadowBlur=10;ctx.beginPath();ctx.arc(v*v*x0+2*v*u*cx+u*u*x1,v*v*y0+2*v*u*cy+u*u*y1,hl?2.4:1.7,0,6.283);ctx.fill();ctx.shadowBlur=0;
+ });
+ L.forEach(function(n){
+  ctx.globalAlpha=n.a;ctx.shadowColor=n.col;ctx.shadowBlur=(n===hov||n===sel)?28:16;ctx.fillStyle=n.col;ctx.beginPath();ctx.arc(n.rx,n.ry,n.r,0,6.283);ctx.fill();ctx.shadowBlur=0;
+  ctx.fillStyle='rgba(255,255,255,.35)';ctx.beginPath();ctx.arc(n.rx-n.r*.3,n.ry-n.r*.3,n.r*.38,0,6.283);ctx.fill();
+  if(!n.par){ctx.strokeStyle=n.col;ctx.lineWidth=1.3;for(var z=0;z<2;z++){var rr=n.r+14+z*10+3*Math.sin(t*.002+z),an=t*.0007*(z?-1:1);ctx.globalAlpha=n.a*(.6-z*.2);ctx.beginPath();ctx.arc(n.rx,n.ry,rr,an,an+4.4);ctx.stroke()}ctx.globalAlpha=n.a}
+  if(n.dir){ctx.strokeStyle='rgba(255,255,255,.7)';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(n.rx,n.ry,n.r+4+(n.open?2.5*Math.sin(t*.003+n.ph):0),0,6.283);ctx.stroke();
+   if(!n.open&&n.ch.length){ctx.fillStyle='#0b0e1f';ctx.font='700 10px system-ui,sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(n.ch.length,n.rx,n.ry+.5)}}
+  if(n.s==='e'&&!n.dir){var q=(t*.0012+n.ph)%1;ctx.globalAlpha=n.a*(1-q);ctx.strokeStyle=n.col;ctx.lineWidth=1.4;ctx.beginPath();ctx.arc(n.rx,n.ry,n.r+q*14,0,6.283);ctx.stroke()}
+  if(n===sel){ctx.globalAlpha=n.a;ctx.strokeStyle='#fff';ctx.lineWidth=1.4;ctx.setLineDash([4,5]);ctx.lineDashOffset=-t*.02;ctx.beginPath();ctx.arc(n.rx,n.ry,n.r+10,0,6.283);ctx.stroke();ctx.setLineDash([])}
+ });
+ ctx.textAlign='center';ctx.textBaseline='alphabetic';ctx.lineJoin='round';
+ L.forEach(function(n){
+  var nr=near(n,hov)||near(n,sel);ctx.globalAlpha=n.a*((n.dir||nr)?1:.5);
+  ctx.font=(n.dir?'700 12px':'600 10.5px')+' ui-monospace,Menlo,Consolas,monospace';
+  var tx=n.dir?n.full:n.lab,ty=n.ry+n.r+(n.dir?17:14);
+  ctx.lineWidth=3;ctx.strokeStyle='rgba(7,8,22,.9)';ctx.strokeText(tx,n.rx,ty);ctx.fillStyle=nr?'#fff':'#dfe4ff';ctx.fillText(tx,n.rx,ty);
+  if(!n.par){ctx.globalAlpha=n.a;ctx.font='700 11px system-ui,sans-serif';ctx.strokeText('★ NÚT GỐC (ROOT)',n.rx,n.ry-n.r-16);ctx.fillStyle='#fcd34d';ctx.fillText('★ NÚT GỐC (ROOT)',n.rx,n.ry-n.r-16)}
+ });
+ ctx.restore();ctx.globalAlpha=1;
+}
+function pt(e){var r=cv.getBoundingClientRect(),sx=e.clientX-r.left,sy=e.clientY-r.top;return{sx:sx,sy:sy,x:(sx-w/2-cam.x)/cam.k,y:(sy-h/2-cam.y)/cam.k}}
+function hit(m){for(var i=L.length-1;i>=0;i--){var n=L[i],dx=n.rx-m.x,dy=n.ry-m.y,r=n.r+7;if(dx*dx+dy*dy<r*r)return n}return null}
+function select(n){
+ sel=n;gi.innerHTML='';gi.style.animation='none';void gi.offsetWidth;gi.style.animation='';
+ var t=document.createElement('b');t.textContent=(n.dir?'📁 ':(IC[n.lab.split('.').pop()]||'📄')+' ')+n.full;gi.appendChild(t);
+ var bc=[];for(var a=n;a;a=a.par)bc.unshift(a.lab);
+ var lv=document.createElement('p');lv.style.color='#fcd34d';lv.textContent=n.par?('Cấp '+n.dep+' · '+bc.join(' › ')):'★ Đây là nút gốc: mọi nhánh đều bắt đầu từ đây';gi.appendChild(lv);
+ var p=document.createElement('p'),c=document.createElement('code');c.textContent=n.path;p.appendChild(c);gi.appendChild(p);
+ var b=document.createElement('span');b.className='b';b.textContent=ST2[n.s];b.style.color=ST[n.s];b.style.borderColor=ST[n.s];gi.appendChild(b);
+ var d=document.createElement('p');d.textContent=n.d+(n.dir?' (chứa '+n.ch.length+' mục)':'');gi.appendChild(d);
+}
+cv.addEventListener('pointerdown',function(e){var m=pt(e),n=hit(m);cv.setPointerCapture(e.pointerId);moved=0;down={x:m.sx,y:m.sy};if(n){drag=n;n.fx=true;cv.style.cursor='grabbing'}else{pan={x:m.sx,y:m.sy};cv.style.cursor='grabbing'}});
+cv.addEventListener('pointermove',function(e){var m=pt(e);
+ if(down)moved=Math.max(moved,Math.hypot(m.sx-down.x,m.sy-down.y));
+ if(drag){drag.px=m.x;drag.py=m.y}
+ else if(pan){cam.x+=m.sx-pan.x;cam.y+=m.sy-pan.y;pan.x=m.sx;pan.y=m.sy}
+ else{hov=hit(m);cv.style.cursor=hov?'pointer':'grab'}});
+function up(){if(drag){drag.fx=false;if(moved<5){if(drag.dir&&drag.ch.length){drag.open=!drag.open;refresh()}select(drag)}drag=null}pan=null;down=null;cv.style.cursor=hov?'pointer':'grab'}
+cv.addEventListener('pointerup',up);cv.addEventListener('pointercancel',up);
+cv.addEventListener('pointerleave',function(){if(!drag&&!pan)hov=null});
+cv.addEventListener('wheel',function(e){e.preventDefault();var m=pt(e),k0=cam.k,k1=Math.max(.35,Math.min(2.5,k0*(e.deltaY<0?1.1:.9)));cam.x=m.sx-w/2-(m.sx-w/2-cam.x)*k1/k0;cam.y=m.sy-h/2-(m.sy-h/2-cam.y)*k1/k0;cam.k=k1},{passive:false});
+document.getElementById('g1').onclick=function(){N.forEach(function(n){if(n.dir)n.open=true});refresh()};
+document.getElementById('g2').onclick=function(){N.forEach(function(n){n.open=false});R.open=true;refresh();sel=null};
+document.getElementById('g3').onclick=function(){cam.x=0;cam.y=0;cam.k=Math.min(1,w/720)};
+select(R);rs();requestAnimationFrame(draw);
+})();
+</script>
+<script>
+(function(){
+var C=['#6366f1','#0ea5e9','#10b981','#f59e0b','#ec4899','#8b5cf6'],NS='http://www.w3.org/2000/svg';
+var M={
+s2:['Phân loại ảnh CIFAR-100',['Bài toán',['Ảnh RGB 32×32','100 lớp (fine labels)','500 ảnh train/lớp gốc → khó tổng quát hóa']],['Cách tiếp cận',['Học chuyển giao từ ImageNet-1K','Freeze hoặc fine-tune toàn bộ','Không train backbone từ đầu']],['Câu hỏi',['Q1|CNN hay ViT hợp hơn khi chỉ train head?','Q2|Fine-tune cải thiện bao nhiêu so với freeze?','Q3|Đánh đổi chất lượng với thời gian, bộ nhớ, tham số?']],['Lưu ý',['Không giả định ViT phải thắng','Khác tham số và recipe pretraining']]],
+s9:['Đánh giá và demo',['Chất lượng',['Top-1, Top-5, macro-F1','Precision/recall/F1 theo lớp']],['Phân tích lỗi',['Confusion 100 lớp','Cặp nhầm nổi bật','Ảnh sai có ID']],['Chi phí',['Thời gian train','Latency, throughput','Peak VRAM, số tham số']],['Tái lập',['Config, seed, môi trường','History, checkpoint, hướng dẫn chạy']],['Demo (dự kiến)',['Ảnh RGB → Top-1/Top-5 + confidence','Ảnh ngoài 100 lớp vẫn bị ép vào 1 lớp']]],
+s11:['Rủi ro và việc cần chốt',['Kỹ thuật',['ViT fine-tune có thể OOM trên GPU 4 GB','BatchNorm với batch nhỏ','12 nhóm trùng xuyên split']],['Khoa học',['ResNet/ViT khác tham số và recipe','Một seed, chưa đủ chứng minh độ ổn định','Attention chỉ để quan sát, không phải nhân quả']],['Cần chốt',['Giảng viên xác nhận phạm vi (ViT vs Anti Face Deepfake)','Chính sách duplicate','GPU, cặp LR, T/E, AdamW/WD/scheduler']],['Sau cùng',['Phần mở rộng chỉ xét sau 4 thí nghiệm cốt lõi']]]
+};
+function mk(t,c,p,s){var e=document.createElement('div');e.className=c;if(t)e.textContent=t;if(s)e.setAttribute('style',s);p.appendChild(e);return e}
+function draw(m){
+ var o=m.querySelector('svg');if(o)m.removeChild(o);
+ if(!m.offsetWidth)return;
+ var s=document.createElementNS(NS,'svg');
+ function ln(a,b,col,dl){var x1=a.offsetLeft+a.offsetWidth,y1=a.offsetTop+a.offsetHeight/2,x2=b.offsetLeft,y2=b.offsetTop+b.offsetHeight/2,dx=(x2-x1)*.5,p=document.createElementNS(NS,'path');p.setAttribute('d','M'+x1+' '+y1+'C'+(x1+dx)+' '+y1+' '+(x2-dx)+' '+y2+' '+x2+' '+y2);p.setAttribute('pathLength','1');p.setAttribute('stroke',col);p.style.animationDelay=dl+'s';s.appendChild(p)}
+ var rt=m.querySelector('.mrt');
+ [].forEach.call(m.querySelectorAll('.mrw'),function(rw,i){var col=C[i%6],br=rw.firstChild;ln(rt,br,col,.1+i*.1);[].forEach.call(rw.lastChild.children,function(lf,j){ln(br,lf,col,.35+i*.1+j*.06)})});
+ m.insertBefore(s,m.firstChild)
+}
+function build(m){
+ var d=M[m.getAttribute('data-k')];if(!d)return;
+ mk(d[0],'mrt',m,'animation-delay:0s');var rs=mk('','mrs',m,'');
+ for(var i=1;i<d.length;i++){(function(i){var col=C[(i-1)%6],rw=mk('','mrw',rs,''),br=mk(d[i][0],'mbr',rw,'background:'+col+';animation-delay:'+(.2+i*.1)+'s'),ls=mk('','mls',rw,'');
+  d[i][1].forEach(function(x,j){var lf=mk('','mlf',ls,'--lc:'+col+';animation-delay:'+(.35+i*.1+j*.06)+'s'),q=x.indexOf('|');if(q>0){var b=document.createElement('b');b.textContent=x.slice(0,q);lf.appendChild(b);lf.appendChild(document.createTextNode(x.slice(q+1)))}else lf.textContent=x})})(i)}
+ draw(m)
+}
+[].forEach.call(document.querySelectorAll('.mm'),function(m){build(m);if(window.ResizeObserver)new ResizeObserver(function(){draw(m)}).observe(m);else window.addEventListener('resize',function(){draw(m)})});
+})();
+</script>
+</body>
+</html>
