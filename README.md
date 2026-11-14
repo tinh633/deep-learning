@@ -9,7 +9,7 @@ Các lab và benchmark được giữ ở nhánh riêng; bản local không bị
 - [Tiến độ thực tế](coursework_vit_classification/docs/progress.md)
 - [HTML explorer](coursework_vit_classification/visualization/explorer.html)
 
-Đã có dữ liệu/EDA và phép chiếu PCA/t-SNE; chưa triển khai train model.
-Chờ giảng viên xác nhận phạm vi ViT/Anti Face Deepfake trước khi triển khai tiếp.
+Đã có dữ liệu/EDA, model và smoke; chưa tuning/train chính thức.
+Giảng viên đã xác nhận phạm vi ViT classification trên CIFAR-100.
 Dataset, pixel ảnh, cache và trọng số local không được commit; xem hướng dẫn để tái sinh.
 AGENTS.md và docs_for_agent/ giữ quy tắc làm việc chung cho workspace.

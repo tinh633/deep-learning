@@ -1,6 +1,6 @@
 # ResNet-50 — CNN baseline
 
-Thiết kế cho coursework, chưa có implementation/model checkpoint CIFAR-100.
+Đã có implementation và checkpoint smoke; chưa có checkpoint CIFAR-100 train chính thức.
 Tham chiếu: [Define](../define/Requirements_Analysis.md), [Design](Implementation_Plan.md), [ViT-B/16](ViT_B16.md).
 
 ## 1. Vai trò và lý do chọn
@@ -73,4 +73,4 @@ VRAM còn phụ thuộc activation, gradient, optimizer, batch và precision; kh
 - So A/B để đo lợi ích fine-tune; so A/C và B/D với ViT để đối chiếu chất lượng/tài nguyên.
 - Không khẳng định residual connection gây ra chênh lệch accuracy khi còn khác recipe và quy mô.
 
-Chưa có số đo CIFAR-100 hoặc GPU của model này trong coursework.
+Số đo kỹ thuật smoke ở Audit_Log; chưa có accuracy/full train/test của coursework.

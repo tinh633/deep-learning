@@ -1,0 +1,18 @@
+{
+  "status": "interrupted",
+  "error": "Recovered 2026-11-14: session ended during pretrained loading; no completed checks recorded.",
+  "checks": {
+    "source_split": "NOT_RUN",
+    "trainable": "NOT_RUN",
+    "optimizer": "NOT_RUN",
+    "shape": "NOT_RUN",
+    "finite_loss": "NOT_RUN",
+    "gradients": "NOT_RUN",
+    "state_update": "NOT_RUN",
+    "validation": "NOT_RUN",
+    "checkpoint": "NOT_RUN",
+    "resume_replay": "NOT_RUN",
+    "resources": "NOT_RUN",
+    "stability": "NOT_RUN"
+  }
+}

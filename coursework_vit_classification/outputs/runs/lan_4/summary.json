@@ -1,0 +1,49 @@
+{
+  "status": "passed",
+  "checks": {
+    "source_split": "PASS",
+    "trainable": "PASS",
+    "optimizer": "PASS",
+    "shape": "PASS",
+    "finite_loss": "PASS",
+    "gradients": "PASS",
+    "state_update": "PASS",
+    "validation": "PASS",
+    "checkpoint": "PASS",
+    "resume_replay": "PASS",
+    "resources": "PASS",
+    "stability": "PASS"
+  },
+  "memory_before_checkpoint": {
+    "ram_available_mib": 3839.34375,
+    "process_rss_mib": 1612.3515625,
+    "commit_available_mib": 3877.7109375
+  },
+  "batches": 10,
+  "train_loss": 5.83740234375,
+  "val_loss": 4.124171853065491,
+  "train_batch_seconds": [
+    2.160451700000067,
+    0.035030900000037946,
+    0.03456770000002507,
+    0.040725599999859696,
+    0.029239399999823945,
+    0.02456159999974261,
+    0.026506499999868538,
+    0.024538899999697605,
+    0.03123279999999795,
+    0.03251479999971707
+  ],
+  "train_peak_allocated_mib": 121.845703125,
+  "workflow_peak_allocated_mib": 139.54150390625,
+  "resume_tolerance": {
+    "atol": 1e-06,
+    "rtol": 1e-05
+  },
+  "miniature_epoch": 1,
+  "memory_at_end": {
+    "ram_available_mib": 3614.59375,
+    "process_rss_mib": 1869.66796875,
+    "commit_available_mib": 3664.05859375
+  }
+}

@@ -1,7 +1,7 @@
 # Chiến lược huấn luyện và tuning hyperparameter
 
-Cập nhật: 10/11/2026. Đây là kế hoạch, chưa thực hiện smoke/tuning/train.
-Chưa thực thi kế hoạch này trước khi xác nhận phạm vi đề tài với giảng viên.
+Cập nhật: 14/11/2026. Đã bắt đầu smoke; pilot/final vẫn là kế hoạch chưa thực thi.
+Phạm vi ViT/CIFAR-100 đã được giảng viên xác nhận.
 Liên quan: [Define](../define/Requirements_Analysis.md), [Design](Implementation_Plan.md),
 [ResNet-50](ResNet50.md), [ViT-B/16](ViT_B16.md).
 
@@ -126,4 +126,4 @@ Mỗi lượt có thư mục riêng; bảng pilot ghi LR, best epoch, val accura
 Không tạo run hoặc số liệu rỗng trước khi chạy; không ghi đè kết quả cũ.
 
 Còn chốt: GPU, duplicate policy, hai cặp LR, T/E, batch/AMP/BN, AdamW/WD và scheduler.
-Chưa có code tuning hoặc train; file này không phải bằng chứng đã chạy thí nghiệm.
+2_train.py mới có smoke; chưa có tuning/final. Bằng chứng smoke xem Audit_Log, không dùng số smoke làm kết quả cuối.

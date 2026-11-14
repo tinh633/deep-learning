@@ -39,3 +39,13 @@
 - Chuyển nhật ký vào docs và bổ sung Audit_Log/CHANGELOG theo vai trò riêng; chưa chạy smoke hoặc sửa code train.
 - Chốt tài liệu và trạng thái chờ giảng viên xác nhận ViT/Anti Face Deepfake; không triển khai tiếp trong lúc chờ.
 - Chuẩn bị xuất bản nhánh cousework theo phạm vi được duyệt, loại lab/dataset/cache, giữ file local.
+
+## 14/11/2026 — Khôi phục task trước
+
+- Đối chiếu log/summary và code đã lưu; nhận diện C bị ngắt, không tự đánh dấu PASS.
+- Bổ sung model/loader/logger/smoke, giảm bản sao RAM và guard tài nguyên; giữ artifact cũ.
+- docs/src.md mô tả 5W1H theo yêu cầu; cập nhật README/Define/Design với phạm vi đã xác nhận.
+- Recheck A/B/C trên CUDA PASS; D tự dừng khi thiếu Windows commit, không hạ ngưỡng bảo vệ.
+- Audit lưu kết quả thực; changelog ghi sửa code/pipeline; chưa tuning/train chính thức hoặc push.
+- Review nêu giới hạn guard sau replay và bias thời gian batch; giữ raw report, cập nhật chú thích audit.
+- Chuẩn bị xuất bản coursework theo phạm vi được duyệt, giữ HTML mới trên remote bằng fast-forward.

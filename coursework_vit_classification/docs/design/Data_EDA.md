@@ -9,7 +9,7 @@
 | src/1_eda.py | Thực hiện tải, thống kê và xuất dữ liệu cho viewer |
 | visualization/explorer.html | Đọc JSON và RGB gzip local, trình bày EDA/gallery |
 
-config/data không tự tải hoặc chạy EDA khi import. Chưa triển khai DataLoader train.
+config/data không tự tải hoặc chạy EDA khi import. Đã có train/val loaders cho smoke, xem [src.md](../src.md).
 
 ## Nguồn và toàn vẹn
 
