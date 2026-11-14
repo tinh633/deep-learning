@@ -1,7 +1,7 @@
 # Tiến độ coursework
 
-Hiện trạng: data/EDA hoàn tất; chưa triển khai model/train hoặc smoke A–D.
-Đang chờ giảng viên xác nhận phạm vi; không triển khai thêm trong lúc chờ.
+Hiện trạng 14/11: data/model/loader/logger và smoke đã có; A/B/C PASS, D dừng bởi memory guard.
+Giảng viên đã xác nhận ViT classification trên CIFAR-100, không kết hợp Anti Face Deepfake.
 Nhật ký thay đổi: [CHANGELOG](CHANGELOG.md); checklist smoke: [Audit_Log](Audit_Log.md).
 
 ## 05/11/2026 — Thiết kế và khởi tạo
@@ -16,9 +16,9 @@ Nhật ký thay đổi: [CHANGELOG](CHANGELOG.md); checklist smoke: [Audit_Log](
 
 ## Bước tiếp theo
 
-1. Xác nhận với giảng viên ViT classification/Anti Face Deepfake là lựa chọn hay phải kết hợp.
-2. Sau xác nhận, đối chiếu và điều chỉnh Define/Design nếu cần, rồi chốt duplicate policy/GPU.
-3. Khi được tiếp tục, triển khai model và smoke bốn cấu hình trước khi chốt hyperparameter.
+1. Bổ sung guard cuối save/load/replay, giải phóng đủ RAM/commit rồi recheck; không hạ ngưỡng để ép chạy.
+2. Chốt duplicate policy và training budget khi ma trận smoke đạt.
+3. Triển khai pilot/final sau khi chốt tham số; evaluate/demo còn rỗng.
 4. Thực hiện pipeline theo [kế hoạch](design/Implementation_Plan.md).
 
 ## Kiểm tra bộ khung
@@ -100,3 +100,24 @@ Nhật ký thay đổi: [CHANGELOG](CHANGELOG.md); checklist smoke: [Audit_Log](
 - Được phép commit/push coursework và tách Practice 2 khỏi nhánh cousework, giữ bản lab local.
 - Không kèm dataset/cache/pixel, benchmark hoặc thay đổi các nhánh khác; không viết lại lịch sử.
 - Kiểm tra cuối: Markdown/liên kết, Python/JS syntax, số lượng EDA/projection đạt; 82 file lab và 12 checkpoint local nguyên vẹn.
+
+## 14/11/2026 — Khôi phục task model/smoke và tài liệu source
+
+- Phiên 10/11 đã có A/B PASS; C không có summary khi nạp weights; D chưa chạy. Giữ nguyên artifact cũ.
+- Đã triển khai model/loader/logger/checkpoint và 2_train.py chỉ hỗ trợ smoke; chưa tuning/final.
+- docs/src.md mô tả 5W1H cả 8 file, phân biệt evaluate/demo chưa triển khai.
+- Cập nhật xác nhận phạm vi CIFAR-100 trong README/Define/Design và chỉ mục chung.
+- A lan_4, B lan_8, C lan_5 PASS 10 batch + val/save/load/replay; D lan_7 dừng sau một update.
+- D: Windows commit 2553,90 MiB dưới ngưỡng 3072; chưa kết luận ổn định hoặc đủ tài nguyên train.
+- Audit_Log chỉ ghi checklist/bằng chứng; giải pháp giảm bản sao RAM ghi ở CHANGELOG.
+- Model weights/checkpoint local không commit; chưa commit/push các thay đổi của giai đoạn này.
+- Kiểm tra guard bằng mock: đủ/thiếu RAM, thiếu commit và thu hồi cache đều đúng; loader chia sẻ data, train-only và val xác định đạt.
+- Python/Markdown/liên kết/evidence đạt; cuối phiên GPU 0 MiB, không còn smoke đang chạy. D vẫn cần thêm commit trống để recheck.
+
+## 14/11/2026 — Review và chuẩn bị xuất bản
+
+- Review: B/lan_8 cuối workflow còn 2952,80 MiB commit; PASS chưa chứng minh đủ bộ nhớ toàn workflow.
+- Cần thêm guard sau checkpoint/replay; chưa sửa phần này hoặc chạy lại trong bước xuất bản.
+- Smoke loss chỉ trên 20 train/4 val; timing có khởi động CUDA/check gradient, không dùng xếp hạng model.
+- Cho phép commit/push phần coursework lên cousework; dataset/weights/checkpoint vẫn giữ local.
+- Giữ file HTML báo cáo vừa được bổ sung trên remote, không viết lại lịch sử nhánh.

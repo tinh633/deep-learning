@@ -3,12 +3,17 @@ Who: EDA và train/evaluate sau này. When: Khi gọi hàm, không tải lúc im
 Where: data/ và outputs/cifar100_split.json. How: torchvision và stratified split.
 """
 import json
+from copy import copy
 
 import numpy as np
 from sklearn.model_selection import train_test_split
 from torchvision.datasets import CIFAR100
+from torchvision import transforms
+from torch.utils.data import DataLoader, Subset
+import torch
 
-from config import DATA_DIR, OUTPUT_DIR, SEED, SPLIT_FILE, VALIDATION_SIZE
+from config import (DATA_DIR, OUTPUT_DIR, SEED, SPLIT_FILE, VALIDATION_SIZE,
+                    IMAGE_SIZE, IMAGENET_MEAN, IMAGENET_STD)
 
 
 def load_datasets(download=False):
@@ -38,3 +43,35 @@ def load_split(targets):
         if not np.all(np.bincount(np.asarray(targets)[ids], minlength=100) == expected):
             raise ValueError('Split không cân bằng theo lớp.')
     return train_ids, val_ids
+
+
+def build_loaders(batch_size, num_workers=0, train_images=None, val_images=None):
+    # Chỉ official train được nạp ở bước này; không mở ảnh test để smoke/tuning.
+    train_transform = transforms.Compose([
+        transforms.Resize((IMAGE_SIZE, IMAGE_SIZE), antialias=True),
+        transforms.RandomHorizontalFlip(),
+        transforms.ToTensor(),
+        transforms.Normalize(IMAGENET_MEAN, IMAGENET_STD),
+    ])
+    val_transform = transforms.Compose([
+        transforms.Resize((IMAGE_SIZE, IMAGE_SIZE), antialias=True),
+        transforms.ToTensor(),
+        transforms.Normalize(IMAGENET_MEAN, IMAGENET_STD),
+    ])
+    training = CIFAR100(str(DATA_DIR), train=True, transform=train_transform, download=False)
+    validation = copy(training)
+    validation.transform = val_transform
+    train_ids, val_ids = load_split(training.targets)
+    rng = np.random.default_rng(SEED)
+    if train_images is not None:
+        train_ids = rng.choice(train_ids, size=train_images, replace=False).tolist()
+    if val_images is not None:
+        val_ids = rng.choice(val_ids, size=val_images, replace=False).tolist()
+    generator = torch.Generator().manual_seed(SEED)
+    train_loader = DataLoader(Subset(training, train_ids), batch_size=batch_size,
+                              shuffle=True, generator=generator, num_workers=num_workers,
+                              pin_memory=torch.cuda.is_available())
+    val_loader = DataLoader(Subset(validation, val_ids), batch_size=batch_size,
+                            shuffle=False, num_workers=num_workers,
+                            generator=torch.Generator().manual_seed(SEED))
+    return train_loader, val_loader, training.classes

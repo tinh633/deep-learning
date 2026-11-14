@@ -35,4 +35,18 @@ Audit chỉ ghi kết quả kiểm tra; lịch sử hỗ trợ AI nằm ở [AI_
 - Chỉ cập nhật tài liệu/trạng thái và phạm vi nhánh; không triển khai tiếp hoặc chạy thí nghiệm.
 - Chuẩn bị commit/push cousework theo phạm vi được duyệt, không kèm lab/dataset/cache.
 
+## 14/11/2026 — Khôi phục sau ngắt và giảm RAM smoke
+
+- Phát hiện phiên trước dừng lúc loading ViT, kèm lỗi Windows 800705af/thiếu commit trong công cụ terminal.
+- Không kết luận đó là nguyên nhân duy nhất của máy đơ; chưa có báo cáo bộ nhớ tại thời điểm ngắt.
+- Nạp pretrained bằng meta + mmap/assign để tránh bản khởi tạo CPU lớn; giữ đúng weights/checksum.
+- Train/val dùng chung pixel array; fingerprint tensor thay clone toàn backbone trong kiểm tra freeze.
+- Checkpoint/replay dùng mmap và file tham chiếu; giải phóng optimizer/grad cũ trước restore.
+- Guard giữ tối thiểu 2 GiB RAM/3 GiB commit; thử thu hồi cache trước khi từ chối, không đổi cấu hình model.
+- Phân loại lỗi guard thành resources thay vì gradients; giữ nguyên raw report lan_6, recheck lan_7.
+- Kiểm chứng A lan_4/B lan_8/C lan_5 PASS; D lan_7 dừng an toàn bởi guard, chưa đạt toàn checklist.
+- Thêm docs/src.md, cập nhật xác nhận phạm vi và mô tả script đã có; không chạy tuning/full train/test.
+- Test guard áp lực bộ nhớ bằng mock, không cố gây OOM thực; kiểm tra invalid model/strategy và loader dùng chung pixel đạt.
+- Review ghi nhận guard chưa bao phủ cuối save/load/replay; đây là việc còn mở, chưa sửa trong bản xuất này.
+
 Khi gần 150 dòng, lưu lịch sử cũ vào docs/archive/changelog_<giai_doan>.md và giữ liên kết tại đây.

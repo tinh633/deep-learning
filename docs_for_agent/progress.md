@@ -4,7 +4,7 @@
 chi tiết được ghi trong `progress.md` của từng practice.
 
 - [Lịch sử workspace](progress_old.md): ghi chép cũ, không phải trạng thái hiện tại.
-- [Coursework ViT](../coursework_vit_classification/docs/progress.md): đã có data/EDA; chờ giảng viên xác nhận phạm vi ViT/Anti Face Deepfake, chưa train.
+- [Coursework ViT](../coursework_vit_classification/docs/progress.md): đã xác nhận CIFAR-100; smoke A/B/C PASS, D dừng bởi memory guard; chưa tuning/final.
 
 Nhánh cousework chỉ xuất bản coursework và quy tắc chung; lab/benchmark thuộc nhánh riêng.
 

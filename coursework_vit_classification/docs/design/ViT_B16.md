@@ -1,6 +1,6 @@
 # ViT-B/16 — Model chính
 
-Thiết kế cho coursework, chưa có implementation/model checkpoint CIFAR-100.
+Đã có implementation và pipeline smoke; chưa có checkpoint CIFAR-100 train chính thức.
 Tham chiếu: [Define](../define/Requirements_Analysis.md), [Design](Implementation_Plan.md), [CNN baseline](ResNet50.md).
 
 ## 1. Vai trò và tên model

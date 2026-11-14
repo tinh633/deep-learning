@@ -1,0 +1,39 @@
+{
+  "status": "passed",
+  "checks": {
+    "source_split": "PASS",
+    "trainable": "PASS",
+    "optimizer": "PASS",
+    "shape": "PASS",
+    "finite_loss": "PASS",
+    "gradients": "PASS",
+    "state_update": "PASS",
+    "validation": "PASS",
+    "checkpoint": "PASS",
+    "resume_replay": "PASS",
+    "resources": "PASS",
+    "stability": "PASS"
+  },
+  "batches": 10,
+  "train_loss": 4.60859375,
+  "val_loss": 4.06377100944519,
+  "train_batch_seconds": [
+    0.8350673999957507,
+    0.2086297999994713,
+    0.16240819999802625,
+    0.16601300000183983,
+    0.1624147999973502,
+    0.15372889999707695,
+    0.16014290000020992,
+    0.15289479999773903,
+    0.16414070000610081,
+    0.1724716000026092
+  ],
+  "train_peak_allocated_mib": 458.32177734375,
+  "workflow_peak_allocated_mib": 574.62939453125,
+  "resume_tolerance": {
+    "atol": 1e-06,
+    "rtol": 1e-05
+  },
+  "miniature_epoch": 1
+}

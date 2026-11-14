@@ -1,7 +1,7 @@
 # Define — Định nghĩa đồ án
 
-Cập nhật: 10/11/2026. Đã có data/EDA; model/train/evaluate/demo chưa triển khai.
-Phạm vi ViT/CIFAR-100 đang chờ giảng viên xác nhận; chưa mở rộng sang Anti Face Deepfake.
+Cập nhật: 14/11/2026. Đã có data/EDA và pipeline smoke; chưa tuning/train chính thức.
+Giảng viên đã xác nhận hướng ViT/CIFAR-100, không kết hợp Anti Face Deepfake.
 Thiết kế: [Implementation_Plan.md](../design/Implementation_Plan.md). Trạng thái: [progress](../progress.md).
 
 ## 1. Project name — Tên đề tài
@@ -105,6 +105,5 @@ Mục tiêu accuracy kỳ vọng chỉ ghi sau pilot có căn cứ, không lấy
 
 Đáp ứng phần đề tài ViT classification, dataset được cho phép, baseline, demo và phân tích giới hạn.
 Không coi phần mở rộng cùng số tham số hoặc attention là đã hoàn thành.
-Cần xác nhận hai dòng ViT/Anti Face Deepfake là lựa chọn hay yêu cầu kết hợp trước triển khai tiếp.
-Sau đó chốt ảnh trùng, GPU và thông số sau smoke trước bốn run chính thức.
+Đã xác nhận phạm vi; còn chốt ảnh trùng và thông số/budget sau smoke trước các pilot/final.
 Nguồn dữ liệu: [CIFAR chính thức](https://www.cs.toronto.edu/~kriz/cifar.html).

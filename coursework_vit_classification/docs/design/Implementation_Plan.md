@@ -1,7 +1,7 @@
 # Design — Thiết kế và kế hoạch triển khai
 
-Cập nhật: 10/11/2026. Thiết kế dự kiến cho phần model/train, chưa phải mô tả code đã hoàn tất.
-Tạm dừng triển khai mới đến khi giảng viên xác nhận phạm vi ViT/Anti Face Deepfake.
+Cập nhật: 14/11/2026. Đã có model/loader/logger và smoke; tuning/final/evaluate/demo còn là thiết kế.
+Giảng viên đã xác nhận ViT classification trên CIFAR-100, không kết hợp Anti Face Deepfake.
 Định nghĩa bài toán: [Define](../define/Requirements_Analysis.md). Hiện trạng: [progress](../progress.md).
 
 ## 1. System architecture — Kiến trúc hệ thống
@@ -63,7 +63,7 @@ coursework_vit_classification/
 ├── README.md, requirements.txt
 ├── Coursework_Report.ipynb
 ├── docs/
-│   ├── progress.md, AI_usage.md, Audit_Log.md, CHANGELOG.md
+│   ├── progress.md, AI_usage.md, Audit_Log.md, CHANGELOG.md, src.md
 │   ├── define/Requirements_Analysis.md
 │   └── design/
 │       ├── Implementation_Plan.md
@@ -101,15 +101,15 @@ Epoch log gồm train/val loss, accuracy, LR và thời gian; đầu run ghi c�
 ## 6. Interfaces/APIs — Giao diện nội bộ dự kiến
 
 Không triển khai HTTP API; giao diện chính là cấu hình Python, hàm dùng chung và artifact.
-Tên hàm dưới đây là hợp đồng đề xuất, chưa phải hàm đã tồn tại trừ load_datasets/load_split.
+Hàm đã có xem docs/src.md; build_model/loaders/save_checkpoint đã triển khai, write_epoch còn dự kiến.
 
 | Giao diện | Input → output / quy ước |
 |---|---|
 | load_datasets(download=False) | Dataset gốc train/test; đã có trong data.py |
 | load_split(targets) | Train IDs/val IDs đã kiểm tra; đã có |
-| build_loaders(settings) | Dataset/split/transforms → train/val/test loaders |
-| build_model(name, strategy, pretrained) | Model 100 logits và metadata; eval không tải pretrained lại |
-| save_checkpoint(state, path) | Ghi tạm rồi replace, không ghi đè run khác |
+| build_loaders(batch_size, num_workers, train_images, val_images) | Train/val loaders và classes; không mở test |
+| build_model(name, strategy, pretrained) | Model 100 logits; metadata ghi riêng trong config run |
+| save_checkpoint(path, model, optimizer, scaler, epoch, generator, settings) | Ghi tạm rồi replace |
 | write_epoch(metrics, run_dir) | Một dòng log/epoch và history có epoch rõ ràng |
 | model(images) | Tensor B×3×224×224 → logits B×100 |
 
@@ -146,4 +146,4 @@ Chưa gán tên; người tích hợp chính rà soát đầu vào/đầu ra gi�
 | Attention bị diễn giải quá mức | Mở rộng sau; cần cơ chế lấy attention đúng, không coi là giải thích nhân quả |
 
 Inference benchmark cần cùng máy/batch/precision/warm-up; tách forward-only khỏi end-to-end.
-Chưa chạy train/test hoặc đo tài nguyên model; không ghi kết quả dự kiến thành số đo thật.
+Chưa tuning/full train/test; kết quả smoke ở Audit_Log không đại diện chất lượng cuối.

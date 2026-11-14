@@ -3,3 +3,4 @@ torchvision
 numpy
 scikit-learn
 Pillow
+psutil
