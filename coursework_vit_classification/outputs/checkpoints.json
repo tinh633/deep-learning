@@ -1,0 +1,90 @@
+{
+  "files": [
+    {
+      "file": "outputs/runs/lan_1/last.pt",
+      "size_bytes": 96815872,
+      "sha256": "8a8d1469c2e5a40e9f6616d07f5d728b6eb3e06dc0505fd24f5b26107f370eaa",
+      "model": "resnet50",
+      "experiment": "A",
+      "strategy": "freeze",
+      "phase": "smoke",
+      "purpose": "smoke",
+      "epoch": 1,
+      "epoch_scope": "miniature 20-image epoch"
+    },
+    {
+      "file": "outputs/runs/lan_2/last.pt",
+      "size_bytes": 284992623,
+      "sha256": "e83e846e0e5c72ab850d16cdfb96254a6184371335d02bd0693fe1c14d5cfd87",
+      "model": "resnet50",
+      "experiment": "B",
+      "strategy": "fine_tune",
+      "phase": "smoke",
+      "purpose": "smoke",
+      "epoch": 1,
+      "epoch_scope": "miniature 20-image epoch"
+    },
+    {
+      "file": "outputs/runs/lan_4/last.pt",
+      "size_bytes": 96816256,
+      "sha256": "dfc8ce836d0d73670778a578905c91a4156a7c6377c7e5a2001488542d7e98e2",
+      "model": "resnet50",
+      "experiment": "A",
+      "strategy": "freeze",
+      "phase": "smoke",
+      "purpose": "smoke",
+      "epoch": 1,
+      "epoch_scope": "miniature 20-image epoch"
+    },
+    {
+      "file": "outputs/runs/lan_5/last.pt",
+      "size_bytes": 344193416,
+      "sha256": "2d43fe385b5fbc736f72cb632971841d739d3748f39c91eced13d24832f10433",
+      "model": "vit_b_16",
+      "experiment": "C",
+      "strategy": "freeze",
+      "phase": "smoke",
+      "purpose": "smoke",
+      "epoch": 1,
+      "epoch_scope": "miniature 20-image epoch"
+    },
+    {
+      "file": "outputs/runs/lan_8/last.pt",
+      "size_bytes": 284993007,
+      "sha256": "e6c9e02751c6f60f2df3cb9a849aecd15b541bcbf4daddd1fe7e2493bf8f3c78",
+      "model": "resnet50",
+      "experiment": "B",
+      "strategy": "fine_tune",
+      "phase": "smoke",
+      "purpose": "smoke",
+      "epoch": 1,
+      "epoch_scope": "miniature 20-image epoch"
+    },
+    {
+      "file": "outputs/runs/lan_9/best.pt",
+      "size_bytes": 96816192,
+      "sha256": "58ed77c1a73191549e89a4c01fdf4db9488c084af272e75a7073ae549741180e",
+      "model": "resnet50",
+      "experiment": "A",
+      "strategy": "freeze",
+      "phase": "tuning",
+      "purpose": "resource_probe",
+      "epoch": 1,
+      "epoch_scope": "full 45000-image train epoch"
+    },
+    {
+      "file": "outputs/runs/lan_9/last.pt",
+      "size_bytes": 96816192,
+      "sha256": "82e7e2072c1cbee3df549f60d5a28cf99b08e9a2b2e49f1ab099435d740bd579",
+      "model": "resnet50",
+      "experiment": "A",
+      "strategy": "freeze",
+      "phase": "tuning",
+      "purpose": "resource_probe",
+      "epoch": 1,
+      "epoch_scope": "full 45000-image train epoch"
+    }
+  ],
+  "total_bytes": 1301443558,
+  "scope": "published best/last only; smoke or resource probe, no final model"
+}

@@ -1,3 +1,5 @@
 # Keep checkpoint split fingerprints stable across Windows/Linux checkouts.
 coursework_vit_classification/outputs/cifar100_split.json text eol=lf
+coursework_vit_classification/outputs/runs/lan_*/best.pt filter=lfs diff=lfs merge=lfs -text
+coursework_vit_classification/outputs/runs/lan_*/last.pt filter=lfs diff=lfs merge=lfs -text
 *.pt filter=lfs diff=lfs merge=lfs -text

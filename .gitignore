@@ -25,6 +25,8 @@ venv/
 # Local training weights, TensorBoard events and dataset-derived error images.
 *.pt
 *.pth
+!coursework_vit_classification/outputs/runs/lan_*/best.pt
+!coursework_vit_classification/outputs/runs/lan_*/last.pt
 **/events.out.tfevents.*
 practice_2_pretrained_model/visualization/runs/
 

@@ -146,4 +146,4 @@ Nhật ký thay đổi: [CHANGELOG](CHANGELOG.md); checklist smoke: [Audit_Log](
 - Best/last epoch 1 khớp, backbone/BN giữ nguyên; optimizer head đủ 2813 bước: [verification](../outputs/runs/lan_9/verification.json).
 - Nhiều mẫu GPU dùng 342–494 MiB (không phải peak allocator); commit cuối 4672 MiB, guard không dừng.
 - Runtime overrides được lưu; default vẫn chặn train dài. Đã ghi [quy trình/phân vai/bàn giao](design/Work_Allocation.md), chưa gán tên hoặc chốt tham số chính thức.
-- 16/11: chuẩn bị commit/push code, tài liệu và bằng chứng lan_9 lên cousework; không kèm data/cache/checkpoint.
+- 16/11: xuất code/tài liệu/lan_9; yêu cầu bổ sung 7 best/last qua Git LFS, có [hướng dẫn](Checkpoints.md); data/cache/replay_reference vẫn local.

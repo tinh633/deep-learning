@@ -33,5 +33,5 @@ memory_snapshot ghi RAM trống, process RSS và Windows commit trống.
 guard_memory giữ ít nhất 2 GiB RAM/3 GiB Windows commit, thử gc/empty_cache rồi kiểm tra lại.
 Không hạ ngưỡng để ép chạy; guard không bảo đảm tuyệt đối tránh hệ điều hành hết bộ nhớ.
 state_fingerprints đọc từng tensor để xác minh freeze, không clone toàn backbone.
-Checkpoint .pt/cache bị ignore; không tải pickle không rõ nguồn vào các hàm này.
+Best/last được chia sẻ bằng Git LFS; cache và replay_reference vẫn ignore. Chỉ nạp checkpoint tin cậy.
 Audit Markdown ghi kết quả; changelog ghi sửa pipeline, không nhân bản hai vai trò vào log.
