@@ -49,4 +49,19 @@ Audit chỉ ghi kết quả kiểm tra; lịch sử hỗ trợ AI nằm ở [AI_
 - Test guard áp lực bộ nhớ bằng mock, không cố gây OOM thực; kiểm tra invalid model/strategy và loader dùng chung pixel đạt.
 - Review ghi nhận guard chưa bao phủ cuối save/load/replay; đây là việc còn mở, chưa sửa trong bản xuất này.
 
+## 16/11/2026 — Hoàn thiện source và tài liệu theo module
+
+- Tách smoke từ 2_train.py sang 0_smoke.py; 2_train.py giữ loop pilot/final trực tiếp, không tạo Trainer.
+- Bổ sung guard sau save/load/replay và cuối smoke; giữ nguyên các bằng chứng GPU cũ.
+- Train có config gate, val chọn best, last/full state, resume config validation và history từ checkpoint.
+- Evaluate/demo dùng chung preprocessing/model, test cần opt-in và checkpoint final.
+- Tổ chức docs/src/ cùng cấp define/design, mỗi Python có Markdown 5W1H và luồng input/output riêng.
+- Regression CPU kiểm tra pipeline tổng hợp, không đọc CIFAR test hoặc tải pretrained; kết quả xem progress.
+
+## 16/11/2026 — Resource probe A
+
+- Thêm RUN_PURPOSE để phân biệt lượt đo khả năng chạy với pilot chọn cấu hình chính thức.
+- Final từ chối chọn LR từ checkpoint purpose=resource_probe; resume cũng đối chiếu purpose.
+- Giữ default config chưa cho train dài; probe dùng runtime overrides, tham số thực được lưu trong run.
+
 Khi gần 150 dòng, lưu lịch sử cũ vào docs/archive/changelog_<giai_doan>.md và giữ liên kết tại đây.

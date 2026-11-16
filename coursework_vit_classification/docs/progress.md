@@ -1,6 +1,6 @@
 # Tiến độ coursework
 
-Hiện trạng 14/11: data/model/loader/logger và smoke đã có; A/B/C PASS, D dừng bởi memory guard.
+Hiện trạng 16/11: code pipeline đã có; A resource_probe hoàn tất 1 epoch thật, chưa tuning/final/test chính thức. D GPU cần recheck.
 Giảng viên đã xác nhận ViT classification trên CIFAR-100, không kết hợp Anti Face Deepfake.
 Nhật ký thay đổi: [CHANGELOG](CHANGELOG.md); checklist smoke: [Audit_Log](Audit_Log.md).
 
@@ -16,9 +16,9 @@ Nhật ký thay đổi: [CHANGELOG](CHANGELOG.md); checklist smoke: [Audit_Log](
 
 ## Bước tiếp theo
 
-1. Bổ sung guard cuối save/load/replay, giải phóng đủ RAM/commit rồi recheck; không hạ ngưỡng để ép chạy.
+1. Guard cuối workflow đã có và được test tổng hợp; cần đủ RAM/commit để recheck D trên GPU thật.
 2. Chốt duplicate policy và training budget khi ma trận smoke đạt.
-3. Triển khai pilot/final sau khi chốt tham số; evaluate/demo còn rỗng.
+3. Chạy pilot/final/evaluate/demo theo cấu hình đã chốt; không dùng kết quả tổng hợp để chọn model.
 4. Thực hiện pipeline theo [kế hoạch](design/Implementation_Plan.md).
 
 ## Kiểm tra bộ khung
@@ -121,3 +121,29 @@ Nhật ký thay đổi: [CHANGELOG](CHANGELOG.md); checklist smoke: [Audit_Log](
 - Smoke loss chỉ trên 20 train/4 val; timing có khởi động CUDA/check gradient, không dùng xếp hạng model.
 - Cho phép commit/push phần coursework lên cousework; dataset/weights/checkpoint vẫn giữ local.
 - Giữ file HTML báo cáo vừa được bổ sung trên remote, không viết lại lịch sử nhánh.
+
+## 16/11/2026 — Code src và tài liệu từng module
+
+- Tách 0_smoke.py; 2_train.py hỗ trợ pilot/final/resume, 3_evaluate.py và 4_demo.py đã có code.
+- Thêm guard sau save/load/replay và cuối smoke; không thay kết luận GPU A/B/C/D lịch sử.
+- Thay docs/src.md bằng docs/src/README.md và 9 Markdown tương ứng các file Python, cùng cấp define/design.
+- Mặc định chặn train dài/test: protocol, duplicate policy, batch/LR/WD/epochs chưa chốt; không tự chọn giá trị final.
+- Regression CPU tổng hợp: 2 bài integration PASS, bao phủ smoke, guard cuối replay, ngắt/resume, final, evaluate và demo.
+- Bằng chứng: [source_pipeline_check.json](../outputs/validation/source_pipeline_check.json); không phải kết quả CIFAR-100 thật.
+- Chưa recheck D GPU, chưa tuning/full train/test thật hoặc tạo nội dung notebook báo cáo.
+- Chưa commit/push; tiếp theo vẫn cần đủ RAM/commit, chốt duplicate policy và training budget.
+- Bổ sung kiểm tra state sau resume khớp hoàn toàn nhánh train liên tục trên dữ liệu tổng hợp; cờ train/test mặc định chặn đúng.
+- Thêm docs/src/test_pipeline.md: 5W1H, hai nhóm regression, mock/cleanup, cách chạy/đọc kết quả và giới hạn; không chạy lại test vì chỉ đổi tài liệu.
+- Rà soát Markdown workspace: 10 mô tả source dùng What/Why/Which/When/Where/How, Which nêu lựa chọn kỹ thuật cụ thể.
+- Đồng bộ AGENTS và quy tắc documentation; không thay logic Python hoặc kết quả thực nghiệm trong lượt sửa tài liệu này.
+
+## 16/11/2026 — Thử chạy chiến lược A
+
+- Lan_9 hoàn tất: ResNet-50 freeze, purpose=resource_probe, 1 epoch trên 45k train/5k val.
+- Batch 16, AMP CUDA, workers 0, LR 1e-3, WD=0; giữ split cũ chỉ cho thử tài nguyên, không mở test.
+- Không coi đây là pilot chọn LR/final; không chốt duplicate policy hoặc budget chính thức từ lượt thử này.
+- Train loss/acc 1,5263/58,73%; val loss/acc 1,3034/64,16%; train+val 173,57 giây, không AMP skip.
+- Best/last epoch 1 khớp, backbone/BN giữ nguyên; optimizer head đủ 2813 bước: [verification](../outputs/runs/lan_9/verification.json).
+- Nhiều mẫu GPU dùng 342–494 MiB (không phải peak allocator); commit cuối 4672 MiB, guard không dừng.
+- Runtime overrides được lưu; default vẫn chặn train dài. Đã ghi [quy trình/phân vai/bàn giao](design/Work_Allocation.md), chưa gán tên hoặc chốt tham số chính thức.
+- 16/11: chuẩn bị commit/push code, tài liệu và bằng chứng lan_9 lên cousework; không kèm data/cache/checkpoint.

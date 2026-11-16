@@ -1,6 +1,6 @@
 # Define — Định nghĩa đồ án
 
-Cập nhật: 14/11/2026. Đã có data/EDA và pipeline smoke; chưa tuning/train chính thức.
+Cập nhật: 16/11/2026. Code data/train/evaluate/demo đã có; chưa tuning/train chính thức.
 Giảng viên đã xác nhận hướng ViT/CIFAR-100, không kết hợp Anti Face Deepfake.
 Thiết kế: [Implementation_Plan.md](../design/Implementation_Plan.md). Trạng thái: [progress](../progress.md).
 

@@ -1,19 +1,20 @@
 # Coursework — Phân loại CIFAR-100 bằng CNN và ViT
 
 Trạng thái: đã triển khai tải CIFAR-100, split, EDA và HTML explorer.
-Đã triển khai model, loader, logger/checkpoint và script smoke. Evaluate/demo và notebook còn chưa triển khai.
+Đã có model, loaders, logger/checkpoint, smoke, train, evaluate và demo; notebook báo cáo còn chưa triển khai.
 Giảng viên đã xác nhận hướng ViT classification trên CIFAR-100; không kết hợp Anti Face Deepfake.
 Chưa chạy tuning hoặc train chính thức; cần chốt duplicate policy và training budget trước bước đó.
 
 - [Define — phân tích yêu cầu](docs/define/Requirements_Analysis.md).
 - [Design — kế hoạch, chiến lược train và cấu trúc thư mục](docs/design/Implementation_Plan.md).
 - [Chiến lược train/tuning — ma trận lượt chạy và cách chọn LR](docs/design/Training_Strategy.md).
+- [Phân chia công việc — quy trình và gói bàn giao](docs/design/Work_Allocation.md).
 - [Model CNN baseline — ResNet-50](docs/design/ResNet50.md).
 - [Model chính — ViT-B/16](docs/design/ViT_B16.md).
 - [Tiến độ](docs/progress.md).
 - [Ghi nhận hỗ trợ AI](docs/AI_usage.md).
 - [Audit log smoke run](docs/Audit_Log.md) và [changelog code/pipeline](docs/CHANGELOG.md).
-- [Source workflow — 5W1H từng file](docs/src.md).
+- [Source workflow — 5W1H từng file](docs/src/README.md).
 
 ## Chạy dữ liệu và EDA
 
@@ -42,10 +43,25 @@ Checkpoint trong các run smoke chỉ phục vụ kiểm chứng kỹ thuật, k
 ## Kiểm tra smoke
 
 ```powershell
-.venv/Scripts/python.exe -u coursework_vit_classification/src/2_train.py
+.venv/Scripts/python.exe -u coursework_vit_classification/src/0_smoke.py
 ```
 
 PHASE=smoke, batch 2, workers 0, 20 ảnh train/4 val; không nạp test hoặc tuning LR.
 Mỗi chiến lược tạo một lan_N mới; kết luận có bằng chứng nằm trong docs/Audit_Log.md.
 Logger dừng khi RAM/Windows commit thấp; không khởi chạy nhiều smoke process đồng thời.
-Giới hạn đã biết: guard chưa bao phủ cuối checkpoint/replay; cần bổ sung và recheck trước tuning.
+Guard đã bổ sung sau checkpoint/replay; mới kiểm tra hồi quy CPU tổng hợp, chưa recheck D trên GPU.
+
+## Train, evaluate và demo
+
+Xem [train](docs/src/2_train.md), [evaluate](docs/src/3_evaluate.md), [demo](docs/src/4_demo.md).
+Train được chặn mặc định: cần PHASE=tuning/final, TRAINING_APPROVED và các giá trị đã chốt.
+Test cần RUN_TEST=True, checkpoint final; demo cần chỉ định ảnh và run, không tải/train ngầm.
+
+Kiểm tra pipeline CPU không tải weights/dataset:
+
+```powershell
+.venv/Scripts/python.exe coursework_vit_classification/tests/test_pipeline.py
+```
+
+Model/dữ liệu ở bài kiểm tra là tổng hợp, không dùng làm số liệu CIFAR-100.
+Mô tả tình huống, cách đọc kết quả và giới hạn: [test_pipeline.md](docs/src/test_pipeline.md).

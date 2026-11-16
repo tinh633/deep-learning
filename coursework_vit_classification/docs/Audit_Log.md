@@ -91,3 +91,35 @@ PASS trong summary chỉ phản ánh các check đã cài; guard chưa bao phủ
 Thời gian batch có warm-up CUDA và kiểm tra gradient, không dùng để xếp hạng tốc độ model.
 Kết luận: A/B/C hoàn tất smoke hiện có; D chưa đạt. Chưa xác nhận bộ nhớ ổn định toàn workflow.
 Trước tuning/final cần bổ sung guard cuối workflow và đủ RAM/commit để recheck, nhất là D.
+
+## 16/11/2026 — Kiểm tra hồi quy CPU tổng hợp
+
+Nguồn: [source_pipeline_check.json](../outputs/validation/source_pipeline_check.json),
+[test_pipeline.py](../tests/test_pipeline.py). Hai bài integration hoàn tất, exit code 0.
+Chỉ dùng model nhỏ/dữ liệu tổng hợp trên CPU, memory guard được mock; không nạp pretrained/CIFAR/test thật.
+
+| Kiểm tra | Kết quả trong phạm vi tổng hợp |
+|---|---|
+| Smoke A–D: gradient/freeze/save/load/replay | PASS |
+| Guard sau save, load, replay và cuối workflow được gọi | PASS |
+| Giả lập thiếu commit sau replay phải dừng và ghi resources FAIL | PASS |
+| Ngắt/resume epoch 1→2, state khớp nhánh liên tục | PASS |
+| Từ chối resume khi LR thay đổi | PASS |
+| Final khởi tạo độc lập, nhận config từ pilot đã completed | PASS |
+| Evaluate/predictions nhất quán, xử lý AUC thiếu lớp | PASS |
+| RUN_TEST=False ngăn truy cập loader test | PASS |
+| Demo Top-5 và JSON đầu ra | PASS |
+
+Không chuyển PASS tổng hợp thành PASS GPU hoặc accuracy thật; D/GPU và train dài vẫn chưa được xác nhận.
+
+## 16/11/2026 — Resource probe A, ngoài ma trận smoke
+
+Nguồn: [lan_9/history](../outputs/runs/lan_9/history.json), [verification](../outputs/runs/lan_9/verification.json),
+[resource samples](../outputs/runs/lan_9/resource_samples.json). Đây là thử năng lực chạy, không phải chọn LR.
+ResNet freeze, 45.000 train/5.000 val, 1 epoch, batch 16, AMP train/FP32 val, workers 0.
+Train acc 58,73%, val acc 64,16%, thời gian train+val 173,57 giây; 2813 update, AMP skip 0.
+Đã kiểm chứng best/last cùng epoch/weights; backbone/BN khớp pretrained, counter BN legacy vẫn 0.
+Quan sát 18 mẫu: GPU dùng 342–494 MiB, commit thấp nhất mẫu 4736 MiB; commit cuối 4672 MiB.
+Số GPU là snapshot toàn GPU, không khẳng định peak allocator; không suy ra VRAM của fine-tune ViT.
+Không có guard stop/NaN/Inf/OOM trong lượt hoàn tất. Đạt khả năng chạy A ở cấu hình này.
+Giữ duplicate/split cũ chỉ cho probe, không mở test, không dùng điểm val để chọn LR final.

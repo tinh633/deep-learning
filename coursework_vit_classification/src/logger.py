@@ -62,14 +62,15 @@ def save_json(path, value):
     temporary.replace(path)
 
 
-def create_run(settings):
+def create_run(settings, folder=None):
     runs = OUTPUT_DIR / 'runs'
     runs.mkdir(exist_ok=True, parents=True)
-    number = 1
-    while (runs / f'lan_{number}').exists():
-        number += 1
-    folder = runs / f'lan_{number}'
-    folder.mkdir()
+    if folder is None:
+        number = 1
+        while (runs / f'lan_{number}').exists():
+            number += 1
+        folder = runs / f'lan_{number}'
+        folder.mkdir()
     log = logging.getLogger(str(folder))
     log.setLevel(logging.INFO)
     log.propagate = False
@@ -86,14 +87,15 @@ def create_run(settings):
                     memory_at_start=memory_snapshot(),
                     source_sha256={p.name: hashlib.sha256(p.read_bytes()).hexdigest()
                                    for p in (PROJECT / 'src').glob('*.py')})
-    save_json(folder / 'config.json', settings)
+    if not (folder / 'config.json').exists():
+        save_json(folder / 'config.json', settings)
     log.info('Config: %s', json.dumps(settings, ensure_ascii=False))
     return folder, log
 
 
-def save_checkpoint(path, model, optimizer, scaler, epoch, generator, settings):
+def save_checkpoint(path, model, optimizer, scaler, epoch, generator, settings, extra=None):
     state = dict(model=model.state_dict(), optimizer=optimizer.state_dict(),
-                 scaler=scaler.state_dict(), epoch=epoch, settings=settings,
+                 scaler=scaler.state_dict(), epoch=epoch, settings=settings, extra=extra,
                  python_rng=random.getstate(), numpy_rng=np.random.get_state(),
                  torch_rng=torch.get_rng_state(), loader_rng=generator.get_state(),
                  cuda_rng=torch.cuda.get_rng_state_all() if torch.cuda.is_available() else None)
@@ -102,9 +104,23 @@ def save_checkpoint(path, model, optimizer, scaler, epoch, generator, settings):
     temporary.replace(path)
 
 
-def load_checkpoint(path, model, optimizer, scaler, generator):
+def read_checkpoint(path):
     # Chỉ nạp checkpoint local do pipeline này tạo, không nạp pickle không rõ nguồn.
     state = torch.load(path, mmap=True, map_location='cpu', weights_only=False)
+    if not {'model', 'epoch', 'settings'} <= state.keys():
+        raise ValueError('Checkpoint thiếu model/epoch/settings')
+    return state
+
+
+def load_checkpoint(path, model, optimizer, scaler, generator, expected=None):
+    state = read_checkpoint(path)
+    if expected is not None:
+        keys = ('phase', 'purpose', 'experiment', 'model', 'strategy', 'lr', 'weight_decay', 'batch_size',
+                'seed', 'split_sha256', 'epochs', 'preprocessing', 'candidate', 'selected_from',
+                'duplicate_policy', 'use_amp', 'workers', 'classes')
+        mismatch = [key for key in keys if state['settings'].get(key) != expected.get(key)]
+        if mismatch:
+            raise ValueError(f'Resume không cùng cấu hình: {mismatch}')
     optimizer.zero_grad(set_to_none=True)
     optimizer.state.clear()
     model.load_state_dict(state['model'], strict=True)
@@ -117,3 +133,20 @@ def load_checkpoint(path, model, optimizer, scaler, generator):
     if state['cuda_rng'] is not None and torch.cuda.is_available():
         torch.cuda.set_rng_state_all(state['cuda_rng'])
     return state['epoch']
+
+
+def resolve_run(name):
+    if not isinstance(name, str) or not name.startswith('lan_') or not name[4:].isdigit():
+        raise ValueError('Run phải có dạng lan_N')
+    folder = OUTPUT_DIR / 'runs' / name
+    if not folder.is_dir():
+        raise FileNotFoundError(folder)
+    return folder
+
+
+def latest_checkpoint(folder):
+    candidates = [p for p in (folder / 'best.pt', folder / 'last.pt') if p.exists()]
+    if not candidates:
+        raise FileNotFoundError('Không có checkpoint để resume')
+    # Best cũng lưu full state; dùng nó nếu bị ngắt sau best nhưng trước last.
+    return max(candidates, key=lambda p: read_checkpoint(p)['epoch'])

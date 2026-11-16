@@ -1,6 +1,6 @@
 # Design — Thiết kế và kế hoạch triển khai
 
-Cập nhật: 14/11/2026. Đã có model/loader/logger và smoke; tuning/final/evaluate/demo còn là thiết kế.
+Cập nhật: 16/11/2026. Code các bước đã có; chưa chạy pilot/final hoặc official test trên model thật.
 Giảng viên đã xác nhận ViT classification trên CIFAR-100, không kết hợp Anti Face Deepfake.
 Định nghĩa bài toán: [Define](../define/Requirements_Analysis.md). Hiện trạng: [progress](../progress.md).
 
@@ -8,7 +8,6 @@ Giảng viên đã xác nhận ViT classification trên CIFAR-100, không kết 
 
 Pipeline local theo bước, dùng chung data/model/config, lưu artifact để báo cáo và demo đọc lại.
 Không xây backend service hoặc REST API trong phạm vi hiện tại.
-
 ```mermaid
 flowchart LR
   A[CIFAR-100] --> B[Kiểm tra + split + EDA]
@@ -31,6 +30,7 @@ flowchart LR
 | data.py | Dataset, split, preprocessing, DataLoader | data/ và split JSON |
 | model.py | Nạp pretrained, thay head, freeze/fine-tune | Weights; trả model và metadata |
 | logger.py | Config/máy, log epoch, history và checkpoint | Một thư mục run riêng |
+| 0_smoke.py | Kiểm tra kỹ thuật và guard toàn workflow | Checklist/summary, không tuning |
 | 1_eda.py | Khảo sát data, RGB gzip và tọa độ 2D | eda/split/projection JSON và data/ |
 | 2_train.py | Setup, vòng train/val trực tiếp, resume | Best/last, history, log |
 | 3_evaluate.py | Nạp checkpoint, infer, tính metric | Metric và predictions theo split |
@@ -63,7 +63,8 @@ coursework_vit_classification/
 ├── README.md, requirements.txt
 ├── Coursework_Report.ipynb
 ├── docs/
-│   ├── progress.md, AI_usage.md, Audit_Log.md, CHANGELOG.md, src.md
+│   ├── progress.md, AI_usage.md, Audit_Log.md, CHANGELOG.md
+│   ├── src/                      # Một Markdown cho mỗi file Python
 │   ├── define/Requirements_Analysis.md
 │   └── design/
 │       ├── Implementation_Plan.md
@@ -73,7 +74,7 @@ coursework_vit_classification/
 │       └── ViT_B16.md
 ├── src/
 │   ├── config.py, data.py, model.py, logger.py
-│   └── 1_eda.py, 2_train.py, 3_evaluate.py, 4_demo.py
+│   └── 0_smoke.py, 1_eda.py, 2_train.py, 3_evaluate.py, 4_demo.py
 ├── visualization/explorer.html
 ├── data/                         # Dataset/pixel/cache local, không commit
 └── outputs/
@@ -101,7 +102,7 @@ Epoch log gồm train/val loss, accuracy, LR và thời gian; đầu run ghi c�
 ## 6. Interfaces/APIs — Giao diện nội bộ dự kiến
 
 Không triển khai HTTP API; giao diện chính là cấu hình Python, hàm dùng chung và artifact.
-Hàm đã có xem docs/src.md; build_model/loaders/save_checkpoint đã triển khai, write_epoch còn dự kiến.
+Giao diện đã có xem docs/src/README.md; script đánh số không dùng làm module import.
 
 | Giao diện | Input → output / quy ước |
 |---|---|
@@ -110,7 +111,7 @@ Hàm đã có xem docs/src.md; build_model/loaders/save_checkpoint đã triển 
 | build_loaders(batch_size, num_workers, train_images, val_images) | Train/val loaders và classes; không mở test |
 | build_model(name, strategy, pretrained) | Model 100 logits; metadata ghi riêng trong config run |
 | save_checkpoint(path, model, optimizer, scaler, epoch, generator, settings) | Ghi tạm rồi replace |
-| write_epoch(metrics, run_dir) | Một dòng log/epoch và history có epoch rõ ràng |
+| log.info(...) | Script ghi một dòng log/epoch và history/checkpoint có epoch rõ ràng |
 | model(images) | Tensor B×3×224×224 → logits B×100 |
 
 Config lưu model/weights, A–D, phase/candidate/LR, seed, split, preprocessing, optimizer và budget.
@@ -129,8 +130,8 @@ TensorBoard chưa là phụ thuộc bắt buộc; chỉ thêm khi cần, không 
 | M5 / tuần 4 | Report, demo, tái lập và trình bày | Run All an toàn, demo chạy, công bố giới hạn |
 
 Tuần là kế hoạch tương đối, không giả định đã hoàn tất theo ngày lịch; tiến độ thật ghi ở progress.
-Vai trò dự kiến: 1 tích hợp/train; 2 data/EDA; 3 test/checkpoint; 4 đánh giá; 5 demo; 6 report/tái lập.
-Chưa gán tên; người tích hợp chính rà soát đầu vào/đầu ra giữa các phần.
+Phân vai dự kiến: 1 tích hợp/protocol; 2–5 phụ trách A/B/C/D; 6 đánh giá/report/demo.
+Chưa gán tên; đầu việc và bàn giao: [Work_Allocation.md](Work_Allocation.md).
 
 ## 8. Technical risks — Rủi ro và quyết định còn mở
 

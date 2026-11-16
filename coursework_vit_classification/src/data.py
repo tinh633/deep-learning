@@ -53,11 +53,7 @@ def build_loaders(batch_size, num_workers=0, train_images=None, val_images=None)
         transforms.ToTensor(),
         transforms.Normalize(IMAGENET_MEAN, IMAGENET_STD),
     ])
-    val_transform = transforms.Compose([
-        transforms.Resize((IMAGE_SIZE, IMAGE_SIZE), antialias=True),
-        transforms.ToTensor(),
-        transforms.Normalize(IMAGENET_MEAN, IMAGENET_STD),
-    ])
+    val_transform = evaluation_transform()
     training = CIFAR100(str(DATA_DIR), train=True, transform=train_transform, download=False)
     validation = copy(training)
     validation.transform = val_transform
@@ -75,3 +71,35 @@ def build_loaders(batch_size, num_workers=0, train_images=None, val_images=None)
                             shuffle=False, num_workers=num_workers,
                             generator=torch.Generator().manual_seed(SEED))
     return train_loader, val_loader, training.classes
+
+
+def evaluation_transform():
+    return transforms.Compose([
+        transforms.Resize((IMAGE_SIZE, IMAGE_SIZE), antialias=True),
+        transforms.ToTensor(),
+        transforms.Normalize(IMAGENET_MEAN, IMAGENET_STD),
+    ])
+
+
+def build_evaluation_loader(split, batch_size, num_workers=0, maximum=None):
+    if split not in ('train', 'validation', 'test'):
+        raise ValueError('split phải là train, validation hoặc test')
+    dataset = CIFAR100(str(DATA_DIR), train=split != 'test',
+                      transform=evaluation_transform(), download=False)
+    if split == 'test':
+        ids = list(range(len(dataset)))
+    else:
+        train_ids, val_ids = load_split(dataset.targets)
+        ids = train_ids if split == 'train' else val_ids
+    if maximum is not None:
+        if not isinstance(maximum, int) or maximum < 1:
+            raise ValueError('maximum phải là số nguyên dương hoặc None')
+        ids = ids[:maximum]
+    loader = DataLoader(Subset(dataset, ids), batch_size=batch_size, shuffle=False,
+                        num_workers=num_workers)
+    return loader, dataset.classes, ids
+
+
+def preprocessing_settings():
+    return dict(image_size=IMAGE_SIZE, mean=list(IMAGENET_MEAN), std=list(IMAGENET_STD),
+                interpolation='bilinear', antialias=True, train_horizontal_flip=True)
