@@ -67,3 +67,11 @@ def set_train_mode(model, strategy):
         model.train()
     else:
         raise ValueError('strategy phải là freeze hoặc fine_tune')
+
+
+def model_from_checkpoint(state, device):
+    settings = state['settings']
+    with torch.device('meta'):
+        model = build_model(settings['model'], settings['strategy'], pretrained=False)
+    model.load_state_dict(state['model'], assign=True, strict=True)
+    return model.to(device).eval()

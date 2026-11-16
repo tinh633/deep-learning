@@ -1,9 +1,10 @@
 # Chiến lược huấn luyện và tuning hyperparameter
 
-Cập nhật: 14/11/2026. Đã bắt đầu smoke; pilot/final vẫn là kế hoạch chưa thực thi.
+Cập nhật: 16/11/2026. A resource_probe hoàn tất; pilot chọn LR và final vẫn chưa thực thi.
 Phạm vi ViT/CIFAR-100 đã được giảng viên xác nhận.
 Liên quan: [Define](../define/Requirements_Analysis.md), [Design](Implementation_Plan.md),
 [ResNet-50](ResNet50.md), [ViT-B/16](ViT_B16.md).
+Quy trình bàn giao và phân vai nhóm 6 người: [Work_Allocation.md](Work_Allocation.md).
 
 ## 1. Mục tiêu và phạm vi
 
@@ -99,6 +100,7 @@ Không đồng thời thay head, augmentation hoặc số layer được mở tr
 
 E lớn hơn T và được thống nhất trước khi bắt đầu final; cả bốn cùng số epoch dự kiến.
 Final khởi tạo lại pretrained/head/optimizer/RNG; không warm-start từ pilot.
+Đơn vị giao việc là một chiến lược: hai pilot → chọn LR bằng val → final khởi tạo mới → bàn giao đánh giá.
 Giữ các lựa chọn cố định đã công bố; thay đổi khác LR phải ghi thành thay đổi protocol.
 Best checkpoint theo max val accuracy, hòa thì min val loss, sau đó epoch sớm hơn.
 Last lưu epoch hoàn tất cùng trạng thái optimizer/RNG/scheduler/scaler nếu có để resume.
@@ -116,6 +118,7 @@ Một dòng log/epoch; có config/máy/model/precision, history, best.pt và las
 ## 8. Ngân sách, tracking và những gì chưa chốt
 
 Tổng dự kiến: **8 pilot ngắn + 4 final đầy đủ**, ngoài các kiểm tra smoke kỹ thuật.
+Lượt thử tài nguyên dùng purpose=resource_probe được theo dõi riêng, không tính pilot chọn LR hoặc kết quả chính.
 Chi phí train gần đúng là 8T + 4E epoch, nhưng mỗi model/chế độ có thời gian và VRAM khác nhau.
 Một seed/cấu hình chưa đủ đánh giá độ ổn định; không thêm nhiều seed trong phạm vi ban đầu.
 Đây là mở rộng kế hoạch so với chỉ 4 final; cần kiểm tra đủ thời gian sau smoke, không tự giảm ngân sách.
@@ -126,4 +129,4 @@ Mỗi lượt có thư mục riêng; bảng pilot ghi LR, best epoch, val accura
 Không tạo run hoặc số liệu rỗng trước khi chạy; không ghi đè kết quả cũ.
 
 Còn chốt: GPU, duplicate policy, hai cặp LR, T/E, batch/AMP/BN, AdamW/WD và scheduler.
-2_train.py mới có smoke; chưa có tuning/final. Bằng chứng smoke xem Audit_Log, không dùng số smoke làm kết quả cuối.
+Smoke ở 0_smoke.py; 2_train.py có pilot/final được chặn mặc định. Chưa chạy thật; bằng chứng kỹ thuật ở Audit_Log.

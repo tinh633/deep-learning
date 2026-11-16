@@ -1,0 +1,24 @@
+{
+  "scope": "synthetic CPU integration only; no real pretrained/CIFAR/test inference",
+  "date": "2026-11-16",
+  "returncode": 0,
+  "passed": true,
+  "tests": [
+    "smoke_matrix_and_post_replay_memory_guard",
+    "train_interrupt_resume_exact_state_final_evaluate_demo",
+    "reject_resource_probe_for_final_selection"
+  ],
+  "cuda_used": false,
+  "test_sha256": "fbff347c88d6e614d8251e91c16f034a5d7235721f2d455bd3be7621114a9063",
+  "source_sha256": {
+    "0_smoke.py": "6f8cd42e041802a89c0a080346e66f8b2b59ff5fbda13c61d1e212c77a0dc2a6",
+    "1_eda.py": "cf1dcd8cdbec29c5c7b05469bf3955493182d022632cbc236c23666c27fa1694",
+    "2_train.py": "ae89a9f20e9c0787f06effd10a309b2982af583bf4fd7c2cae3870bbc1701fb0",
+    "3_evaluate.py": "4874804aec565ee0b3a18d98cb9c9e2bea56f8c22481e928a63e2d5d8a3dcae9",
+    "4_demo.py": "6a6c2f3c2b831ccf0eb5ef4ddd85734a1dc5671d1afcd4a257cc641de65b33ac",
+    "config.py": "d35fdd924c13ff762328664850d2e6967824ec7fcecd03b243cad782b0f7ace9",
+    "data.py": "299722b142999203726af8e5c09a8f35e9d545b9903f2f9e9c11eac83c0cb96c",
+    "logger.py": "966d08d7b83e3c52eadb7cbf98217af9dee9bf13c1bb8c1b9cb221d3f02f56f9",
+    "model.py": "037a3794631a9c2cea96372aa4ec4db114ef05e980eadd850f8e7357e074b2f3"
+  }
+}

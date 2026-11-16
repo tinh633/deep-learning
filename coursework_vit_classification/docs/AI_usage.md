@@ -49,3 +49,16 @@
 - Audit lưu kết quả thực; changelog ghi sửa code/pipeline; chưa tuning/train chính thức hoặc push.
 - Review nêu giới hạn guard sau replay và bias thời gian batch; giữ raw report, cập nhật chú thích audit.
 - Chuẩn bị xuất bản coursework theo phạm vi được duyệt, giữ HTML mới trên remote bằng fast-forward.
+
+## 16/11/2026 — Source và tài liệu per-file
+
+- Hoàn thiện code train/evaluate/demo, tách smoke, bổ sung guard cuối workflow và kiểm tra resume.
+- Chuyển mô tả tổng hợp thành docs/src/README.md và từng file Markdown 5W1H theo source.
+- Thêm kiểm tra hồi quy CPU bằng model/dữ liệu tổng hợp; không coi đó là lượt train/test CIFAR-100.
+- Chưa chạy tuning/final, test thật hoặc commit/push giai đoạn mới.
+- Bổ sung mô tả tests/test_pipeline.py trong docs/src/test_pipeline.md, đối chiếu code và report hiện có; chỉ đổi tài liệu.
+- Rà soát Markdown và chuyển mục Which sang mô tả model/dataset/công cụ/cấu hình; đồng bộ quy tắc, không sửa code thực thi.
+- Chạy thử A một epoch đầy đủ theo phạm vi resource_probe; không dùng để chọn LR, test hoặc kết quả cuối.
+- Lan_9 hoàn tất 45k/5k, val 64,16%; đối chiếu checkpoint/backbone/BN và 2813 optimizer steps, lưu verification và telemetry.
+- Ghi quy trình tuning → chọn val → final khởi tạo lại, phân vai 6 người và tiêu chí bàn giao trong Work_Allocation.md; chưa gán tên hoặc chạy thêm.
+- Xuất bản theo phạm vi được duyệt: coursework và quy tắc liên quan trên cousework; chỉ text artifact, không dataset/weights.

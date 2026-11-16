@@ -1,0 +1,12 @@
+{
+  "best_last_model_equal": true,
+  "frozen_parameters_and_bn_equal_pretrained": true,
+  "zero_initialized_bn_counters": 53,
+  "optimizer_steps": [
+    2813.0,
+    2813.0
+  ],
+  "expected_batches": 2813,
+  "phase": "resource_probe; no test",
+  "checkpoint_epoch": 1
+}
