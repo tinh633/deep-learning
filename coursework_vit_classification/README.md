@@ -15,6 +15,7 @@ Chưa chạy tuning hoặc train chính thức; cần chốt duplicate policy v�
 - [Ghi nhận hỗ trợ AI](docs/AI_usage.md).
 - [Audit log smoke run](docs/Audit_Log.md) và [changelog code/pipeline](docs/CHANGELOG.md).
 - [Source workflow — 5W1H từng file](docs/src/README.md).
+- [Checkpoint Git LFS — tải, phạm vi và cách sử dụng](docs/Checkpoints.md).
 
 ## Chạy dữ liệu và EDA
 

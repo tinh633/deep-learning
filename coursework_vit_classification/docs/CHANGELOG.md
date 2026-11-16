@@ -64,4 +64,11 @@ Audit chỉ ghi kết quả kiểm tra; lịch sử hỗ trợ AI nằm ở [AI_
 - Final từ chối chọn LR từ checkpoint purpose=resource_probe; resume cũng đối chiếu purpose.
 - Giữ default config chưa cho train dài; probe dùng runtime overrides, tham số thực được lưu trong run.
 
+## 16/11/2026 — Chia sẻ checkpoint bằng Git LFS
+
+- Cho phép track đúng best.pt/last.pt của coursework, không thay file hoặc migrate lịch sử Git.
+- Giữ ignore dataset/cache/replay_reference; tạo manifest dung lượng/hash và hướng dẫn tải/sử dụng.
+- Kiểm tra 7 checkpoint có đủ model/optimizer/scaler/RNG, 100 class labels và head phù hợp.
+- Smoke/resource probe được đánh dấu riêng, chưa có final hoặc official test.
+
 Khi gần 150 dòng, lưu lịch sử cũ vào docs/archive/changelog_<giai_doan>.md và giữ liên kết tại đây.

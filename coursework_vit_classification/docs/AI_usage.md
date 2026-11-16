@@ -62,3 +62,4 @@
 - Lan_9 hoàn tất 45k/5k, val 64,16%; đối chiếu checkpoint/backbone/BN và 2813 optimizer steps, lưu verification và telemetry.
 - Ghi quy trình tuning → chọn val → final khởi tạo lại, phân vai 6 người và tiêu chí bàn giao trong Work_Allocation.md; chưa gán tên hoặc chạy thêm.
 - Xuất bản theo phạm vi được duyệt: coursework và quy tắc liên quan trên cousework; chỉ text artifact, không dataset/weights.
+- Yêu cầu bổ sung checkpoint: kiểm tra 7 best/last, head 100 lớp và cấu trúc resume; tạo manifest SHA-256, cấu hình LFS và hướng dẫn lấy về.

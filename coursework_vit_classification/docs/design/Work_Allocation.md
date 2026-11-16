@@ -59,7 +59,7 @@ Chỉ chạy code hiện có sau khi khai báo cấu hình rõ ràng; không c�
 Mã A_LR1/A_final là nhãn logic; thư mục thực vẫn lan_N theo config run.
 Không ghi đè các lan_N khi gộp từ máy khác; giữ bảng ánh xạ run nguồn và vị trí sau khi tích hợp.
 Các tham chiếu SELECTED_FROM trong checkpoint phải truy được về pilot nguồn qua bảng ánh xạ.
-Dataset/cache không commit; checkpoint trao đổi theo cách nhóm thống nhất, không tự bỏ ignore .pt.
+Dataset/cache không commit; best/last chia sẻ bằng Git LFS, xem [Checkpoints.md](../Checkpoints.md); file đối chiếu vẫn local.
 
 ## 4. Điều kiện nhận việc và nghiệm thu
 
