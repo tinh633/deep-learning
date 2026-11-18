@@ -1,7 +1,7 @@
 # Audit log — Checklist smoke run
 
 18/11: đổi CNN sang ConvNeXt-Base; các PASS và số đo ResNet dưới đây là lịch sử, không chuyển sang ConvNeXt.
-Smoke GPU ConvNeXt A/B: NOT_RUN; cần kiểm tra lại theo source hiện tại trước pilot.
+Smoke ConvNeXt A: lan_11 PASS sau khi giải phóng bộ nhớ; B: NOT_RUN. Lỗi lan_10 giữ nguyên.
 
 Checklist ngày 10/11/2026 được giữ làm kế hoạch; kết quả thực ngày 14/11 nằm ở phần cuối.
 Chiến lược: [Training_Strategy.md](design/Training_Strategy.md).
@@ -117,8 +117,8 @@ Không chuyển PASS tổng hợp thành PASS GPU hoặc accuracy thật; D/GPU 
 
 ## 16/11/2026 — Resource probe A, ngoài ma trận smoke
 
-Nguồn: [lan_9/history](../outputs/runs/lan_9/history.json), [verification](../outputs/runs/lan_9/verification.json),
-[resource samples](../outputs/runs/lan_9/resource_samples.json). Đây là thử năng lực chạy, không phải chọn LR.
+Lan_9 ResNet lịch sử đã xóa ngày 18/11 theo yêu cầu; bằng chứng cũ ở commit 6bf7dcc, không liên kết run mới.
+Đây là thử năng lực chạy cũ, không phải chọn LR hoặc kết quả ConvNeXt.
 ResNet freeze, 45.000 train/5.000 val, 1 epoch, batch 16, AMP train/FP32 val, workers 0.
 Train acc 58,73%, val acc 64,16%, thời gian train+val 173,57 giây; 2813 update, AMP skip 0.
 Đã kiểm chứng best/last cùng epoch/weights; backbone/BN khớp pretrained, counter BN legacy vẫn 0.
@@ -126,3 +126,16 @@ Quan sát 18 mẫu: GPU dùng 342–494 MiB, commit thấp nhất mẫu 4736 MiB
 Số GPU là snapshot toàn GPU, không khẳng định peak allocator; không suy ra VRAM của fine-tune ViT.
 Không có guard stop/NaN/Inf/OOM trong lượt hoàn tất. Đạt khả năng chạy A ở cấu hình này.
 Giữ duplicate/split cũ chỉ cho probe, không mở test, không dùng điểm val để chọn LR final.
+
+## 18/11/2026 — ConvNeXt A smoke
+
+- Lan_9 ResNet đã xóa theo yêu cầu; lan_9 mới FAIL khi tải weights: sandbox socket WinError 10013, 0 batch.
+- Tải riêng weights chính thức thành công, checksum prefix 6075fbad; không đổi model hoặc nguồn weights.
+- [Lan_10 summary](../outputs/runs/lan_10/summary.json): batch 2, AMP, workers 0, 20 train/4 val, GPU RTX3050.
+- Source/split, trainable 102.500 và optimizer PASS; hoàn tất 1 batch rồi guard dừng.
+- Windows commit còn 2942,83 MiB (<3072); RAM 3319,13 MiB. Resources FAIL, chưa val/save/replay/stability.
+- Tiến trình đã thoát; GPU trở về 0 MiB. Không giảm guard hoặc tự chạy lại liên tục, chưa pilot/final.
+- Sau khi được phép đóng Zalo/Discord, commit trước khởi chạy mới tăng lên khoảng 6,3 GiB.
+- [Lan_11 summary](../outputs/runs/lan_11/summary.json): batch 16, 32 train/16 val; 2 batch, đủ 12 checks PASS.
+- Peak allocated train/workflow 511,22/607,22 MiB; guard cuối RAM 4028,70 MiB, commit 3716,92 MiB.
+- Save/load/replay và backbone/LayerNorm bất biến đạt; không suy ra độ hội tụ hoặc ổn định 20 epoch.

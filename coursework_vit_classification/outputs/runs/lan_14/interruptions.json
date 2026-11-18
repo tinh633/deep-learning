@@ -1,0 +1,17 @@
+[
+  {
+    "at": "2026-11-18 16:39",
+    "last_completed_epoch": 19,
+    "summary": {
+      "status": "failed",
+      "phase": "final",
+      "error": "RuntimeError: Dừng trước bước nặng vì RAM/Windows commit thấp: {'ram_available_mib': 4411.03515625, 'process_rss_mib': 1042.01953125, 'commit_available_mib': 3061.44921875}",
+      "memory_at_end": {
+        "ram_available_mib": 4410.9921875,
+        "process_rss_mib": 1042.1484375,
+        "commit_available_mib": 3061.61328125
+      }
+    },
+    "resume_plan": "same run, same settings, restart epoch 20 from last.pt"
+  }
+]

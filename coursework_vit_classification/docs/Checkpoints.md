@@ -1,8 +1,8 @@
 # Tải và sử dụng checkpoint
 
-Cập nhật: 16/11/2026. Có 7 full checkpoint được lưu bằng Git LFS, tổng khoảng 1,21 GiB.
+Cập nhật 18/11/2026: manifest có 12 checkpoint local (~3,32 GiB), gồm lịch sử và A mới sau xóa lan_9 ResNet.
 Danh sách chính xác, dung lượng và SHA-256: [outputs/checkpoints.json](../outputs/checkpoints.json).
-Đây là checkpoint lịch sử ResNet/ViT; chưa có ConvNeXt hoặc final của cặp mới ngày 18/11.
+ConvNeXt smoke/pilot/final đã hoàn tất và kiểm chứng local, chưa commit/upload các kết quả mới.
 18/11: đã upload đủ 7 checkpoint Git LFS (1,3 GB) cùng code ConvNeXt tại commit d5e6dfc.
 
 ## 1. Các file được chia sẻ
@@ -14,13 +14,17 @@ Danh sách chính xác, dung lượng và SHA-256: [outputs/checkpoints.json](..
 | lan_4 | last.pt | ResNet-50 freeze | Smoke 20 ảnh train, recheck |
 | lan_5 | last.pt | ViT-B/16 freeze | Smoke 20 ảnh train |
 | lan_8 | last.pt | ResNet-50 fine-tune | Smoke 20 ảnh train, recheck |
-| lan_9 | best.pt và last.pt | ResNet-50 freeze | Resource probe: 1 epoch 45k train/5k val |
+| lan_11 | last.pt | ConvNeXt-Base freeze | Smoke 32 ảnh train, batch 16; chưa upload |
+| lan_12 | best.pt / last.pt | ConvNeXt-Base freeze | Pilot LR1, 5 epoch; chưa upload |
+| lan_13 | best.pt / last.pt | ConvNeXt-Base freeze | Pilot LR2, 5 epoch; chưa upload |
+| lan_14 | best.pt / last.pt | ConvNeXt-Base freeze | Final 20 epoch, best epoch 9; chưa upload |
 
 Checkpoint smoke ghi epoch=1 nhưng đó là mini-epoch, không phải một lượt qua đủ 45.000 ảnh.
-lan_9 mới là một epoch đầy đủ; validation accuracy 64,16%, chưa test, chưa tuning LR.
+Lan_9 ResNet cũ đã xóa; tên lan_9 mới là smoke ConvNeXt thất bại tải mạng, không có checkpoint.
 lan_3 bị ngắt, lan_6/7 không hoàn tất checkpoint; không tạo file để bù kết quả thiếu.
 replay_reference.pt chỉ chứa state đối chiếu của bài kiểm tra, không chia sẻ như checkpoint sử dụng.
 Dataset, pixel và cache pretrained tiếp tục được ignore.
+Model A dùng tiếp: lan_14/best.pt; xem [A_Results](A_Results.md), không chọn checkpoint bằng test.
 
 ## 2. Tải bằng Git LFS
 
@@ -34,23 +38,23 @@ git lfs pull
 git lfs ls-files
 ```
 
-Để chỉ lấy lượt A resource probe, có thể dùng:
+Ví dụ chỉ lấy checkpoint smoke ViT lịch sử:
 
 ```powershell
-git lfs pull --include="coursework_vit_classification/outputs/runs/lan_9/*.pt"
+git lfs pull --include="coursework_vit_classification/outputs/runs/lan_5/*.pt"
 ```
 
 Nếu file .pt chỉ chứa vài dòng bắt đầu bằng version https://git-lfs..., đó là pointer,
 chưa phải weights; cần git lfs pull trước khi torch.load.
 Không tải file từ trang xem pointer rồi cho rằng đã lấy model đầy đủ.
 
-## 3. Giới hạn tương thích của lan_9
+## 3. Giới hạn tương thích của ResNet lịch sử
 
-- Lan_9 dùng ResNet-50; code hiện chỉ hỗ trợ ConvNeXt-Base và ViT-B/16 nên từ chối nạp.
+- Checkpoint ResNet còn lại chỉ đọc với source cũ; code hiện chỉ hỗ trợ ConvNeXt-Base và ViT-B/16.
 - Muốn tái lập ResNet dùng source commit 8da0358 trong checkout riêng, không đổi metadata checkpoint.
 - Model mới phải được smoke/train và xuất checkpoint mới bằng pipeline hiện tại.
-- Giữ RUN_TEST=False; lan_9 là resource_probe phase tuning, không đủ điều kiện official test final.
-- Không dùng lan_9 làm SELECTED_FROM của final vì chưa qua quy trình chọn LR chính thức.
+- Giữ RUN_TEST=False; smoke/probe không đủ điều kiện official test final.
+- Không dùng smoke/probe làm SELECTED_FROM của final vì chưa qua quy trình chọn LR chính thức.
 
 Chi tiết: [demo](src/4_demo.md), [evaluate](src/3_evaluate.md), [resume](src/logger.md).
 Full checkpoint có model/optimizer/scaler, epoch, config và RNG; không phải chỉ state_dict đơn lẻ.

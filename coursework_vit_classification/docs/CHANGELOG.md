@@ -4,6 +4,17 @@ Ghi vấn đề/nhu cầu, thay đổi, lý do và cách kiểm chứng; không 
 Trạng thái hiện tại: [progress](progress.md). Checklist smoke: [Audit_Log](Audit_Log.md).
 Audit chỉ ghi kết quả kiểm tra; lịch sử hỗ trợ AI nằm ở [AI_usage](AI_usage.md).
 
+## 18/11/2026 — Khởi chạy A được duyệt
+
+- Xóa lan_9 ResNet, giữ lịch sử trong Git; tên lan_9 mới là lỗi tải mạng, không dùng như bằng chứng cũ.
+- Tải weights với quyền mạng ngoài sandbox; đóng Zalo/Discord theo chỉ dẫn, không đóng Code/hệ thống.
+- A smoke batch 16 đạt sau giải phóng commit; bật config A pilot theo protocol đã duyệt.
+- Controller tạm local chạy 2 pilot và final tuần tự, tự dừng khi child lỗi hoặc GPU/disk vượt ngưỡng.
+- Sửa kiểm tra disk của controller dùng str(path) theo psutil Windows; lỗi xảy ra trước khi run train được tạo.
+- Tách lịch sử progress sang file liên kết để giữ status hiện tại ngắn, không vượt 150 dòng.
+- Guard dừng giữa final epoch20; giữ checkpoint19, đóng lại ứng dụng theo quyền đã có và resume cùng run đủ epoch20.
+- Không sửa loop hoặc giảm guard; giữ interruptions.json và log; cấu hình sau hoàn tất chặn train lặp.
+
 ## 18/11/2026 — Thay CNN baseline bằng ConvNeXt-Base
 
 - A/B chuyển sang convnext_base; classifier[2] là Linear(1024,100), chỉ mở Linear ở A.

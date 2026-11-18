@@ -1,6 +1,6 @@
 # Design — Thiết kế và kế hoạch triển khai
 
-Cập nhật: 18/11/2026. ConvNeXt-Base/ViT-B16 đã đồng bộ; chưa smoke GPU CNN mới hoặc pilot/final.
+Cập nhật: 18/11/2026. A hoàn tất smoke, 2 pilot và final 20 epoch; B/C/D chưa có kết quả tích hợp.
 Giảng viên đã xác nhận ViT classification trên CIFAR-100, không kết hợp Anti Face Deepfake.
 Định nghĩa bài toán: [Define](../define/Requirements_Analysis.md). Hiện trạng: [progress](../progress.md).
 
@@ -143,8 +143,8 @@ Chưa gán tên; đầu việc và bàn giao: [Work_Allocation.md](Work_Allocati
 | ConvNeXt fine-tune tốn bộ nhớ | Smoke lại A/B; LayerNorm không có running stats như BatchNorm |
 | Train lâu hoặc bị ngắt | Đo pilot, lưu last/resume epoch; không hứa thời gian chưa đo |
 | Overfit, lệch cơ hội tuning | Cùng split/ngân sách epoch, tuning tương đương, không chọn theo test |
-| LR/WD/scheduler/batch/epoch chưa chốt | Đề xuất AdamW; chốt giá trị sau smoke, không tăng hàng loạt run |
+| Budget B/C/D cần xác nhận | A đã khóa theo Training_Strategy mục 9; không tự tăng số lượt hoặc suy VRAM từ A |
 | Attention bị diễn giải quá mức | Mở rộng sau; cần cơ chế lấy attention đúng, không coi là giải thích nhân quả |
 
 Inference benchmark cần cùng máy/batch/precision/warm-up; tách forward-only khỏi end-to-end.
-Chưa tuning/full train/test; kết quả smoke ở Audit_Log không đại diện chất lượng cuối.
+A đã tuning/final: xem A_Results.md trong docs; chưa test. Smoke ở Audit_Log không đại diện chất lượng cuối.

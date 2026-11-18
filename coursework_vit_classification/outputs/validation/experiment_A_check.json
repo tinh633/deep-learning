@@ -1,0 +1,93 @@
+{
+  "scope": "actual A pilots/final checkpoints, not test evaluation",
+  "runs": [
+    {
+      "run": "lan_12",
+      "epochs": 5,
+      "best_epoch": 5,
+      "best_val_accuracy": 0.8064,
+      "best_val_loss": 0.6950041233778,
+      "lr": 0.001,
+      "skipped_amp_steps": 0,
+      "recorded_train_val_seconds": 1696.7642941,
+      "checkpoints": [
+        {
+          "file": "best.pt",
+          "epoch": 5,
+          "sha256": "2b73f2768494c19c660499d627a3175dea85957dc35625a6fa91c13f35b3f94e",
+          "frozen_tensors_verified": 342,
+          "optimizer_steps": 14065
+        },
+        {
+          "file": "last.pt",
+          "epoch": 5,
+          "sha256": "84784af307ba323f4d2d97e6c3d6a4949103ebea43cae1fff62fa9692c08d0f3",
+          "frozen_tensors_verified": 342,
+          "optimizer_steps": 14065
+        }
+      ]
+    },
+    {
+      "run": "lan_13",
+      "epochs": 5,
+      "best_epoch": 5,
+      "best_val_accuracy": 0.8078,
+      "best_val_loss": 0.6335281094312668,
+      "lr": 0.0003,
+      "skipped_amp_steps": 0,
+      "recorded_train_val_seconds": 1690.0496945000004,
+      "checkpoints": [
+        {
+          "file": "best.pt",
+          "epoch": 5,
+          "sha256": "3704682919467c5511c43e5033fda0ba4b448cb1310f167212c7a8734a53fd13",
+          "frozen_tensors_verified": 342,
+          "optimizer_steps": 14065
+        },
+        {
+          "file": "last.pt",
+          "epoch": 5,
+          "sha256": "e2b93e75d068b7131858b63863777b22734a5069cdd4870c035003ee9e3bd32d",
+          "frozen_tensors_verified": 342,
+          "optimizer_steps": 14065
+        }
+      ]
+    },
+    {
+      "run": "lan_14",
+      "epochs": 20,
+      "best_epoch": 9,
+      "best_val_accuracy": 0.8146,
+      "best_val_loss": 0.6137656047999859,
+      "lr": 0.0003,
+      "skipped_amp_steps": 18,
+      "recorded_train_val_seconds": 6725.019253100005,
+      "checkpoints": [
+        {
+          "file": "best.pt",
+          "epoch": 9,
+          "sha256": "fc5882c99f0fa97ec1526422daa36b616fa1fc5094e712b7b4828f0e99e5eb0d",
+          "frozen_tensors_verified": 342,
+          "optimizer_steps": 25314
+        },
+        {
+          "file": "last.pt",
+          "epoch": 20,
+          "sha256": "fcc71f8913733c7aa5065bd719581be5c76315ffd188d34d59d859de687ef128",
+          "frozen_tensors_verified": 342,
+          "optimizer_steps": 56242
+        }
+      ]
+    }
+  ],
+  "checks": [
+    "20 unique final epochs",
+    "best/last match validation rule",
+    "frozen tensors equal ImageNet weights",
+    "optimizer steps account for AMP skips",
+    "checkpoint RNG/scaler/history present",
+    "final first 5 epoch metrics match independently initialized LR2 pilot",
+    "no test evaluation artifacts"
+  ],
+  "status": "passed"
+}

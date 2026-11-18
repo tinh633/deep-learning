@@ -17,7 +17,9 @@ Source: [config.py](../../src/config.py).
 - EXPERIMENTS: A/C freeze, B/D fine-tune; ConvNeXt-Base và ViT-B/16.
 - Smoke: 20 train/4 val, batch 2, workers 0, AMP CUDA; LR 1e-3/1e-4 và WD=0 chỉ để kiểm tra.
 - Train: PHASE=tuning/final, EXPERIMENT, BATCH_SIZE/LR/WD/EPOCHS phải được khai báo rõ.
-- TRAINING_APPROVED=False và DUPLICATE_POLICY=None mặc định chặn train dài.
+- A hoàn tất: PHASE=final, CANDIDATE=None, SELECTED_FROM=lan_13, RESUME_RUN=lan_14, LR=3e-4, 20 epoch.
+- TRAINING_APPROVED=False để tránh chạy lặp; không phải protocol chưa chốt. Chỉ bật khi chủ động train/resume.
+- Batch 16, LR1=1e-3, LR2=3e-4, WD=0, pilot 5 epoch; duplicate policy giữ split và công bố, không scheduler.
 - Tuning cần CANDIDATE=LR1/LR2; final cần SELECTED_FROM là pilot đã hoàn tất và CANDIDATE=None.
 - RESUME_RUN là tên lan_N; resume không tự đổi LR, epoch budget hoặc phase.
 - RUN_PURPOSE=resource_probe đánh dấu lượt đo khả năng chạy, không dùng chọn LR cho final.

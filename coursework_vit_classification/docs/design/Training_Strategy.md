@@ -1,6 +1,6 @@
 # Chiến lược huấn luyện và tuning hyperparameter
 
-Cập nhật: 18/11/2026. Thay ResNet bằng ConvNeXt-Base; phải smoke lại A/B, chưa có pilot/final mới.
+Cập nhật: 18/11/2026. A hoàn tất smoke, 2 pilot và final 20 epoch; B/C/D chưa có kết quả tích hợp.
 Phạm vi ViT/CIFAR-100 đã được giảng viên xác nhận.
 Liên quan: [Define](../define/Requirements_Analysis.md), [Design](Implementation_Plan.md),
 [ConvNeXt-Base](ConvNeXt_Base.md), [ViT-B/16](ViT_B16.md).
@@ -129,4 +129,14 @@ Mỗi lượt có thư mục riêng; bảng pilot ghi LR, best epoch, val accura
 Không tạo run hoặc số liệu rỗng trước khi chạy; không ghi đè kết quả cũ.
 
 Còn chốt: GPU, duplicate policy, hai cặp LR, T/E, batch/AMP, AdamW/WD và scheduler.
-Smoke ở 0_smoke.py; 2_train.py có pilot/final được chặn mặc định. Chưa chạy thật; bằng chứng kỹ thuật ở Audit_Log.
+Smoke ở 0_smoke.py; 2_train.py có pilot/final. A đã duyệt tại mục 9; bằng chứng kỹ thuật ở Audit_Log.
+
+## 9. Protocol A được duyệt 18/11
+
+A: ConvNeXt-Base freeze, ImageNet1K_V1, head 100 lớp. LR1=1e-3, LR2=3e-4, mỗi pilot 5 epoch.
+Final 20 epoch khởi tạo mới; chọn LR bằng best val accuracy, hòa theo loss rồi LR1.
+AdamW, WD=0, không scheduler, seed 42, AMP, workers 0; batch 16 cần resource check đạt trước pilot.
+Giữ split hiện tại (45k/5k/10k), công bố 12 nhóm trùng xuyên split; không mở test trong bước này.
+Theo dõi và dừng khi lỗi NaN/Inf/OOM hoặc guard bộ nhớ; không hạ ngưỡng để ép chạy.
+Đây là duyệt cho A; B/C/D cần xác nhận cặp LR/batch/ngân sách tương ứng, không tự mở train trên máy này.
+Kết quả: [A_Results](../A_Results.md). LR2 thắng pilot; final best val 81,46% tại epoch 9, chưa test.

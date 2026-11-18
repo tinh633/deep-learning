@@ -74,3 +74,12 @@
 - Push d5e6dfc thành công lên cousework ngày 18/11, upload đủ 7 checkpoint LFS (1,3 GB); không còn blocker upload cũ.
 - Thêm Training_Monitor.ipynb đọc JSON, tách train/val, so sánh run, bảng trạng thái và refresh tùy chọn; không nạp model.
 - Chạy mọi code cell (refresh mặc định tắt), kiểm tra history thật, hai run tổng hợp, bộ lọc và JSON lỗi; xem ảnh biểu đồ; đã duyệt commit/push notebook lên cousework.
+- Xóa lan_9 ResNet theo yêu cầu, cập nhật manifest; chạy A smoke lan_9 lỗi mạng, tải weights chính thức rồi lan_10 dừng đúng guard commit 2942,83 MiB.
+- Đã duyệt A 2×5 pilot và final 20 epoch; chưa bắt đầu do smoke thiếu tài nguyên, đang chờ giải phóng bộ nhớ; không tự đóng ứng dụng hoặc hạ ngưỡng.
+- Được phép đóng ứng dụng: đã đóng Zalo/Discord, Chrome bị từ chối quyền; smoke lan_11 batch16 đạt, bắt đầu A_LR1 lan_12.
+- Controller local theo dõi nhiệt/disk, dừng theo lỗi và chọn LR bằng val rồi khởi tạo final mới; không test hoặc tự commit/push.
+- Hoàn tất pilot lan_12/13, chọn LR2; final lan_14 bị guard dừng giữa epoch20, giữ epoch19, giải phóng bộ nhớ rồi resume riêng epoch20.
+- Đủ 20 epoch, best val81,46% epoch9; kiểm chứng 6 best/last, frozen tensors, optimizer/RNG/history và reset final, cập nhật manifest và A_Results.md.
+- Giữ traceback/interruptions.json, GPU trở về 0 MiB; khóa train lặp bằng config, chưa test/commit/push kết quả mới.
+- Chạy lại notebook monitor trên 3 history thật (5/5/20 epoch), kiểm tra bảng 81,46% và xem ảnh biểu đồ; đồng bộ trạng thái Define/Design/README.
+- Được duyệt push kết quả A: kiểm tra lại SHA-256 toàn bộ 12 checkpoint, trạng thái completed, liên kết/Markdown/AST; chỉ xuất coursework và chỉ mục liên quan.

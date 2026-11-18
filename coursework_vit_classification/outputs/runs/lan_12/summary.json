@@ -1,0 +1,12 @@
+{
+  "status": "completed",
+  "phase": "tuning",
+  "epochs": 5,
+  "best_accuracy": 0.8064,
+  "best_loss": 0.6950041233778,
+  "memory_at_end": {
+    "ram_available_mib": 4682.578125,
+    "process_rss_mib": 1573.28515625,
+    "commit_available_mib": 4470.59375
+  }
+}

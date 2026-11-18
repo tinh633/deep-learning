@@ -21,10 +21,10 @@ EXPERIMENTS = {
     'D': {'model': 'vit_b_16', 'strategy': 'fine_tune'},
 }
 
-# Chỉ kiểm tra kỹ thuật; đây chưa phải thông số tuning/final đã chốt.
-PHASE = 'smoke'
+# A đã hoàn tất pilot/final; smoke có cấu hình riêng bên dưới.
+PHASE = 'final'
 RUN_PURPOSE = 'experiment'  # 'resource_probe' chỉ đo khả năng chạy, không dùng chọn LR final.
-SMOKE_EXPERIMENTS = ('A', 'B', 'C', 'D')
+SMOKE_EXPERIMENTS = ('A',)
 SMOKE_BATCH_SIZE = 2
 SMOKE_TRAIN_IMAGES = 20
 SMOKE_VAL_IMAGES = 4
@@ -34,19 +34,19 @@ SMOKE_WEIGHT_DECAY = 0.0
 NUM_WORKERS = 0
 USE_AMP = True
 
-# Chưa chốt protocol: khai báo rõ trước khi bật tuning/final, không tự dùng LR smoke.
-TRAINING_APPROVED = False
-DUPLICATE_POLICY = None  # Hỗ trợ 'keep_reported'; lọc duplicate cần một split version mới.
+# A được duyệt 18/11: smoke trước, LR1/LR2 mỗi 5 epoch, final 20 epoch khởi tạo mới.
+TRAINING_APPROVED = False  # A đã xong 20/20; chặn vô tình chạy lặp. Bật lại khi chủ động resume/train.
+DUPLICATE_POLICY = 'keep_reported'  # Giữ split và công bố các nhóm trùng; không đổi giữa pilot/final.
 EXPERIMENT = 'A'
 CANDIDATE = None  # 'LR1'/'LR2' khi PHASE='tuning'.
-SELECTED_FROM = None  # Tên run pilot được chọn khi PHASE='final'.
-BATCH_SIZE = None
-LEARNING_RATE = None
-WEIGHT_DECAY = None
-EPOCHS = None
-RESUME_RUN = None
+SELECTED_FROM = 'lan_13'  # LR2 được chọn theo validation.
+BATCH_SIZE = 16  # Chỉ bắt đầu sau khi kiểm tra tài nguyên đạt.
+LEARNING_RATE = 3e-4
+WEIGHT_DECAY = 0.0
+EPOCHS = 20
+RESUME_RUN = 'lan_14'
 
-EVAL_RUN = None
+EVAL_RUN = 'lan_14'
 EVAL_CHECKPOINT = 'best.pt'
 EVAL_SPLIT = 'validation'
 RUN_TEST = False
