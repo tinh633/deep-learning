@@ -83,3 +83,4 @@
 - Giữ traceback/interruptions.json, GPU trở về 0 MiB; khóa train lặp bằng config, chưa test/commit/push kết quả mới.
 - Chạy lại notebook monitor trên 3 history thật (5/5/20 epoch), kiểm tra bảng 81,46% và xem ảnh biểu đồ; đồng bộ trạng thái Define/Design/README.
 - Được duyệt push kết quả A: kiểm tra lại SHA-256 toàn bộ 12 checkpoint, trạng thái completed, liên kết/Markdown/AST; chỉ xuất coursework và chỉ mục liên quan.
+- Push 68641b3 thành công lên cousework, upload đủ 7 LFS mới (~2,46 GB); đồng bộ ghi nhận xuất bản, không kèm dataset/cache.

@@ -4,7 +4,7 @@
 chi tiết được ghi trong `progress.md` của từng practice.
 
 - [Lịch sử workspace](progress_old.md): ghi chép cũ, không phải trạng thái hiện tại.
-- [Coursework ViT](../coursework_vit_classification/docs/progress.md): A hoàn tất 2 pilot + final 20 epoch, best val 81,46%; checkpoint đã kiểm chứng, chưa test/commit kết quả.
+- [Coursework ViT](../coursework_vit_classification/docs/progress.md): A hoàn tất 2 pilot + final 20 epoch, best val 81,46%; checkpoint đã kiểm chứng và push cousework, chưa test.
 
 Nhánh cousework chỉ xuất bản coursework và quy tắc chung; lab/benchmark thuộc nhánh riêng.
 
