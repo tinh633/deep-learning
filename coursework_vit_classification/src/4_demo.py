@@ -1,5 +1,5 @@
 """What: Dự đoán một ảnh bằng checkpoint. Why: Demo đóng trong 100 lớp CIFAR-100.
-Who: Thành viên trình bày. When: Sau khi có checkpoint và chủ động chọn ảnh.
+Which: local image, saved checkpoint, Top-5. When: Sau khi có checkpoint và chủ động chọn ảnh.
 Where: Ảnh local, outputs/runs/lan_N/demo. How: Dùng chung model/transform, eval và Top-5.
 """
 import sys

@@ -1,0 +1,19 @@
+{
+  "date": "2026-11-18",
+  "scope": "actual torchvision meta architecture contracts plus synthetic CPU integration; no GPU smoke or pretrained download",
+  "exit_code": 0,
+  "tests": 3,
+  "log": "data/convnext_pipeline_test.log",
+  "source_sha256": {
+    "0_smoke.py": "1ddf15a1a9f7aa9e19a5002fb1e90f57d0809aa943595241c04431f92d975ec2",
+    "1_eda.py": "713e60ba899f1060513a949a50b43ba86604d344a3e4392210128fd76b136961",
+    "2_train.py": "6e4af03cfa283c5e588711fe3379a1d152acf8a71ab29130b5c9b4eddd9c52c8",
+    "3_evaluate.py": "faad9d5933705f57e2eea1d004bd30784b99aeee78404c36f3901b2050e20ea5",
+    "4_demo.py": "d4f38ac94019cbf29257ea4fb62054f9d084f66ce734784471c5ce85854f6961",
+    "config.py": "3d230d7643499bee6767405c792f530c0b7ba5c480f7f73733610d8986908514",
+    "data.py": "39379d7984ce1b8a08813b596932eca47277aed440b21600114225816dd92450",
+    "logger.py": "ab06a106d109fcfe94a622d0e721f6e78b6f636956069b1c5e0018a79a9284f7",
+    "model.py": "2632b63ea6a84d652d6872679d7f3c60ee117913316fd7825ef90aa6bff27a0a"
+  },
+  "test_sha256": "7dd69eb50eeec711aff6ba0e0e5cf2cd5cd91f4438196b3d839f1f5de3705970"
+}

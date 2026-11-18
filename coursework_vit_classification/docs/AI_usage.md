@@ -4,7 +4,7 @@
 
 - Phạm vi hỗ trợ: tổng hợp yêu cầu, thiết kế bốn thí nghiệm, kế hoạch và cấu trúc dự án.
 - Các quyết định được thống nhất: CIFAR-100, CNN/ViT với freeze và fine-tune toàn bộ.
-- Hướng model được ghi trong kế hoạch: ResNet-50 và ViT-B/16; tài nguyên cần smoke kiểm chứng.
+- Hướng hiện tại: ConvNeXt-Base và ViT-B/16; ghi nhận ResNet bên dưới là lịch sử trước 18/11.
 - Đã tạo file nguồn rỗng và notebook rỗng hợp lệ; chưa sinh pipeline huấn luyện.
 - Kiểm chứng: cấu trúc file, UTF-8, số dòng Markdown, liên kết và notebook JSON.
 - Chưa có kết quả accuracy, thời gian hoặc VRAM của coursework.
@@ -63,3 +63,11 @@
 - Ghi quy trình tuning → chọn val → final khởi tạo lại, phân vai 6 người và tiêu chí bàn giao trong Work_Allocation.md; chưa gán tên hoặc chạy thêm.
 - Xuất bản theo phạm vi được duyệt: coursework và quy tắc liên quan trên cousework; chỉ text artifact, không dataset/weights.
 - Yêu cầu bổ sung checkpoint: kiểm tra 7 best/last, head 100 lớp và cấu trúc resume; tạo manifest SHA-256, cấu hình LFS và hướng dẫn lấy về.
+
+## 18/11/2026 — Đồng bộ cặp model gần quy mô
+
+- Thay ResNet-50 bằng ConvNeXt-Base theo lựa chọn mới, giữ ViT-B16 và ma trận A–D.
+- Sửa head, freeze LayerNorm, stochastic depth, smoke fingerprint và chặn pilot khác kiến trúc.
+- Viết ConvNeXt_Base.md, cập nhật Define/Design/source docs và ghi rõ checkpoint ResNet là lịch sử.
+- Kiểm chứng cấu trúc torchvision trên meta và hồi quy CPU tổng hợp; không tải weights hoặc chạy GPU mới.
+- Chưa chốt budget hoặc train mới; đã duyệt commit/push cousework, kiểm tra lại evidence/hash và phạm vi trước xuất bản.

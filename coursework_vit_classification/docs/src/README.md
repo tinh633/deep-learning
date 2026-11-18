@@ -8,7 +8,7 @@ Các mục dùng What, Why, Which, When, Where, How; Which nêu lựa chọn mod
 |---|---|---|
 | config.py | [config.md](config.md) | Giá trị chung và các lựa chọn chưa được chốt |
 | data.py | [data.md](data.md) | Dataset, split, transforms và loaders |
-| model.py | [model.md](model.md) | ResNet/ViT, freeze/fine-tune, nạp checkpoint |
+| model.py | [model.md](model.md) | ConvNeXt/ViT, freeze/fine-tune, nạp checkpoint |
 | logger.py | [logger.md](logger.md) | Log, RAM guard, checkpoint và provenance |
 | 0_smoke.py | [0_smoke.md](0_smoke.md) | Kiểm tra kỹ thuật trước tuning |
 | 1_eda.py | [1_eda.md](1_eda.md) | Tải/khảo sát dữ liệu và HTML artifacts |

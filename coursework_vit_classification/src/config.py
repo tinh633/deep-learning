@@ -1,5 +1,5 @@
 """What: Đường dẫn và split CIFAR-100. Why: Dùng chung cấu hình dữ liệu.
-Who: data/EDA và pipeline sau này. When: Khi import.
+Which: CIFAR-100, ConvNeXt-Base/ViT-B16, A-D. When: Khi import.
 Where: data/, outputs/ của coursework. How: pathlib và hằng số tường minh.
 """
 from pathlib import Path
@@ -15,8 +15,8 @@ IMAGE_SIZE = 224
 IMAGENET_MEAN = (0.485, 0.456, 0.406)
 IMAGENET_STD = (0.229, 0.224, 0.225)
 EXPERIMENTS = {
-    'A': {'model': 'resnet50', 'strategy': 'freeze'},
-    'B': {'model': 'resnet50', 'strategy': 'fine_tune'},
+    'A': {'model': 'convnext_base', 'strategy': 'freeze'},
+    'B': {'model': 'convnext_base', 'strategy': 'fine_tune'},
     'C': {'model': 'vit_b_16', 'strategy': 'freeze'},
     'D': {'model': 'vit_b_16', 'strategy': 'fine_tune'},
 }

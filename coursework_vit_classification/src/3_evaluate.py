@@ -1,5 +1,5 @@
 """What: Đánh giá checkpoint trên một split. Why: Metric và lỗi theo lớp có thể tái tính.
-Who: Nhóm chạy sau khi chọn checkpoint bằng validation. When: Test chỉ sau khóa cấu hình.
+Which: 100-class checkpoints, train/validation/test. When: Test chỉ sau khóa cấu hình.
 Where: outputs/runs/lan_N/evaluation. How: eval/inference_mode, sklearn, lưu predictions không pixel.
 """
 import hashlib

@@ -1,9 +1,9 @@
 # Chiến lược huấn luyện và tuning hyperparameter
 
-Cập nhật: 16/11/2026. A resource_probe hoàn tất; pilot chọn LR và final vẫn chưa thực thi.
+Cập nhật: 18/11/2026. Thay ResNet bằng ConvNeXt-Base; phải smoke lại A/B, chưa có pilot/final mới.
 Phạm vi ViT/CIFAR-100 đã được giảng viên xác nhận.
 Liên quan: [Define](../define/Requirements_Analysis.md), [Design](Implementation_Plan.md),
-[ResNet-50](ResNet50.md), [ViT-B/16](ViT_B16.md).
+[ConvNeXt-Base](ConvNeXt_Base.md), [ViT-B/16](ViT_B16.md).
 Quy trình bàn giao và phân vai nhóm 6 người: [Work_Allocation.md](Work_Allocation.md).
 
 ## 1. Mục tiêu và phạm vi
@@ -22,8 +22,8 @@ Chốt dữ liệu/protocol → smoke A–D → khóa không gian LR
 
 | Mã | Model | Backbone | Head mới |
 |---|---|---|---|
-| A | ResNet-50 | Freeze toàn bộ | Linear(2048, 100), train |
-| B | ResNet-50 | Fine-tune toàn bộ | Linear(2048, 100), train |
+| A | ConvNeXt-Base | Freeze toàn bộ | Linear(1024, 100), train |
+| B | ConvNeXt-Base | Fine-tune toàn bộ | Linear(1024, 100), train |
 | C | ViT-B/16 | Freeze toàn bộ | Linear(768, 100), train |
 | D | ViT-B/16 | Fine-tune toàn bộ | Linear(768, 100), train |
 
@@ -36,7 +36,7 @@ Resume chỉ tiếp tục một lượt bị ngắt với cùng cấu hình, kh�
 - Kiểm tra shape B×100, loss hữu hạn, gradient, freeze/mode và optimizer parameter groups.
 - Thử vài batch có backward cho cả A–D; test save/load và resume bằng dữ liệu train/val.
 - Đo VRAM, thời gian/batch và tốc độ val để ước tính ngân sách.
-- Kiểm tra batch nhỏ/AMP và chính sách BatchNorm của ResNet trước khi khóa cấu hình.
+- Kiểm tra batch nhỏ/AMP, LayerNorm và stochastic depth của ConvNeXt trước khi khóa cấu hình.
 - Không dùng accuracy trên vài batch để chọn model/LR; không truy cập test trong bước này.
 - Số batch smoke đủ kiểm tra kỹ thuật, không tính là epoch hoặc run chính thức.
 - Ghi checklist/kết luận vào [Audit_Log.md](../Audit_Log.md); sửa pipeline vào [CHANGELOG.md](../CHANGELOG.md).
@@ -54,10 +54,10 @@ Chưa gán giá trị số hoặc T trước khi smoke có số đo; khóa toàn
 
 | Pilot | Chiến lược | LR thử | Dữ liệu | Ngân sách |
 |---|---|---|---|---|
-| A_LR1 | ResNet freeze | LR_F1 | Cùng train/val | T epoch |
-| A_LR2 | ResNet freeze | LR_F2 | Cùng train/val | T epoch |
-| B_LR1 | ResNet fine-tune | LR_T1 | Cùng train/val | T epoch |
-| B_LR2 | ResNet fine-tune | LR_T2 | Cùng train/val | T epoch |
+| A_LR1 | ConvNeXt freeze | LR_F1 | Cùng train/val | T epoch |
+| A_LR2 | ConvNeXt freeze | LR_F2 | Cùng train/val | T epoch |
+| B_LR1 | ConvNeXt fine-tune | LR_T1 | Cùng train/val | T epoch |
+| B_LR2 | ConvNeXt fine-tune | LR_T2 | Cùng train/val | T epoch |
 | C_LR1 | ViT freeze | LR_F1 | Cùng train/val | T epoch |
 | C_LR2 | ViT freeze | LR_F2 | Cùng train/val | T epoch |
 | D_LR1 | ViT fine-tune | LR_T1 | Cùng train/val | T epoch |
@@ -83,9 +83,9 @@ Không tự thêm ứng viên hoặc kéo dài pilot sau khi xem test; thay đ�
 | Scheduler | Ưu tiên LR cố định cho pilot/final để cô lập ảnh hưởng LR ban đầu; chưa khóa |
 | Batch/precision | Khóa sau smoke, ưu tiên cùng effective batch; ghi rõ khác biệt nếu cần |
 | Epoch/validation | T epoch mỗi pilot; không early-stop riêng làm lệch ngân sách |
-| BN/dropout | Cùng policy giữa hai LR của một chiến lược; freeze backbone giữ eval |
+| LayerNorm/stochastic depth | Cùng policy giữa hai LR; freeze giữ backbone eval, fine-tune train |
 
-Nếu batch vật lý khác nhau, ghi accumulation; accumulation không tái tạo BatchNorm của batch lớn.
+Code hiện chưa hỗ trợ accumulation; nếu batch khác nhau phải thống nhất và ghi rõ trước pilot.
 Mọi giá trị cố định cần xuất trong config, không để chỉ tồn tại trong tài liệu.
 Không đồng thời thay head, augmentation hoặc số layer được mở trong các pilot LR.
 
@@ -93,8 +93,8 @@ Không đồng thời thay head, augmentation hoặc số layer được mở tr
 
 | Run logic | Model/chế độ | Cấu hình LR | Ngân sách |
 |---|---|---|---|
-| A_final | ResNet freeze | LR tốt nhất của A_LR1/A_LR2 | E epoch |
-| B_final | ResNet fine-tune | LR tốt nhất của B_LR1/B_LR2 | E epoch |
+| A_final | ConvNeXt freeze | LR tốt nhất của A_LR1/A_LR2 | E epoch |
+| B_final | ConvNeXt fine-tune | LR tốt nhất của B_LR1/B_LR2 | E epoch |
 | C_final | ViT freeze | LR tốt nhất của C_LR1/C_LR2 | E epoch |
 | D_final | ViT fine-tune | LR tốt nhất của D_LR1/D_LR2 | E epoch |
 
@@ -128,5 +128,5 @@ Config ghi phase=smoke/tuning/final, strategy=A–D, candidate, LR, T/E, seed v�
 Mỗi lượt có thư mục riêng; bảng pilot ghi LR, best epoch, val accuracy/loss, thời gian và run nguồn.
 Không tạo run hoặc số liệu rỗng trước khi chạy; không ghi đè kết quả cũ.
 
-Còn chốt: GPU, duplicate policy, hai cặp LR, T/E, batch/AMP/BN, AdamW/WD và scheduler.
+Còn chốt: GPU, duplicate policy, hai cặp LR, T/E, batch/AMP, AdamW/WD và scheduler.
 Smoke ở 0_smoke.py; 2_train.py có pilot/final được chặn mặc định. Chưa chạy thật; bằng chứng kỹ thuật ở Audit_Log.

@@ -6,7 +6,7 @@ Source: [config.py](../../src/config.py).
 |---|---|
 | What | Đường dẫn, data, A–D, smoke, tuning/final, evaluate và demo |
 | Why | Một nguồn cấu hình cho mọi bước, không dùng ngầm tham số smoke cho train dài |
-| Which | CIFAR-100, ResNet-50/ViT-B/16, chiến lược A–D và các giá trị cấu hình tương ứng |
+| Which | CIFAR-100, ConvNeXt-Base/ViT-B/16, chiến lược A–D và các giá trị cấu hình tương ứng |
 | When | Khi import; không tự tải hoặc thực thi |
 | Where | data/, outputs/, split, tên run và đường dẫn ảnh demo |
 | How | Hằng số Python và dictionary tường minh |
@@ -14,7 +14,7 @@ Source: [config.py](../../src/config.py).
 ## Các nhóm cấu hình
 
 - Data: seed 42, input 224, ImageNet mean/std, split 45k/5k/10k.
-- EXPERIMENTS: A/C freeze, B/D fine-tune; ResNet-50 và ViT-B/16.
+- EXPERIMENTS: A/C freeze, B/D fine-tune; ConvNeXt-Base và ViT-B/16.
 - Smoke: 20 train/4 val, batch 2, workers 0, AMP CUDA; LR 1e-3/1e-4 và WD=0 chỉ để kiểm tra.
 - Train: PHASE=tuning/final, EXPERIMENT, BATCH_SIZE/LR/WD/EPOCHS phải được khai báo rõ.
 - TRAINING_APPROVED=False và DUPLICATE_POLICY=None mặc định chặn train dài.

@@ -1,5 +1,8 @@
 # Audit log — Checklist smoke run
 
+18/11: đổi CNN sang ConvNeXt-Base; các PASS và số đo ResNet dưới đây là lịch sử, không chuyển sang ConvNeXt.
+Smoke GPU ConvNeXt A/B: NOT_RUN; cần kiểm tra lại theo source hiện tại trước pilot.
+
 Checklist ngày 10/11/2026 được giữ làm kế hoạch; kết quả thực ngày 14/11 nằm ở phần cuối.
 Chiến lược: [Training_Strategy.md](design/Training_Strategy.md).
 Thay đổi code/pipeline ghi ở [CHANGELOG.md](CHANGELOG.md); việc tiếp theo ghi ở [progress.md](progress.md).

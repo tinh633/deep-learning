@@ -2,7 +2,8 @@
 
 Cập nhật: 16/11/2026. Có 7 full checkpoint được lưu bằng Git LFS, tổng khoảng 1,21 GiB.
 Danh sách chính xác, dung lượng và SHA-256: [outputs/checkpoints.json](../outputs/checkpoints.json).
-Chưa có model final; smoke và resource probe không được trình bày như kết quả chính thức.
+Đây là checkpoint lịch sử ResNet/ViT; chưa có ConvNeXt hoặc final của cặp mới ngày 18/11.
+Upload LFS trước bị kẹt; danh sách local không chứng minh remote đã có đủ model.
 
 ## 1. Các file được chia sẻ
 
@@ -43,11 +44,11 @@ Nếu file .pt chỉ chứa vài dòng bắt đầu bằng version https://git-l
 chưa phải weights; cần git lfs pull trước khi torch.load.
 Không tải file từ trang xem pointer rồi cho rằng đã lấy model đầy đủ.
 
-## 3. Dùng lan_9 với pipeline hiện có
+## 3. Giới hạn tương thích của lan_9
 
-- Cài requirements, chọn EVAL_RUN='lan_9', EVAL_CHECKPOINT='best.pt' trong config.py.
-- Demo: chọn DEMO_IMAGE là ảnh local, chạy src/4_demo.py; không cần dataset để dự đoán một ảnh.
-- Evaluate: chuẩn bị CIFAR-100 local theo README, chọn validation và chạy src/3_evaluate.py.
+- Lan_9 dùng ResNet-50; code hiện chỉ hỗ trợ ConvNeXt-Base và ViT-B/16 nên từ chối nạp.
+- Muốn tái lập ResNet dùng source commit 8da0358 trong checkout riêng, không đổi metadata checkpoint.
+- Model mới phải được smoke/train và xuất checkpoint mới bằng pipeline hiện tại.
 - Giữ RUN_TEST=False; lan_9 là resource_probe phase tuning, không đủ điều kiện official test final.
 - Không dùng lan_9 làm SELECTED_FROM của final vì chưa qua quy trình chọn LR chính thức.
 

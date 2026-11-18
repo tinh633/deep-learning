@@ -21,8 +21,8 @@ Smoke/resource check → 2 pilot LR → chọn LR bằng validation
 
 | Chiến lược | Hai lượt tuning | Lượt chính thức | Đối chiếu |
 |---|---|---|---|
-| A — ResNet freeze | A_LR1, A_LR2 | A_final với LR được chọn | A↔B, A↔C |
-| B — ResNet fine-tune | B_LR1, B_LR2 | B_final với LR được chọn | B↔A, B↔D |
+| A — ConvNeXt freeze | A_LR1, A_LR2 | A_final với LR được chọn | A↔B, A↔C |
+| B — ConvNeXt fine-tune | B_LR1, B_LR2 | B_final với LR được chọn | B↔A, B↔D |
 | C — ViT freeze | C_LR1, C_LR2 | C_final với LR được chọn | C↔D, C↔A |
 | D — ViT fine-tune | D_LR1, D_LR2 | D_final với LR được chọn | D↔C, D↔B |
 
@@ -69,5 +69,6 @@ Dataset/cache không commit; best/last chia sẻ bằng Git LFS, xem [Checkpoint
 - Khi lỗi: audit ghi kết quả kiểm tra, changelog ghi thay đổi pipeline, progress ghi blocker/bước tiếp.
 - Báo cáo phân biệt pilot/final và resource probe; không trộn số đo vào một bảng xếp hạng.
 
-Hiện tại A/lan_9 chỉ là resource_probe một epoch, không thay A_LR1 hoặc A_final.
+A: người tích hợp chạy máy hiện tại; ba người khác nhận B/C/D, mỗi người 2 pilot + 1 final.
+Lan_9 là ResNet resource_probe lịch sử; không đại diện A ConvNeXt hoặc thay pilot/final mới.
 D/GPU vẫn cần kiểm chứng lại sau khi đủ RAM/commit; chưa giao D như một phần đã sẵn sàng train dài.
