@@ -1,0 +1,140 @@
+{
+  "run": "lan_1",
+  "split": "validation",
+  "sample_count": 400,
+  "label_order": [
+    "NEGATIVE",
+    "POSITIVE"
+  ],
+  "metrics": {
+    "validation_loss": 0.3663069009780884,
+    "validation_model_preparation_time": 0.0019,
+    "validation_accuracy": 0.8425,
+    "validation_precision": 0.801762114537445,
+    "validation_recall": 0.91,
+    "validation_f1": 0.8524590163934426,
+    "validation_runtime": 4.1691,
+    "validation_samples_per_second": 95.944,
+    "validation_steps_per_second": 11.993
+  },
+  "error_count": 63,
+  "error_examples": [
+    {
+      "source_index": 7364,
+      "actual": "NEGATIVE",
+      "predicted": "POSITIVE",
+      "probability_positive": 0.9520255758237779,
+      "review_excerpt": "Don't get me wrong - I love David Suchet as Poirot. I love the series as well as the movies but enough already re: Death On The Nile. Everyone has done this one! We know who dies. We know why they die. We know who the killer is. We know how it was done. So I say enough already! Mr. Suchet could have used that awesome talent in another one of Agatha Christie's novels. I will say that the acting by ",
+      "original_token_count": 205
+    },
+    {
+      "source_index": 8686,
+      "actual": "NEGATIVE",
+      "predicted": "POSITIVE",
+      "probability_positive": 0.9311081765964405,
+      "review_excerpt": "Well, I finally saw it. I didn't go when it first came out because, well, frankly, I was afraid. Afraid of how bad it might be, or how disappointing. While not as bad as Menace, and better than Clones, it wasn't particularly memorable, or satisfying.<br /><br />I was 11 years old when I saw Star Wars. I still remember sitting in the theater. From the opening crawl to the final credits it was a mov",
+      "original_token_count": 1437
+    },
+    {
+      "source_index": 2371,
+      "actual": "NEGATIVE",
+      "predicted": "POSITIVE",
+      "probability_positive": 0.9294445315297425,
+      "review_excerpt": "\"Freddy's Dead\" did the smartest thing it could've done after the disappointment of the fifth film. It started from scratch. Sure, this \"final\" film in the saga is silly but at least it's original. Some of the visuals are even a bit breath-taking. And the story of Freddy's kid (Lisa Zane) returning to town to face her evil father is unique.<br /><br />Overall, the movie is nothing but another cart",
+      "original_token_count": 186
+    },
+    {
+      "source_index": 3282,
+      "actual": "NEGATIVE",
+      "predicted": "POSITIVE",
+      "probability_positive": 0.9286728474111238,
+      "review_excerpt": "David Mamet's film debut has been hailed by many as a real thinking-man's movie, a movie that makes you question everybody and everything. I saw it for the first time recently and couldn't understand what was supposed to be so great about it.<br /><br />The movie is about a female psychologist named Margaret who is also a best-selling author. Margaret has become disillusioned by her profession and",
+      "original_token_count": 814
+    },
+    {
+      "source_index": 8462,
+      "actual": "NEGATIVE",
+      "predicted": "POSITIVE",
+      "probability_positive": 0.9273291506684649,
+      "review_excerpt": "The Cowboys could leave you a little sore in the saddle. Definitely not one of Johns best movies. Don't get me wrong, with any John Wayne move there is always some good spots. And this one has it's fair share. But over all the picture moves slow and just doesn't live up to the aspirations it could have been. Bruce Dern again does an outstanding job as the villain. Roscoe Lee Brown is another brigh",
+      "original_token_count": 210
+    },
+    {
+      "source_index": 6854,
+      "actual": "NEGATIVE",
+      "predicted": "POSITIVE",
+      "probability_positive": 0.9259142779640834,
+      "review_excerpt": "I'm hearing rumors of an upcoming \"Leonard Nimoy Demonstrates the Blu-ray Disc\". With advances over the past 25 years ranging from Steady-cam to CGI, it'll be interesting to see if the franchise can be reinvigorated. I just hope it helps to remove the bad taste left in my mouth by that whole Magnavision demonstration fiasco.<br /><br />And yes... \"Leonard Nimoy Demonstrates the Betamax VCR\" was a ",
+      "original_token_count": 166
+    },
+    {
+      "source_index": 8606,
+      "actual": "NEGATIVE",
+      "predicted": "POSITIVE",
+      "probability_positive": 0.9108199623737422,
+      "review_excerpt": "Before I begin, you need to know that I am a huge fan of many of Sonny Chiba's films. His biographical series of the life of his master, Mas Oyama, were amazing and among the best martial arts films ever made, as were most of his Street Fighter films. The action was practically non-stop and with the possible exception of Bruce Lee (depending on who you ask), he was the greatest martial arts practi",
+      "original_token_count": 1055
+    },
+    {
+      "source_index": 7663,
+      "actual": "NEGATIVE",
+      "predicted": "POSITIVE",
+      "probability_positive": 0.903077089055523,
+      "review_excerpt": "Chan Wook Park is nothing if not inventive. I'M A CYBORG BUT THAT'S OK is chock full of amusing little technical flourishes with some ingenious ideas sprinkled in between. Attempting to walk in the footsteps of the likes of Marc Caro and Jeunet (CITY OF LOST CHILDREN, DELICATESSEN), Park embarks on a fanciful, lighthearted tale which is a radical departure from his usual morbid fare. Hardly one to",
+      "original_token_count": 401
+    },
+    {
+      "source_index": 4088,
+      "actual": "NEGATIVE",
+      "predicted": "POSITIVE",
+      "probability_positive": 0.8963630311466053,
+      "review_excerpt": "1st watched 12/7/2002 - 3 out of 10(Dir-Steve Purcell): Typical Mary Kate & Ashley fare with a few more kisses. It looks to me like the girls are getting pretty tired of this stuff and it will be interesting what happens to them if they ever decide to split up and go there own ways. In this episode of their adventures they are interns in Rome for a `fashion' designer who puts them right into the m",
+      "original_token_count": 247
+    },
+    {
+      "source_index": 671,
+      "actual": "NEGATIVE",
+      "predicted": "POSITIVE",
+      "probability_positive": 0.8907710826994384,
+      "review_excerpt": "Twenty years ago, the five years old boy Michael Hawthorne witnessed his father killing his mother with an axe in an empty road and committing suicide later. On the present days, Michael (Gordon Currie) invites his girlfriend Peg (Stacy Grant) and his best friends Chris (Myc Agnew), Jennifer (Emmanuelle Vaugier), Lisa Ann (Kelly Benson), Ned (Brendon Beiser), Mitch Maldive (Phillip Rhys) and Trish",
+      "original_token_count": 435
+    }
+  ],
+  "confusion_matrix": [
+    [
+      155,
+      45
+    ],
+    [
+      18,
+      182
+    ]
+  ],
+  "classification_report": {
+    "NEGATIVE": {
+      "precision": 0.8959537572254336,
+      "recall": 0.775,
+      "f1-score": 0.8310991957104558,
+      "support": 200.0
+    },
+    "POSITIVE": {
+      "precision": 0.801762114537445,
+      "recall": 0.91,
+      "f1-score": 0.8524590163934426,
+      "support": 200.0
+    },
+    "accuracy": 0.8425,
+    "macro avg": {
+      "precision": 0.8488579358814392,
+      "recall": 0.8425,
+      "f1-score": 0.8417791060519492,
+      "support": 400.0
+    },
+    "weighted avg": {
+      "precision": 0.8488579358814392,
+      "recall": 0.8425,
+      "f1-score": 0.841779106051949,
+      "support": 400.0
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "dataset_id": "stanfordnlp/imdb",
+  "tokenizer_id": "distilbert/distilbert-base-uncased",
+  "seed": 42,
+  "max_length": 128,
+  "labels": {
+    "0": "NEGATIVE",
+    "1": "POSITIVE"
+  },
+  "cross_split_duplicates": {
+    "train/validation": 0,
+    "train/test": 0,
+    "validation/test": 0
+  },
+  "splits": {
+    "train": {
+      "count": 2000,
+      "source_split": "train",
+      "label_counts": {
+        "NEGATIVE": 1000,
+        "POSITIVE": 1000
+      },
+      "sha256": "fd311a73bad825c5d9e9fdc0328114dde90ef15c94adbd2ff9e8faf5252be35b"
+    },
+    "validation": {
+      "count": 400,
+      "source_split": "train",
+      "label_counts": {
+        "NEGATIVE": 200,
+        "POSITIVE": 200
+      },
+      "sha256": "d6b2775c61d454d536cce948c4df15ee7974127e40ac050463415ff58d39f36e"
+    },
+    "test": {
+      "count": 500,
+      "source_split": "test",
+      "label_counts": {
+        "NEGATIVE": 250,
+        "POSITIVE": 250
+      },
+      "sha256": "33f050c96f0652e851fc4e6bdde0284f2edbfcf883d388bda77ae48586703630"
+    }
+  }
+}

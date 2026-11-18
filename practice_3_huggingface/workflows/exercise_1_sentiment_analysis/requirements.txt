@@ -1,0 +1,4 @@
+torch>=2.6,<3
+transformers>=4.57,<5
+matplotlib>=3.8,<4
+ipykernel>=6.28

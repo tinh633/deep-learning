@@ -1,4 +1,4 @@
-# Practice 3 — Operating runbook (CachyOS / Fish)
+c# Practice 3 — Operating runbook (CachyOS / Fish)
 
 ## Prerequisites
 

@@ -1,9 +1,16 @@
-# Runtime artifacts are local by default (datasets and pretrained weights can be large).
-outputs/data/
-outputs/runs/
-outputs/exercise1/
-visualization/lan_*/
+# Downloaded datasets: recreate from each project's preparation script.
+**/data/
+
+# Python caches and local virtual environments.
 __pycache__/
 *.py[cod]
-.ipynb_checkpoints/
-.DS_Store
+.venv/
+venv/
+.pytest_cache/
+
+# Local secrets and temporary files.
+.env
+.env.*
+!.env.example
+*.tmp
+*.part

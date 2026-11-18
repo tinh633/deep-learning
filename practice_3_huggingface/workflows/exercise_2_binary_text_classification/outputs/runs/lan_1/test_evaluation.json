@@ -1,0 +1,140 @@
+{
+  "run": "lan_1",
+  "split": "test",
+  "sample_count": 500,
+  "label_order": [
+    "NEGATIVE",
+    "POSITIVE"
+  ],
+  "metrics": {
+    "test_loss": 0.413148432970047,
+    "test_model_preparation_time": 0.0027,
+    "test_accuracy": 0.818,
+    "test_precision": 0.8,
+    "test_recall": 0.848,
+    "test_f1": 0.8233009708737864,
+    "test_runtime": 5.1034,
+    "test_samples_per_second": 97.973,
+    "test_steps_per_second": 12.345
+  },
+  "error_count": 91,
+  "error_examples": [
+    {
+      "source_index": 9338,
+      "actual": "NEGATIVE",
+      "predicted": "POSITIVE",
+      "probability_positive": 0.954588922035808,
+      "review_excerpt": "This is a silly movie with much singing and dancing. Acting is average, but writing leaves something to be desired. There are rememberable performances by Buddy Epsen, with a short but outstanding performance by Gypsy Rose as the bitter wife of a rich playboy. A totally unbelievable portrayal of college life which ends with a superb ice skating exibition of Alice in Wonderland. Many parts are wort",
+      "original_token_count": 94
+    },
+    {
+      "source_index": 6943,
+      "actual": "NEGATIVE",
+      "predicted": "POSITIVE",
+      "probability_positive": 0.9538325244456064,
+      "review_excerpt": "The female cast of this movie is terrific: you've got Linda Blair (maturing nicely), Julie Strain (who doesn't get too many speaking lines - that's a good thing), Rochelle Swanson (equally convincing as a sweet innocent girl or as an evil possessed girl), Toni Naples, and the most beautiful of them all IMO, the simply stunning Kristina Ducati (how the goofy male lead, Larry Poindexter, deserved to",
+      "original_token_count": 188
+    },
+    {
+      "source_index": 2189,
+      "actual": "NEGATIVE",
+      "predicted": "POSITIVE",
+      "probability_positive": 0.9519890781716277,
+      "review_excerpt": "Not as bad as some people say...This is a unofficial Bond movie and a remake of \"Thunderball\", written by Kevin McClory (co- producer in \"Thunderball\"). Well, the cast is very very interesting, Maria Brandauer is a great Bond- villain, Kim Basinger and Barbara Carrera are just like the \"original\" Bond- girls, plus Rowan Atkinson and a truly great Edward Fox, who looks really refreshing in the \"M\" ",
+      "original_token_count": 252
+    },
+    {
+      "source_index": 4159,
+      "actual": "NEGATIVE",
+      "predicted": "POSITIVE",
+      "probability_positive": 0.9513491403394968,
+      "review_excerpt": "***SPOILERS*** ***SPOILERS***<br /><br />I saw this movie last night at a screening. I started out already liking Tim Robbins and loving sci-fi. The first third of the movie was very cool. The score was good, the cinematography was interesting, the film maker's vision of the future was realistic yet starkly interesting nonetheless. I remember thinking to myself: \"this is the most intelligently don",
+      "original_token_count": 909
+    },
+    {
+      "source_index": 9386,
+      "actual": "NEGATIVE",
+      "predicted": "POSITIVE",
+      "probability_positive": 0.9476456584536527,
+      "review_excerpt": "If good intentions made a film great, then this film might be one of the greatest films ever made. The film has great actors, a master director, a significant theme--at least a would-be significant theme, undertone of fifties existential world-weariness, aerial scenes that ought to have thrilled both senses and imagination, and characters about which one might deeply care. It is about patriotism a",
+      "original_token_count": 800
+    },
+    {
+      "source_index": 7063,
+      "actual": "NEGATIVE",
+      "predicted": "POSITIVE",
+      "probability_positive": 0.9423618336403692,
+      "review_excerpt": "I finally rented this video after searching for it for many months. Initially I only wanted to see it because I'm an out and out Neil Pearson fan (Patrick, boyfriend of Isobel, the lead). However, the movie stands up very well without Neil (although he handles himself very well in this movie, he is overshadowed by the three main female characters). It's an eerie, intense movie, the sort the Brits ",
+      "original_token_count": 151
+    },
+    {
+      "source_index": 5375,
+      "actual": "NEGATIVE",
+      "predicted": "POSITIVE",
+      "probability_positive": 0.9225164176032149,
+      "review_excerpt": "Renting this direct-to-video film, I was not expecting an amazing piece of cinematography. (Not to say just because a film is in cinema it will.) Only very loosely following the story retold in the epic poem, this film provides a unique take on the tale of monsters and super humans. The general photography can be summarized as conflicted, with its mixture of mediaeval and post-apocalyptic (reminis",
+      "original_token_count": 289
+    },
+    {
+      "source_index": 2499,
+      "actual": "NEGATIVE",
+      "predicted": "POSITIVE",
+      "probability_positive": 0.9130250650131966,
+      "review_excerpt": "There are lots of other comments here about how poor this film is. What I wanted to point out is how this film took the largest science project in history and made it look small. The Manhattan project was an incredible achievement and it was huge. Virtually all silver in the country went into making wire for electromagnetic separators. If there was every a choice between two alternative ways of do",
+      "original_token_count": 245
+    },
+    {
+      "source_index": 432,
+      "actual": "NEGATIVE",
+      "predicted": "POSITIVE",
+      "probability_positive": 0.9057963228463114,
+      "review_excerpt": "How can anyone even begin to like this film is really beyond me.<br /><br />The idea? It has none. \"A guy fell apart\". That's the idea. Wow. An environment was slowly killing him... now THAT's original and worth watching.<br /><br />This is the first Fasbinder's film I've seen... I've heard that he's a genius of mise-en-scene, but I've seen student films with more attention, inspiration, idea, and",
+      "original_token_count": 549
+    },
+    {
+      "source_index": 1532,
+      "actual": "NEGATIVE",
+      "predicted": "POSITIVE",
+      "probability_positive": 0.8920020570392767,
+      "review_excerpt": "i found this Robin Williams vehicle mildly amusing at best.i guess you would call it a political satire of sorts.it's about a political talk show host/comedian who decides to run for president and unexpectedly wins.i found most of the humour dry myself,and Robin Williams is much more restrained and sedate than usual.i would say the movie is more of a drama than a comedy,with a bit of mystery and s",
+      "original_token_count": 191
+    }
+  ],
+  "confusion_matrix": [
+    [
+      197,
+      53
+    ],
+    [
+      38,
+      212
+    ]
+  ],
+  "classification_report": {
+    "NEGATIVE": {
+      "precision": 0.8382978723404255,
+      "recall": 0.788,
+      "f1-score": 0.8123711340206186,
+      "support": 250.0
+    },
+    "POSITIVE": {
+      "precision": 0.8,
+      "recall": 0.848,
+      "f1-score": 0.8233009708737864,
+      "support": 250.0
+    },
+    "accuracy": 0.818,
+    "macro avg": {
+      "precision": 0.8191489361702128,
+      "recall": 0.8180000000000001,
+      "f1-score": 0.8178360524472025,
+      "support": 500.0
+    },
+    "weighted avg": {
+      "precision": 0.8191489361702128,
+      "recall": 0.818,
+      "f1-score": 0.8178360524472025,
+      "support": 500.0
+    }
+  }
+}
