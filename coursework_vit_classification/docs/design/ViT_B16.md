@@ -1,7 +1,7 @@
 # ViT-B/16 — Model chính
 
 Đã có implementation và pipeline smoke; chưa có checkpoint CIFAR-100 train chính thức.
-Tham chiếu: [Define](../define/Requirements_Analysis.md), [Design](Implementation_Plan.md), [CNN baseline](ResNet50.md).
+Tham chiếu: [Define](../define/Requirements_Analysis.md), [Design](Implementation_Plan.md), [CNN baseline](ConvNeXt_Base.md).
 
 ## 1. Vai trò và tên model
 
@@ -63,6 +63,7 @@ Val/test luôn eval và không gradient; nếu cấu hình dropout thì eval t�
 Tổng với head ImageNet 1.000 lớp: 86.567.656 theo metadata torchvision.
 Head mới: 768 × 100 + 100 = 76.900 tham số.
 Tổng sau thay head dự kiến: 85.875.556; trainable C = 76.900, D = toàn bộ tổng này.
+ConvNeXt-Base với head 100 lớp có 87.668.964 tham số, chênh 2,09% so với ViT; không bằng tuyệt đối.
 Số liệu này tính từ cấu hình, chưa phải log của một run đã thực hiện.
 Fine-tune cần lưu gradient, optimizer state và activation ngoài model weights.
 GPU 4 GB có rủi ro thiếu VRAM; batch nhỏ/AMP cần smoke kiểm chứng, không hứa chạy được trước khi đo.

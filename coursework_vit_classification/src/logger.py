@@ -1,5 +1,5 @@
 """What: Log, metadata và checkpoint. Why: Loop train giữ ngắn, artifact kiểm chứng được.
-Who: Script train/smoke. When: Tạo run, ghi kết quả hoặc save/resume.
+Which: logging, JSON, PyTorch checkpoints. When: Tạo run, ghi kết quả hoặc save/resume.
 Where: outputs/runs/lan_N. How: logging, JSON, torch.save và trạng thái RNG.
 """
 import hashlib

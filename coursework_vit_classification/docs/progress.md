@@ -1,11 +1,8 @@
 # Tiến độ coursework
-
-Hiện trạng 16/11: code pipeline đã có; A resource_probe hoàn tất 1 epoch thật, chưa tuning/final/test chính thức. D GPU cần recheck.
+Lịch sử 16/11: code pipeline đã có; A resource_probe hoàn tất 1 epoch thật, chưa tuning/final/test chính thức. D GPU cần recheck.
 Giảng viên đã xác nhận ViT classification trên CIFAR-100, không kết hợp Anti Face Deepfake.
 Nhật ký thay đổi: [CHANGELOG](CHANGELOG.md); checklist smoke: [Audit_Log](Audit_Log.md).
-
 ## 05/11/2026 — Thiết kế và khởi tạo
-
 - Dataset: CIFAR-100; bốn chiến lược CNN/ViT × freeze/fine-tune.
 - Model dự kiến: ResNet-50 và ViT-B/16, pretrained ImageNet-1K.
 - Đã viết phân tích yêu cầu và kế hoạch 4 tuần.
@@ -13,14 +10,11 @@ Nhật ký thay đổi: [CHANGELOG](CHANGELOG.md); checklist smoke: [Audit_Log](
 - Tám file Python, HTML và requirements còn rỗng; notebook hợp lệ nhưng chưa có cell.
 - Không tạo best/last checkpoint, metric hoặc log giả cho lần train chưa thực hiện.
 - Chưa tải dataset/weights, cài dependency, chạy smoke hoặc huấn luyện.
-
 ## Bước tiếp theo
-
 1. Guard cuối workflow đã có và được test tổng hợp; cần đủ RAM/commit để recheck D trên GPU thật.
 2. Chốt duplicate policy và training budget khi ma trận smoke đạt.
 3. Chạy pilot/final/evaluate/demo theo cấu hình đã chốt; không dùng kết quả tổng hợp để chọn model.
 4. Thực hiện pipeline theo [kế hoạch](design/Implementation_Plan.md).
-
 ## Kiểm tra bộ khung
 
 - Kiểm tra UTF-8, giới hạn 150 dòng Markdown, liên kết nội bộ và notebook JSON.
@@ -147,3 +141,10 @@ Nhật ký thay đổi: [CHANGELOG](CHANGELOG.md); checklist smoke: [Audit_Log](
 - Nhiều mẫu GPU dùng 342–494 MiB (không phải peak allocator); commit cuối 4672 MiB, guard không dừng.
 - Runtime overrides được lưu; default vẫn chặn train dài. Đã ghi [quy trình/phân vai/bàn giao](design/Work_Allocation.md), chưa gán tên hoặc chốt tham số chính thức.
 - 16/11: xuất code/tài liệu/lan_9; yêu cầu bổ sung 7 best/last qua Git LFS, có [hướng dẫn](Checkpoints.md); data/cache/replay_reference vẫn local.
+- Checkpoint commit 8da0358 local: 7 LFS files verified; push blocked at storage upload (0 bytes), remote remains 28b5b8e. Retry `git push origin cousework`; no checkpoint/data removed.
+
+## 18/11/2026 - ConvNeXt-Base / ViT-B16
+
+- A/B chuyển ConvNeXt-Base (87.668.964 tham số); C/D ViT-B16 (85.875.556), chênh 2,09%, chưa bằng tuyệt đối.
+- Source/docs/tests đồng bộ; 3 kiểm thử PASS, AST/liên kết/Markdown/hash đạt: [bằng chứng](../outputs/validation/convnext_pipeline_check.json).
+- ResNet cũ là lịch sử; GPU smoke ConvNeXt NOT_RUN, chưa pilot/final/budget mới. A local, ba người nhận B/C/D; đã duyệt commit/push, cần xác nhận remote.

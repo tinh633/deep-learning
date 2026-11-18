@@ -29,4 +29,5 @@ Guard sau save, load, replay load/step, reference save và cuối workflow; khô
 - PASS/FAIL/NOT_RUN ở summary được đối chiếu khi ghi audit, không tự sửa các report lịch sử.
 - LR smoke không phải LR đã tuning; mini-loss không dùng xếp hạng kiến trúc.
 - Kết quả A/B/C trước đây thuộc source cũ; việc sửa guard không tự làm D đạt hoặc tái xác nhận GPU.
+- A/B mới dùng ConvNeXt-Base: chỉ classifier[2] được đổi khi freeze; LayerNorm cuối phải giữ bất biến.
 - Code mới cần recheck thực khi RAM/commit đủ; không chạy D liên tục để ép PASS.

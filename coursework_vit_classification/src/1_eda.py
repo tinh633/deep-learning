@@ -1,5 +1,5 @@
 """What: Tải và khảo sát CIFAR-100. Why: Hiểu dữ liệu trước huấn luyện.
-Who: Người thực hiện coursework, HTML đọc report. When: Trước train.
+Which: CIFAR-100, PCA, t-SNE. When: Trước train.
 Where: data/CIFAR100_web và outputs/eda.json. How: NumPy thống kê, gzip cho viewer.
 """
 import gzip

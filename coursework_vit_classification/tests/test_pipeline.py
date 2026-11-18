@@ -26,19 +26,27 @@ class SmallClassifier(nn.Module):
         super().__init__()
         self.pool = nn.AdaptiveAvgPool2d(1)
         self.conv = nn.Conv2d(3, width, 1)
-        self.fc = nn.Linear(width, 100)
+        self.classifier = nn.Sequential(nn.Identity(), nn.Flatten(1), nn.Linear(width, 100))
+        self.heads = nn.Module()
+        self.heads.head = self.classifier[2]
 
     def forward(self, images):
         features = self.pool(images)
         features = self.conv(features).flatten(1)
-        return self.fc(features)
+        head = self.classifier[2] if hasattr(self, 'classifier') else self.heads.head
+        return head(features)
 
 
 def synthetic_model(name, strategy, pretrained=True):
-    result = SmallClassifier(2048 if name == 'resnet50' else 768)
+    result = SmallClassifier(1024 if name == 'convnext_base' else 768)
+    if name == 'vit_b_16':
+        # Synthetic head follows the same public path as the real architecture.
+        del result.classifier
+    else:
+        del result.heads
     for parameter in result.parameters():
         parameter.requires_grad = strategy == 'fine_tune'
-    for parameter in result.fc.parameters():
+    for parameter in model.get_head(result).parameters():
         parameter.requires_grad = True
     return result
 
@@ -122,7 +130,7 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual([row['epoch'] for row in json.loads((pilot/'history.json').read_text())], [1, 2])
         state = logger.read_checkpoint(pilot/'last.pt')
         incompatible = dict(state['settings'], lr=1e-2)
-        tiny = synthetic_model('resnet50', 'fine_tune')
+        tiny = synthetic_model('convnext_base', 'fine_tune')
         optimizer = torch.optim.AdamW(tiny.parameters())
         scaler = torch.amp.GradScaler('cuda', enabled=False)
         with self.assertRaisesRegex(ValueError, 'lr'):
@@ -140,6 +148,15 @@ class PipelineTests(unittest.TestCase):
 
         with patch.object(logger, 'read_checkpoint', side_effect=resource_pilot):
             with self.assertRaisesRegex(ValueError, 'resource_probe'):
+                self.run_script('2_train.py')
+
+        def old_architecture_pilot(path):
+            state = real_read(path)
+            state['settings'] = dict(state['settings'], model='resnet50')
+            return state
+
+        with patch.object(logger, 'read_checkpoint', side_effect=old_architecture_pilot):
+            with self.assertRaisesRegex(ValueError, 'model'):
                 self.run_script('2_train.py')
         self.run_script('2_train.py')
         final = self.root/'outputs/runs/lan_2'
@@ -210,6 +227,31 @@ class PipelineTests(unittest.TestCase):
         result = json.loads(latest.read_text())
         self.assertEqual(result['status'], 'failed')
         self.assertEqual(result['failed_check'], 'resources')
+
+
+class ArchitectureTests(unittest.TestCase):
+    def test_real_architecture_contracts(self):
+        # Meta constructs the actual torchvision graph without allocating weights or downloading.
+        for name, total, head_count in [('convnext_base', 87668964, 102500),
+                                        ('vit_b_16', 85875556, 76900)]:
+            for strategy in ('freeze', 'fine_tune'):
+                with self.subTest(model=name, strategy=strategy), torch.device('meta'):
+                    net = model.build_model(name, strategy, pretrained=False)
+                    self.assertEqual(sum(p.numel() for p in net.parameters()), total)
+                    trainable = sum(p.numel() for p in net.parameters() if p.requires_grad)
+                    self.assertEqual(trainable, head_count if strategy == 'freeze' else total)
+                    model.set_train_mode(net, strategy)
+                    self.assertTrue(model.get_head(net).training)
+                    self.assertEqual(net.training, strategy == 'fine_tune')
+                    if name == 'convnext_base':
+                        self.assertEqual(net.classifier[0].weight.requires_grad, strategy == 'fine_tune')
+                        stochastic = [m for m in net.modules() if m.__class__.__name__ == 'StochasticDepth']
+                        self.assertTrue(stochastic)
+                        self.assertTrue(all(m.training == (strategy == 'fine_tune') for m in stochastic))
+                        self.assertFalse(any(isinstance(m, nn.modules.batchnorm._BatchNorm) for m in net.modules()))
+                    self.assertEqual(net(torch.empty(2, 3, 224, 224)).shape, (2, 100))
+        with self.assertRaisesRegex(ValueError, 'resnet50'):
+            model.build_model('resnet50', 'freeze', pretrained=False)
 
 
 if __name__ == '__main__':

@@ -4,12 +4,14 @@ Trạng thái: đã triển khai tải CIFAR-100, split, EDA và HTML explorer.
 Đã có model, loaders, logger/checkpoint, smoke, train, evaluate và demo; notebook báo cáo còn chưa triển khai.
 Giảng viên đã xác nhận hướng ViT classification trên CIFAR-100; không kết hợp Anti Face Deepfake.
 Chưa chạy tuning hoặc train chính thức; cần chốt duplicate policy và training budget trước bước đó.
+Cặp hiện tại: ConvNeXt-Base/ViT-B16, khoảng 87,67/85,88 triệu tham số (chênh 2,09%).
+Phải smoke lại ConvNeXt A/B; số đo và checkpoint ResNet cũ không đại diện cặp mới.
 
 - [Define — phân tích yêu cầu](docs/define/Requirements_Analysis.md).
 - [Design — kế hoạch, chiến lược train và cấu trúc thư mục](docs/design/Implementation_Plan.md).
 - [Chiến lược train/tuning — ma trận lượt chạy và cách chọn LR](docs/design/Training_Strategy.md).
 - [Phân chia công việc — quy trình và gói bàn giao](docs/design/Work_Allocation.md).
-- [Model CNN baseline — ResNet-50](docs/design/ResNet50.md).
+- [Model CNN baseline — ConvNeXt-Base](docs/design/ConvNeXt_Base.md).
 - [Model chính — ViT-B/16](docs/design/ViT_B16.md).
 - [Tiến độ](docs/progress.md).
 - [Ghi nhận hỗ trợ AI](docs/AI_usage.md).

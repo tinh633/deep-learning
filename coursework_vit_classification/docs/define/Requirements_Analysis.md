@@ -1,13 +1,13 @@
 # Define — Định nghĩa đồ án
 
-Cập nhật: 16/11/2026. Code data/train/evaluate/demo đã có; chưa tuning/train chính thức.
+Cập nhật: 18/11/2026. Baseline ConvNeXt-Base thay ResNet; code đã có, chưa tuning/train chính thức.
 Giảng viên đã xác nhận hướng ViT/CIFAR-100, không kết hợp Anti Face Deepfake.
 Thiết kế: [Implementation_Plan.md](../design/Implementation_Plan.md). Trạng thái: [progress](../progress.md).
 
 ## 1. Project name — Tên đề tài
 
 **Phân loại ảnh CIFAR-100 bằng Vision Transformer và đối chiếu CNN trong học chuyển giao.**
-Model chính: ViT-B/16. Baseline: ResNet-50. Cả hai sử dụng pretrained ImageNet-1K.
+Model chính: ViT-B/16. Baseline: ConvNeXt-Base. Cả hai sử dụng pretrained ImageNet-1K.
 Đây là đồ án vận dụng, thực hiện trong 4 tuần bởi nhóm 6 thành viên.
 
 ## 2. Problem — Bài toán và câu hỏi thực nghiệm
@@ -23,7 +23,8 @@ Ba câu hỏi cần trả lời bằng kết quả thực:
 3. Chất lượng dự đoán đánh đổi thế nào với thời gian, bộ nhớ và số tham số?
 
 Không đặt giả thuyết bắt buộc ViT thắng CNN và không có ngưỡng accuracy bắt buộc trong đề đã cung cấp.
-Không suy diễn đây là so sánh kiến trúc thuần túy vì số tham số và recipe pretraining khác nhau.
+Quy mô gần tương đương: ConvNeXt 87.668.964, ViT 85.875.556 tham số với head 100 lớp.
+Chênh 2,09% và recipe pretraining khác nhau; không suy diễn đây là so sánh kiến trúc thuần túy.
 
 ## 3. Target user — Người sử dụng
 
@@ -63,7 +64,7 @@ Confidence không mặc định là xác suất đã hiệu chỉnh hoặc độ
 - Notebook trình bày và demo dùng cùng pipeline, không nhân bản logic train.
 
 Phần mở rộng trong hướng dẫn: CNN/ViT cùng số tham số và trực quan hóa attention.
-Cặp hiện tại chưa đáp ứng cùng số tham số; attention chỉ xem xét sau phần cốt lõi.
+Cặp hiện tại gần tương đương (chênh 2,09%), chưa bằng tuyệt đối; attention sau phần cốt lõi.
 Không mở rộng sang deepfake, detection, segmentation, train từ đầu hoặc tìm kiếm hàng loạt model.
 
 ## 6. Technology constraints — Ràng buộc kỹ thuật

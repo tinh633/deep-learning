@@ -1,6 +1,6 @@
 # Design — Thiết kế và kế hoạch triển khai
 
-Cập nhật: 16/11/2026. Code các bước đã có; chưa chạy pilot/final hoặc official test trên model thật.
+Cập nhật: 18/11/2026. ConvNeXt-Base/ViT-B16 đã đồng bộ; chưa smoke GPU CNN mới hoặc pilot/final.
 Giảng viên đã xác nhận ViT classification trên CIFAR-100, không kết hợp Anti Face Deepfake.
 Định nghĩa bài toán: [Define](../define/Requirements_Analysis.md). Hiện trạng: [progress](../progress.md).
 
@@ -44,16 +44,16 @@ Notebook mặc định chỉ đọc artifact, không tải weights, train hoặc
 
 | Mã | Model | Backbone | Head mới |
 |---|---|---|---|
-| A | ResNet-50 | Freeze toàn bộ | Linear(2048, 100) |
-| B | ResNet-50 | Fine-tune toàn bộ | Linear(2048, 100) |
+| A | ConvNeXt-Base | Freeze toàn bộ | Linear(1024, 100) |
+| B | ConvNeXt-Base | Fine-tune toàn bộ | Linear(1024, 100) |
 | C | ViT-B/16 | Freeze toàn bộ | Linear(768, 100) |
 | D | ViT-B/16 | Fine-tune toàn bộ | Linear(768, 100) |
 
 Mỗi run bắt đầu từ pretrained tương ứng, seed ban đầu cố định; không tiếp tục từ run khác.
-Freeze: head train, backbone eval; fine-tune: model train, chính sách BatchNorm phải ghi rõ.
+Freeze: Linear mới train, backbone/LayerNorm eval; fine-tune: model train, bật stochastic depth.
 Validation/test: model.eval(), inference_mode/no_grad; không cập nhật tham số hoặc running statistics.
 Chọn rõ IMAGENET1K_V1 cho cả hai; khác recipe/quy mô nên không tuyên bố công bằng tuyệt đối.
-Chi tiết: [ResNet-50](ResNet50.md), [ViT-B/16](ViT_B16.md).
+Chi tiết: [ConvNeXt-Base](ConvNeXt_Base.md), [ViT-B/16](ViT_B16.md).
 Lộ trình smoke → 8 pilot LR ngắn → 4 final → test: [Training_Strategy.md](Training_Strategy.md).
 
 ## 4. Folder structure — Cấu trúc
@@ -70,7 +70,7 @@ coursework_vit_classification/
 │       ├── Implementation_Plan.md
 │       ├── Data_EDA.md
 │       ├── Training_Strategy.md
-│       ├── ResNet50.md
+│       ├── ConvNeXt_Base.md
 │       └── ViT_B16.md
 ├── src/
 │   ├── config.py, data.py, model.py, logger.py
@@ -139,8 +139,8 @@ Chưa gán tên; đầu việc và bàn giao: [Work_Allocation.md](Work_Allocati
 |---|---|
 | ViT fine-tune OOM GPU 4 GB | Smoke batch nhỏ/AMP; đo rồi thống nhất GPU, không tự đổi model |
 | 12 nhóm duplicate xuyên split | Chốt giữ protocol và công bố, hoặc lọc train/val và version split trước train |
-| ResNet/ViT khác tham số, recipe | Ghi rõ hạn chế; chưa đáp ứng mở rộng cùng số tham số |
-| Batch nhỏ ảnh hưởng BatchNorm | Kiểm tra policy BN; accumulation không thay thống kê BN |
+| ConvNeXt/ViT chênh 2,09% tham số, khác recipe | 87.668.964 và 85.875.556; gần tương đương, chưa bằng tuyệt đối |
+| ConvNeXt fine-tune tốn bộ nhớ | Smoke lại A/B; LayerNorm không có running stats như BatchNorm |
 | Train lâu hoặc bị ngắt | Đo pilot, lưu last/resume epoch; không hứa thời gian chưa đo |
 | Overfit, lệch cơ hội tuning | Cùng split/ngân sách epoch, tuning tương đương, không chọn theo test |
 | LR/WD/scheduler/batch/epoch chưa chốt | Đề xuất AdamW; chốt giá trị sau smoke, không tăng hàng loạt run |

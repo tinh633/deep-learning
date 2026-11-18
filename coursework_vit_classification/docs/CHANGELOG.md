@@ -4,6 +4,15 @@ Ghi vấn đề/nhu cầu, thay đổi, lý do và cách kiểm chứng; không 
 Trạng thái hiện tại: [progress](progress.md). Checklist smoke: [Audit_Log](Audit_Log.md).
 Audit chỉ ghi kết quả kiểm tra; lịch sử hỗ trợ AI nằm ở [AI_usage](AI_usage.md).
 
+## 18/11/2026 — Thay CNN baseline bằng ConvNeXt-Base
+
+- A/B chuyển sang convnext_base; classifier[2] là Linear(1024,100), chỉ mở Linear ở A.
+- Giữ LayerNorm pretrained; freeze tắt stochastic depth, fine-tune bật theo torchvision.
+- Smoke kiểm tra cả LayerNorm cuối bất biến; final từ chối pilot khác model/strategy/weights.
+- Đồng bộ Define/Design và source docs, thay ResNet50.md bằng ConvNeXt_Base.md.
+- Không sửa log/checkpoint ResNet cũ hoặc coi chúng là bằng chứng ConvNeXt; cần GPU smoke mới.
+- Kiểm chứng: [report cặp mới](../outputs/validation/convnext_pipeline_check.json); meta và synthetic CPU, không phải train thật.
+
 ## 05/11/2026 — Chuẩn bị dữ liệu và viewer
 
 - Nhu cầu: dữ liệu/split nhất quán và quan sát toàn CIFAR-100 trước train.

@@ -1,5 +1,5 @@
 """What: Tải CIFAR-100 và quản lý split. Why: Các thí nghiệm dùng chung dữ liệu.
-Who: EDA và train/evaluate sau này. When: Khi gọi hàm, không tải lúc import.
+Which: CIFAR-100, seed 42, torchvision transforms. When: Khi gọi hàm, không tải lúc import.
 Where: data/ và outputs/cifar100_split.json. How: torchvision và stratified split.
 """
 import json
