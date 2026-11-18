@@ -33,7 +33,7 @@ Lịch sử: [progress_before_A_2026-11-18.md](progress_before_A_2026-11-18.md).
 - [experiment_A.json](../outputs/experiment_A.json) trạng thái completed; process train/monitor đã thoát, GPU về 0 MiB.
 - [Kết quả A](A_Results.md); Training_Monitor.ipynb đọc được lan_12/13/14. Không mở test.
 - Config giữ final/resume lan_14 nhưng TRAINING_APPROVED=False để tránh chạy lặp; EVAL_RUN=lan_14, validation.
-- Manifest 12 checkpoint, 3,32 GiB; đã duyệt commit/push kết quả A, đang chờ xác nhận remote. B/C/D chờ kết quả nhóm.
+- Manifest 12 checkpoint, 3,32 GiB; kết quả A đã push cousework tại 68641b3, đủ 7 LFS mới. B/C/D chờ kết quả nhóm.
 
 ## Bàn giao khi bị ngắt
 
@@ -41,6 +41,6 @@ Lịch sử: [progress_before_A_2026-11-18.md](progress_before_A_2026-11-18.md).
 2. Run bị ngắt có last.pt: dùng RESUME_RUN cùng cấu hình/budget; không đổi LR hoặc train lại từ đầu.
 3. Không chạy lại controller từ đầu khi đã có pilot; tiếp tục đúng bước còn thiếu.
 4. Guard thiếu bộ nhớ: dừng, không hạ ngưỡng hoặc tự thay batch đã chốt.
-5. A đã đủ budget, không chạy lại controller; xuất bản theo quyền đã duyệt, tích hợp B/C/D rồi test sau khóa protocol.
+5. A đã đủ budget và đã xuất bản, không chạy lại controller; tiếp theo tích hợp B/C/D rồi test sau khóa protocol.
 
 Audit: [Audit_Log](Audit_Log.md). Thay đổi pipeline: [CHANGELOG](CHANGELOG.md).

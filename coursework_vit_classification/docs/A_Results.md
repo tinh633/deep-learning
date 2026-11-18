@@ -65,4 +65,4 @@ File dùng tiếp: [best.pt](../outputs/runs/lan_14/best.pt), [last.pt](../outpu
 [history](../outputs/runs/lan_14/history.json), [run.log](../outputs/runs/lan_14/run.log).
 Mở Training_Monitor.ipynb, lọc lan_12/13/14 để xem pilot/final; không trộn smoke vào đường epoch.
 Config giữ A final/resume và EVAL_RUN=lan_14, RUN_TEST=False; chặn train lặp bằng TRAINING_APPROVED=False.
-Các kết quả/checkpoint mới đang local, chưa commit/push; B/C/D và báo cáo tổng hợp còn chờ kết quả nhóm.
+Kết quả/checkpoint đã push cousework ngày 18/11 tại commit 68641b3, đủ 7 LFS mới; B/C/D chờ kết quả nhóm.

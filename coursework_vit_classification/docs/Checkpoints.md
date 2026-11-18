@@ -2,7 +2,7 @@
 
 Cập nhật 18/11/2026: manifest có 12 checkpoint local (~3,32 GiB), gồm lịch sử và A mới sau xóa lan_9 ResNet.
 Danh sách chính xác, dung lượng và SHA-256: [outputs/checkpoints.json](../outputs/checkpoints.json).
-ConvNeXt smoke/pilot/final đã hoàn tất và kiểm chứng local, chưa commit/upload các kết quả mới.
+ConvNeXt smoke/pilot/final đã hoàn tất, kiểm chứng và upload đủ 7 LFS mới tại commit 68641b3 trên cousework.
 18/11: đã upload đủ 7 checkpoint Git LFS (1,3 GB) cùng code ConvNeXt tại commit d5e6dfc.
 
 ## 1. Các file được chia sẻ
@@ -14,10 +14,10 @@ ConvNeXt smoke/pilot/final đã hoàn tất và kiểm chứng local, chưa comm
 | lan_4 | last.pt | ResNet-50 freeze | Smoke 20 ảnh train, recheck |
 | lan_5 | last.pt | ViT-B/16 freeze | Smoke 20 ảnh train |
 | lan_8 | last.pt | ResNet-50 fine-tune | Smoke 20 ảnh train, recheck |
-| lan_11 | last.pt | ConvNeXt-Base freeze | Smoke 32 ảnh train, batch 16; chưa upload |
-| lan_12 | best.pt / last.pt | ConvNeXt-Base freeze | Pilot LR1, 5 epoch; chưa upload |
-| lan_13 | best.pt / last.pt | ConvNeXt-Base freeze | Pilot LR2, 5 epoch; chưa upload |
-| lan_14 | best.pt / last.pt | ConvNeXt-Base freeze | Final 20 epoch, best epoch 9; chưa upload |
+| lan_11 | last.pt | ConvNeXt-Base freeze | Smoke 32 ảnh train, batch 16 |
+| lan_12 | best.pt / last.pt | ConvNeXt-Base freeze | Pilot LR1, 5 epoch |
+| lan_13 | best.pt / last.pt | ConvNeXt-Base freeze | Pilot LR2, 5 epoch |
+| lan_14 | best.pt / last.pt | ConvNeXt-Base freeze | Final 20 epoch, best epoch 9 |
 
 Checkpoint smoke ghi epoch=1 nhưng đó là mini-epoch, không phải một lượt qua đủ 45.000 ảnh.
 Lan_9 ResNet cũ đã xóa; tên lan_9 mới là smoke ConvNeXt thất bại tải mạng, không có checkpoint.
