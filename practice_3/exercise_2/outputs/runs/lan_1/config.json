@@ -1,0 +1,30 @@
+{
+  "base_model": "distilbert/distilbert-base-uncased",
+  "dataset_id": "stanfordnlp/imdb",
+  "seed": 42,
+  "train_samples": 2000,
+  "validation_samples": 400,
+  "max_length": 128,
+  "epochs": 3,
+  "batch_size": 8,
+  "learning_rate": 2e-05,
+  "weight_decay": 0.01,
+  "optimizer": "Trainer default AdamW",
+  "loss": "CrossEntropyLoss",
+  "model_selection": "highest validation F1; tie handling by Trainer",
+  "test_used_during_training": false,
+  "environment": {
+    "recorded_utc": "2026-11-18T08:01:21.912640+00:00",
+    "python": "3.12.6",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "torch": "2.15.0+cpu",
+    "transformers": "5.23.0",
+    "datasets": "4.8.5",
+    "device": "cpu",
+    "cuda_name": null
+  },
+  "split_metadata": "C:\\Users\\hovan\\Downloads\\practice_31\\practice_3_split\\exercise_2\\outputs\\data\\split_info.json",
+  "best_checkpoint": "C:\\Users\\hovan\\Downloads\\practice_31\\practice_3_split\\exercise_2\\outputs\\runs\\lan_1\\checkpoints\\checkpoint-500",
+  "best_metric": 0.8660287081339713,
+  "global_step": 750
+}

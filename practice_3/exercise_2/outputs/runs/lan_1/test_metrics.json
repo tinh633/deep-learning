@@ -1,0 +1,3061 @@
+{
+  "run": "lan_1",
+  "split": "test",
+  "sample_count": 500,
+  "model_path": "C:\\Users\\hovan\\Downloads\\practice_31\\practice_3_split\\exercise_2\\outputs\\runs\\lan_1\\model",
+  "label_order": [
+    "NEGATIVE",
+    "POSITIVE"
+  ],
+  "metrics": {
+    "test_loss": 0.5371009707450867,
+    "test_model_preparation_time": 0.001,
+    "test_accuracy": 0.812,
+    "test_precision": 0.7550335570469798,
+    "test_recall": 0.9146341463414634,
+    "test_f1": 0.8272058823529411,
+    "test_runtime": 28.5651,
+    "test_samples_per_second": 17.504,
+    "test_steps_per_second": 2.205
+  },
+  "roc_auc": 0.9164746175020805,
+  "confusion_matrix": [
+    [
+      181,
+      73
+    ],
+    [
+      21,
+      225
+    ]
+  ],
+  "classification_report": {
+    "NEGATIVE": {
+      "precision": 0.8960396039603961,
+      "recall": 0.7125984251968503,
+      "f1-score": 0.793859649122807,
+      "support": 254.0
+    },
+    "POSITIVE": {
+      "precision": 0.7550335570469798,
+      "recall": 0.9146341463414634,
+      "f1-score": 0.8272058823529411,
+      "support": 246.0
+    },
+    "accuracy": 0.812,
+    "macro avg": {
+      "precision": 0.825536580503688,
+      "recall": 0.8136162857691569,
+      "f1-score": 0.810532765737874,
+      "support": 500.0
+    },
+    "weighted avg": {
+      "precision": 0.8266646288789953,
+      "recall": 0.812,
+      "f1-score": 0.8102659958720331,
+      "support": 500.0
+    }
+  },
+  "predictions": [
+    {
+      "index": 0,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9835441504737985
+    },
+    {
+      "index": 1,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9804757981807992
+    },
+    {
+      "index": 2,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.010544629319062445
+    },
+    {
+      "index": 3,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9731311087223529
+    },
+    {
+      "index": 4,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.015295861601893935
+    },
+    {
+      "index": 5,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9858457300953344
+    },
+    {
+      "index": 6,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9853173073330013
+    },
+    {
+      "index": 7,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.008446531443648412
+    },
+    {
+      "index": 8,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.028340439025740502
+    },
+    {
+      "index": 9,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9881518938049199
+    },
+    {
+      "index": 10,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.988081822647851
+    },
+    {
+      "index": 11,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.006859163685047915
+    },
+    {
+      "index": 12,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.11977233638326308
+    },
+    {
+      "index": 13,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.23256820466655345
+    },
+    {
+      "index": 14,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9875954394471871
+    },
+    {
+      "index": 15,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9879135743099104
+    },
+    {
+      "index": 16,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9566181109294156
+    },
+    {
+      "index": 17,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9075365798238411
+    },
+    {
+      "index": 18,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9874748844405609
+    },
+    {
+      "index": 19,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9839888267727308
+    },
+    {
+      "index": 20,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.007839760755824503
+    },
+    {
+      "index": 21,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9781622682191312
+    },
+    {
+      "index": 22,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.1327532962074458
+    },
+    {
+      "index": 23,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9884512875835765
+    },
+    {
+      "index": 24,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.009943401303486216
+    },
+    {
+      "index": 25,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9848737547524115
+    },
+    {
+      "index": 26,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9731715995030245
+    },
+    {
+      "index": 27,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9791999998559129
+    },
+    {
+      "index": 28,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9880216342337049
+    },
+    {
+      "index": 29,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9889180066669317
+    },
+    {
+      "index": 30,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.11017572430520049
+    },
+    {
+      "index": 31,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.10729356984842853
+    },
+    {
+      "index": 32,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9811524958541343
+    },
+    {
+      "index": 33,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.009518762513961094
+    },
+    {
+      "index": 34,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.8846399062085668
+    },
+    {
+      "index": 35,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9691495159774189
+    },
+    {
+      "index": 36,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.48808768195272506
+    },
+    {
+      "index": 37,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.0684810306941582
+    },
+    {
+      "index": 38,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.10718226030825449
+    },
+    {
+      "index": 39,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9634633710762573
+    },
+    {
+      "index": 40,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.008008542106174073
+    },
+    {
+      "index": 41,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.008724503017851574
+    },
+    {
+      "index": 42,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.008996519941469472
+    },
+    {
+      "index": 43,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.010011873761975067
+    },
+    {
+      "index": 44,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.009155038495241559
+    },
+    {
+      "index": 45,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9807085292674598
+    },
+    {
+      "index": 46,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9797422173108754
+    },
+    {
+      "index": 47,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9736001480865129
+    },
+    {
+      "index": 48,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9884783065689181
+    },
+    {
+      "index": 49,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.5608968673028354
+    },
+    {
+      "index": 50,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9843637048333986
+    },
+    {
+      "index": 51,
+      "true": 1,
+      "predicted": 0,
+      "probability_positive": 0.17592078589869242
+    },
+    {
+      "index": 52,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.014730091280604195
+    },
+    {
+      "index": 53,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9774608714149063
+    },
+    {
+      "index": 54,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9869615646470961
+    },
+    {
+      "index": 55,
+      "true": 1,
+      "predicted": 0,
+      "probability_positive": 0.04483262210982117
+    },
+    {
+      "index": 56,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.01105469598137585
+    },
+    {
+      "index": 57,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.98410671741631
+    },
+    {
+      "index": 58,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.8080522187574053
+    },
+    {
+      "index": 59,
+      "true": 1,
+      "predicted": 0,
+      "probability_positive": 0.37210192730989977
+    },
+    {
+      "index": 60,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.00841415311317799
+    },
+    {
+      "index": 61,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.508717546576351
+    },
+    {
+      "index": 62,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9364272364621676
+    },
+    {
+      "index": 63,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.012699950339785222
+    },
+    {
+      "index": 64,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9871284692452366
+    },
+    {
+      "index": 65,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.022986023585186855
+    },
+    {
+      "index": 66,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.13575213536348932
+    },
+    {
+      "index": 67,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9828462359800461
+    },
+    {
+      "index": 68,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9857267499576253
+    },
+    {
+      "index": 69,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.008154692280629426
+    },
+    {
+      "index": 70,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9880672983650456
+    },
+    {
+      "index": 71,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.028794316255612722
+    },
+    {
+      "index": 72,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.007356146641404195
+    },
+    {
+      "index": 73,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9845064001203259
+    },
+    {
+      "index": 74,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.664815901414406
+    },
+    {
+      "index": 75,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.06710696486150834
+    },
+    {
+      "index": 76,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.007403012336923174
+    },
+    {
+      "index": 77,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9793231432138881
+    },
+    {
+      "index": 78,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.01042272914549504
+    },
+    {
+      "index": 79,
+      "true": 1,
+      "predicted": 0,
+      "probability_positive": 0.22870435421971
+    },
+    {
+      "index": 80,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.011982099392354442
+    },
+    {
+      "index": 81,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.987068505942658
+    },
+    {
+      "index": 82,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9410235783683479
+    },
+    {
+      "index": 83,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9807038871943111
+    },
+    {
+      "index": 84,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9781710465194852
+    },
+    {
+      "index": 85,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9890141117387715
+    },
+    {
+      "index": 86,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9873433773685828
+    },
+    {
+      "index": 87,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.007876168281276867
+    },
+    {
+      "index": 88,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.5287272816591526
+    },
+    {
+      "index": 89,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.988075602101574
+    },
+    {
+      "index": 90,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.014772339292462187
+    },
+    {
+      "index": 91,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9869854617144658
+    },
+    {
+      "index": 92,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.2471714225524365
+    },
+    {
+      "index": 93,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.985901522913616
+    },
+    {
+      "index": 94,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.17006485342951613
+    },
+    {
+      "index": 95,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.012272263927353035
+    },
+    {
+      "index": 96,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.008742214285120512
+    },
+    {
+      "index": 97,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.01631637054471224
+    },
+    {
+      "index": 98,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9418266183508299
+    },
+    {
+      "index": 99,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9876274659223633
+    },
+    {
+      "index": 100,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.007854971074517332
+    },
+    {
+      "index": 101,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.054282680312670244
+    },
+    {
+      "index": 102,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.04162521582099787
+    },
+    {
+      "index": 103,
+      "true": 1,
+      "predicted": 0,
+      "probability_positive": 0.20116287894158072
+    },
+    {
+      "index": 104,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9740913262420158
+    },
+    {
+      "index": 105,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.40660036263283
+    },
+    {
+      "index": 106,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.008840938905664996
+    },
+    {
+      "index": 107,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.01219533353166383
+    },
+    {
+      "index": 108,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9634718467978711
+    },
+    {
+      "index": 109,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9825335424340539
+    },
+    {
+      "index": 110,
+      "true": 1,
+      "predicted": 0,
+      "probability_positive": 0.014445764837883752
+    },
+    {
+      "index": 111,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9832901734023871
+    },
+    {
+      "index": 112,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9780918331656373
+    },
+    {
+      "index": 113,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9586621559414996
+    },
+    {
+      "index": 114,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.010437141781588293
+    },
+    {
+      "index": 115,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9379154704877561
+    },
+    {
+      "index": 116,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9864497651273181
+    },
+    {
+      "index": 117,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.7471586758332069
+    },
+    {
+      "index": 118,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9867656910676136
+    },
+    {
+      "index": 119,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.7774863108963265
+    },
+    {
+      "index": 120,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.7287956479865934
+    },
+    {
+      "index": 121,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.01191015856455379
+    },
+    {
+      "index": 122,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9628235609414016
+    },
+    {
+      "index": 123,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.988811125003126
+    },
+    {
+      "index": 124,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.988529489285362
+    },
+    {
+      "index": 125,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9740467807535957
+    },
+    {
+      "index": 126,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.05066037436499298
+    },
+    {
+      "index": 127,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.8875933950277536
+    },
+    {
+      "index": 128,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.014415108296510448
+    },
+    {
+      "index": 129,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9787524764613
+    },
+    {
+      "index": 130,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.97203477609295
+    },
+    {
+      "index": 131,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.010933585938045642
+    },
+    {
+      "index": 132,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.12303566419894214
+    },
+    {
+      "index": 133,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9805458515227498
+    },
+    {
+      "index": 134,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.5102788343291007
+    },
+    {
+      "index": 135,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9886147188724079
+    },
+    {
+      "index": 136,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.982866157905236
+    },
+    {
+      "index": 137,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.009763471240073374
+    },
+    {
+      "index": 138,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9861429703958328
+    },
+    {
+      "index": 139,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9879897415082394
+    },
+    {
+      "index": 140,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.677085085179532
+    },
+    {
+      "index": 141,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9862099477461791
+    },
+    {
+      "index": 142,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9766738268236776
+    },
+    {
+      "index": 143,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.006926309737922006
+    },
+    {
+      "index": 144,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9801969226628339
+    },
+    {
+      "index": 145,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.1456893589195836
+    },
+    {
+      "index": 146,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.013942258682081994
+    },
+    {
+      "index": 147,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9647451979889918
+    },
+    {
+      "index": 148,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9862044052744147
+    },
+    {
+      "index": 149,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.011451432204641837
+    },
+    {
+      "index": 150,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.01609399233676038
+    },
+    {
+      "index": 151,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.7001509052373923
+    },
+    {
+      "index": 152,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.010102119733192862
+    },
+    {
+      "index": 153,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9781674979353827
+    },
+    {
+      "index": 154,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.009123055023010059
+    },
+    {
+      "index": 155,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9711971148674524
+    },
+    {
+      "index": 156,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9806301193372308
+    },
+    {
+      "index": 157,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9654183685441103
+    },
+    {
+      "index": 158,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9862077589105898
+    },
+    {
+      "index": 159,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.009785005591714357
+    },
+    {
+      "index": 160,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.009293247085114541
+    },
+    {
+      "index": 161,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9872067801944815
+    },
+    {
+      "index": 162,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.4608329575480012
+    },
+    {
+      "index": 163,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.7310641568300296
+    },
+    {
+      "index": 164,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.007352655137459082
+    },
+    {
+      "index": 165,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9737742700657855
+    },
+    {
+      "index": 166,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9850034496231249
+    },
+    {
+      "index": 167,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.6310443983754775
+    },
+    {
+      "index": 168,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.006983727247103123
+    },
+    {
+      "index": 169,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.012209524282433297
+    },
+    {
+      "index": 170,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9824210313522639
+    },
+    {
+      "index": 171,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9854165272097565
+    },
+    {
+      "index": 172,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.010194012745093715
+    },
+    {
+      "index": 173,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.6192782476233109
+    },
+    {
+      "index": 174,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.008754683648855482
+    },
+    {
+      "index": 175,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9805210380683212
+    },
+    {
+      "index": 176,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9535526673525214
+    },
+    {
+      "index": 177,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9153529014831964
+    },
+    {
+      "index": 178,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9380004918565618
+    },
+    {
+      "index": 179,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9883778432069539
+    },
+    {
+      "index": 180,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.5389661097929479
+    },
+    {
+      "index": 181,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9885087572349582
+    },
+    {
+      "index": 182,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9145240383151302
+    },
+    {
+      "index": 183,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.009038421306673842
+    },
+    {
+      "index": 184,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.00932060481592131
+    },
+    {
+      "index": 185,
+      "true": 1,
+      "predicted": 0,
+      "probability_positive": 0.048849447529109545
+    },
+    {
+      "index": 186,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.04346229727496652
+    },
+    {
+      "index": 187,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9832388786144427
+    },
+    {
+      "index": 188,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9872234149826599
+    },
+    {
+      "index": 189,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9679656704316717
+    },
+    {
+      "index": 190,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9722483896778875
+    },
+    {
+      "index": 191,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.010489214988818793
+    },
+    {
+      "index": 192,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9827849096981974
+    },
+    {
+      "index": 193,
+      "true": 1,
+      "predicted": 0,
+      "probability_positive": 0.022856072756002186
+    },
+    {
+      "index": 194,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.984204981176346
+    },
+    {
+      "index": 195,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9850324665297719
+    },
+    {
+      "index": 196,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.8211195566509445
+    },
+    {
+      "index": 197,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9871578628050985
+    },
+    {
+      "index": 198,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9833312129935854
+    },
+    {
+      "index": 199,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9889468078729621
+    },
+    {
+      "index": 200,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.7453165846273553
+    },
+    {
+      "index": 201,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.018389424925907647
+    },
+    {
+      "index": 202,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.00712326649176428
+    },
+    {
+      "index": 203,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9762626429969355
+    },
+    {
+      "index": 204,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.7712116686940671
+    },
+    {
+      "index": 205,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.05057184046285509
+    },
+    {
+      "index": 206,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9642585161575488
+    },
+    {
+      "index": 207,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.011181481056268885
+    },
+    {
+      "index": 208,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.007951726949484646
+    },
+    {
+      "index": 209,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.009465347544036001
+    },
+    {
+      "index": 210,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9878710748179946
+    },
+    {
+      "index": 211,
+      "true": 1,
+      "predicted": 0,
+      "probability_positive": 0.011880633051200887
+    },
+    {
+      "index": 212,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9155665937168199
+    },
+    {
+      "index": 213,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.008965239884931512
+    },
+    {
+      "index": 214,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.008775466395298763
+    },
+    {
+      "index": 215,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9605938887270976
+    },
+    {
+      "index": 216,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9879943718265989
+    },
+    {
+      "index": 217,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9883537395924363
+    },
+    {
+      "index": 218,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.014283414193960895
+    },
+    {
+      "index": 219,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9645066334715646
+    },
+    {
+      "index": 220,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9542980851381665
+    },
+    {
+      "index": 221,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.008929612348583225
+    },
+    {
+      "index": 222,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.018391307913016307
+    },
+    {
+      "index": 223,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.034423917912744476
+    },
+    {
+      "index": 224,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9876346452600665
+    },
+    {
+      "index": 225,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9875575669875346
+    },
+    {
+      "index": 226,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9839228276450217
+    },
+    {
+      "index": 227,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9875338970810733
+    },
+    {
+      "index": 228,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.979960482193438
+    },
+    {
+      "index": 229,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9734595724290874
+    },
+    {
+      "index": 230,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.008111512105518234
+    },
+    {
+      "index": 231,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.08043539762563345
+    },
+    {
+      "index": 232,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.007425467517296748
+    },
+    {
+      "index": 233,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.5992581663302254
+    },
+    {
+      "index": 234,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9839168676340653
+    },
+    {
+      "index": 235,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9864921071834177
+    },
+    {
+      "index": 236,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9783416995913652
+    },
+    {
+      "index": 237,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.00906269946246433
+    },
+    {
+      "index": 238,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9889241321790353
+    },
+    {
+      "index": 239,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.009556501343255289
+    },
+    {
+      "index": 240,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9748549955272376
+    },
+    {
+      "index": 241,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9865694456363332
+    },
+    {
+      "index": 242,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.008116537540535738
+    },
+    {
+      "index": 243,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.008320563482420393
+    },
+    {
+      "index": 244,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9870258159880736
+    },
+    {
+      "index": 245,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.008526442434290574
+    },
+    {
+      "index": 246,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9883421664917269
+    },
+    {
+      "index": 247,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9363052420163526
+    },
+    {
+      "index": 248,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9852422171109423
+    },
+    {
+      "index": 249,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9858034933067819
+    },
+    {
+      "index": 250,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.007261538484549142
+    },
+    {
+      "index": 251,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.6559240013022166
+    },
+    {
+      "index": 252,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.009228479425468105
+    },
+    {
+      "index": 253,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9883368662577843
+    },
+    {
+      "index": 254,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9874812051301417
+    },
+    {
+      "index": 255,
+      "true": 1,
+      "predicted": 0,
+      "probability_positive": 0.02681568619338251
+    },
+    {
+      "index": 256,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9874417348314535
+    },
+    {
+      "index": 257,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9777066467985497
+    },
+    {
+      "index": 258,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9867465072554291
+    },
+    {
+      "index": 259,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9687636042686669
+    },
+    {
+      "index": 260,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9370830169285361
+    },
+    {
+      "index": 261,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9089637211344159
+    },
+    {
+      "index": 262,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9614466460431994
+    },
+    {
+      "index": 263,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9862144119087742
+    },
+    {
+      "index": 264,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.013871489493639257
+    },
+    {
+      "index": 265,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9889828501408587
+    },
+    {
+      "index": 266,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9877065369970488
+    },
+    {
+      "index": 267,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.5060304077430372
+    },
+    {
+      "index": 268,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9738872280580918
+    },
+    {
+      "index": 269,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.008699270230745657
+    },
+    {
+      "index": 270,
+      "true": 1,
+      "predicted": 0,
+      "probability_positive": 0.38434733150861516
+    },
+    {
+      "index": 271,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9877596097025576
+    },
+    {
+      "index": 272,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.01311247829765778
+    },
+    {
+      "index": 273,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.979627673489764
+    },
+    {
+      "index": 274,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.987230329822729
+    },
+    {
+      "index": 275,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9872024073105085
+    },
+    {
+      "index": 276,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.013918914182258641
+    },
+    {
+      "index": 277,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9868165662197688
+    },
+    {
+      "index": 278,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9876954124958048
+    },
+    {
+      "index": 279,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9648055930918789
+    },
+    {
+      "index": 280,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9853399687626332
+    },
+    {
+      "index": 281,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9275521175882157
+    },
+    {
+      "index": 282,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.00832417813717884
+    },
+    {
+      "index": 283,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9859579968055471
+    },
+    {
+      "index": 284,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.008539652269455925
+    },
+    {
+      "index": 285,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9770735347333419
+    },
+    {
+      "index": 286,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.017657584886974526
+    },
+    {
+      "index": 287,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.877358065101096
+    },
+    {
+      "index": 288,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9877096515821189
+    },
+    {
+      "index": 289,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9121380368199847
+    },
+    {
+      "index": 290,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9653114928493363
+    },
+    {
+      "index": 291,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.8422489015101501
+    },
+    {
+      "index": 292,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9865803211889905
+    },
+    {
+      "index": 293,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.8557484259987413
+    },
+    {
+      "index": 294,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.18781933698003997
+    },
+    {
+      "index": 295,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9712386658165829
+    },
+    {
+      "index": 296,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9462470032808682
+    },
+    {
+      "index": 297,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.18299777281170151
+    },
+    {
+      "index": 298,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.008701587676579796
+    },
+    {
+      "index": 299,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9823308090562546
+    },
+    {
+      "index": 300,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.976533802652754
+    },
+    {
+      "index": 301,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9637692062498662
+    },
+    {
+      "index": 302,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9789976491598964
+    },
+    {
+      "index": 303,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.8766410277828204
+    },
+    {
+      "index": 304,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9882346132505146
+    },
+    {
+      "index": 305,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9879526439118415
+    },
+    {
+      "index": 306,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9685130804135134
+    },
+    {
+      "index": 307,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.965922980053717
+    },
+    {
+      "index": 308,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.24202870793033354
+    },
+    {
+      "index": 309,
+      "true": 1,
+      "predicted": 0,
+      "probability_positive": 0.047172828630780934
+    },
+    {
+      "index": 310,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9453676149376666
+    },
+    {
+      "index": 311,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.015668733443966822
+    },
+    {
+      "index": 312,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.03207030082506133
+    },
+    {
+      "index": 313,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.013324282575905068
+    },
+    {
+      "index": 314,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9296907034495964
+    },
+    {
+      "index": 315,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.042143951710494024
+    },
+    {
+      "index": 316,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9801961729254212
+    },
+    {
+      "index": 317,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.012695697055821718
+    },
+    {
+      "index": 318,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9875347306217892
+    },
+    {
+      "index": 319,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.013958223764569106
+    },
+    {
+      "index": 320,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9837838288678887
+    },
+    {
+      "index": 321,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9649348583171077
+    },
+    {
+      "index": 322,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.017447746338265558
+    },
+    {
+      "index": 323,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.0074838972542212645
+    },
+    {
+      "index": 324,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9847335641780219
+    },
+    {
+      "index": 325,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.988675242577045
+    },
+    {
+      "index": 326,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.008503662911676022
+    },
+    {
+      "index": 327,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.01599950677051454
+    },
+    {
+      "index": 328,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9852822738064305
+    },
+    {
+      "index": 329,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9879176559399853
+    },
+    {
+      "index": 330,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.007411112489619877
+    },
+    {
+      "index": 331,
+      "true": 1,
+      "predicted": 0,
+      "probability_positive": 0.476739958257488
+    },
+    {
+      "index": 332,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9798455651810151
+    },
+    {
+      "index": 333,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.008204581610065636
+    },
+    {
+      "index": 334,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9851403372065687
+    },
+    {
+      "index": 335,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.007454565590817059
+    },
+    {
+      "index": 336,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.1417389646174368
+    },
+    {
+      "index": 337,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9394156773544173
+    },
+    {
+      "index": 338,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9799847933206124
+    },
+    {
+      "index": 339,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9885806060598932
+    },
+    {
+      "index": 340,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9752165957850215
+    },
+    {
+      "index": 341,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.008335667994906133
+    },
+    {
+      "index": 342,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9882935317834434
+    },
+    {
+      "index": 343,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.012489079212290956
+    },
+    {
+      "index": 344,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.007657626868103424
+    },
+    {
+      "index": 345,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9880522021437893
+    },
+    {
+      "index": 346,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.01780552146255947
+    },
+    {
+      "index": 347,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9820801819426374
+    },
+    {
+      "index": 348,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.008333423539727724
+    },
+    {
+      "index": 349,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.011315130075615357
+    },
+    {
+      "index": 350,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9893508355588866
+    },
+    {
+      "index": 351,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9830652304096459
+    },
+    {
+      "index": 352,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9886392499473388
+    },
+    {
+      "index": 353,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9745364966959157
+    },
+    {
+      "index": 354,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.025199650837810433
+    },
+    {
+      "index": 355,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9792537866635797
+    },
+    {
+      "index": 356,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9801177903458752
+    },
+    {
+      "index": 357,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.008543652093803538
+    },
+    {
+      "index": 358,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.5336052765787511
+    },
+    {
+      "index": 359,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9686803584090926
+    },
+    {
+      "index": 360,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.0077501372204580804
+    },
+    {
+      "index": 361,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9411450942125804
+    },
+    {
+      "index": 362,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.2884753277283055
+    },
+    {
+      "index": 363,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.008211696984958387
+    },
+    {
+      "index": 364,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.00857869793807527
+    },
+    {
+      "index": 365,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.8886515209082173
+    },
+    {
+      "index": 366,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.8454333258974841
+    },
+    {
+      "index": 367,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9835885816271752
+    },
+    {
+      "index": 368,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.010572017282618829
+    },
+    {
+      "index": 369,
+      "true": 1,
+      "predicted": 0,
+      "probability_positive": 0.03253852303415316
+    },
+    {
+      "index": 370,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9865900557060892
+    },
+    {
+      "index": 371,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.015325879305672516
+    },
+    {
+      "index": 372,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.8350090077982277
+    },
+    {
+      "index": 373,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.023410864068291896
+    },
+    {
+      "index": 374,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.008429336401843313
+    },
+    {
+      "index": 375,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9880690354563524
+    },
+    {
+      "index": 376,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9398389328750363
+    },
+    {
+      "index": 377,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.017545508407662443
+    },
+    {
+      "index": 378,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.985094784623658
+    },
+    {
+      "index": 379,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9864571661902958
+    },
+    {
+      "index": 380,
+      "true": 1,
+      "predicted": 0,
+      "probability_positive": 0.17905204171534253
+    },
+    {
+      "index": 381,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9850707962583546
+    },
+    {
+      "index": 382,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9857998725758137
+    },
+    {
+      "index": 383,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.987896963355332
+    },
+    {
+      "index": 384,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9876619705944452
+    },
+    {
+      "index": 385,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.007411861421923818
+    },
+    {
+      "index": 386,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9866444592681426
+    },
+    {
+      "index": 387,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9876314303575491
+    },
+    {
+      "index": 388,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9875195068994993
+    },
+    {
+      "index": 389,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.07869485356226683
+    },
+    {
+      "index": 390,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9722229523975021
+    },
+    {
+      "index": 391,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9823535714583828
+    },
+    {
+      "index": 392,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.009066794227015236
+    },
+    {
+      "index": 393,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.008174669411376456
+    },
+    {
+      "index": 394,
+      "true": 1,
+      "predicted": 0,
+      "probability_positive": 0.019661100848520678
+    },
+    {
+      "index": 395,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.00715817159593335
+    },
+    {
+      "index": 396,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9878598800747254
+    },
+    {
+      "index": 397,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9839480167282432
+    },
+    {
+      "index": 398,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9849730434667746
+    },
+    {
+      "index": 399,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9884739693709433
+    },
+    {
+      "index": 400,
+      "true": 1,
+      "predicted": 0,
+      "probability_positive": 0.4374399007839593
+    },
+    {
+      "index": 401,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.7765393162213944
+    },
+    {
+      "index": 402,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9855319612733856
+    },
+    {
+      "index": 403,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.6158949274442032
+    },
+    {
+      "index": 404,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.986742172536969
+    },
+    {
+      "index": 405,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.00685178106787012
+    },
+    {
+      "index": 406,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9884456960200926
+    },
+    {
+      "index": 407,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9873530328863661
+    },
+    {
+      "index": 408,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9569122633686103
+    },
+    {
+      "index": 409,
+      "true": 1,
+      "predicted": 0,
+      "probability_positive": 0.27126073960776087
+    },
+    {
+      "index": 410,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9824028022422661
+    },
+    {
+      "index": 411,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.009729706952775346
+    },
+    {
+      "index": 412,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.988321886900768
+    },
+    {
+      "index": 413,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9560251630379473
+    },
+    {
+      "index": 414,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.5645308771980798
+    },
+    {
+      "index": 415,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9565061274849606
+    },
+    {
+      "index": 416,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.20200630803130162
+    },
+    {
+      "index": 417,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9856560273530042
+    },
+    {
+      "index": 418,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9788379502660874
+    },
+    {
+      "index": 419,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9866482193395171
+    },
+    {
+      "index": 420,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9234683497677175
+    },
+    {
+      "index": 421,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9885923162435041
+    },
+    {
+      "index": 422,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.012303938471017399
+    },
+    {
+      "index": 423,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.009090263048032668
+    },
+    {
+      "index": 424,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.6379433081934871
+    },
+    {
+      "index": 425,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.979195058345176
+    },
+    {
+      "index": 426,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.7160298620811156
+    },
+    {
+      "index": 427,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.01503502565918289
+    },
+    {
+      "index": 428,
+      "true": 1,
+      "predicted": 0,
+      "probability_positive": 0.0096322353153832
+    },
+    {
+      "index": 429,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9879916566430338
+    },
+    {
+      "index": 430,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.010511586600579097
+    },
+    {
+      "index": 431,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.012015600964021513
+    },
+    {
+      "index": 432,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.98735207718946
+    },
+    {
+      "index": 433,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9802630375475729
+    },
+    {
+      "index": 434,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9839475629600679
+    },
+    {
+      "index": 435,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9880412655177132
+    },
+    {
+      "index": 436,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.806778920636681
+    },
+    {
+      "index": 437,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9765634265490667
+    },
+    {
+      "index": 438,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9861974262267517
+    },
+    {
+      "index": 439,
+      "true": 1,
+      "predicted": 0,
+      "probability_positive": 0.38105106892355634
+    },
+    {
+      "index": 440,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9882077381071205
+    },
+    {
+      "index": 441,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.008557031971760335
+    },
+    {
+      "index": 442,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.008196586544495479
+    },
+    {
+      "index": 443,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9867847013554921
+    },
+    {
+      "index": 444,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.035037405708445934
+    },
+    {
+      "index": 445,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.012241070613226109
+    },
+    {
+      "index": 446,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.007318457431990193
+    },
+    {
+      "index": 447,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.011102677607206375
+    },
+    {
+      "index": 448,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.007407411026076463
+    },
+    {
+      "index": 449,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9777155755060382
+    },
+    {
+      "index": 450,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.5280139087217502
+    },
+    {
+      "index": 451,
+      "true": 1,
+      "predicted": 0,
+      "probability_positive": 0.09298827673519695
+    },
+    {
+      "index": 452,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9843309870876568
+    },
+    {
+      "index": 453,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.007276318867563876
+    },
+    {
+      "index": 454,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.8961737326842889
+    },
+    {
+      "index": 455,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9876122431950533
+    },
+    {
+      "index": 456,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9868829732428478
+    },
+    {
+      "index": 457,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9880101559495843
+    },
+    {
+      "index": 458,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9857335511564252
+    },
+    {
+      "index": 459,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.033544924530444026
+    },
+    {
+      "index": 460,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9599814482755098
+    },
+    {
+      "index": 461,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.13233732301943382
+    },
+    {
+      "index": 462,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.017768237935084683
+    },
+    {
+      "index": 463,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9864816062525935
+    },
+    {
+      "index": 464,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9679949002034852
+    },
+    {
+      "index": 465,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9539072774894242
+    },
+    {
+      "index": 466,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.019650786807522705
+    },
+    {
+      "index": 467,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.00727349674717201
+    },
+    {
+      "index": 468,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.015456240523284719
+    },
+    {
+      "index": 469,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.987609527281649
+    },
+    {
+      "index": 470,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.008550204023581974
+    },
+    {
+      "index": 471,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.7322137916483307
+    },
+    {
+      "index": 472,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9835129943566211
+    },
+    {
+      "index": 473,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.7972074138053595
+    },
+    {
+      "index": 474,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.007516441124929011
+    },
+    {
+      "index": 475,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.008384977895045855
+    },
+    {
+      "index": 476,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9874857992136233
+    },
+    {
+      "index": 477,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.008129603901549414
+    },
+    {
+      "index": 478,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.007988808968110163
+    },
+    {
+      "index": 479,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.072237385566922
+    },
+    {
+      "index": 480,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.009765151776084856
+    },
+    {
+      "index": 481,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9132634652695345
+    },
+    {
+      "index": 482,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9828343539585055
+    },
+    {
+      "index": 483,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.00760179452235781
+    },
+    {
+      "index": 484,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9680524491986509
+    },
+    {
+      "index": 485,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.007305742768136845
+    },
+    {
+      "index": 486,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.007579966911144901
+    },
+    {
+      "index": 487,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.017168478010086755
+    },
+    {
+      "index": 488,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9032538681635569
+    },
+    {
+      "index": 489,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9871057994010847
+    },
+    {
+      "index": 490,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.00798393184848564
+    },
+    {
+      "index": 491,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9270704908946479
+    },
+    {
+      "index": 492,
+      "true": 1,
+      "predicted": 1,
+      "probability_positive": 0.9872596407188889
+    },
+    {
+      "index": 493,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.007936544770171985
+    },
+    {
+      "index": 494,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9515765613783674
+    },
+    {
+      "index": 495,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.008762244961525776
+    },
+    {
+      "index": 496,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.007568180123262815
+    },
+    {
+      "index": 497,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.00800818602438511
+    },
+    {
+      "index": 498,
+      "true": 0,
+      "predicted": 0,
+      "probability_positive": 0.007711962912446788
+    },
+    {
+      "index": 499,
+      "true": 0,
+      "predicted": 1,
+      "probability_positive": 0.9835752236616089
+    }
+  ]
+}

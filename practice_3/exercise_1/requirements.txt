@@ -1,0 +1,6 @@
+# Exercise 1 only: pretrained inference, no training, no dataset.
+torch>=2.2
+transformers>=4.46,<6
+pytest>=8
+ipykernel>=6.28
+pandas>=2.1

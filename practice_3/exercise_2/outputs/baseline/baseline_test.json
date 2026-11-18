@@ -1,0 +1,30 @@
+{
+  "split": "test",
+  "sample_count": 500,
+  "max_length": 128,
+  "zero_shot_model": "distilbert/distilbert-base-uncased-finetuned-sst-2-english",
+  "zero_shot_metrics": {
+    "accuracy": 0.818,
+    "precision": 0.8189300411522634,
+    "recall": 0.8089430894308943,
+    "f1": 0.8139059304703476
+  },
+  "zero_shot_confusion_matrix": [
+    [
+      210,
+      44
+    ],
+    [
+      47,
+      199
+    ]
+  ],
+  "majority_baseline": {
+    "majority_label": 0,
+    "accuracy": 0.508,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0
+  },
+  "note": "Zero-shot = no fine-tuning on IMDb; SST-2 sentences differ from IMDb reviews."
+}
