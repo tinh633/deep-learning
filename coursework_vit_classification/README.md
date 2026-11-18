@@ -18,6 +18,7 @@ Phải smoke lại ConvNeXt A/B; số đo và checkpoint ResNet cũ không đạ
 - [Audit log smoke run](docs/Audit_Log.md) và [changelog code/pipeline](docs/CHANGELOG.md).
 - [Source workflow — 5W1H từng file](docs/src/README.md).
 - [Checkpoint Git LFS — tải, phạm vi và cách sử dụng](docs/Checkpoints.md).
+- [Training Monitor — biểu đồ log huấn luyện](Training_Monitor.ipynb): Run All với kernel .venv; lọc run, đọc history mới sau mỗi epoch, tự cập nhật tùy chọn.
 
 ## Chạy dữ liệu và EDA
 
