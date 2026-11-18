@@ -3,7 +3,7 @@
 Cập nhật: 16/11/2026. Có 7 full checkpoint được lưu bằng Git LFS, tổng khoảng 1,21 GiB.
 Danh sách chính xác, dung lượng và SHA-256: [outputs/checkpoints.json](../outputs/checkpoints.json).
 Đây là checkpoint lịch sử ResNet/ViT; chưa có ConvNeXt hoặc final của cặp mới ngày 18/11.
-Upload LFS trước bị kẹt; danh sách local không chứng minh remote đã có đủ model.
+18/11: đã upload đủ 7 checkpoint Git LFS (1,3 GB) cùng code ConvNeXt tại commit d5e6dfc.
 
 ## 1. Các file được chia sẻ
 
