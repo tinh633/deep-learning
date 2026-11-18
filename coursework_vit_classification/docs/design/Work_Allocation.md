@@ -28,7 +28,7 @@ Smoke/resource check → 2 pilot LR → chọn LR bằng validation
 
 Tổng kế hoạch: 8 pilot ngắn và 4 final; lượt smoke/resource probe được ghi riêng.
 T và E, hai cặp LR, WD, batch/precision và policy duplicate phải chốt trước khi giao ca chạy.
-20–30 epoch mới là ngân sách đang cân nhắc, chưa tự áp dụng làm cấu hình chính thức.
+A đã duyệt 18/11: pilot 5 epoch/LR, final 20 epoch; chi tiết protocol A ở Training_Strategy mục 9.
 
 ## 2. Đề xuất phân công nhóm 6 người
 

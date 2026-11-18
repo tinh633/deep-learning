@@ -60,4 +60,5 @@ Fine-tune cần gradient, activation và optimizer state; gần số tham số k
 Máy GPU 4 GB phải smoke lại A/B; số đo ResNet cũ không dùng ước tính ConvNeXt.
 Kiểm thử cấu trúc xác nhận head, tham số, freeze/mode và logits B×100 trên meta device.
 Regression tổng hợp xác nhận orchestration/resume; không thay thế smoke GPU pretrained thật.
-Chưa có checkpoint ConvNeXt hoặc pilot/final mới; chưa khóa LR/batch/epoch.
+A đã hoàn tất 2 pilot và final 20 epoch, batch16, LR chọn 3e-4; xem [A_Results](../A_Results.md).
+B fine-tune vẫn cần smoke/budget riêng; không dùng số đo A để khẳng định B đủ tài nguyên.

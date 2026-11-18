@@ -1,6 +1,6 @@
 # Define — Định nghĩa đồ án
 
-Cập nhật: 18/11/2026. Baseline ConvNeXt-Base thay ResNet; code đã có, chưa tuning/train chính thức.
+Cập nhật: 18/11/2026. ConvNeXt A đã hoàn tất 2 pilot và final; B/C/D chờ kết quả tích hợp, chưa test.
 Giảng viên đã xác nhận hướng ViT/CIFAR-100, không kết hợp Anti Face Deepfake.
 Thiết kế: [Implementation_Plan.md](../design/Implementation_Plan.md). Trạng thái: [progress](../progress.md).
 
@@ -79,7 +79,7 @@ Không mở rộng sang deepfake, detection, segmentation, train từ đầu ho�
 - Fit thống kê phục vụ lựa chọn preprocessing chỉ trên train; augmentation chỉ ở train.
 - Không dùng test để tinh chỉnh LR, số epoch, checkpoint hoặc chọn cấu hình cho lượt tiếp theo.
 - GPU local từng dùng có 4 GB; khả năng fine-tune ViT phải kiểm chứng bằng smoke run.
-- LR, batch, weight decay, scheduler và epoch chưa chốt; không ghi mục tiêu thời gian thiếu số đo.
+- A đã khóa LR/batch/WD/scheduler/epoch; B/C/D cần xác nhận trước chạy, không suy thời gian từ A.
 - Không phát sinh dịch vụ trả phí hoặc đổi model/phạm vi khi chưa thống nhất.
 - Dataset, pixel dẫn xuất và cache không commit; không tạo artifact train giả.
 - Resize 32 lên 224 không phục hồi chi tiết ảnh đã mất.
@@ -106,5 +106,5 @@ Mục tiêu accuracy kỳ vọng chỉ ghi sau pilot có căn cứ, không lấy
 
 Đáp ứng phần đề tài ViT classification, dataset được cho phép, baseline, demo và phân tích giới hạn.
 Không coi phần mở rộng cùng số tham số hoặc attention là đã hoàn thành.
-Đã xác nhận phạm vi; còn chốt ảnh trùng và thông số/budget sau smoke trước các pilot/final.
+Đã xác nhận phạm vi; A giữ split và công bố ảnh trùng, protocol/kết quả ở [A_Results](../A_Results.md).
 Nguồn dữ liệu: [CIFAR chính thức](https://www.cs.toronto.edu/~kriz/cifar.html).

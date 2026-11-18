@@ -1,0 +1,94 @@
+{
+  "status": "completed",
+  "protocol": {
+    "model": "convnext_base",
+    "strategy": "freeze",
+    "pilot_lrs": [
+      0.001,
+      0.0003
+    ],
+    "pilot_epochs": 5,
+    "final_epochs": 20,
+    "batch_size": 16,
+    "weight_decay": 0.0,
+    "optimizer": "AdamW",
+    "scheduler": null,
+    "seed": 42,
+    "workers": 0,
+    "use_amp": true,
+    "duplicate_policy": "keep_reported",
+    "test": false
+  },
+  "runs": [
+    {
+      "phase": "tuning",
+      "candidate": "LR1",
+      "lr": 0.001,
+      "epochs": 5,
+      "selected_from": null,
+      "status": "completed",
+      "started": "2026-11-18 13:52:16",
+      "pid": 14664,
+      "sampled_gpu_peak_mib": 876,
+      "sampled_gpu_max_celsius": 77,
+      "run": "lan_12",
+      "last_completed_epoch": 5,
+      "exit_code": 0,
+      "best_accuracy": 0.8064,
+      "best_loss": 0.6950041233778,
+      "ended": "2026-11-18 14:20:57"
+    },
+    {
+      "phase": "tuning",
+      "candidate": "LR2",
+      "lr": 0.0003,
+      "epochs": 5,
+      "selected_from": null,
+      "status": "completed",
+      "started": "2026-11-18 14:20:57",
+      "pid": 17948,
+      "sampled_gpu_peak_mib": 876,
+      "sampled_gpu_max_celsius": 77,
+      "run": "lan_13",
+      "last_completed_epoch": 5,
+      "exit_code": 0,
+      "best_accuracy": 0.8078,
+      "best_loss": 0.6335281094312668,
+      "ended": "2026-11-18 14:49:27"
+    },
+    {
+      "phase": "final",
+      "candidate": null,
+      "lr": 0.0003,
+      "epochs": 20,
+      "selected_from": "lan_13",
+      "status": "completed",
+      "started": "2026-11-18 14:49:27",
+      "pid": 12324,
+      "sampled_gpu_peak_mib": 876,
+      "sampled_gpu_max_celsius": 78,
+      "run": "lan_14",
+      "last_completed_epoch": 20,
+      "exit_code": 0,
+      "attempts": [
+        {
+          "status": "failed",
+          "exit_code": 1,
+          "last_completed_epoch": 19,
+          "error": "Windows commit 3061.45 MiB below 3072 during epoch 20"
+        }
+      ],
+      "resumed_at": "2026-11-18 16:41:08",
+      "best_accuracy": 0.8146,
+      "best_loss": 0.6137656047999859,
+      "ended": "2026-11-18 16:46:38",
+      "resumed_from_epoch": 19
+    }
+  ],
+  "pid": null,
+  "selected_pilot": "lan_13",
+  "selection_rule": "max best validation accuracy, min loss, then LR1",
+  "monitor": "Codex session 8186",
+  "previous_stop": "Training failed; inspect D:\\newtask\\DL\\coursework_vit_classification\\outputs\\runs\\lan_14\\run.log",
+  "ended": "2026-11-18 16:46:38"
+}

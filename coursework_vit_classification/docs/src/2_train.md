@@ -25,7 +25,8 @@ Final từ chối pilot có purpose=resource_probe; đây chỉ là lượt ki�
 .venv/Scripts/python.exe -u coursework_vit_classification/src/2_train.py
 ```
 
-Mặc định bị chặn vì PHASE=smoke và cấu hình chưa được duyệt; smoke chạy 0_smoke.py riêng.
+A đã hoàn tất ở lan_14; config giữ final/resume nhưng TRAINING_APPROVED=False để không chạy lặp.
+Lúc hoạt động không chạy thêm process; đối chiếu outputs/experiment_A.json và PID thật trước resume.
 
 ## Luồng
 
