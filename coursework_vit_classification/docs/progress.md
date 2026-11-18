@@ -16,7 +16,6 @@ Nhật ký thay đổi: [CHANGELOG](CHANGELOG.md); checklist smoke: [Audit_Log](
 3. Chạy pilot/final/evaluate/demo theo cấu hình đã chốt; không dùng kết quả tổng hợp để chọn model.
 4. Thực hiện pipeline theo [kế hoạch](design/Implementation_Plan.md).
 ## Kiểm tra bộ khung
-
 - Kiểm tra UTF-8, giới hạn 150 dòng Markdown, liên kết nội bộ và notebook JSON.
 - Chỉ stage thư mục coursework; giữ nguyên thay đổi của benchmark và chỉ mục chung.
 - Không có kiểm thử chức năng vì mã thực thi chưa được triển khai.
@@ -148,3 +147,4 @@ Nhật ký thay đổi: [CHANGELOG](CHANGELOG.md); checklist smoke: [Audit_Log](
 - A/B chuyển ConvNeXt-Base (87.668.964 tham số); C/D ViT-B16 (85.875.556), chênh 2,09%, chưa bằng tuyệt đối.
 - Source/docs/tests đồng bộ; 3 kiểm thử PASS, AST/liên kết/Markdown/hash đạt: [bằng chứng](../outputs/validation/convnext_pipeline_check.json).
 - ResNet cũ là lịch sử; GPU smoke ConvNeXt NOT_RUN, chưa pilot/final/budget mới. A local, ba người nhận B/C/D; d5e6dfc đã push cousework, đủ 7 LFS (1,3 GB).
+- Training_Monitor.ipynb: biểu đồ epoch, so sánh run và refresh tùy chọn; kiểm tra code cell/log thật/hai run tổng hợp/bộ lọc/JSON lỗi đạt. Đã duyệt xuất bản cousework.

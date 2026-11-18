@@ -72,3 +72,5 @@
 - Kiểm chứng cấu trúc torchvision trên meta và hồi quy CPU tổng hợp; không tải weights hoặc chạy GPU mới.
 - Chưa chốt budget hoặc train mới; đã duyệt commit/push cousework, kiểm tra lại evidence/hash và phạm vi trước xuất bản.
 - Push d5e6dfc thành công lên cousework ngày 18/11, upload đủ 7 checkpoint LFS (1,3 GB); không còn blocker upload cũ.
+- Thêm Training_Monitor.ipynb đọc JSON, tách train/val, so sánh run, bảng trạng thái và refresh tùy chọn; không nạp model.
+- Chạy mọi code cell (refresh mặc định tắt), kiểm tra history thật, hai run tổng hợp, bộ lọc và JSON lỗi; xem ảnh biểu đồ; đã duyệt commit/push notebook lên cousework.
