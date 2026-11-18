@@ -71,3 +71,4 @@
 - Viết ConvNeXt_Base.md, cập nhật Define/Design/source docs và ghi rõ checkpoint ResNet là lịch sử.
 - Kiểm chứng cấu trúc torchvision trên meta và hồi quy CPU tổng hợp; không tải weights hoặc chạy GPU mới.
 - Chưa chốt budget hoặc train mới; đã duyệt commit/push cousework, kiểm tra lại evidence/hash và phạm vi trước xuất bản.
+- Push d5e6dfc thành công lên cousework ngày 18/11, upload đủ 7 checkpoint LFS (1,3 GB); không còn blocker upload cũ.

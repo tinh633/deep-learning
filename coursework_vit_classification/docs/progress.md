@@ -147,4 +147,4 @@ Nhật ký thay đổi: [CHANGELOG](CHANGELOG.md); checklist smoke: [Audit_Log](
 
 - A/B chuyển ConvNeXt-Base (87.668.964 tham số); C/D ViT-B16 (85.875.556), chênh 2,09%, chưa bằng tuyệt đối.
 - Source/docs/tests đồng bộ; 3 kiểm thử PASS, AST/liên kết/Markdown/hash đạt: [bằng chứng](../outputs/validation/convnext_pipeline_check.json).
-- ResNet cũ là lịch sử; GPU smoke ConvNeXt NOT_RUN, chưa pilot/final/budget mới. A local, ba người nhận B/C/D; đã duyệt commit/push, cần xác nhận remote.
+- ResNet cũ là lịch sử; GPU smoke ConvNeXt NOT_RUN, chưa pilot/final/budget mới. A local, ba người nhận B/C/D; d5e6dfc đã push cousework, đủ 7 LFS (1,3 GB).
