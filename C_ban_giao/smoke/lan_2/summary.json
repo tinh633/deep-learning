@@ -1,0 +1,71 @@
+{
+  "status": "passed",
+  "checks": {
+    "source_split": "PASS",
+    "trainable": "PASS",
+    "optimizer": "PASS",
+    "shape": "PASS",
+    "finite_loss": "PASS",
+    "gradients": "PASS",
+    "state_update": "PASS",
+    "validation": "PASS",
+    "checkpoint": "PASS",
+    "resume_replay": "PASS",
+    "resources": "PASS",
+    "stability": "PASS"
+  },
+  "memory_before_checkpoint": {
+    "ram_available_mib": 9591.01953125,
+    "process_rss_mib": 1798.17578125
+  },
+  "memory_after_save": {
+    "ram_available_mib": 9542.26953125,
+    "process_rss_mib": 1798.3671875
+  },
+  "memory_after_load": {
+    "ram_available_mib": 9563.9375,
+    "process_rss_mib": 2126.6171875
+  },
+  "memory_after_replay": {
+    "ram_available_mib": 9533.84765625,
+    "process_rss_mib": 2158.44921875
+  },
+  "memory_after_reference_save": {
+    "ram_available_mib": 9537.04296875,
+    "process_rss_mib": 2158.44921875
+  },
+  "memory_after_replay_load": {
+    "ram_available_mib": 9534.08203125,
+    "process_rss_mib": 2158.44921875
+  },
+  "memory_final_guard": {
+    "ram_available_mib": 9552.54296875,
+    "process_rss_mib": 2471.01953125
+  },
+  "batches": 10,
+  "train_loss": 4.62293701171875,
+  "val_loss": 4.545142889022827,
+  "train_batch_seconds": [
+    1.5676278730002196,
+    0.08512734699979774,
+    0.07799922499998502,
+    0.07680889999983265,
+    0.053852766000090924,
+    0.05299438400015788,
+    0.05199524699992253,
+    0.052093629999944824,
+    0.05201708399999916,
+    0.05438135800022792
+  ],
+  "train_peak_allocated_mib": 436.900390625,
+  "workflow_peak_allocated_mib": 473.67236328125,
+  "resume_tolerance": {
+    "atol": 1e-06,
+    "rtol": 1e-05
+  },
+  "miniature_epoch": 1,
+  "memory_at_end": {
+    "ram_available_mib": 9552.54296875,
+    "process_rss_mib": 2471.01953125
+  }
+}
