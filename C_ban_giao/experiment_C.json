@@ -1,0 +1,24 @@
+{
+  "experiment": "C",
+  "model": "vit_b_16",
+  "strategy": "freeze",
+  "run_mapping": {
+    "lan_1": "smoke/lan_1",
+    "lan_2": "smoke/lan_2",
+    "lan_3": "training/lan_3",
+    "lan_4": "training/lan_4",
+    "lan_5": "training/lan_5"
+  },
+  "selected_pilot": "lan_4",
+  "selected_lr": 0.0003,
+  "selection_reason": "LR2 best validation accuracy 81.84% exceeds LR1 80.56%; test was not used for selection.",
+  "final_status": "completed",
+  "final_epochs": 20,
+  "best_checkpoint_epoch": 9,
+  "last_checkpoint_epoch": 20,
+  "resume": "Epochs 1-18 on Colab; resumed epochs 19-20 on Kaggle with different torch/torchvision versions. See original resume metadata.",
+  "test_results": "training/lan_5/evaluation/test_best_1/metrics.json",
+  "all_four_group_checkpoints_locked_before_test": "not_confirmed",
+  "deep_final_checkpoint_audit": "not_performed",
+  "note": "Run names are local to C. Original config, history, summary and resume files are authoritative."
+}

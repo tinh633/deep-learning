@@ -1,0 +1,11 @@
+{
+  "status": "completed",
+  "phase": "final",
+  "epochs": 20,
+  "best_accuracy": 0.8208,
+  "best_loss": 0.6238062336921691,
+  "memory_at_end": {
+    "ram_available_mib": 28941.01953125,
+    "process_rss_mib": 2024.8359375
+  }
+}
