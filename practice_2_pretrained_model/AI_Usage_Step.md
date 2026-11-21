@@ -55,3 +55,13 @@
 - Publication remains pending explicit approval; ImageNet benchmark workspace excluded from Practice2 scope.
 
 - 2026-11-04: Publication authorized: Practice2 and its .gitignore change to practice2-pretrained-model; ImageNet benchmark excluded.
+
+## 2026-11-21 — TensorBoard A/B/C
+
+- Mở rộng notebook cho đủ DenseNet121/VGG16 × A/B/C; bảng metadata và biểu đồ riêng từng model.
+- Events thiếu được chuyển đổi từ history thực, tách cache có provenance/hash, không thay events gốc.
+- Kiểm tra 720 scalar, 20 epoch mỗi run, cache không trùng, HTTP đủ6 run; xem ảnh static.
+- Sửa health check theo đủ run và dấu phân cách Windows; mặc định cổng6007, giữ cổng6006 gốc.
+- Đồng bộ README/Training/progress và ignore cache. Đã ghi vào Full; không train/test hoặc commit/push.
+- Đổi đồ thị thành ba cặp cùng cấu hình 1/4, 2/5, 3/6; kiểm tra2 đường/panel×4panel×3cặp và lưu output thật trong notebook.
+- Được duyệt commit/push riêng cập nhật Lab2 lên practice2-pretrained-model; giữ nguyên các nhánh khác và cache local.

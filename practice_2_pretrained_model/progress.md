@@ -85,3 +85,16 @@ Chi tiết kiểm tra cuối được cập nhật bên dưới. Nhật ký đ�
 - Giới hạn đã ghi: batch64 cố định, events chỉ2/3, một seed/nhiều máy và test đã quan sát.
 
 - 2026-11-04: Publication authorized: Practice2 and its .gitignore change to practice2-pretrained-model; ImageNet benchmark excluded.
+
+## 2026-11-21 — TensorBoard so sánh A/B/C
+
+- TensorBoard.ipynb nhận đủ 6 run theo settings.model_name/experiment/model_config thực.
+- Vẽ riêng A/B/C trong DenseNet121 và VGG16; ánh xạ lan_1–3 và lan_4–6, 20 epoch mỗi run.
+- Chuyển history đã đo thành events so sánh trong cache riêng có manifest/hash; không sửa events gốc hoặc weights.
+- Cache idempotent, ignore local; provenance ghi rõ không phải events live gốc, wall time không phải lúc train.
+- Dashboard 6007 dùng tên model/cấu hình/run, health check đợi đủ sáu nhóm và chuẩn hóa dấu phân cách Windows.
+- Kiểm tra 5 code cell, 720 scalar so với history, chạy lại không trùng, events gốc bất biến, HTTP đủ6 run đạt.
+- Đã xem biểu đồ static; chưa kiểm tra thao tác tương tác dashboard trong IDE/browser. Không train/test/commit/push.
+- Điều chỉnh theo từng cặp cùng cấu hình: A lan_1/4, B lan_2/5, C lan_3/6; mỗi hình4 panel, đúng2 đường/panel.
+- Chạy và lưu ba biểu đồ thật vào notebook; kiểm tra tên run/20 epoch, thêm hướng dẫn lọc cặp trong TensorBoard, không đổi events.
+- Đã duyệt xuất bản riêng 7 file notebook/tài liệu/ignore lên practice2-pretrained-model; không kèm cache, dữ liệu, lab3 hoặc coursework.

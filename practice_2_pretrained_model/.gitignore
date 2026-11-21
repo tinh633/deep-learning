@@ -1,0 +1,4 @@
+# Rebuilt locally from saved history by TensorBoard.ipynb.
+outputs/tensorboard_comparison/
+outputs/tensorboard_comparison_*.png
+outputs/tensorboard_server.log

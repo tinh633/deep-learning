@@ -72,9 +72,10 @@ Chi tiết train/resume: [Training.md](Training.md).
 .\.venv\Scripts\python.exe -m tensorboard.main --logdir practice_2_pretrained_model/outputs/runs --host 127.0.0.1 --port 6006 --reload_interval 2
 ```
 
-Mở [TensorBoard.ipynb](TensorBoard.ipynb) bằng kernel .venv và Run All; có biểu đồ đọc trực tiếp events, dashboard live và link tab riêng.
-HTML không còn tự nhúng iframe TensorBoard. Mở 127.0.0.1:6006 sau khi server chạy. Events local hiện có ở lan_2/lan_3; history đủ sáu lượt.
-Live Server không khởi động TensorBoard. Không dựng event giả cho các run thiếu file gốc.
+Mở [TensorBoard.ipynb](TensorBoard.ipynb) bằng kernel .venv và Run All để so từng cặp cùng cấu hình: A=1/4, B=2/5, C=3/6.
+Notebook xuất events so sánh từ history thực vào cache riêng có manifest/hash; dashboard mặc định 127.0.0.1:6007.
+Lệnh 6006 trên chỉ đọc events gốc (lan_2/lan_3), được giữ nguyên. Không train/evaluate hoặc nội suy số liệu thiếu.
+Chọn Step/Epoch và smoothing=0; wall time của bộ chuyển đổi không phải thời điểm train. Cache được ignore, tái tạo local.
 
 ## Phạm vi và giới hạn
 
@@ -98,6 +99,6 @@ Trạng thái/kiểm tra: [progress.md](progress.md). Nhật ký AI: [Step](AI_U
 HTML giữ PCA60.000 ảnh; bổ sung độ đậm điểm và chế độ chỉ hiện một lớp để giảm che lấp.
 Đã thử t-SNE không dùng nhãn trên60.000 ảnh; các lớp vẫn trộn nhiều,
 nên không giữ phần tính t-SNE trong pipeline hoặc làm thay đổi tọa độ theo nhãn.
-TensorBoard.ipynb không train lại; đọc trực tiếp events để vẽ loss/accuracy,
+TensorBoard.ipynb không train lại; đọc history để vẽ A/B/C và xuất bộ events so sánh riêng,
 khởi động server live có kiểm tra HTTP và link mở tab riêng khi khung nhúng không hiển thị.
-Hiện chỉ lan_2/lan_3 có events; run khác xem history qua notebook báo cáo.
+Events gốc chỉ có ở lan_2/lan_3; bộ so sánh có đủ lan_1–lan_6 từ history đã đo.

@@ -96,7 +96,13 @@ Chọn EVAL_RUN, đọc best.pt và cấu hình đã lưu; không dùng config m
 .\.venv\Scripts\python.exe -m tensorboard.main --logdir practice_2_pretrained_model/outputs/runs --host 127.0.0.1 --port 6006 --reload_interval 2
 ```
 
-Mở TensorBoard.ipynb để đọc events/vẽ biểu đồ và khởi động server, hoặc tab127.0.0.1:6006.
+Mở TensorBoard.ipynb bằng kernel .venv và Run All: ba cặp DenseNet/VGG cùng cấu hình A=1/4, B=2/5, C=3/6; dashboard6007.
+Trong TensorBoard bỏ chọn các run khác, lọc A_lan_/B_lan_/C_lan_ rồi chọn đúng hai run của cặp.
+Notebook xuất đúng history.json thực sang outputs/tensorboard_comparison/history_<hash>, kèm manifest nguồn/hash.
+Tên run: densenet121/A_lan_1 … vgg16/C_lan_6; 20 epoch/run, accuracy gốc 0–1 trong TensorBoard.
+Chạy lại không ghi trùng nếu nguồn không đổi; nguồn đổi tạo phiên bản riêng, server phải trỏ đúng logdir mới.
+Chọn trục Step/Epoch, smoothing=0; wall time là lúc chuyển đổi. Không dùng để so sánh thời gian train giữa máy.
+Lệnh cổng6006 ở trên vẫn đọc events gốc lan_2/lan_3; không có events gốc cho bốn run còn lại.
 HTML chỉ có link, không tự tải iframe. Notebook báo cáo đọc history không cần server.
 Live Server ignore outputs/data/events để giảm reload theo thay đổi artifact; nguyên nhân reload chưa tái hiện bằng browser.
 
