@@ -65,3 +65,4 @@
 - Đồng bộ README/Training/progress và ignore cache. Đã ghi vào Full; không train/test hoặc commit/push.
 - Đổi đồ thị thành ba cặp cùng cấu hình 1/4, 2/5, 3/6; kiểm tra2 đường/panel×4panel×3cặp và lưu output thật trong notebook.
 - Được duyệt commit/push riêng cập nhật Lab2 lên practice2-pretrained-model; giữ nguyên các nhánh khác và cache local.
+- Xuất bản 355262f thành công, đúng7 file Lab2; không có model/data/event gốc thay đổi, đã ghi vào Full.

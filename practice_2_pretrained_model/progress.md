@@ -98,3 +98,4 @@ Chi tiết kiểm tra cuối được cập nhật bên dưới. Nhật ký đ�
 - Điều chỉnh theo từng cặp cùng cấu hình: A lan_1/4, B lan_2/5, C lan_3/6; mỗi hình4 panel, đúng2 đường/panel.
 - Chạy và lưu ba biểu đồ thật vào notebook; kiểm tra tên run/20 epoch, thêm hướng dẫn lọc cặp trong TensorBoard, không đổi events.
 - Đã duyệt xuất bản riêng 7 file notebook/tài liệu/ignore lên practice2-pretrained-model; không kèm cache, dữ liệu, lab3 hoặc coursework.
+- Đã push cập nhật tại 355262f ngày 21/11; giữ nhánh làm việc hiện tại cousework và worktree lab3 nguyên trạng.
