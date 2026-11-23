@@ -1,5 +1,5 @@
 """What: Train một pilot hoặc final. Why: Cùng vòng lặp cho bốn chiến lược A–D.
-Which: ConvNeXt-Base/ViT-B16, AdamW, AMP. When: Sau smoke và cấu hình đã được duyệt.
+Which: ConvNeXt-Base/ResNet-50/ViT-B16, AdamW, AMP. When: Sau smoke và cấu hình đã được duyệt.
 Where: outputs/runs/lan_N. How: Loop train/val trực tiếp, AdamW, best/last và resume epoch.
 """
 import hashlib
@@ -65,7 +65,9 @@ if __name__ == '__main__':
                     duplicate_policy=config.DUPLICATE_POLICY, preprocessing=preprocessing_settings(),
                     split_sha256=hashlib.sha256(config.SPLIT_FILE.read_bytes()).hexdigest(),
                     classes=classes, optimizer='AdamW', scheduler=None, loss='CrossEntropyLoss',
-                    backbone_mode='eval when frozen; train when fine-tuning; LayerNorm and stochastic depth',
+                    backbone_mode=('eval except layer4+fc; BatchNorm of conv1/layer1-3 uses ImageNet statistics'
+                                   if experiment['strategy'] == 'fine_tune_layer4' else
+                                   'eval when frozen; train when fine-tuning; LayerNorm and stochastic depth'),
                     weights='IMAGENET1K_V1', train_count=len(train_loader.dataset), val_count=len(val_loader.dataset))
     if config.PHASE == 'final':
         pilot_folder = resolve_run(config.SELECTED_FROM)

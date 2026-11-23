@@ -1,5 +1,5 @@
 """What: Smoke bốn chiến lược trước tuning. Why: Kiểm tra đúng pipeline và tài nguyên.
-Which: ConvNeXt-Base/ViT-B16, AMP, AdamW. When: Sau data/EDA, trước train chính thức.
+Which: ConvNeXt-Base/ResNet-50/ViT-B16, AMP, AdamW. When: Sau data/EDA, trước train chính thức.
 Where: outputs/runs/lan_N phase=smoke. How: Mini-epoch train/val trực tiếp và save/replay.
 """
 import gc
@@ -43,8 +43,12 @@ if __name__ == '__main__':
         name, strategy = experiment['model'], experiment['strategy']
         lr = config.SMOKE_LR_FREEZE if strategy == 'freeze' else config.SMOKE_LR_FINE_TUNE
         amp = config.USE_AMP and device.type == 'cuda'
-        weights = (models.ConvNeXt_Base_Weights.IMAGENET1K_V1 if name == 'convnext_base'
-                   else models.ViT_B_16_Weights.IMAGENET1K_V1)
+        if name == 'convnext_base':
+            weights = models.ConvNeXt_Base_Weights.IMAGENET1K_V1
+        elif name == 'resnet50':
+            weights = models.ResNet50_Weights.IMAGENET1K_V1
+        else:
+            weights = models.ViT_B_16_Weights.IMAGENET1K_V1
         settings = dict(phase='smoke', experiment=code, model=name, strategy=strategy,
                         seed=config.SEED, lr=lr, optimizer='AdamW',
                         weight_decay=config.SMOKE_WEIGHT_DECAY, scheduler=None,
@@ -56,7 +60,9 @@ if __name__ == '__main__':
                         preprocessing=preprocessing_settings(),
                         scheduled_experiments=list(config.SMOKE_EXPERIMENTS),
                         weights=str(weights), weights_url=weights.url,
-                        backbone_mode='eval when frozen; train when fine-tuning; LayerNorm and stochastic depth',
+                        backbone_mode=('eval except layer4+fc; BatchNorm of conv1/layer1-3 uses ImageNet statistics'
+                                       if strategy == 'fine_tune_layer4' else
+                                       'eval when frozen; train when fine-tuning; LayerNorm and stochastic depth'),
                         split_sha256=hashlib.sha256(config.SPLIT_FILE.read_bytes()).hexdigest())
         folder, log = create_run(settings)
         checks = dict.fromkeys(['source_split', 'trainable', 'optimizer', 'shape', 'finite_loss',
@@ -81,16 +87,25 @@ if __name__ == '__main__':
             (folder / 'model.txt').write_text(str(model), encoding='utf-8')
             head = get_head(model)
             head_ids = {id(p) for p in head.parameters()}
-            backbone = next(p for p in model.parameters() if id(p) not in head_ids)
+            if strategy == 'fine_tune_layer4':
+                backbone = next(p for p in model.layer4.parameters() if id(p) not in head_ids)
+            else:
+                backbone = next(p for p in model.parameters() if id(p) not in head_ids)
             head_before = head.weight.detach().cpu().clone()
             backbone_before = backbone.detach().cpu().clone()
-            if strategy == 'freeze':
+            # Phần không được học: backbone khi freeze; conv1/layer1-3 khi fine_tune_layer4.
+            unfrozen_prefixes = ('classifier.2.', 'heads.head.', 'fc.')
+            if strategy == 'fine_tune_layer4':
+                unfrozen_prefixes += ('layer4.',)
+            if strategy != 'fine_tune':
                 frozen_before = {k: v for k, v in state_fingerprints(model).items()
-                                 if not k.startswith(('classifier.2.', 'heads.head.'))}
+                                 if not k.startswith(unfrozen_prefixes)}
             trainable = [p for p in model.parameters() if p.requires_grad]
             current_check = 'trainable'
-            expected = 102500 if name == 'convnext_base' else 76900
-            assert (sum(p.numel() for p in trainable) == expected if strategy == 'freeze'
+            expected = {'convnext_base': 102500, 'vit_b_16': 76900, 'resnet50': 204900}[name]
+            if strategy == 'fine_tune_layer4':
+                expected = 15169636  # layer4 14.964.736 + fc 204.900
+            assert (sum(p.numel() for p in trainable) == expected if strategy != 'fine_tune'
                     else all(p.requires_grad for p in model.parameters())), 'Trainable mismatch'
             settings.update(total_parameters=sum(p.numel() for p in model.parameters()),
                             trainable_parameters=sum(p.numel() for p in trainable))
@@ -137,7 +152,7 @@ if __name__ == '__main__':
             checks['shape'] = checks['finite_loss'] = checks['gradients'] = 'PASS'
             current_check = 'state_update'
             assert not torch.equal(head_before, head.weight.detach().cpu()), 'Head did not update'
-            if strategy == 'freeze':
+            if strategy != 'fine_tune':
                 state_after = state_fingerprints(model)
                 assert all(v == state_after[k] for k, v in frozen_before.items()), 'Frozen backbone/buffer changed'
             else:

@@ -1,0 +1,79 @@
+{
+  "status": "passed",
+  "checks": {
+    "source_split": "PASS",
+    "trainable": "PASS",
+    "optimizer": "PASS",
+    "shape": "PASS",
+    "finite_loss": "PASS",
+    "gradients": "PASS",
+    "state_update": "PASS",
+    "validation": "PASS",
+    "checkpoint": "PASS",
+    "resume_replay": "PASS",
+    "resources": "PASS",
+    "stability": "PASS"
+  },
+  "memory_before_checkpoint": {
+    "ram_available_mib": 3377.33203125,
+    "process_rss_mib": 1867.921875,
+    "commit_available_mib": 11828.37109375
+  },
+  "memory_after_save": {
+    "ram_available_mib": 3166.52734375,
+    "process_rss_mib": 1870.1640625,
+    "commit_available_mib": 11822.74609375
+  },
+  "memory_after_load": {
+    "ram_available_mib": 3166.5859375,
+    "process_rss_mib": 2076.60546875,
+    "commit_available_mib": 11615.765625
+  },
+  "memory_after_replay": {
+    "ram_available_mib": 3049.7578125,
+    "process_rss_mib": 2104.71484375,
+    "commit_available_mib": 11491.0546875
+  },
+  "memory_after_reference_save": {
+    "ram_available_mib": 3051.046875,
+    "process_rss_mib": 2104.63671875,
+    "commit_available_mib": 11492.21484375
+  },
+  "memory_after_replay_load": {
+    "ram_available_mib": 3050.59765625,
+    "process_rss_mib": 2104.6796875,
+    "commit_available_mib": 11491.8828125
+  },
+  "memory_final_guard": {
+    "ram_available_mib": 3008.48046875,
+    "process_rss_mib": 2236.90234375,
+    "commit_available_mib": 11357.6640625
+  },
+  "batches": 10,
+  "train_loss": 4.63798828125,
+  "val_loss": 4.0614495277404785,
+  "train_batch_seconds": [
+    1.8158275000168942,
+    0.032608200039248914,
+    0.030184100032784045,
+    0.028531800024211407,
+    0.029215299990028143,
+    0.02980570000363514,
+    0.03270640003029257,
+    0.024062299984507263,
+    0.027794499997980893,
+    0.02763349999440834
+  ],
+  "train_peak_allocated_mib": 303.42626953125,
+  "workflow_peak_allocated_mib": 422.7880859375,
+  "resume_tolerance": {
+    "atol": 1e-06,
+    "rtol": 1e-05
+  },
+  "miniature_epoch": 1,
+  "memory_at_end": {
+    "ram_available_mib": 3008.4140625,
+    "process_rss_mib": 2236.90234375,
+    "commit_available_mib": 11357.6640625
+  }
+}
