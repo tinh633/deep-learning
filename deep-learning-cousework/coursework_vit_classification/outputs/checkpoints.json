@@ -1,0 +1,150 @@
+{
+  "files": [
+    {
+      "file": "outputs/runs/lan_1/last.pt",
+      "size_bytes": 96815872,
+      "sha256": "8a8d1469c2e5a40e9f6616d07f5d728b6eb3e06dc0505fd24f5b26107f370eaa",
+      "model": "resnet50",
+      "experiment": "A",
+      "strategy": "freeze",
+      "phase": "smoke",
+      "purpose": "smoke",
+      "epoch": 1,
+      "epoch_scope": "miniature 20-image epoch"
+    },
+    {
+      "file": "outputs/runs/lan_2/last.pt",
+      "size_bytes": 284992623,
+      "sha256": "e83e846e0e5c72ab850d16cdfb96254a6184371335d02bd0693fe1c14d5cfd87",
+      "model": "resnet50",
+      "experiment": "B",
+      "strategy": "fine_tune",
+      "phase": "smoke",
+      "purpose": "smoke",
+      "epoch": 1,
+      "epoch_scope": "miniature 20-image epoch"
+    },
+    {
+      "file": "outputs/runs/lan_4/last.pt",
+      "size_bytes": 96816256,
+      "sha256": "dfc8ce836d0d73670778a578905c91a4156a7c6377c7e5a2001488542d7e98e2",
+      "model": "resnet50",
+      "experiment": "A",
+      "strategy": "freeze",
+      "phase": "smoke",
+      "purpose": "smoke",
+      "epoch": 1,
+      "epoch_scope": "miniature 20-image epoch"
+    },
+    {
+      "file": "outputs/runs/lan_5/last.pt",
+      "size_bytes": 344193416,
+      "sha256": "2d43fe385b5fbc736f72cb632971841d739d3748f39c91eced13d24832f10433",
+      "model": "vit_b_16",
+      "experiment": "C",
+      "strategy": "freeze",
+      "phase": "smoke",
+      "purpose": "smoke",
+      "epoch": 1,
+      "epoch_scope": "miniature 20-image epoch"
+    },
+    {
+      "file": "outputs/runs/lan_8/last.pt",
+      "size_bytes": 284993007,
+      "sha256": "e6c9e02751c6f60f2df3cb9a849aecd15b541bcbf4daddd1fe7e2493bf8f3c78",
+      "model": "resnet50",
+      "experiment": "B",
+      "strategy": "fine_tune",
+      "phase": "smoke",
+      "purpose": "smoke",
+      "epoch": 1,
+      "epoch_scope": "miniature 20-image epoch"
+    },
+    {
+      "file": "outputs/runs/lan_11/last.pt",
+      "size_bytes": 351625224,
+      "sha256": "d70c7e8b73a0590a58aae0238968da6112ec48ef99d89dc11047be18f88dd1ed",
+      "model": "convnext_base",
+      "experiment": "A",
+      "strategy": "freeze",
+      "phase": "smoke",
+      "purpose": "smoke",
+      "epoch": 1,
+      "epoch_scope": "miniature 32-image epoch"
+    },
+    {
+      "file": "outputs/runs/lan_12/best.pt",
+      "size_bytes": 351625096,
+      "sha256": "2b73f2768494c19c660499d627a3175dea85957dc35625a6fa91c13f35b3f94e",
+      "model": "convnext_base",
+      "experiment": "A",
+      "strategy": "freeze",
+      "phase": "tuning",
+      "purpose": "experiment",
+      "epoch": 5,
+      "epoch_scope": "full 45000-image train epochs"
+    },
+    {
+      "file": "outputs/runs/lan_12/last.pt",
+      "size_bytes": 351625096,
+      "sha256": "84784af307ba323f4d2d97e6c3d6a4949103ebea43cae1fff62fa9692c08d0f3",
+      "model": "convnext_base",
+      "experiment": "A",
+      "strategy": "freeze",
+      "phase": "tuning",
+      "purpose": "experiment",
+      "epoch": 5,
+      "epoch_scope": "full 45000-image train epochs"
+    },
+    {
+      "file": "outputs/runs/lan_13/best.pt",
+      "size_bytes": 351625096,
+      "sha256": "3704682919467c5511c43e5033fda0ba4b448cb1310f167212c7a8734a53fd13",
+      "model": "convnext_base",
+      "experiment": "A",
+      "strategy": "freeze",
+      "phase": "tuning",
+      "purpose": "experiment",
+      "epoch": 5,
+      "epoch_scope": "full 45000-image train epochs"
+    },
+    {
+      "file": "outputs/runs/lan_13/last.pt",
+      "size_bytes": 351625096,
+      "sha256": "e2b93e75d068b7131858b63863777b22734a5069cdd4870c035003ee9e3bd32d",
+      "model": "convnext_base",
+      "experiment": "A",
+      "strategy": "freeze",
+      "phase": "tuning",
+      "purpose": "experiment",
+      "epoch": 5,
+      "epoch_scope": "full 45000-image train epochs"
+    },
+    {
+      "file": "outputs/runs/lan_14/best.pt",
+      "size_bytes": 351625544,
+      "sha256": "fc5882c99f0fa97ec1526422daa36b616fa1fc5094e712b7b4828f0e99e5eb0d",
+      "model": "convnext_base",
+      "experiment": "A",
+      "strategy": "freeze",
+      "phase": "final",
+      "purpose": "experiment",
+      "epoch": 9,
+      "epoch_scope": "full 45000-image train epochs"
+    },
+    {
+      "file": "outputs/runs/lan_14/last.pt",
+      "size_bytes": 351626824,
+      "sha256": "fcc71f8913733c7aa5065bd719581be5c76315ffd188d34d59d859de687ef128",
+      "model": "convnext_base",
+      "experiment": "A",
+      "strategy": "freeze",
+      "phase": "final",
+      "purpose": "experiment",
+      "epoch": 20,
+      "epoch_scope": "full 45000-image train epochs"
+    }
+  ],
+  "total_bytes": 3569189150,
+  "scope": "historical smoke plus ConvNeXt A smoke/pilots/final; no test evaluation"
+}

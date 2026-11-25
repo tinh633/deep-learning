@@ -1,0 +1,35 @@
+{
+  "status": "failed",
+  "checks": {
+    "source_split": "PASS",
+    "trainable": "PASS",
+    "optimizer": "PASS",
+    "shape": "PASS",
+    "finite_loss": "PASS",
+    "gradients": "PASS",
+    "state_update": "PASS",
+    "validation": "PASS",
+    "checkpoint": "NOT_RUN",
+    "resume_replay": "NOT_RUN",
+    "resources": "FAIL",
+    "stability": "NOT_RUN"
+  },
+  "memory_before_checkpoint": {
+    "ram_available_mib": 2860.77734375,
+    "process_rss_mib": 1912.05078125,
+    "commit_available_mib": 5831.578125
+  },
+  "memory_after_save": {
+    "ram_available_mib": 2584.59765625,
+    "process_rss_mib": 1926.984375,
+    "commit_available_mib": 5888.640625
+  },
+  "error": "RuntimeError: Dừng trước bước nặng vì RAM/Windows commit thấp: {'ram_available_mib': 1876.19921875, 'process_rss_mib': 2930.41015625, 'commit_available_mib': 6910.90625}",
+  "failed_check": "resources",
+  "batches_completed": 2,
+  "memory_at_failure": {
+    "ram_available_mib": 1876.1640625,
+    "process_rss_mib": 2930.41015625,
+    "commit_available_mib": 6910.90625
+  }
+}

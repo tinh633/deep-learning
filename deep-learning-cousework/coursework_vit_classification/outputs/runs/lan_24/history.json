@@ -1,0 +1,32 @@
+[
+  {
+    "epoch": 1,
+    "train_loss": 1.5804278249952528,
+    "train_accuracy": 0.685,
+    "val_loss": 0.49381630890369416,
+    "val_accuracy": 0.85,
+    "lr": 3e-05,
+    "seconds": 1219.5560456999992,
+    "skipped_amp_steps": 0
+  },
+  {
+    "epoch": 2,
+    "train_loss": 0.43080052388509116,
+    "train_accuracy": 0.8798888888888889,
+    "val_loss": 0.39114391977787016,
+    "val_accuracy": 0.8758,
+    "lr": 3e-05,
+    "seconds": 1287.3648085000004,
+    "skipped_amp_steps": 0
+  },
+  {
+    "epoch": 3,
+    "train_loss": 0.2771679883109199,
+    "train_accuracy": 0.9171555555555555,
+    "val_loss": 0.35170900816470385,
+    "val_accuracy": 0.8942,
+    "lr": 3e-05,
+    "seconds": 1314.8520830000016,
+    "skipped_amp_steps": 0
+  }
+]

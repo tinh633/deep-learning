@@ -1,0 +1,44 @@
+# Downloaded datasets: recreate from each project's preparation script.
+**/data/
+
+# This branch publishes coursework; keep other projects only in the local workspace.
+/practice_1_fashionmnist/
+/practice_2_pretrained_model/
+/test_model_present/
+/src.ipynb
+
+# Python caches and local virtual environments.
+__pycache__/
+*.py[cod]
+.venv/
+.venv-gpu/
+venv/
+.pytest_cache/
+
+# Local secrets and temporary files.
+.env
+.env.*
+!.env.example
+*.tmp
+*.part
+
+# Local training weights, TensorBoard events and dataset-derived error images.
+*.pt
+*.pth
+!coursework_vit_classification/outputs/runs/lan_*/best.pt
+!coursework_vit_classification/outputs/runs/lan_*/last.pt
+**/events.out.tfevents.*
+practice_2_pretrained_model/visualization/runs/
+
+# Dataset image galleries and feature previews are regenerated locally.
+practice_1_fashionmnist/outputs/cnn_runs/*/mistakes.png
+practice_1_fashionmnist/outputs/cnn_runs/*/feature_maps.png
+practice_1_fashionmnist/outputs/cnn_runs/*/backbone_features.png
+practice_1_fashionmnist/outputs/mlp_error_analysis/*_class_confusions.png
+practice_1_fashionmnist/outputs/mlp_error_analysis/*_high_confidence.png
+practice_1_fashionmnist/outputs/mlp_error_analysis/*_fixed.png
+practice_1_fashionmnist/outputs/mlp_error_analysis/*_new_errors.png
+practice_1_fashionmnist/outputs/runs/*/plots/predictions.png
+
+# Local TensorBoard server diagnostics are not experiment artifacts.
+practice_2_pretrained_model/outputs/tensorboard_server.log

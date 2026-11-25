@@ -1,0 +1,25 @@
+{
+  "status": "failed",
+  "checks": {
+    "source_split": "FAIL",
+    "trainable": "NOT_RUN",
+    "optimizer": "NOT_RUN",
+    "shape": "NOT_RUN",
+    "finite_loss": "NOT_RUN",
+    "gradients": "NOT_RUN",
+    "state_update": "NOT_RUN",
+    "validation": "NOT_RUN",
+    "checkpoint": "NOT_RUN",
+    "resume_replay": "NOT_RUN",
+    "resources": "NOT_RUN",
+    "stability": "NOT_RUN"
+  },
+  "error": "RuntimeError: Dataset not found or corrupted. You can use download=True to download it",
+  "failed_check": "source_split",
+  "batches_completed": 0,
+  "memory_at_failure": {
+    "ram_available_mib": 3185.37109375,
+    "process_rss_mib": 668.51171875,
+    "commit_available_mib": 11030.0234375
+  }
+}

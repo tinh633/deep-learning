@@ -1,0 +1,10 @@
+{
+  "status": "failed",
+  "phase": "tuning",
+  "error": "RuntimeError: Dừng trước bước nặng vì RAM/Windows commit thấp: {'ram_available_mib': 2047.62109375, 'process_rss_mib': 1976.49609375, 'commit_available_mib': 12876.7734375}",
+  "memory_at_end": {
+    "ram_available_mib": 2047.63671875,
+    "process_rss_mib": 1976.49609375,
+    "commit_available_mib": 12876.7734375
+  }
+}
