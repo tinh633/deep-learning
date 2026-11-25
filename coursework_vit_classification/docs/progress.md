@@ -35,12 +35,6 @@ Lịch sử: [progress_before_A_2026-11-18.md](progress_before_A_2026-11-18.md).
 - Config giữ final/resume lan_14 nhưng TRAINING_APPROVED=False để tránh chạy lặp; EVAL_RUN=lan_14, validation.
 - Manifest 12 checkpoint, 3,32 GiB; kết quả A đã push cousework tại 68641b3, đủ 7 LFS mới. B/C/D chờ kết quả nhóm.
 
-## Exp B (ResNet-50 layer4 + fc) — 23/11/2026
-
-- Code/config sẵn sàng cho pilot LR1 (1e-4, 5 epoch); chưa smoke, chưa train, chưa có kết quả.
-- Trainable 15.169.636 / 23.712.932 tham số. Chi tiết: [CHANGELOG](CHANGELOG.md).
-- Việc tiếp theo trên máy có GPU và CIFAR-100: smoke B → pilot LR1 → pilot LR2 (3e-5) → chọn LR theo validation → final 20 epoch.
-
 ## Bàn giao khi bị ngắt
 
 1. Kiểm tra experiment_A.json, PID thật, summary/history trước khi chạy mới; không chạy song song.

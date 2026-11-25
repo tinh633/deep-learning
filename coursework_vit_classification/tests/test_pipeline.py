@@ -12,7 +12,6 @@ import torch
 from torch import nn
 from torch.utils.data import DataLoader, TensorDataset
 from PIL import Image
-from torchvision import models as torchvision_models
 
 PROJECT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT / 'src'))
@@ -38,35 +37,15 @@ class SmallClassifier(nn.Module):
         return head(features)
 
 
-class SmallResNet(nn.Module):
-    # Stem tổng hợp + layer4/fc thật của ResNet-50 để số tham số B khớp (14.964.736 + 204.900).
-    def __init__(self):
-        super().__init__()
-        self.pool = nn.AdaptiveAvgPool2d(1)
-        self.conv = nn.Conv2d(3, 1024, 1)
-        self.layer4 = torchvision_models.resnet50().layer4
-        self.fc = nn.Linear(2048, 100)
-
-    def forward(self, images):
-        features = self.conv(self.pool(images))
-        return self.fc(self.layer4(features).flatten(1))
-
-
 def synthetic_model(name, strategy, pretrained=True):
-    if name == 'resnet50':
-        result = SmallResNet()
+    result = SmallClassifier(1024 if name == 'convnext_base' else 768)
+    if name == 'vit_b_16':
+        # Synthetic head follows the same public path as the real architecture.
+        del result.classifier
     else:
-        result = SmallClassifier(1024 if name == 'convnext_base' else 768)
-        if name == 'vit_b_16':
-            # Synthetic head follows the same public path as the real architecture.
-            del result.classifier
-        else:
-            del result.heads
+        del result.heads
     for parameter in result.parameters():
         parameter.requires_grad = strategy == 'fine_tune'
-    if strategy == 'fine_tune_layer4':
-        for parameter in result.layer4.parameters():
-            parameter.requires_grad = True
     for parameter in model.get_head(result).parameters():
         parameter.requires_grad = True
     return result
@@ -173,7 +152,7 @@ class PipelineTests(unittest.TestCase):
 
         def old_architecture_pilot(path):
             state = real_read(path)
-            state['settings'] = dict(state['settings'], model='resnet18')
+            state['settings'] = dict(state['settings'], model='resnet50')
             return state
 
         with patch.object(logger, 'read_checkpoint', side_effect=old_architecture_pilot):
@@ -271,26 +250,8 @@ class ArchitectureTests(unittest.TestCase):
                         self.assertTrue(all(m.training == (strategy == 'fine_tune') for m in stochastic))
                         self.assertFalse(any(isinstance(m, nn.modules.batchnorm._BatchNorm) for m in net.modules()))
                     self.assertEqual(net(torch.empty(2, 3, 224, 224)).shape, (2, 100))
-        with self.assertRaisesRegex(ValueError, 'resnet18'):
-            model.build_model('resnet18', 'freeze', pretrained=False)
-
-    def test_resnet50_layer4_contract(self):
-        # B: ResNet-50 chỉ học layer4 + fc; conv1/layer1-3 đóng băng và BatchNorm của chúng ở eval.
-        with torch.device('meta'):
-            net = model.build_model('resnet50', 'fine_tune_layer4', pretrained=False)
-            self.assertEqual(sum(p.numel() for p in net.parameters()), 23712932)
-            trainable = {n for n, p in net.named_parameters() if p.requires_grad}
-            self.assertEqual(sum(p.numel() for p in net.parameters() if p.requires_grad), 15169636)
-            self.assertTrue(all(n.startswith(('layer4.', 'fc.')) for n in trainable))
-            self.assertEqual({n for n, p in net.named_parameters() if not p.requires_grad} & trainable, set())
-            model.set_train_mode(net, 'fine_tune_layer4')
-            self.assertTrue(net.layer4.training and net.fc.training)
-            for frozen in (net.conv1, net.bn1, net.layer1, net.layer2, net.layer3):
-                self.assertFalse(frozen.training)
-            self.assertEqual(net(torch.empty(2, 3, 224, 224)).shape, (2, 100))
-            self.assertIs(model.get_head(net), net.fc)
         with self.assertRaisesRegex(ValueError, 'resnet50'):
-            model.build_model('convnext_base', 'fine_tune_layer4', pretrained=False)
+            model.build_model('resnet50', 'freeze', pretrained=False)
 
 
 if __name__ == '__main__':

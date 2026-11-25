@@ -4,16 +4,6 @@ Ghi vấn đề/nhu cầu, thay đổi, lý do và cách kiểm chứng; không 
 Trạng thái hiện tại: [progress](progress.md). Checklist smoke: [Audit_Log](Audit_Log.md).
 Audit chỉ ghi kết quả kiểm tra; lịch sử hỗ trợ AI nằm ở [AI_usage](AI_usage.md).
 
-## 23/11/2026 — B đổi sang ResNet-50 fine-tune một phần
-
-- Nhu cầu: kế hoạch nhóm giao B = ResNet-50 fine-tune; fine-tune toàn bộ (23,71 triệu tham số) quá nặng.
-- Thay đổi: thêm resnet50 (ImageNet-1K V1, fc 2048→100) và strategy fine_tune_layer4: chỉ layer4 + fc được học
-  (14.964.736 + 204.900 = 15.169.636 tham số, 64,0% tổng); conv1/layer1-3 đóng băng, BatchNorm của chúng ở eval.
-- EXPERIMENTS['B'] đổi từ ConvNeXt fine-tune sang ResNet-50 layer4; A/C/D và checkpoint lan_14 không đổi.
-- Config: PHASE=tuning, EXPERIMENT=B, LR1=1e-4 (LR2=3e-5), 5 epoch, batch 16; LR và epoch là đề xuất, chưa được nhóm chốt.
-- Kiểm chứng: 4 test CPU tổng hợp đạt; đếm tham số trên meta khớp; mô phỏng nạp weights (zip, không có
-  num_batches_tracked, meta + assign + strict) không còn tensor meta. CHƯA chạy: tải weights thật, CIFAR-100, smoke B, train.
-
 ## 18/11/2026 — Khởi chạy A được duyệt
 
 - Xóa lan_9 ResNet, giữ lịch sử trong Git; tên lan_9 mới là lỗi tải mạng, không dùng như bằng chứng cũ.
