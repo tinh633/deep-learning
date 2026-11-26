@@ -1,0 +1,8 @@
+torch
+torchvision
+numpy
+scikit-learn
+Pillow
+psutil
+matplotlib
+ipykernel
