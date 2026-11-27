@@ -3,3 +3,5 @@ coursework_vit_classification/outputs/cifar100_split.json text eol=lf
 coursework_vit_classification/outputs/runs/lan_*/best.pt filter=lfs diff=lfs merge=lfs -text
 coursework_vit_classification/outputs/runs/lan_*/last.pt filter=lfs diff=lfs merge=lfs -text
 coursework_vit_classification/outputs/runs/lan_21/*.pt filter=lfs diff=lfs merge=lfs -text
+coursework_vit_classification/outputs/runs/lan_19/*.pt filter=lfs diff=lfs merge=lfs -text
+coursework_vit_classification/outputs/runs/lan_20/*.pt filter=lfs diff=lfs merge=lfs -text
