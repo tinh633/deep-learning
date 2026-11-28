@@ -1,0 +1,9 @@
+{
+  "status": "interrupted",
+  "phase": "final",
+  "error": "KeyboardInterrupt: ",
+  "memory_at_end": {
+    "ram_available_mib": 20194.8828125,
+    "process_rss_mib": 1145.265625
+  }
+}

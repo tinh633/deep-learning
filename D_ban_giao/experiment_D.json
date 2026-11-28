@@ -1,0 +1,25 @@
+{
+  "experiment": "D",
+  "model": "vit_b_16",
+  "strategy": "fine_tune",
+  "dataset": "CIFAR-100",
+  "smoke_run": "lan_19",
+  "pilot_lr1": {
+    "run": "lan_20",
+    "lr": 0.0001,
+    "best_val_accuracy": 79.16
+  },
+  "pilot_lr2": {
+    "run": "lan_21",
+    "lr": 3e-05,
+    "best_val_accuracy": 83.82
+  },
+  "selected_from": "lan_21",
+  "final_run": "lan_22",
+  "final_epochs_completed": 18,
+  "final_epochs_required": 20,
+  "final_status": "incomplete",
+  "best_final_val_accuracy": 84.92,
+  "best_final_epoch": 6,
+  "test_status": "not_run"
+}
