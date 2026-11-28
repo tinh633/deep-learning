@@ -135,3 +135,8 @@
 - Ghi B/C là kết quả các thành viên khác; raw gói bàn giao giữ nguyên, local chỉ chuẩn hóa/kiểm tra bản sao.
 - Xác minh SHA256/size22 checkpoint/reference và toàn bộ raw nhập; kiểm tra AST/final history, links/Markdown.
 - Chuẩn bị commit nối tiếp remote/lịch sử local và push theo chỉ định; không force, không train/test mới hoặc thêm dataset/cache.
+
+## 28/11/2026 — Kết quả xuất bản
+
+- Commit a9d0277 đã push thành công tới cousework, LFS2 object194 MB hoàn tất; không force và giữ nguyên subtree B/C nguồn.
+- Bản đồng bộ có provenance thành viên, docs hiện tại và HTML/PDF nguồn; không thực thi train/evaluate mới.

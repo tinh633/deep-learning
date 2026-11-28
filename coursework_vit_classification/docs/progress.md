@@ -120,3 +120,9 @@ Audit: [Audit_Log](Audit_Log.md). Thay đổi pipeline: [CHANGELOG](CHANGELOG.md
 - Giữ B_ban_giao/C_ban_giao nguyên trạng remote, phục hồi bản local; chuẩn bị commit nối tiếp cả remote b754c2f và lịch sử local, không force.
 - Chuẩn hóa ignore/LFS, giữ data/cache ngoài Git; kiểm tra links/giới hạn150 dòng và staged tree trước push.
 - Được chỉ định commit/push trong phiên này; trạng thái thực sau push xem Git log và remote, không coi ghi chép chuẩn bị là đã phát hành.
+
+## 28/11/2026 — Đã xuất bản
+
+- Push a9d0277 thành công lên origin/cousework từ b754c2f, có cả hai parent local/remote; không force-push.
+- Git LFS hoàn tất2 object194 MB; B_ban_giao/C_ban_giao giữ nguyên subtree so với remote nguồn.
+- Docs, provenance thành viên B/C, run chuẩn hóa, PDF/HTML và notebook monitor đã xuất bản; data/cache không kèm.
