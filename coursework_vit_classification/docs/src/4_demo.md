@@ -22,5 +22,6 @@ Checkpoint smoke bị chặn mặc định, không dùng như model đã train �
 
 In năm nhãn có điểm cao nhất, lưu JSON model/checkpoint/epoch/phase và đường dẫn ảnh.
 Không sao chép pixel ảnh vào output Git; mỗi lần dự đoán tạo file số mới.
-Chỉ là demo dòng lệnh, chưa có web/API upload ảnh.
+Inference hiện là dòng lệnh; HTML có upload ảnh local để preview/che vùng, chưa có model inference hoặc web/API dự đoán.
+Bộ10–20 ảnh có nhãn, Top-5 trước/sau che và≥3 phân tích theo PDF còn thiếu.
 Ảnh ngoài 100 lớp vẫn bị ép vào một nhãn; confidence không mặc định được hiệu chỉnh.

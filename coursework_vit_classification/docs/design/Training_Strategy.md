@@ -1,6 +1,6 @@
 # Chiến lược huấn luyện và tuning hyperparameter
 
-Cập nhật: 18/11/2026. A hoàn tất smoke, 2 pilot và final 20 epoch; B/C/D chưa có kết quả tích hợp.
+Cập nhật28/11/2026: A/B/C đủ smoke/pilot/final; B/C do các thành viên khác train và bàn giao. D chưa tích hợp.
 Phạm vi ViT/CIFAR-100 đã được giảng viên xác nhận.
 Liên quan: [Define](../define/Requirements_Analysis.md), [Design](Implementation_Plan.md),
 [ConvNeXt-Base](ConvNeXt_Base.md), [ViT-B/16](ViT_B16.md).
@@ -128,7 +128,7 @@ Config ghi phase=smoke/tuning/final, strategy=A–D, candidate, LR, T/E, seed v�
 Mỗi lượt có thư mục riêng; bảng pilot ghi LR, best epoch, val accuracy/loss, thời gian và run nguồn.
 Không tạo run hoặc số liệu rỗng trước khi chạy; không ghi đè kết quả cũ.
 
-Còn chốt: GPU, duplicate policy, hai cặp LR, T/E, batch/AMP, AdamW/WD và scheduler.
+A/B/C đã có cấu hình thực trong artifact; phần dự kiến ở trên mô tả protocol trước triển khai. D còn phải xác nhận.
 Smoke ở 0_smoke.py; 2_train.py có pilot/final. A đã duyệt tại mục 9; bằng chứng kỹ thuật ở Audit_Log.
 
 ## 9. Protocol A được duyệt 18/11
@@ -138,5 +138,11 @@ Final 20 epoch khởi tạo mới; chọn LR bằng best val accuracy, hòa theo
 AdamW, WD=0, không scheduler, seed 42, AMP, workers 0; batch 16 cần resource check đạt trước pilot.
 Giữ split hiện tại (45k/5k/10k), công bố 12 nhóm trùng xuyên split; không mở test trong bước này.
 Theo dõi và dừng khi lỗi NaN/Inf/OOM hoặc guard bộ nhớ; không hạ ngưỡng để ép chạy.
-Đây là duyệt cho A; B/C/D cần xác nhận cặp LR/batch/ngân sách tương ứng, không tự mở train trên máy này.
+Đây là duyệt lịch sử cho A; B/C sau đó đã bàn giao. D cần xác nhận trước chạy, không tự mở train trên máy này.
 Kết quả: [A_Results](../A_Results.md). LR2 thắng pilot; final best val 81,46% tại epoch 9, chưa test.
+
+## 10. Trạng thái thực ngày28/11/2026
+
+A/C pilot LR1=1e-3, LR2=3e-4; B LR1=1e-4, LR2=3e-5. Mỗi pilot5 epoch, final20; đều chọn LR2.
+A/B/C batch16, WD0, AdamW, không scheduler; B/C là kết quả thành viên khác, giữ nguyên gói nguồn.
+[Kết quả và giới hạn](../Experiment_Results.md); D chưa có final, chưa khóa bộ đánh giá test cuối chung.

@@ -4,3 +4,13 @@ coursework_vit_classification/outputs/runs/lan_*/best.pt filter=lfs diff=lfs mer
 coursework_vit_classification/outputs/runs/lan_*/last.pt filter=lfs diff=lfs merge=lfs -text
 C_ban_giao/training/lan_5/best.pt filter=lfs diff=lfs merge=lfs -text
 C_ban_giao/training/lan_5/last.pt filter=lfs diff=lfs merge=lfs -text
+
+B_bangiao/**/best.pt filter=lfs diff=lfs merge=lfs -text
+B_bangiao/**/last.pt filter=lfs diff=lfs merge=lfs -text
+B_ban_giao/**/best.pt filter=lfs diff=lfs merge=lfs -text
+B_ban_giao/**/last.pt filter=lfs diff=lfs merge=lfs -text
+*.pt filter=lfs diff=lfs merge=lfs -text
+coursework_vit_classification/outputs/runs/lan_20/replay_reference.pt filter=lfs diff=lfs merge=lfs -text
+# Imported member artifacts retain the exact bytes recorded in their manifests.
+coursework_vit_classification/outputs/runs/lan_1[5-9]/** -text whitespace=cr-at-eol
+coursework_vit_classification/outputs/runs/lan_2[0-3]/** -text whitespace=cr-at-eol

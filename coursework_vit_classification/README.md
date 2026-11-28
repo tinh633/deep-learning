@@ -1,11 +1,12 @@
 # Coursework — Phân loại CIFAR-100 bằng CNN và ViT
 
 Trạng thái: đã triển khai tải CIFAR-100, split, EDA và HTML explorer.
-Đã có model, loaders, logger/checkpoint, smoke, train, evaluate và demo; notebook báo cáo còn chưa triển khai.
+Đã có pipeline, monitor và HTML trình bày; Coursework_Report.ipynb còn rỗng, notebook demo chưa hoàn thiện.
 Giảng viên đã xác nhận hướng ViT classification trên CIFAR-100; không kết hợp Anti Face Deepfake.
-A hoàn tất 2 pilot × 5 epoch và final 20 epoch, batch 16; best val 81,46%, chưa test.
+Cập nhật 28/11/2026: A/B/C đủ 2 pilot × 5 epoch + final 20 epoch; best val 81,46% / 89,70% / 82,08%.
+B/C do các thành viên khác huấn luyện; local chỉ tích hợp/kiểm tra, giữ nguyên các gói B_ban_giao và C_ban_giao.
 Cặp hiện tại: ConvNeXt-Base/ViT-B16, khoảng 87,67/85,88 triệu tham số (chênh 2,09%).
-ConvNeXt A smoke batch 16 đã đạt; B vẫn cần smoke, số đo ResNet cũ không đại diện cặp mới.
+ConvNeXt A/B đã có smoke batch16 đạt; D/GPU vẫn cần kiểm chứng, số đo ResNet cũ không đại diện cặp mới.
 
 - [Define — phân tích yêu cầu](docs/define/Requirements_Analysis.md).
 - [Design — kế hoạch, chiến lược train và cấu trúc thư mục](docs/design/Implementation_Plan.md).
@@ -14,7 +15,11 @@ ConvNeXt A smoke batch 16 đã đạt; B vẫn cần smoke, số đo ResNet cũ 
 - [Model CNN baseline — ConvNeXt-Base](docs/design/ConvNeXt_Base.md).
 - [Model chính — ViT-B/16](docs/design/ViT_B16.md).
 - [Tiến độ](docs/progress.md).
+- [Chỉ mục runs — phân biệt smoke, pilot và final](outputs/runs/README.md).
+- [HTML trình bày ViT theo đề bài PDF](visualization/presentation.html): đọc, trình chiếu, in PDF; demo còn bổ sung.
+- [Hướng dẫn trang trình bày và phần còn thiếu](docs/design/Presentation.md).
 - [Kết quả Exp A — pilot, final và kiểm chứng checkpoint](docs/A_Results.md).
+- [Kết quả A/B/C, provenance và giới hạn kiểm chứng](docs/Experiment_Results.md).
 - [Ghi nhận hỗ trợ AI](docs/AI_usage.md).
 - [Audit log smoke run](docs/Audit_Log.md) và [changelog code/pipeline](docs/CHANGELOG.md).
 - [Source workflow — 5W1H từng file](docs/src/README.md).
@@ -42,7 +47,9 @@ Trong HTML, mục Không gian ảnh hỗ trợ chọn nhiều lớp, zoom/kéo v
 Xem [workflow dữ liệu](docs/design/Data_EDA.md) để biết thống kê và giới hạn.
 Pipeline tiếp theo: train → evaluate → demo; mã dùng chung ở src/.
 Dữ liệu đặt ở data/ và không commit. Kết quả chỉ sinh trong outputs/ khi chạy thực tế.
-Đã có checkpoint A final best/last, history và kiểm chứng thực; chưa có test metrics hoặc kết quả B/C/D tích hợp.
+Đã có A final lan_14, C nhập ở lan_15–19 và B nhập ở lan_20–23; D chưa có gói tích hợp.
+B final best val 89,70%; [mapping B](outputs/import_B_manifest.json), [mapping C](outputs/import_C_manifest.json).
+Gói C có test nguồn; nhập gói không chạy train/test mới và không dùng test để tuning.
 Checkpoint trong các run smoke chỉ phục vụ kiểm chứng kỹ thuật, không phải model đã train đầy đủ.
 
 ## Kiểm tra smoke

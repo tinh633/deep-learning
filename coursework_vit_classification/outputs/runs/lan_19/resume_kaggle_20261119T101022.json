@@ -1,0 +1,10 @@
+{
+  "platform": "Kaggle",
+  "resumed_from": "last.pt",
+  "completed_epoch_before_resume": 18,
+  "python": "3.13.16",
+  "torch": "2.11.0+cu130",
+  "torchvision": "0.26.0+cu130",
+  "gpu": "Tesla T4",
+  "time_utc": "2026-11-19T10:10:22.598939+00:00"
+}

@@ -1,0 +1,2 @@
+lan_5 best.pt epoch=9 test n=10000
+accuracy=0.8097 macro-F1=0.8099

@@ -56,7 +56,7 @@ Biểu đồ có đổi PCA/t-SNE, chọn nhiều lớp, lọc split PCA, giữ 
 Chồng lấn màu là kết quả thực của đặc trưng RGB; không dịch điểm theo nhãn để làm tách lớp.
 t-SNE không hỗ trợ transform test; chỉ mô tả mẫu train, không dùng khoảng cách giữa cụm làm metric.
 Đây chưa phải không gian embedding của model; phân tích embedding CNN/ViT thuộc giai đoạn sau nếu cần.
-Viewer không có predictions, TensorBoard hoặc ảnh lỗi test khi chưa huấn luyện.
+EDA viewer không có predictions/TensorBoard; HTML presentation riêng đọc history A/B/C, chưa trình bày bộ ảnh lỗi demo.
 Các giá trị thống kê không được tự động dùng thay ImageNet normalization.
 
 ## Tái lập và quản lý Git

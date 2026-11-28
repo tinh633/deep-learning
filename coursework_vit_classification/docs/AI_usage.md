@@ -82,5 +82,56 @@
 - Đủ 20 epoch, best val81,46% epoch9; kiểm chứng 6 best/last, frozen tensors, optimizer/RNG/history và reset final, cập nhật manifest và A_Results.md.
 - Giữ traceback/interruptions.json, GPU trở về 0 MiB; khóa train lặp bằng config, chưa test/commit/push kết quả mới.
 - Chạy lại notebook monitor trên 3 history thật (5/5/20 epoch), kiểm tra bảng 81,46% và xem ảnh biểu đồ; đồng bộ trạng thái Define/Design/README.
+
+## 21/11/2026 — Nhập C bàn giao
+
+- Pull da0d199 trên cousework, giữ tài liệu local; chuyển 2 smoke/2 pilot/1 final C thành lan_15–19, không ghi đè A.
+- Giữ nguyên raw checkpoint/log/config, lưu mapping và nguồn/hash trong import_C_manifest.json; wrapper C dùng tên local.
+- Xác nhận SHA/size mọi file, basic checkpoint epoch/head/split và 14 run cũ bất biến; bổ sung2 final C vào manifest.
+- Giữ test/resume nguồn và giới hạn all-four-lock/deep-audit chưa xác nhận; không train, test mới hoặc commit/push.
 - Được duyệt push kết quả A: kiểm tra lại SHA-256 toàn bộ 12 checkpoint, trạng thái completed, liên kết/Markdown/AST; chỉ xuất coursework và chỉ mục liên quan.
 - Push 68641b3 thành công lên cousework, upload đủ 7 LFS mới (~2,46 GB); đồng bộ ghi nhận xuất bản, không kèm dataset/cache.
+
+## 21/11/2026 — Giải thích lịch sử chạy
+
+- AI đọc artifact config/summary của 14 run, log gián đoạn và history final; đối chiếu tài liệu audit/kết quả.
+- Tổng hợp mục đích, cấu hình và kết quả từng run; không thực thi huấn luyện hoặc kiểm thử mới.
+- Làm rõ tiêu chí PASS trong Audit_Log từ artifact và source smoke; không chạy lại thí nghiệm.
+- Đối chiếu lại 14 summary/config, bổ sung kết quả cụ thể theo từng run vào Audit_Log; tách completed pilot/final khỏi PASS smoke và giữ nhãn lỗi legacy lan_6.
+
+## 25/11/2026 — Đánh giá overfitting và bước thực nghiệm kế tiếp
+
+- AI đối chiếu yêu cầu/protocol, mã data/model/train và artifact final A/C để tư vấn có cần chạy lại.
+- Xác định best accuracy đều ở epoch9, validation suy giảm cuối run trong khi train tiếp tục tăng; C rõ hơn A.
+- Đề xuất giữ baseline A/C, hoàn tất B/D trước khi quyết định thí nghiệm bổ sung; không dùng test C để tuning.
+- Kiểm chứng bằng history/config/summary và quy tắc chọn best trong source; không thực thi train hoặc evaluation mới.
+- Cập nhật progress và nhật ký này; không đổi source, hyperparameter hoặc tạo kết quả thí nghiệm mới.
+
+## 27/11/2026 — Tích hợp bàn giao B/C
+
+- AI fetch remote cousework và đối chiếu gói C với manifest; giữ C lan_15–19, chỉ nhập B còn thiếu thành lan_20–23.
+- Tải8 file qua GitHub media khi LFS fetch không nhận dữ liệu, xác minh SHA-256/size theo pointer remote.
+- Giữ raw artifacts, tạo mapping/provenance B và cập nhật checkpoint manifest; đối chiếu config/history/summary, header weights và split.
+- Cập nhật README, Checkpoints, progress và thuộc tính LFS cho smoke replay reference B; không merge remote do force-update và thay đổi ngoài gói.
+- Không thực hiện train/evaluate/test mới, không commit/push; kết quả B lấy từ artifact bàn giao.
+
+## 27/11/2026 — Chỉ mục runs
+
+- AI tạo outputs/runs/README.md theo yêu cầu: phân biệt smoke/pilot/final và mô tả toàn bộ23 run từ artifact.
+- Đối chiếu trạng thái, LR, accuracy, best epoch và mapping; kiểm tra đường dẫn/số dòng, không thực thi model.
+
+## 27/11/2026 — HTML trình bày ViT từ đề bài PDF
+
+- AI trích2 trang PDF local bằng pypdf, đối chiếu10 nội dung và yêu cầu demo/sản phẩm; tham khảo paper ViT và Torchvision chính thức.
+- Dùng skill Sites ở chế độ local để thiết kế HTML/CSS/JS thuần, minh họa tương tác tự dựng và biểu đồ snapshot A/B/C thật.
+- Phần code/artifact còn thiếu được đánh dấu chờ bổ sung; không giả Top-5, kết quả che vùng hoặc attention checkpoint.
+- Thêm presentation.html, tài liệu thiết kế và liên kết README; giữ source train/evaluate, không chạy model/test mới.
+- Edge headless xác nhận desktop/mobile, tương tác, bàn phím, file/HTTP và in15 trang; xem screenshot, kiểm tra links/snapshot/Markdown đạt.
+- PDF và screenshot kiểm tra ở thư mục tạm; chưa commit/push hoặc hosting. Bộ demo thực và D vẫn cần hoàn thiện sau.
+
+## 28/11/2026 — Rà soát và chuẩn bị xuất bản đồng bộ
+
+- Đối chiếu docs/source/notebook/artifact, sửa trạng thái lỗi thời và thêm bảng kết quả/provenance A/B/C.
+- Ghi B/C là kết quả các thành viên khác; raw gói bàn giao giữ nguyên, local chỉ chuẩn hóa/kiểm tra bản sao.
+- Xác minh SHA256/size22 checkpoint/reference và toàn bộ raw nhập; kiểm tra AST/final history, links/Markdown.
+- Chuẩn bị commit nối tiếp remote/lịch sử local và push theo chỉ định; không force, không train/test mới hoặc thêm dataset/cache.

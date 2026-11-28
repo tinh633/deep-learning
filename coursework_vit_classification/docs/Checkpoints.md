@@ -1,6 +1,6 @@
 # Tải và sử dụng checkpoint
 
-Cập nhật 18/11/2026: manifest có 12 checkpoint local (~3,32 GiB), gồm lịch sử và A mới sau xóa lan_9 ResNet.
+Cập nhật 27/11/2026: manifest có 21 checkpoint và 1 smoke replay reference; B ở lan_20–23, C ở lan_15–19.
 Danh sách chính xác, dung lượng và SHA-256: [outputs/checkpoints.json](../outputs/checkpoints.json).
 ConvNeXt smoke/pilot/final đã hoàn tất, kiểm chứng và upload đủ 7 LFS mới tại commit 68641b3 trên cousework.
 18/11: đã upload đủ 7 checkpoint Git LFS (1,3 GB) cùng code ConvNeXt tại commit d5e6dfc.
@@ -18,13 +18,23 @@ ConvNeXt smoke/pilot/final đã hoàn tất, kiểm chứng và upload đủ 7 L
 | lan_12 | best.pt / last.pt | ConvNeXt-Base freeze | Pilot LR1, 5 epoch |
 | lan_13 | best.pt / last.pt | ConvNeXt-Base freeze | Pilot LR2, 5 epoch |
 | lan_14 | best.pt / last.pt | ConvNeXt-Base freeze | Final 20 epoch, best epoch 9 |
+| lan_19 | best.pt / last.pt | ViT-B16 freeze | Final C 20 epoch, best epoch9; nguồn da0d199 |
+| lan_20 | last.pt / replay_reference.pt | ConvNeXt-Base fine-tune | Smoke B, replay chỉ đối chiếu |
+| lan_21/22 | best.pt / last.pt | ConvNeXt-Base fine-tune | Hai pilot B, mỗi lượt 5 epoch |
+| lan_23 | best.pt / last.pt | ConvNeXt-Base fine-tune | Final B 20 epoch; best val 89,70% |
 
 Checkpoint smoke ghi epoch=1 nhưng đó là mini-epoch, không phải một lượt qua đủ 45.000 ảnh.
 Lan_9 ResNet cũ đã xóa; tên lan_9 mới là smoke ConvNeXt thất bại tải mạng, không có checkpoint.
 lan_3 bị ngắt, lan_6/7 không hoàn tất checkpoint; không tạo file để bù kết quả thiếu.
-replay_reference.pt chỉ chứa state đối chiếu của bài kiểm tra, không chia sẻ như checkpoint sử dụng.
+replay_reference.pt chỉ phục vụ đối chiếu; B giữ bản nguồn để bảo toàn gói bàn giao, không dùng cho inference.
 Dataset, pixel và cache pretrained tiếp tục được ignore.
 Model A dùng tiếp: lan_14/best.pt; xem [A_Results](A_Results.md), không chọn checkpoint bằng test.
+Mapping C: smoke lan_15/16, pilot lan_17/18, final lan_19; xem [import manifest](../outputs/import_C_manifest.json).
+Raw selected_from=lan_4 của C là pilot nguồn/local lan_18, không phải local lan_4; không sửa metadata trong weights.
+Gói C chỉ có checkpoint final; checkpoint pilot không được cung cấp. Đã có test nguồn, không chạy lại khi nhập.
+Mapping B: smoke/LR1/LR2/final → lan_20/21/22/23; [manifest B](../outputs/import_B_manifest.json).
+Raw B selected_from=lan_25 là LR2 nguồn/local lan_22; phải resolve mapping trước resume.
+Nhập từ remote b754c2f; B/C do các thành viên khác train, local chuẩn hóa bản sao. Gói nguồn B_ban_giao/C_ban_giao giữ nguyên khi đồng bộ.
 
 ## 2. Tải bằng Git LFS
 

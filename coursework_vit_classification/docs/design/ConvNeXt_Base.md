@@ -57,8 +57,9 @@ Freeze giữ cả LayerNorm cuối bất biến; smoke kiểm tra mọi tensor n
 Head ImageNet: 1024×1000+1000; thay bằng 1024×100+100 để tính tổng mới.
 Không gắn thêm tham số vô dụng để tạo số lượng bằng ViT.
 Fine-tune cần gradient, activation và optimizer state; gần số tham số không có nghĩa cùng VRAM/tốc độ.
-Máy GPU 4 GB phải smoke lại A/B; số đo ResNet cũ không dùng ước tính ConvNeXt.
+A/B đã có smoke batch16 đạt trên RTX3050 Laptop4GB; không dùng số đo ResNet cũ để đại diện ConvNeXt.
 Kiểm thử cấu trúc xác nhận head, tham số, freeze/mode và logits B×100 trên meta device.
 Regression tổng hợp xác nhận orchestration/resume; không thay thế smoke GPU pretrained thật.
 A đã hoàn tất 2 pilot và final 20 epoch, batch16, LR chọn 3e-4; xem [A_Results](../A_Results.md).
-B fine-tune vẫn cần smoke/budget riêng; không dùng số đo A để khẳng định B đủ tài nguyên.
+B do thành viên khác train: lan_20 smoke, lan_21/22 pilot, lan_23 final20 epoch, best val89,70% epoch13.
+Đã kiểm tra hash/header, chưa audit sâu cập nhật mọi tensor backbone; xem [kết quả/provenance](../Experiment_Results.md).

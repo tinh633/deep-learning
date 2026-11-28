@@ -42,3 +42,8 @@ practice_1_fashionmnist/outputs/runs/*/plots/predictions.png
 
 # Local TensorBoard server diagnostics are not experiment artifacts.
 practice_2_pretrained_model/outputs/tensorboard_server.log
+
+# Preserve member handoffs and the imported B smoke replay artifact.
+!B_ban_giao/**/*.pt
+!C_ban_giao/**/*.pt
+!coursework_vit_classification/outputs/runs/lan_20/replay_reference.pt

@@ -1,6 +1,6 @@
 # Source workflow
 
-Cập nhật: 16/11/2026. Tài liệu source nằm cùng cấp nhóm với docs/define và docs/design.
+Cập nhật28/11/2026. Tài liệu source nằm cùng cấp nhóm với docs/define và docs/design.
 Mỗi file dưới đây mô tả 5W1H, input/output, luồng xử lý, cách chạy và giới hạn theo code hiện có.
 Các mục dùng What, Why, Which, When, Where, How; Which nêu lựa chọn model/dataset/công cụ/cấu hình của file.
 
@@ -22,8 +22,8 @@ Thứ tự: EDA → smoke → khóa protocol → pilot/final → evaluate → de
 Không import script đánh số để dùng lại hàm; các module chung không tự chạy pipeline.
 Train/evaluate có main guard để an toàn với worker trên Windows.
 
-Đã có code khác với đã train: chưa chạy tuning/final hoặc official test trên model thật.
-PHASE mặc định smoke, TRAINING_APPROVED=False; 2_train.py yêu cầu cấu hình rõ ràng.
+A/B/C đã hoàn tất tuning/final thật; B/C là kết quả thành viên khác. D chưa có final; test cuối chung chưa thực hiện.
+Config local giữ PHASE=final/A, RESUME_RUN=lan_14 và TRAINING_APPROVED=False để chặn train lặp.
 Các bài kiểm tra CPU dùng dữ liệu/model tổng hợp không được tính là kết quả CIFAR-100.
 
 Thiết kế: [Implementation_Plan](../design/Implementation_Plan.md).

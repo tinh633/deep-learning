@@ -4,6 +4,13 @@ Ghi vấn đề/nhu cầu, thay đổi, lý do và cách kiểm chứng; không 
 Trạng thái hiện tại: [progress](progress.md). Checklist smoke: [Audit_Log](Audit_Log.md).
 Audit chỉ ghi kết quả kiểm tra; lịch sử hỗ trợ AI nằm ở [AI_usage](AI_usage.md).
 
+## 28/11/2026 ? T?ch h?p artifact v? trang tr?nh b?y
+
+- B/C do th?nh vi?n kh?c train; b?n sao t?n chu?n ? lan_15?23, g?i ngu?n gi? nguy?n tr?n remote.
+- Th?m manifest/provenance, ch? m?c23 run v? k?t qu? A/B/C; s?a m? t? hi?n tr?ng l?i th?i trong docs/notebook.
+- Th?m HTML tr?nh b?y theo PDF, t??ng t?c minh h?a v? snapshot th?c; demo/D c?n thi?u, kh?ng s?a code train/evaluate.
+- Chu?n h?a Git LFS/ignore cho checkpoint nh?p v? B replay, gi? data/cache ngo?i Git; ki?m ch?ng ? progress.
+
 ## 18/11/2026 — Khởi chạy A được duyệt
 
 - Xóa lan_9 ResNet, giữ lịch sử trong Git; tên lan_9 mới là lỗi tải mạng, không dùng như bằng chứng cũ.

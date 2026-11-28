@@ -1,0 +1,25 @@
+{
+  "experiment": "B",
+  "model": "convnext_base",
+  "strategy": "fine_tune",
+  "source_commit": "b754c2f14392789b1d285cd78f040e029615dbf8",
+  "run_mapping": {
+    "smoke": "lan_20",
+    "LR1": "lan_21",
+    "LR2": "lan_22",
+    "final": "lan_23"
+  },
+  "selected_pilot": "lan_22",
+  "selected_lr": 3e-05,
+  "final_run": "lan_23",
+  "final_status": "completed",
+  "final_epochs": 20,
+  "best_checkpoint_epoch": 13,
+  "best_validation_accuracy": 0.897,
+  "note": "Raw selected_from=lan_25 refers to source LR2, mapped to local lan_22. Resolve via import_B_manifest.json before resume. Headers verified; no new inference or training.",
+  "training_provenance": {
+    "trained_by": "another team member",
+    "local_contribution": "import, run-name normalization and artifact verification; not local training",
+    "original_handoff_preserved": true
+  }
+}

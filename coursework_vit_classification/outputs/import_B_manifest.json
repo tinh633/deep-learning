@@ -1,0 +1,313 @@
+{
+  "source_commit": "b754c2f14392789b1d285cd78f040e029615dbf8",
+  "source_bundle": "B_ban_giao",
+  "run_mapping": {
+    "smoke": "lan_20",
+    "LR1": "lan_21",
+    "LR2": "lan_22",
+    "final": "lan_23"
+  },
+  "raw_artifacts_unchanged": true,
+  "C_remote_files_verified": 33,
+  "runs": [
+    {
+      "source": "smoke",
+      "local_run": "lan_20",
+      "phase": "smoke",
+      "status": "passed",
+      "original_selected_from": null,
+      "local_selected_from": null,
+      "files": [
+        {
+          "path": "config.json",
+          "size_bytes": 4958,
+          "sha256": "a5e80153b22f8795229dc00863a5ddf7b18cf423def8e5fbacaaa0515d6777e9",
+          "source_path": "B_ban_giao/smoke/config.json"
+        },
+        {
+          "path": "history.json",
+          "size_bytes": 122,
+          "sha256": "2eb7ae1de83613c9d68a38adf79c158a1aaf651a4f6c8a850e58c13b80e5efdb",
+          "source_path": "B_ban_giao/smoke/history.json"
+        },
+        {
+          "path": "last.pt",
+          "size_bytes": 1052398969,
+          "sha256": "4597abd818db5134405f712feed2f030405e8f0f77c1390b1317d033561d2c6c",
+          "source_path": "B_ban_giao/smoke/last.pt"
+        },
+        {
+          "path": "model.txt",
+          "size_bytes": 20258,
+          "sha256": "1a9e894eb54be464d9f533afc327f5329e4e73092b74c808a1db7759bc5f6ecf",
+          "source_path": "B_ban_giao/smoke/model.txt"
+        },
+        {
+          "path": "replay_reference.pt",
+          "size_bytes": 350805533,
+          "sha256": "1f69916a321eb5e2b06fc05e518ffe69aa82e9feaee0f6aad71f85e13b330d17",
+          "source_path": "B_ban_giao/smoke/replay_reference.pt"
+        },
+        {
+          "path": "run.log",
+          "size_bytes": 2632,
+          "sha256": "7c5cc795c97c666ab9c54072035e9b52f35c5cdb5bfe1ba54cb224fe61d07357",
+          "source_path": "B_ban_giao/smoke/run.log"
+        },
+        {
+          "path": "summary.json",
+          "size_bytes": 1905,
+          "sha256": "c7d33aee0a930ea66c993b7508e512373ca20dbba7bac094cf63f47c2865475c",
+          "source_path": "B_ban_giao/smoke/summary.json"
+        }
+      ]
+    },
+    {
+      "source": "LR1",
+      "local_run": "lan_21",
+      "phase": "tuning",
+      "status": "completed",
+      "original_selected_from": null,
+      "local_selected_from": null,
+      "files": [
+        {
+          "path": "best.pt",
+          "size_bytes": 1052398777,
+          "sha256": "f7ff5d6d5f4abc57b3ff6ee85c0eae2a0b6cce1f6eaff58103963f02786d4e41",
+          "source_path": "B_ban_giao/LR1/best.pt"
+        },
+        {
+          "path": "config.json",
+          "size_bytes": 3739,
+          "sha256": "464de030af7590019216ddef07f16da9a415aa9e0b1ac236d9b331ae724ce7cc",
+          "source_path": "B_ban_giao/LR1/config.json"
+        },
+        {
+          "path": "history.json",
+          "size_bytes": 1232,
+          "sha256": "05770fc7e793ccc2786b5cd25e5aa1af19841f49fea89fc91cc2f0c8c591b699",
+          "source_path": "B_ban_giao/LR1/history.json"
+        },
+        {
+          "path": "last.pt",
+          "size_bytes": 1052398905,
+          "sha256": "07de3cdaba584881c384026fa6ea09db318bb6df73d5791a885e41d175690346",
+          "source_path": "B_ban_giao/LR1/last.pt"
+        },
+        {
+          "path": "model.txt",
+          "size_bytes": 20258,
+          "sha256": "1a9e894eb54be464d9f533afc327f5329e4e73092b74c808a1db7759bc5f6ecf",
+          "source_path": "B_ban_giao/LR1/model.txt"
+        },
+        {
+          "path": "run.log",
+          "size_bytes": 3652,
+          "sha256": "3a6c3f0ed82ef8a0e2f8c2b29ef30a0c7038f196804664cd2c5070e963d91924",
+          "source_path": "B_ban_giao/LR1/run.log"
+        },
+        {
+          "path": "summary.json",
+          "size_bytes": 271,
+          "sha256": "2dc40d4e5344affd07f85efe7d6ea9e8d43364c74fbe889237353719147f2604",
+          "source_path": "B_ban_giao/LR1/summary.json"
+        }
+      ]
+    },
+    {
+      "source": "LR2",
+      "local_run": "lan_22",
+      "phase": "tuning",
+      "status": "completed",
+      "original_selected_from": null,
+      "local_selected_from": null,
+      "files": [
+        {
+          "path": "best.pt",
+          "size_bytes": 1052398649,
+          "sha256": "a06f57a65b96962b4d40979c31bee4d3c9ca6a08577cc639cb24c5896ca8ff11",
+          "source_path": "B_ban_giao/LR2/best.pt"
+        },
+        {
+          "path": "config.json",
+          "size_bytes": 3735,
+          "sha256": "d197b1c605fdd5afea8ca073a7be7de9696d921b8340dc3e92c1906f5e793c94",
+          "source_path": "B_ban_giao/LR2/config.json"
+        },
+        {
+          "path": "history.json",
+          "size_bytes": 1234,
+          "sha256": "b7398d740fb40be0102385f1bb7d752432254bf2dc69470116fd78a254df0155",
+          "source_path": "B_ban_giao/LR2/history.json"
+        },
+        {
+          "path": "last.pt",
+          "size_bytes": 1052398905,
+          "sha256": "24c9c45cd2b37b40625a3e08c9411d96e2f3829ae4cfb71e20833340cf383578",
+          "source_path": "B_ban_giao/LR2/last.pt"
+        },
+        {
+          "path": "model.txt",
+          "size_bytes": 20258,
+          "sha256": "1a9e894eb54be464d9f533afc327f5329e4e73092b74c808a1db7759bc5f6ecf",
+          "source_path": "B_ban_giao/LR2/model.txt"
+        },
+        {
+          "path": "run.log",
+          "size_bytes": 3643,
+          "sha256": "08f33b4578e7941b10f77814eb6e26e4d447444007a06614384d7df2a6320d80",
+          "source_path": "B_ban_giao/LR2/run.log"
+        },
+        {
+          "path": "summary.json",
+          "size_bytes": 270,
+          "sha256": "7c2ed6269ca753f0d84bd1c21f6ad65b65f15ef024e09e4d2e4f2e992f9fceb5",
+          "source_path": "B_ban_giao/LR2/summary.json"
+        }
+      ]
+    },
+    {
+      "source": "final",
+      "local_run": "lan_23",
+      "phase": "final",
+      "status": "completed",
+      "original_selected_from": "lan_25",
+      "local_selected_from": "lan_22",
+      "files": [
+        {
+          "path": "best.pt",
+          "size_bytes": 1052399737,
+          "sha256": "ac8d9d87ae5db8619f803a33be862b1c76e9dda3c152f52749cacfd240f61382",
+          "source_path": "B_ban_giao/final/best.pt"
+        },
+        {
+          "path": "config.json",
+          "size_bytes": 3745,
+          "sha256": "a0b1fceeb2e8393f54b78b0ad395077da2dc8c8c2136083e818e512297b8143d",
+          "source_path": "B_ban_giao/final/config.json"
+        },
+        {
+          "path": "history.json",
+          "size_bytes": 4943,
+          "sha256": "7045d2197a5cdc7f857d62286ea6c76374d1ddfb5b2e0ab270061db24d7d70f4",
+          "source_path": "B_ban_giao/final/history.json"
+        },
+        {
+          "path": "last.pt",
+          "size_bytes": 1052400505,
+          "sha256": "85c981359776e838f39dbafbf057b0e68b8b60d017d042584d1080070c64a561",
+          "source_path": "B_ban_giao/final/last.pt"
+        },
+        {
+          "path": "model.txt",
+          "size_bytes": 20258,
+          "sha256": "1a9e894eb54be464d9f533afc327f5329e4e73092b74c808a1db7759bc5f6ecf",
+          "source_path": "B_ban_giao/final/model.txt"
+        },
+        {
+          "path": "run.log",
+          "size_bytes": 5349,
+          "sha256": "2ec9bcd62b851dd38e73c7805d9465de843bf37fe4b83fa4636eec2d39d6d0d4",
+          "source_path": "B_ban_giao/final/run.log"
+        },
+        {
+          "path": "summary.json",
+          "size_bytes": 268,
+          "sha256": "09ccacb4388adb20a9a176dcbb043772511338f58fa50d1af99ce32df7eddfbb",
+          "source_path": "B_ban_giao/final/summary.json"
+        }
+      ]
+    }
+  ],
+  "existing_runs_unchanged": true,
+  "import_status": "files_verified",
+  "checkpoint_header_checks": [
+    {
+      "file": "lan_20/last.pt",
+      "epoch": 1,
+      "head": [
+        100,
+        1024
+      ],
+      "model": "convnext_base",
+      "split_matches_local": true,
+      "selected_from": null
+    },
+    {
+      "file": "lan_20/replay_reference.pt",
+      "kind": "smoke replay reference",
+      "loaded": true
+    },
+    {
+      "file": "lan_21/best.pt",
+      "epoch": 4,
+      "head": [
+        100,
+        1024
+      ],
+      "model": "convnext_base",
+      "split_matches_local": true,
+      "selected_from": null
+    },
+    {
+      "file": "lan_21/last.pt",
+      "epoch": 5,
+      "head": [
+        100,
+        1024
+      ],
+      "model": "convnext_base",
+      "split_matches_local": true,
+      "selected_from": null
+    },
+    {
+      "file": "lan_22/best.pt",
+      "epoch": 3,
+      "head": [
+        100,
+        1024
+      ],
+      "model": "convnext_base",
+      "split_matches_local": true,
+      "selected_from": null
+    },
+    {
+      "file": "lan_22/last.pt",
+      "epoch": 5,
+      "head": [
+        100,
+        1024
+      ],
+      "model": "convnext_base",
+      "split_matches_local": true,
+      "selected_from": null
+    },
+    {
+      "file": "lan_23/best.pt",
+      "epoch": 13,
+      "head": [
+        100,
+        1024
+      ],
+      "model": "convnext_base",
+      "split_matches_local": true,
+      "selected_from": "lan_25"
+    },
+    {
+      "file": "lan_23/last.pt",
+      "epoch": 20,
+      "head": [
+        100,
+        1024
+      ],
+      "model": "convnext_base",
+      "split_matches_local": true,
+      "selected_from": "lan_25"
+    }
+  ],
+  "training_provenance": {
+    "trained_by": "another team member",
+    "local_contribution": "import, run-name normalization and artifact verification; not local training",
+    "original_handoff_preserved": true
+  }
+}

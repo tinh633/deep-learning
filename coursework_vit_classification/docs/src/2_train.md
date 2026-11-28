@@ -45,4 +45,5 @@ Khôi phục history/best score, optimizer/scaler, RNG và train loader generato
 Đối chiếu phase, model, LR, seed, batch, preprocessing, split, epoch budget và các trường protocol.
 Không đổi EPOCHS để kéo dài run ngầm; muốn đổi ngân sách phải thiết kế lượt mới.
 Chưa có gradient accumulation, early stopping, scheduler hoặc tự chọn LR thắng giữa hai pilot.
-Full run trên CIFAR-100 chưa thực hiện; kiểm tra tổng hợp CPU không đại diện chất lượng model.
+A/B/C đã đủ final20 epoch; B/C do thành viên khác train. Kiểm tra tổng hợp CPU không đại diện chất lượng model.
+B/C nhập giữ raw selected_from; phải áp dụng mapping manifest và đối chiếu pilot trước resume. C thiếu checkpoint pilot.

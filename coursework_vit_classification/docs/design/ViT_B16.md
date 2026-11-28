@@ -1,6 +1,6 @@
 # ViT-B/16 — Model chính
 
-Đã có implementation và pipeline smoke; chưa có checkpoint CIFAR-100 train chính thức.
+Cập nhật28/11/2026: C do thành viên khác train, đã nhập final20 epoch vào lan_19; best val82,08% epoch9.
 Tham chiếu: [Define](../define/Requirements_Analysis.md), [Design](Implementation_Plan.md), [CNN baseline](ConvNeXt_Base.md).
 
 ## 1. Vai trò và tên model
@@ -64,7 +64,7 @@ Tổng với head ImageNet 1.000 lớp: 86.567.656 theo metadata torchvision.
 Head mới: 768 × 100 + 100 = 76.900 tham số.
 Tổng sau thay head dự kiến: 85.875.556; trainable C = 76.900, D = toàn bộ tổng này.
 ConvNeXt-Base với head 100 lớp có 87.668.964 tham số, chênh 2,09% so với ViT; không bằng tuyệt đối.
-Số liệu này tính từ cấu hình, chưa phải log của một run đã thực hiện.
+C có log76.900 trainable/85.875.556 tổng tham số; D toàn bộ là cấu hình dự kiến, chưa có final local.
 Fine-tune cần lưu gradient, optimizer state và activation ngoài model weights.
 GPU 4 GB có rủi ro thiếu VRAM; batch nhỏ/AMP cần smoke kiểm chứng, không hứa chạy được trước khi đo.
 Resize CIFAR-100 lên 224 phù hợp cấu hình pretrained nhưng không làm ảnh gốc giàu chi tiết hơn.
@@ -90,4 +90,4 @@ PCA/t-SNE RGB hiện có trong EDA không phải attention hoặc embedding củ
 
 So C/D để đo lợi ích fine-tune; đối chiếu A/C và B/D theo cùng protocol.
 Trình bày accuracy/macro-F1, lỗi theo lớp và thời gian/VRAM bên cạnh chênh lệch tham số.
-ViT không bắt buộc thắng CNN; chưa có kết quả CIFAR-100 thực đo trong coursework.
+ViT không bắt buộc thắng CNN; C đã có kết quả validation, D chưa có; xem [kết quả và giới hạn](../Experiment_Results.md).

@@ -1,6 +1,7 @@
 # Quy trình và phân chia công việc thực nghiệm
 
-Cập nhật: 16/11/2026. Phân công dưới đây là đề xuất theo vai trò, chưa gán tên thành viên.
+Cập nhật28/11/2026: A local, B/C do các thành viên khác train và đã nhập; D chưa có gói tích hợp.
+Vai trò dưới đây giữ thiết kế phân công ban đầu, chưa ghi tên cá nhân.
 Ma trận và protocol: [Training_Strategy.md](Training_Strategy.md).
 Hiện trạng thực: [progress.md](../progress.md).
 
@@ -69,6 +70,7 @@ Dataset/cache không commit; best/last chia sẻ bằng Git LFS, xem [Checkpoint
 - Khi lỗi: audit ghi kết quả kiểm tra, changelog ghi thay đổi pipeline, progress ghi blocker/bước tiếp.
 - Báo cáo phân biệt pilot/final và resource probe; không trộn số đo vào một bảng xếp hạng.
 
-A: người tích hợp chạy máy hiện tại; ba người khác nhận B/C/D, mỗi người 2 pilot + 1 final.
+A chạy local; B/C thành viên khác đã bàn giao2 pilot +1 final, D còn chờ.
+Gói nguồn B_ban_giao/C_ban_giao giữ nguyên; bản chuẩn hóa nằm outputs/runs, không nhận là train local.
 Lan_9 là ResNet resource_probe lịch sử; không đại diện A ConvNeXt hoặc thay pilot/final mới.
 D/GPU vẫn cần kiểm chứng lại sau khi đủ RAM/commit; chưa giao D như một phần đã sẵn sàng train dài.

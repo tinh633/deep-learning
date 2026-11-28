@@ -1,6 +1,7 @@
 # Define — Định nghĩa đồ án
 
-Cập nhật: 18/11/2026. ConvNeXt A đã hoàn tất 2 pilot và final; B/C/D chờ kết quả tích hợp, chưa test.
+Cập nhật28/11/2026: A/B/C hoàn tất pilot/final; B/C do các thành viên khác train và bàn giao. D chưa tích hợp.
+Chưa có đánh giá test cuối chung; test nguồn C có giới hạn protocol, xem [kết quả hiện tại](../Experiment_Results.md).
 Giảng viên đã xác nhận hướng ViT/CIFAR-100, không kết hợp Anti Face Deepfake.
 Thiết kế: [Implementation_Plan.md](../design/Implementation_Plan.md). Trạng thái: [progress](../progress.md).
 
@@ -79,7 +80,7 @@ Không mở rộng sang deepfake, detection, segmentation, train từ đầu ho�
 - Fit thống kê phục vụ lựa chọn preprocessing chỉ trên train; augmentation chỉ ở train.
 - Không dùng test để tinh chỉnh LR, số epoch, checkpoint hoặc chọn cấu hình cho lượt tiếp theo.
 - GPU local từng dùng có 4 GB; khả năng fine-tune ViT phải kiểm chứng bằng smoke run.
-- A đã khóa LR/batch/WD/scheduler/epoch; B/C/D cần xác nhận trước chạy, không suy thời gian từ A.
+- A/B/C đã có config/budget trong artifact; D cần xác nhận trước chạy, không suy tài nguyên từ A.
 - Không phát sinh dịch vụ trả phí hoặc đổi model/phạm vi khi chưa thống nhất.
 - Dataset, pixel dẫn xuất và cache không commit; không tạo artifact train giả.
 - Resize 32 lên 224 không phục hồi chi tiết ảnh đã mất.
@@ -106,5 +107,6 @@ Mục tiêu accuracy kỳ vọng chỉ ghi sau pilot có căn cứ, không lấy
 
 Đáp ứng phần đề tài ViT classification, dataset được cho phép, baseline, demo và phân tích giới hạn.
 Không coi phần mở rộng cùng số tham số hoặc attention là đã hoàn thành.
-Đã xác nhận phạm vi; A giữ split và công bố ảnh trùng, protocol/kết quả ở [A_Results](../A_Results.md).
+Đã xác nhận phạm vi; A/B/C giữ split và công bố ảnh trùng; [kết quả/provenance](../Experiment_Results.md).
+PDF ViT gồm10 nội dung; HTML đã có khung, còn10–20 ảnh demo, Top-5/che vùng và≥3 phân tích; xem [Presentation](../design/Presentation.md).
 Nguồn dữ liệu: [CIFAR chính thức](https://www.cs.toronto.edu/~kriz/cifar.html).

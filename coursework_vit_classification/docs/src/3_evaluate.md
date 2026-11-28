@@ -35,5 +35,5 @@ MAX_EVAL_IMAGES giới hạn subset để kiểm tra; report luôn ghi n và gi�
 - evaluate.log ghi tóm tắt; checkpoint SHA/epoch/split/preprocessing nằm trong report.
 
 evaluation_seconds gồm loader/transform/transfer/forward/guard, không phải benchmark forward-only.
-Chưa tạo notebook/HTML phân tích kết quả trong bước này; report là đầu vào cho phần trình bày sau.
+HTML trình bày đã đọc history A/B/C; chưa có notebook báo cáo hoàn chỉnh hoặc giao diện phân tích predictions theo ảnh.
 Không dùng test report để thay đổi LR, checkpoint hoặc số epoch của thí nghiệm đang so sánh.

@@ -1,0 +1,40 @@
+{
+  "experiment": "C",
+  "model": "vit_b_16",
+  "strategy": "freeze",
+  "run_mapping": {
+    "lan_1": "lan_15",
+    "lan_2": "lan_16",
+    "lan_3": "lan_17",
+    "lan_4": "lan_18",
+    "lan_5": "lan_19"
+  },
+  "selected_pilot": "lan_18",
+  "selected_lr": 0.0003,
+  "selection_reason": "LR2 best validation accuracy 81.84% exceeds LR1 80.56%; test was not used for selection.",
+  "final_status": "completed",
+  "final_epochs": 20,
+  "best_checkpoint_epoch": 9,
+  "last_checkpoint_epoch": 20,
+  "resume": "Epochs 1-18 on Colab; resumed epochs 19-20 on Kaggle with different torch/torchvision versions. See original resume metadata.",
+  "test_results": "outputs/runs/lan_19/evaluation/test_best_1/metrics.json",
+  "all_four_group_checkpoints_locked_before_test": "not_confirmed",
+  "deep_final_checkpoint_audit": "not_performed",
+  "note": "Folders normalized to local run names. Original config/checkpoint/log/evaluation bytes preserved; selected_from inside raw artifacts uses source-local aliases. Resolve aliases through import_C_manifest.json before resume.",
+  "source_commit": "da0d199419810cddf58c9efffb614a9fb9e627f7",
+  "source_bundle": "C_ban_giao",
+  "source_run_mapping": {
+    "lan_1": "smoke/lan_1",
+    "lan_2": "smoke/lan_2",
+    "lan_3": "training/lan_3",
+    "lan_4": "training/lan_4",
+    "lan_5": "training/lan_5"
+  },
+  "source_selected_pilot": "lan_4",
+  "final_run": "lan_19",
+  "training_provenance": {
+    "trained_by": "another team member",
+    "local_contribution": "import, run-name normalization and artifact verification; not local training",
+    "original_handoff_preserved": true
+  }
+}

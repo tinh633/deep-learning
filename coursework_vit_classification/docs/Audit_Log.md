@@ -1,9 +1,10 @@
 # Audit log — Checklist smoke run
+Hi?n tr?ng28/11: A/B/C ?? c? final; B/C th?nh vi?n kh?c train, hash/header ?? ki?m tra; [k?t qu?/gi?i h?n](Experiment_Results.md).
 
 18/11: đổi CNN sang ConvNeXt-Base; các PASS và số đo ResNet dưới đây là lịch sử, không chuyển sang ConvNeXt.
 Smoke ConvNeXt A: lan_11 PASS sau khi giải phóng bộ nhớ; B: NOT_RUN. Lỗi lan_10 giữ nguyên.
 
-Checklist ngày 10/11/2026 được giữ làm kế hoạch; kết quả thực ngày 14/11 nằm ở phần cuối.
+Mỗi dòng dưới đây ghi riêng một lần chạy; các bảng phía sau giải thích tiêu chí và bằng chứng chi tiết.
 Chiến lược: [Training_Strategy.md](design/Training_Strategy.md).
 Thay đổi code/pipeline ghi ở [CHANGELOG.md](CHANGELOG.md); việc tiếp theo ghi ở [progress.md](progress.md).
 
@@ -18,38 +19,35 @@ Thay đổi code/pipeline ghi ở [CHANGELOG.md](CHANGELOG.md); việc tiếp th
 - Smoke ngắn không chứng minh hội tụ hoặc khả năng tổng quát hóa; không dùng test để smoke/tuning.
 - Audit Markdown là bản tóm tắt; bằng chứng chi tiết đọc từ artifact thật, không bắt buộc thêm audit.py/JSON riêng.
 
-## Checklist trước smoke — Chưa thực thi
+## Kết quả từng lần chạy — lan_1 đến lan_14
 
-A: ResNet freeze; B: ResNet fine-tune; C: ViT freeze; D: ViT fine-tune.
-Các cột chỉ được cập nhật khi có run và bằng chứng tương ứng.
+Smoke lan_1–10 dùng batch 2, 20 ảnh train/4 val; lan_11 dùng batch 16, 32 train/16 val. Không mở test.
+PASS chỉ áp dụng các check được lưu ở source của run đó; NOT_RUN là chưa hoàn tất kiểm tra, kể cả đã chạy một batch.
 
-| Kiểm tra | A | B | C | D |
-|---|---|---|---|---|
-| Nguồn weights, class order, split/config đúng | NOT_RUN | NOT_RUN | NOT_RUN | NOT_RUN |
-| Input/output shape và logits 100 lớp | NOT_RUN | NOT_RUN | NOT_RUN | NOT_RUN |
-| Loss hữu hạn, không NaN/Inf | NOT_RUN | NOT_RUN | NOT_RUN | NOT_RUN |
-| Trainable parameters đúng chiến lược | NOT_RUN | NOT_RUN | NOT_RUN | NOT_RUN |
-| Head/backbone gradient đúng | NOT_RUN | NOT_RUN | NOT_RUN | NOT_RUN |
-| Optimizer chứa đúng tham số được mở | NOT_RUN | NOT_RUN | NOT_RUN | NOT_RUN |
-| Tham số/buffers thay đổi đúng policy freeze/BN | NOT_RUN | NOT_RUN | NOT_RUN | NOT_RUN |
-| Val eval/no-gradient, không thay state | NOT_RUN | NOT_RUN | NOT_RUN | NOT_RUN |
-| Save/load tái tạo logits trong tolerance đã ghi | NOT_RUN | NOT_RUN | NOT_RUN | NOT_RUN |
-| Resume epoch/optimizer/RNG đúng cấu hình | NOT_RUN | NOT_RUN | NOT_RUN | NOT_RUN |
-| Thời gian, peak VRAM và số batch đo được ghi | NOT_RUN | NOT_RUN | NOT_RUN | NOT_RUN |
-| Không NaN/Inf/OOM trong số batch đã công bố | NOT_RUN | NOT_RUN | NOT_RUN | NOT_RUN |
+| Run / cấu hình | Cụ thể đã PASS hoặc hoàn tất | Lỗi, phần chưa kiểm tra và giới hạn |
+|---|---|---|
+| [lan_1](../outputs/runs/lan_1/summary.json) — ResNet-50 freeze | Đủ 12 check: đúng nguồn/split, chỉ mở head, optimizer đúng tập tham số; logits B×100 và loss hữu hạn; gradient head hữu hạn, backbone không gradient; head cập nhật, backbone/buffers giữ nguyên; validation eval/không gradient/buffers không đổi; save/load logits và resume một bước khớp; resources/stability PASS qua 10 batch train. | Source cũ; PASS bộ nhớ chỉ tại các điểm guard đã cài, chưa chứng minh train dài hoặc chất lượng phân loại. |
+| [lan_2](../outputs/runs/lan_2/summary.json) — ResNet-50 fine-tune | Đủ 12 check: đúng nguồn/split, mở toàn model, optimizer đúng tham số; logits B×100, loss/gradient hữu hạn; head và tensor backbone được kiểm tra có cập nhật; validation eval/không gradient/buffers không đổi; save/load và resume một bước khớp; resources/stability PASS qua 10 batch train. | Source cũ; chưa chứng minh bộ nhớ ổn định toàn workflow hoặc hội tụ. |
+| [lan_3](../outputs/runs/lan_3/summary.json) — ViT-B/16 freeze | Không có check PASS được lưu. | INTERRUPTED trong lúc nạp pretrained; cả 12 check NOT_RUN. |
+| [lan_4](../outputs/runs/lan_4/summary.json) — ResNet-50 freeze | Đủ 12 check: nguồn/split đúng; chỉ head được học, optimizer đúng; logits B×100, loss/gradient hữu hạn; head đổi, backbone/buffers không đổi; validation đúng eval/không gradient; save/load và resume khớp; resources/stability đạt qua 10 batch train. | Kiểm chứng lại nhánh freeze trên source cập nhật; vẫn là smoke, guard chưa bao phủ các bước cuối workflow. |
+| [lan_5](../outputs/runs/lan_5/summary.json) — ViT-B/16 freeze | Đủ 12 check: nguồn/split đúng; chỉ head được học, optimizer đúng; logits B×100, loss/gradient hữu hạn; head đổi, backbone/buffers không đổi; validation đúng eval/không gradient; save/load và resume khớp; resources/stability đạt qua 10 batch train. | Hoàn tất smoke ViT freeze sau lan_3 bị ngắt; chưa có kết quả train đầy đủ. |
+| [lan_6](../outputs/runs/lan_6/summary.json) — ViT-B/16 fine-tune | 3 check PASS: nguồn/split/config đúng; toàn model được mở để fine-tune; optimizer chứa đúng tập tham số. | Guard dừng vì commit 2676,77 MiB <3072. Summary cũ ghi gradients=FAIL, resources=NOT_RUN; traceback cho thấy nguyên nhân là thiếu bộ nhớ, không phải bằng chứng gradient sai. Các check khác NOT_RUN. |
+| [lan_7](../outputs/runs/lan_7/summary.json) — ViT-B/16 fine-tune | 3 check PASS: nguồn/split/config đúng; mở toàn model; optimizer đúng tham số. | Sau 1 update, resources FAIL vì commit 2553,90 MiB <3072; shape/loss/gradient toàn lượt, state update, validation, checkpoint, resume, stability đều NOT_RUN. |
+| [lan_8](../outputs/runs/lan_8/summary.json) — ResNet-50 fine-tune | Đủ 12 check đã cài: nguồn/split đúng, mở toàn model, optimizer đúng; logits B×100, loss/gradient hữu hạn; head/backbone được kiểm tra có cập nhật; validation đúng; save/load và resume khớp; resources/stability PASS qua 10 batch train. | Commit cuối 2952,80 MiB <3072; guard cũ chưa bao phủ cuối save/load/replay. PASS trong summary không xác nhận bộ nhớ đạt ngưỡng toàn workflow. |
+| [lan_9](../outputs/runs/lan_9/summary.json) — ConvNeXt-Base freeze hiện tại | Không có check PASS; 0 batch. | source_split FAIL vì tải pretrained lỗi socket WinError 10013; 11 check còn lại NOT_RUN. Không phải lan_9 ResNet lịch sử đã xóa. |
+| [lan_10](../outputs/runs/lan_10/summary.json) — ConvNeXt-Base freeze | 3 check PASS: nguồn/split/config đúng; chỉ Linear(1024,100) được học, 102.500 tham số; optimizer đúng tập này. | Hoàn tất 1 batch rồi resources FAIL vì commit 2942,83 MiB <3072; các check shape/loss/gradient toàn lượt, cập nhật, validation, checkpoint, resume và stability NOT_RUN. |
+| [lan_11](../outputs/runs/lan_11/summary.json) — ConvNeXt-Base freeze | Đủ 12 check: nguồn/split đúng; chỉ 102.500 tham số head được học, optimizer đúng; logits B×100, loss/gradient hữu hạn; head đổi, backbone/LayerNorm/buffers không đổi; validation đúng; save/load/resume khớp; guard qua cả cuối workflow, stability đạt sau 2 batch train và 1 batch val. | Commit cuối 3716,92 MiB; đủ điều kiện kỹ thuật trước pilot, chưa chứng minh hội tụ hoặc ổn định 20 epoch. |
+| [lan_12](../outputs/runs/lan_12/summary.json) — ConvNeXt freeze, pilot LR=1e-3 | COMPLETED đủ 5 epoch trên 45.000 train/5.000 val; best val 80,64% ở epoch 5. Kiểm chứng best/last, history/config và tensor freeze đạt theo A_Results. | Không có bảng 12 check smoke trong summary; đây là pilot chọn LR, không phải test. |
+| [lan_13](../outputs/runs/lan_13/summary.json) — ConvNeXt freeze, pilot LR=3e-4 | COMPLETED đủ 5 epoch; best val 80,78% ở epoch 5. Kiểm chứng best/last, history/config và tensor freeze đạt; được chọn vì hơn lan_12 0,14 điểm phần trăm. | Chỉ một seed, chênh lệch nhỏ; chưa phải đánh giá test. |
+| [lan_14](../outputs/runs/lan_14/summary.json) — ConvNeXt freeze, final LR=3e-4 | COMPLETED đủ 20 epoch, khởi tạo mới; best val 81,46% ở epoch 9, last val 80,94%. Kiểm chứng checkpoint/history 1–20, frozen tensors, optimizer/RNG và resume đạt. | Guard ngắt giữa epoch 20; resume từ epoch 19 và chạy lại epoch 20. Chưa test; xem [A_Results](A_Results.md) và interruptions.json để đọc bằng chứng. |
 
 ## Mẫu ghi một lượt thực tế
-
-Khi chạy, thêm mục theo ngày/run và liên kết thư mục bằng chứng thực sự tồn tại:
 
 1. Nhận diện: run ID, model/chiến lược, source revision/hash, weights và split hash.
 2. Điều kiện: máy, GPU, batch/precision, seed và phạm vi thực thi.
 3. Kết quả: từng check, trạng thái, số đo/tolerance và bằng chứng; ghi rõ check chưa chạy.
 4. Ổn định: số batch quan sát, NaN/Inf/OOM, thống kê thời gian/VRAM nếu đã đo.
 5. Kết luận: có đủ điều kiện tuning chưa, còn giới hạn nào; liên kết recheck nếu cần.
-
-Ở thời điểm tạo checklist 10/11 chưa có run ID hoặc kết luận PASS; không áp dụng nhận định đó cho lượt chạy sau.
-Khi gần 150 dòng, chuyển lượt cũ sang docs/archive/audit_<giai_doan>.md và liên kết, không xóa lịch sử.
 
 ## 14/11/2026 — Kết quả smoke thực và khôi phục phiên
 
@@ -68,17 +66,17 @@ Mini-epoch không đại diện một epoch đầy đủ CIFAR-100; xem config t
 
 | Kiểm tra đã lưu | A / lan_4 | B / lan_8 | C / lan_5 | D / lan_7 |
 |---|---|---|---|---|
-| Nguồn/split/config | PASS | PASS | PASS | PASS |
-| Trainable parameters | PASS | PASS | PASS | PASS |
-| Optimizer parameter groups | PASS | PASS | PASS | PASS |
-| Shape / finite loss qua đủ 10 batch | PASS | PASS | PASS | NOT_RUN |
-| Gradient qua đủ 10 batch | PASS | PASS | PASS | NOT_RUN |
-| Backbone/head/buffers cập nhật đúng policy | PASS | PASS | PASS | NOT_RUN |
-| Validation eval/no-gradient/buffers | PASS | PASS | PASS | NOT_RUN |
-| Save/load logits trong tolerance | PASS | PASS | PASS | NOT_RUN |
-| Resume mini-boundary + bước tiếp theo | PASS | PASS | PASS | NOT_RUN |
-| Điều kiện bộ nhớ hệ thống | PASS | PASS | PASS | FAIL |
-| Hoàn tất phạm vi ổn định đã công bố | PASS | PASS | PASS | NOT_RUN |
+| Nguồn/split/config: đúng weights, thứ tự lớp và split/config đã ghi | PASS | PASS | PASS | PASS |
+| Trainable: freeze chỉ mở head; fine-tune mở toàn model | PASS | PASS | PASS | PASS |
+| Optimizer: chứa đúng tập tham số được mở gradient | PASS | PASS | PASS | PASS |
+| Shape/loss: logits B×100, logits và loss hữu hạn qua đủ 10 batch | PASS | PASS | PASS | NOT_RUN |
+| Gradient: tham số được học có gradient hữu hạn; tham số freeze không có gradient | PASS | PASS | PASS | NOT_RUN |
+| Cập nhật: head thay đổi; freeze giữ backbone/buffers; fine-tune cập nhật tensor backbone được kiểm tra | PASS | PASS | PASS | NOT_RUN |
+| Validation: mọi module ở eval, không gradient, buffers không đổi và loss hữu hạn | PASS | PASS | PASS | NOT_RUN |
+| Save/load: logits sau nạp khớp trước lưu (atol=1e-6, rtol=1e-5) | PASS | PASS | PASS | NOT_RUN |
+| Resume: khôi phục epoch/optimizer/RNG; loss và state sau một bước khớp nhánh đối chứng | PASS | PASS | PASS | NOT_RUN |
+| Bộ nhớ: qua guard ở các điểm đã kiểm tra; source cũ chưa bao phủ cuối workflow | PASS | PASS | PASS | FAIL |
+| Ổn định: đủ 10 batch train, 2 batch val và replay, không NaN/Inf/OOM | PASS | PASS | PASS | NOT_RUN |
 
 A/B/C: checkpoint reload và state sau replay khớp rtol=1e-5, atol=1e-6; chênh loss <1e-5.
 Không NaN/Inf/OOM ở phạm vi hoàn tất của A/B/C; không kết luận về hội tụ hoặc train dài.
@@ -132,10 +130,21 @@ Giữ duplicate/split cũ chỉ cho probe, không mở test, không dùng điể
 - Lan_9 ResNet đã xóa theo yêu cầu; lan_9 mới FAIL khi tải weights: sandbox socket WinError 10013, 0 batch.
 - Tải riêng weights chính thức thành công, checksum prefix 6075fbad; không đổi model hoặc nguồn weights.
 - [Lan_10 summary](../outputs/runs/lan_10/summary.json): batch 2, AMP, workers 0, 20 train/4 val, GPU RTX3050.
-- Source/split, trainable 102.500 và optimizer PASS; hoàn tất 1 batch rồi guard dừng.
+- Source/split PASS: đúng weights và split/config; trainable PASS: chỉ Linear(1024,100), 102.500 tham số; optimizer PASS: chứa đúng tập tham số được học. Hoàn tất 1 batch rồi guard dừng.
 - Windows commit còn 2942,83 MiB (<3072); RAM 3319,13 MiB. Resources FAIL, chưa val/save/replay/stability.
 - Tiến trình đã thoát; GPU trở về 0 MiB. Không giảm guard hoặc tự chạy lại liên tục, chưa pilot/final.
 - Sau khi được phép đóng Zalo/Discord, commit trước khởi chạy mới tăng lên khoảng 6,3 GiB.
 - [Lan_11 summary](../outputs/runs/lan_11/summary.json): batch 16, 32 train/16 val; 2 batch, đủ 12 checks PASS.
 - Peak allocated train/workflow 511,22/607,22 MiB; guard cuối RAM 4028,70 MiB, commit 3716,92 MiB.
 - Save/load/replay và backbone/LayerNorm bất biến đạt; không suy ra độ hội tụ hoặc ổn định 20 epoch.
+
+Ý nghĩa 12 check PASS của lan_11, đối chiếu các khóa trong summary.json:
+
+| Check | Nội dung đã đạt trong smoke lan_11 |
+|---|---|
+| source_split / trainable / optimizer | Đúng weights, lớp, split/config; chỉ học 102.500 tham số Linear(1024,100); optimizer chứa đúng tập này. |
+| shape / finite_loss | Logits B×100; logits và loss train hữu hạn qua cả 2 batch, không NaN/Inf. |
+| gradients / state_update | Tham số được học có gradient hữu hạn, head thay đổi; tham số freeze không gradient, fingerprint backbone/LayerNorm và buffers không đổi. |
+| validation | Loss hữu hạn trên 16 ảnh; mọi module ở eval, không gradient, buffers không đổi. |
+| checkpoint / resume_replay | Nạp lại tái tạo logits; khôi phục epoch 1, optimizer/scaler/RNG; một bước replay có chênh loss <1e-5, state khớp atol=1e-6, rtol=1e-5. |
+| resources / stability | Guard qua cả save/load/replay và cuối workflow; đủ 2 batch train, 1 batch val và replay, không NaN/Inf/OOM. Chưa chứng minh ổn định train dài. |

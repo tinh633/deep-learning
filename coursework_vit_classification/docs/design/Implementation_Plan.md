@@ -1,6 +1,6 @@
 # Design — Thiết kế và kế hoạch triển khai
 
-Cập nhật: 18/11/2026. A hoàn tất smoke, 2 pilot và final 20 epoch; B/C/D chưa có kết quả tích hợp.
+Cập nhật28/11/2026: A/B/C hoàn tất smoke/pilot/final; B/C do các thành viên khác train. D chưa có gói tích hợp.
 Giảng viên đã xác nhận ViT classification trên CIFAR-100, không kết hợp Anti Face Deepfake.
 Định nghĩa bài toán: [Define](../define/Requirements_Analysis.md). Hiện trạng: [progress](../progress.md).
 
@@ -138,13 +138,13 @@ Chưa gán tên; đầu việc và bàn giao: [Work_Allocation.md](Work_Allocati
 | Rủi ro | Cách kiểm soát / trạng thái |
 |---|---|
 | ViT fine-tune OOM GPU 4 GB | Smoke batch nhỏ/AMP; đo rồi thống nhất GPU, không tự đổi model |
-| 12 nhóm duplicate xuyên split | Chốt giữ protocol và công bố, hoặc lọc train/val và version split trước train |
+| 12 nhóm duplicate xuyên split | A/B/C giữ split và công bố; không đổi dữ liệu giữa các lượt |
 | ConvNeXt/ViT chênh 2,09% tham số, khác recipe | 87.668.964 và 85.875.556; gần tương đương, chưa bằng tuyệt đối |
-| ConvNeXt fine-tune tốn bộ nhớ | Smoke lại A/B; LayerNorm không có running stats như BatchNorm |
+| ConvNeXt fine-tune tốn bộ nhớ | B smoke batch16 đã đạt trên máy thành viên; không suy VRAM D từ B |
 | Train lâu hoặc bị ngắt | Đo pilot, lưu last/resume epoch; không hứa thời gian chưa đo |
 | Overfit, lệch cơ hội tuning | Cùng split/ngân sách epoch, tuning tương đương, không chọn theo test |
-| Budget B/C/D cần xác nhận | A đã khóa theo Training_Strategy mục 9; không tự tăng số lượt hoặc suy VRAM từ A |
+| Budget D cần xác nhận | A/B/C đủ final20 epoch; không tự tăng số lượt hoặc suy VRAM D từ A |
 | Attention bị diễn giải quá mức | Mở rộng sau; cần cơ chế lấy attention đúng, không coi là giải thích nhân quả |
 
 Inference benchmark cần cùng máy/batch/precision/warm-up; tách forward-only khỏi end-to-end.
-A đã tuning/final: xem A_Results.md trong docs; chưa test. Smoke ở Audit_Log không đại diện chất lượng cuối.
+[Kết quả A/B/C](../Experiment_Results.md); HTML trình bày đã có, notebook báo cáo/demo còn thiếu. Smoke không đại diện chất lượng cuối.

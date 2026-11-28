@@ -1,0 +1,607 @@
+{
+  "source_commit": "da0d199419810cddf58c9efffb614a9fb9e627f7",
+  "source_bundle": "C_ban_giao",
+  "source_experiment_metadata": {
+    "experiment": "C",
+    "model": "vit_b_16",
+    "strategy": "freeze",
+    "run_mapping": {
+      "lan_1": "smoke/lan_1",
+      "lan_2": "smoke/lan_2",
+      "lan_3": "training/lan_3",
+      "lan_4": "training/lan_4",
+      "lan_5": "training/lan_5"
+    },
+    "selected_pilot": "lan_4",
+    "selected_lr": 0.0003,
+    "selection_reason": "LR2 best validation accuracy 81.84% exceeds LR1 80.56%; test was not used for selection.",
+    "final_status": "completed",
+    "final_epochs": 20,
+    "best_checkpoint_epoch": 9,
+    "last_checkpoint_epoch": 20,
+    "resume": "Epochs 1-18 on Colab; resumed epochs 19-20 on Kaggle with different torch/torchvision versions. See original resume metadata.",
+    "test_results": "training/lan_5/evaluation/test_best_1/metrics.json",
+    "all_four_group_checkpoints_locked_before_test": "not_confirmed",
+    "deep_final_checkpoint_audit": "not_performed",
+    "note": "Run names are local to C. Original config, history, summary and resume files are authoritative."
+  },
+  "runs": [
+    {
+      "source": "smoke/lan_1",
+      "local_run": "lan_15",
+      "phase": "smoke",
+      "status": "passed",
+      "original_selected_from": null,
+      "local_selected_from": null,
+      "files": [
+        {
+          "path": "config.json",
+          "sha256": "4f1c53cb342ad5e47350d06e555d107608a6a8c7e2c911ef44b39796b0430ae4",
+          "size_bytes": 4743
+        },
+        {
+          "path": "history.json",
+          "sha256": "1349fd84de01540f93506c7c276c569592f534ed2a4e5136262e2b0a6fb4237d",
+          "size_bytes": 126
+        },
+        {
+          "path": "model.txt",
+          "sha256": "cac0a39a507d91d5be83655f86a59df777faa8aa200b9b5dd6cccc3c4b4e6f14",
+          "size_bytes": 9156
+        },
+        {
+          "path": "run.log",
+          "sha256": "b7502091131041b245013d5538afd3ab105dc90358ee53af81b2c82aafc132ea",
+          "size_bytes": 2516
+        },
+        {
+          "path": "summary.json",
+          "sha256": "d71ea390d033677b2846a13aac9b6d3d332c38f9585d61221e587ba3b23ae816",
+          "size_bytes": 1821
+        }
+      ]
+    },
+    {
+      "source": "smoke/lan_2",
+      "local_run": "lan_16",
+      "phase": "smoke",
+      "status": "passed",
+      "original_selected_from": null,
+      "local_selected_from": null,
+      "files": [
+        {
+          "path": "config.json",
+          "sha256": "1db5c6efdba7bcaac1ba70117fad9543648397d62216027e258ce63e14b76ebc",
+          "size_bytes": 6717
+        },
+        {
+          "path": "history.json",
+          "sha256": "0dc5c505ec892ee52dc5efb7fe597f64e5fb57107a0ce4a76a49b051bb5c184d",
+          "size_bytes": 131
+        },
+        {
+          "path": "model.txt",
+          "sha256": "cac0a39a507d91d5be83655f86a59df777faa8aa200b9b5dd6cccc3c4b4e6f14",
+          "size_bytes": 9156
+        },
+        {
+          "path": "run.log",
+          "sha256": "d5757909e6b3c3c8dcef0ab114646216f206054dece8d7c00d215db306a0849e",
+          "size_bytes": 2519
+        },
+        {
+          "path": "summary.json",
+          "sha256": "7a76a350d2bd4fc87e29df4a0d7aaa837c26863549fb3403cf1b97b83b3034ec",
+          "size_bytes": 1846
+        }
+      ]
+    },
+    {
+      "source": "training/lan_3",
+      "local_run": "lan_17",
+      "phase": "tuning",
+      "status": "completed",
+      "original_selected_from": null,
+      "local_selected_from": null,
+      "files": [
+        {
+          "path": "config.json",
+          "sha256": "eb1bb3249f388b64ec1390fcf4d514501767fcb4fb5c7ee747db8250fa82fd1c",
+          "size_bytes": 3798
+        },
+        {
+          "path": "history.json",
+          "sha256": "23d59d1c93533b970ef8b0e61dce49f8801b3f287e8154783710b233ffc7b229",
+          "size_bytes": 1290
+        },
+        {
+          "path": "model.txt",
+          "sha256": "cac0a39a507d91d5be83655f86a59df777faa8aa200b9b5dd6cccc3c4b4e6f14",
+          "size_bytes": 9156
+        },
+        {
+          "path": "run.log",
+          "sha256": "639e4a7c9b2914d779da0a019ce4fc633fc83dcf30b648e534d9b297186aeab1",
+          "size_bytes": 3544
+        },
+        {
+          "path": "summary.json",
+          "sha256": "ac2ec0056cc0260ebbc66b77e49ac28669a43c972f2d0540a67858c0345a56f6",
+          "size_bytes": 232
+        }
+      ]
+    },
+    {
+      "source": "training/lan_4",
+      "local_run": "lan_18",
+      "phase": "tuning",
+      "status": "completed",
+      "original_selected_from": null,
+      "local_selected_from": null,
+      "files": [
+        {
+          "path": "config.json",
+          "sha256": "8ef337d315e9ef1e1bbebb5d9ee7fde1d1aa763a1cf0733d5adedfde5550586a",
+          "size_bytes": 3802
+        },
+        {
+          "path": "history.json",
+          "sha256": "09b59a990dfadcdb77d92be9b7cd386c76765fb623f27bbc8c6c208823f16ced",
+          "size_bytes": 1268
+        },
+        {
+          "path": "model.txt",
+          "sha256": "cac0a39a507d91d5be83655f86a59df777faa8aa200b9b5dd6cccc3c4b4e6f14",
+          "size_bytes": 9156
+        },
+        {
+          "path": "run.log",
+          "sha256": "bfa57cadfe2e94fa5a03ae3a3f7e177efedf22da497ef84bef315ff94d46172c",
+          "size_bytes": 3553
+        },
+        {
+          "path": "summary.json",
+          "sha256": "46cef64f062f6b4d2fedbfcb6e331ef0f1be22960f7992682044a51d006c1959",
+          "size_bytes": 238
+        }
+      ]
+    },
+    {
+      "source": "training/lan_5",
+      "local_run": "lan_19",
+      "phase": "final",
+      "status": "completed",
+      "original_selected_from": "lan_4",
+      "local_selected_from": "lan_18",
+      "files": [
+        {
+          "path": "best.pt",
+          "sha256": "dfd3a3fa43b5d8745b6acc2dc446701eb27593321afc5d02384b7958cba976e3",
+          "size_bytes": 344194120
+        },
+        {
+          "path": "config.json",
+          "sha256": "21d7eeab976bace9b4cbc49d2286dbb22bebbd6841dc833450f3b7b333e750a2",
+          "size_bytes": 3799
+        },
+        {
+          "path": "evaluation/test_best_1/evaluate.log",
+          "sha256": "948393ba2bb9294c41e996b11c92146a8c52db93cc80b2e37931f3fae709c3ff",
+          "size_bytes": 69
+        },
+        {
+          "path": "evaluation/test_best_1/metrics.json",
+          "sha256": "a0dda8e41b0481e651fef12c7aad032565e7bd52a02d30c2dca54d80fe17aaac",
+          "size_bytes": 544153
+        },
+        {
+          "path": "evaluation/test_best_1/predictions.json",
+          "sha256": "ad1912433d99b934f9e2374a3bc4223beee5546d4d3e05aef22f4217002ddca8",
+          "size_bytes": 31387125
+        },
+        {
+          "path": "evaluation/test_environment.json",
+          "sha256": "283bd8fc70f7c91baf6132cc2665aba1e0c5cfe8ca5c33b546ddc1eec164706b",
+          "size_bytes": 111
+        },
+        {
+          "path": "history.json",
+          "sha256": "c2de305a6fd844cd742526a3307711efe35edbddec964235c1a32247a10fad9e",
+          "size_bytes": 5121
+        },
+        {
+          "path": "last.pt",
+          "sha256": "21576d313bae03cfcba81b9aa617424774cf8383d37c3785a4b1403cd167f3b6",
+          "size_bytes": 344195400
+        },
+        {
+          "path": "model.txt",
+          "sha256": "8fdec134b79ac401150b4cd0b331a07ec57e0a32f860237c1c00324b8186f896",
+          "size_bytes": 8881
+        },
+        {
+          "path": "resume_20261119T101022.json",
+          "sha256": "569c8b793bcc0f56b54ef5e2d7a8010c984d8874c6dfacb70418597479e853ba",
+          "size_bytes": 257
+        },
+        {
+          "path": "resume_kaggle_20261119T101022.json",
+          "sha256": "569c8b793bcc0f56b54ef5e2d7a8010c984d8874c6dfacb70418597479e853ba",
+          "size_bytes": 257
+        },
+        {
+          "path": "run.log",
+          "sha256": "351bafeeae5a248bd7339db3bef88b491b02e2a74a2efc98956000433caa6793",
+          "size_bytes": 8315
+        },
+        {
+          "path": "summary.json",
+          "sha256": "3e1ec73aab8563d7dbef83dc0e634a71d7c2c0f84c9d4a505b7a700d8f1c6419",
+          "size_bytes": 238
+        }
+      ]
+    }
+  ],
+  "existing_runs": {
+    "lan_1": {
+      "config.json": {
+        "size": 4022,
+        "mtime_ns": 1794321625600351500
+      },
+      "history.json": {
+        "size": 128,
+        "mtime_ns": 1794321631108420500
+      },
+      "last.pt": {
+        "size": 96815872,
+        "mtime_ns": 1794321629298627700
+      },
+      "run.log": {
+        "size": 2045,
+        "mtime_ns": 1794321631110431900
+      },
+      "summary.json": {
+        "size": 938,
+        "mtime_ns": 1794321631111434700
+      }
+    },
+    "lan_10": {
+      "config.json": {
+        "size": 4898,
+        "mtime_ns": 1794984529380741900
+      },
+      "model.txt": {
+        "size": 20723,
+        "mtime_ns": 1794984528939579400
+      },
+      "run.log": {
+        "size": 2800,
+        "mtime_ns": 1794984533267652200
+      },
+      "summary.json": {
+        "size": 797,
+        "mtime_ns": 1794984533267652200
+      }
+    },
+    "lan_11": {
+      "config.json": {
+        "size": 5189,
+        "mtime_ns": 1794984654604643400
+      },
+      "history.json": {
+        "size": 131,
+        "mtime_ns": 1794984666212133100
+      },
+      "last.pt": {
+        "size": 351625224,
+        "mtime_ns": 1794984663896886400
+      },
+      "model.txt": {
+        "size": 20723,
+        "mtime_ns": 1794984654181576900
+      },
+      "replay_reference.pt": {
+        "size": 350805533,
+        "mtime_ns": 1794984664818676800
+      },
+      "run.log": {
+        "size": 2638,
+        "mtime_ns": 1794984666212133100
+      },
+      "summary.json": {
+        "size": 1967,
+        "mtime_ns": 1794984666213135100
+      }
+    },
+    "lan_12": {
+      "best.pt": {
+        "size": 351625096,
+        "mtime_ns": 1794986445540223600
+      },
+      "config.json": {
+        "size": 3908,
+        "mtime_ns": 1794984744605007200
+      },
+      "history.json": {
+        "size": 1274,
+        "mtime_ns": 1794986446068660500
+      },
+      "last.pt": {
+        "size": 351625096,
+        "mtime_ns": 1794986446020654100
+      },
+      "model.txt": {
+        "size": 20723,
+        "mtime_ns": 1794984744603022100
+      },
+      "run.log": {
+        "size": 3648,
+        "mtime_ns": 1794986446069702900
+      },
+      "summary.json": {
+        "size": 274,
+        "mtime_ns": 1794986446070665600
+      }
+    },
+    "lan_13": {
+      "best.pt": {
+        "size": 351625096,
+        "mtime_ns": 1794988161559935200
+      },
+      "config.json": {
+        "size": 3905,
+        "mtime_ns": 1794986467246121800
+      },
+      "history.json": {
+        "size": 1282,
+        "mtime_ns": 1794988162077815700
+      },
+      "last.pt": {
+        "size": 351625096,
+        "mtime_ns": 1794988162038818000
+      },
+      "model.txt": {
+        "size": 20723,
+        "mtime_ns": 1794986467244113100
+      },
+      "run.log": {
+        "size": 3650,
+        "mtime_ns": 1794988162077815700
+      },
+      "summary.json": {
+        "size": 281,
+        "mtime_ns": 1794988162078822700
+      }
+    },
+    "lan_14": {
+      "best.pt": {
+        "size": 351625544,
+        "mtime_ns": 1794991220967146000
+      },
+      "config.json": {
+        "size": 3910,
+        "mtime_ns": 1794988176337133600
+      },
+      "history.json": {
+        "size": 5136,
+        "mtime_ns": 1794995179315004000
+      },
+      "interruptions.json": {
+        "size": 606,
+        "mtime_ns": 1794994826486708500
+      },
+      "last.pt": {
+        "size": 351626824,
+        "mtime_ns": 1794995179313958500
+      },
+      "model.txt": {
+        "size": 20723,
+        "mtime_ns": 1794994837322319500
+      },
+      "run.log": {
+        "size": 9184,
+        "mtime_ns": 1794995179315953000
+      },
+      "summary.json": {
+        "size": 277,
+        "mtime_ns": 1794995179315953000
+      }
+    },
+    "lan_2": {
+      "config.json": {
+        "size": 4028,
+        "mtime_ns": 1794321633889534300
+      },
+      "history.json": {
+        "size": 125,
+        "mtime_ns": 1794321668961285100
+      },
+      "last.pt": {
+        "size": 284992623,
+        "mtime_ns": 1794321637052000600
+      },
+      "run.log": {
+        "size": 2051,
+        "mtime_ns": 1794321668961792200
+      },
+      "summary.json": {
+        "size": 931,
+        "mtime_ns": 1794321668962795500
+      }
+    },
+    "lan_3": {
+      "config.json": {
+        "size": 1637,
+        "mtime_ns": 1794321669150381200
+      },
+      "run.log": {
+        "size": 1618,
+        "mtime_ns": 1794321670381393600
+      },
+      "summary.json": {
+        "size": 517,
+        "mtime_ns": 1794625616258093300
+      }
+    },
+    "lan_4": {
+      "config.json": {
+        "size": 4496,
+        "mtime_ns": 1794625666155056900
+      },
+      "history.json": {
+        "size": 128,
+        "mtime_ns": 1794625671778993600
+      },
+      "last.pt": {
+        "size": 96816256,
+        "mtime_ns": 1794625669717818600
+      },
+      "model.txt": {
+        "size": 11078,
+        "mtime_ns": 1794625665966168800
+      },
+      "replay_reference.pt": {
+        "size": 95172661,
+        "mtime_ns": 1794625670332161100
+      },
+      "run.log": {
+        "size": 2319,
+        "mtime_ns": 1794625671780521900
+      },
+      "summary.json": {
+        "size": 1245,
+        "mtime_ns": 1794625671783052600
+      }
+    },
+    "lan_5": {
+      "config.json": {
+        "size": 4493,
+        "mtime_ns": 1794625711613677600
+      },
+      "history.json": {
+        "size": 127,
+        "mtime_ns": 1794625715130536700
+      },
+      "last.pt": {
+        "size": 344193416,
+        "mtime_ns": 1794625713648104900
+      },
+      "model.txt": {
+        "size": 8881,
+        "mtime_ns": 1794625711227118400
+      },
+      "replay_reference.pt": {
+        "size": 343564381,
+        "mtime_ns": 1794625714262428500
+      },
+      "run.log": {
+        "size": 2316,
+        "mtime_ns": 1794625715130536700
+      },
+      "summary.json": {
+        "size": 1239,
+        "mtime_ns": 1794625715132045800
+      }
+    },
+    "lan_6": {
+      "config.json": {
+        "size": 4501,
+        "mtime_ns": 1794625761015507700
+      },
+      "model.txt": {
+        "size": 8881,
+        "mtime_ns": 1794625761009533600
+      },
+      "run.log": {
+        "size": 2495,
+        "mtime_ns": 1794625762560541800
+      },
+      "summary.json": {
+        "size": 590,
+        "mtime_ns": 1794625762562557000
+      }
+    },
+    "lan_7": {
+      "config.json": {
+        "size": 4495,
+        "mtime_ns": 1794625889196941900
+      },
+      "model.txt": {
+        "size": 8881,
+        "mtime_ns": 1794625889189409100
+      },
+      "run.log": {
+        "size": 2493,
+        "mtime_ns": 1794625889996315200
+      },
+      "summary.json": {
+        "size": 805,
+        "mtime_ns": 1794625889996315200
+      }
+    },
+    "lan_8": {
+      "config.json": {
+        "size": 4492,
+        "mtime_ns": 1794625926105230200
+      },
+      "history.json": {
+        "size": 129,
+        "mtime_ns": 1794625929679379900
+      },
+      "last.pt": {
+        "size": 284993007,
+        "mtime_ns": 1794625928425126700
+      },
+      "model.txt": {
+        "size": 11078,
+        "mtime_ns": 1794625926099233700
+      },
+      "replay_reference.pt": {
+        "size": 95172661,
+        "mtime_ns": 1794625928903359400
+      },
+      "run.log": {
+        "size": 2318,
+        "mtime_ns": 1794625929679379900
+      },
+      "summary.json": {
+        "size": 1245,
+        "mtime_ns": 1794625929680384300
+      }
+    },
+    "lan_9": {
+      "config.json": {
+        "size": 2365,
+        "mtime_ns": 1794984437719226600
+      },
+      "run.log": {
+        "size": 5902,
+        "mtime_ns": 1794984438957862900
+      },
+      "summary.json": {
+        "size": 754,
+        "mtime_ns": 1794984438958862700
+      }
+    }
+  },
+  "import_status": "files_verified",
+  "raw_artifacts_unchanged": true,
+  "existing_runs_unchanged": true,
+  "checkpoint_header_checks": {
+    "best_epoch": 9,
+    "last_epoch": 20,
+    "experiment": "C",
+    "model": "vit_b_16",
+    "head": [
+      100,
+      768
+    ],
+    "split_matches_local": true,
+    "deep_frozen_weight_audit": false
+  },
+  "training_provenance": {
+    "trained_by": "another team member",
+    "local_contribution": "import, run-name normalization and artifact verification; not local training",
+    "original_handoff_preserved": true
+  }
+}
